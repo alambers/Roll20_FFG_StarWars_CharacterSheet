@@ -1,0 +1,908 @@
+<div class="character_sheet">
+  <div class="pools">
+    <h2 data-i18n="dice_pool">Dice Pool</h2>
+    <div class="dice_pool section">      
+      <div class="dice_pool_grid">
+        <div class="positive_dice">
+          <div class="three_dice">
+            <div>
+              <img src="https://i.imgur.com/nlIAfJx.png" data-i18n-title="boost_die" title="Boost Die" />
+              <input name="attr_b" class="dice_pool_boost" type="number" min="0" max="7" value="0" />
+            </div>
+            <div>
+              <img src="https://i.imgur.com/g3hoJRG.png" data-i18n-title="ability_die" title="Ability Die" />
+              <input name="attr_g" class="dice_pool_ability" type="number" min="0" max="7" value="0" />
+            </div>
+            <div>
+              <img src="https://i.imgur.com/4bQ0dY8.png" data-i18n-title="proficiency_die" title="Proficiency Die" />
+              <input name="attr_y" class="dice_pool_proficiency" type="number" min="0" max="7" value="0" />
+            </div>
+          </div>
+          <div class="upgrade_downgrade">
+            <label class="upgrade_label" data-i18n="upgrade">Upgrade :</label>
+            <input name="attr_upgradeAbility" class="dice_pool_upgrade_positive" type="number" min="0" max="7" value="0" />
+            <input name="attr_downgradeProficiency" class="dice_pool_downgrade_positive" type="number" min="0" max="7" value="0" />
+            <label class="downgrade_label" data-i18n="downgrade">: Downgrade</label>
+          </div>
+        </div>
+        <div class="force_dice_dice_roll">
+          <div class="force_dice">
+            <img src="https://i.imgur.com/JCI7Mgm.png" data-i18n-title="force_die" title="Force Die" />
+            <input name="attr_w" class="dice_pool_force" type="number" min="0" max="7" value="0" />
+          </div>
+          <div class="dice_roll">
+            <input type='hidden' name='attr_dicePool' value="@{g}g @{y}y @{p}p @{r}r @{b}b @{blk}blk @{w}w upgrade(ability|@{upgradeAbility}) downgrade(proficiency|@{downgradeProficiency}) upgrade(difficulty|@{upgradeDifficulty}) downgrade(challenge|@{downgradeChallenge})" />
+            <button type="roll" name="roll_DicePool" class="roll_DicePool" data-i18n-title="roll_dice_pool" title="Roll dice pool" value="!eed characterID(@{character_id}) label(Dice:Dice Pool) @{dicePool}"></button>
+            <button type="roll" name="roll_ResetDicePool" class="roll_ResetDicePool" data-i18n-title="reset_dice_pool" title="Reset dice pool" value="!eed resetdice characterID(@{character_id})"></button>
+          </div>
+        </div>
+        <div class="negative_dice">
+          <div class="three_dice">
+            <div>
+              <img src="https://i.imgur.com/n9W07Lp.png" data-i18n-title="setback_die" title="Setback Die" />
+              <input name="attr_blk" class="dice_pool_setback" type="number" min="-7" max="7" value="0" />
+            </div>
+            <div>
+              <img src="https://i.imgur.com/oxbKghK.png" data-i18n-title="difficulty_die" title="Difficulty Die" />
+              <input name="attr_p" class="dice_pool_difficulty" type="number" min="0" max="7" value="0" />
+            </div>
+            <div>
+              <img src="https://i.imgur.com/GInMHEN.png" data-i18n-title="challenge_die" title="Challenge Die" />
+              <input name="attr_r" class="dice_pool_challenge" type="number" min="0" max="7" value="0" />
+            </div>
+          </div>
+          <div class="upgrade_downgrade">
+            <label class="upgrade_label" data-i18n="upgrade">Upgrade :</label>
+            <input name="attr_upgradeDifficulty" class="dice_pool_upgrade_negative" type="number" min="0" max="7" value="0" />
+            <input name="attr_downgradeChallenge" class="dice_pool_downgrade_negative" type="number" min="0" max="7" value="0" />
+            <label class="downgrade_label" data-i18n="downgrade">: Downgrade</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2>Destiny Pool</h2>
+    <div class="destiny_pool section">
+      <div class="destiny_buttons">
+        <button class="sync_destiny_pool_button" name="Update-Dest-Pool" value="!eed characterID(@{character_id}) destiny registerPlayer" data-i18n="sync_pool_gm">Sync Pool with GM</button>
+        <button class="roll_destiny_button" name="Roll-Destiny" value="!eed characterID(@{character_id}) 1w destiny doRoll" data-i18n="roll_destiny">Roll Destiny</button>
+      </div>
+      <div class="destiny_inputs">
+        <div>
+          <input type="number" class="attr_destiny_light" min="0" max="99" value="0" />
+          <label class="destiny_light_label" name='attr_light' value="@{lightSidePoints}" data-i18n="light">Light</label>
+        </div>
+        <div>
+          <button class="use_destiny_button" name="Use-Darkside-Point" value="!eed characterID(@{character_id}) destiny useLight" data-i18n="use_light_side_point">Use Light Side Point</button>
+        </div>
+        <div>
+          <input type="number" class="attr_destiny_dark" min="0" max="99" value="0" />
+          <label class="destiny_dark_label" name='attr_dark' value="@{darkSidePoints}" data-i18n="dark">Dark</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2>Vital Stats</h2>
+  <div class="vital_stats section"> 
+    <div class="soak">
+      <label data-i18n="soak" class="stat_label">Soak</label>
+      <div class="vital_stats_column">
+        <div class="cell_width_2">
+          <input name="attr_body_stats_soak" class="soak" type="number" maxlength="1" min="1" max="9" value="0" />
+        </div>
+      </div>
+    </div>
+    <div class="defense">
+      <label data-i18n="defense" class="stat_label">Defense</label>
+      <div class="vital_stats_column">
+        <div>            
+          <input name="attr_body_stats_defense_ranged" type="number" maxlength="1" min="0" max="9" value="0" />
+          <label data-i18n="ranged" class="threshold_label">Ranged</label>
+        </div>
+        <div>            
+          <input name="attr_body_stats_defense_melee" type="number" maxlength="1" min="0" max="9" value="0" />
+          <label data-i18n="melee" class="current_label">Melee</label>
+        </div>
+      </div>
+    </div>
+    <div class="wounds">
+      <label data-i18n="wounds" class="stat_label">Wounds</label>
+      <div class="vital_stats_column">
+        <div>            
+          <input name="attr_body_stats_wounds_threshold" class="wounds_threshold" type="number" maxlength="2" min="1" max="99" value="0" />
+          <label data-i18n="threshold" class="threshold_label">Threshold</label>
+        </div>
+        <div>            
+          <input name="attr_body_stats_wounds_current" class="wounds_current" type="number" maxlength="2" min="0" max="99" value="0" />
+          <label data-i18n="current" class="current_label">Current</label>
+        </div>
+      </div>        
+    </div>
+    <div class="strain">
+      <label data-i18n="strain" class="stat_label">Strain</label>
+      <div class="vital_stats_column">
+        <div>            
+          <input name="attr_body_stats_strain_threshold" class="strain_threshold" type="number" maxlength="2" min="1" max="99" value="0" />
+          <label data-i18n="threshold" class="threshold_label">Threshold</label>
+        </div>
+        <div>            
+          <input name="attr_body_stats_strain_current" class="strain_current" type="number" maxlength="2" min="0" max="99" value="0" />
+          <label data-i18n="current" class="current_label">Current</label>
+        </div>
+      </div>        
+    </div>
+  </div>
+  <div class="tab_navigation">
+    <div>
+      <input type="radio" name="attr_navSelection" value="skills" class="navSelection_radio" />
+      <button type="action" name="act_skills"><span data-i18n="skills">Skills</span></button>
+    </div>
+    <div>
+      <input type="radio" name="attr_navSelection" value="combat" class="navSelection_radio" />
+      <button type="action" name="act_combat"><span data-i18n="combat">Combat</span></button>
+    </div>
+    <div>
+      <input type="radio" name="attr_navSelection" value="equipment" class="navSelection_radio" />
+      <button type="action" name="act_equipment"><span data-i18n="equipment">Equipment</span></button>
+    </div>
+    <div>
+      <input type="radio" name="attr_navSelection" value="talents" class="navSelection_radio" />
+      <button type="action" name="act_talents"><span data-i18n="talents">Talents</span></button>
+    </div>
+    <div>
+      <input type="radio" name="attr_navSelection" value="force" class="navSelection_radio" />
+      <button type="action" name="act_force"><span data-i18n="force_powers">Force Powers</span></button>
+    </div>
+  </div>
+  <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab'  value='skills' />
+  <div class="sheet-skills">
+    <h2 data-i18n="characteristics">Characteristics</h2>
+    <div class="characteristics section">
+      <div>
+        <input name="attr_brawn" class="characteristics_brawn" type="number" min="1" max="7" value="1" />
+        <label data-i18n="brawn">Brawn</label>
+      </div>
+      <div>
+        <input name="attr_agility" class="characteristics_agility" type="number" min="1" max="7" value="1" />
+        <label data-i18n="agility">Agility</label>
+      </div>
+      <div>
+        <input name="attr_intellect" class="characteristics_intellect" type="number" min="1" max="7" value="1" />
+        <label data-i18n="intellect">Intellect</label>
+      </div>
+      <div>
+        <input name="attr_cunning" class="characteristics_cunning" type="number" min="1" max="7" value="1" />
+        <label data-i18n="cunning">Cunning</label>
+      </div>
+      <div>
+        <input name="attr_willpower" class="characteristics_willpower" type="number" min="1" max="7" value="1" />
+        <label data-i18n="willpower">Willpower</label>
+      </div>
+      <div>
+        <input name="attr_presence" class="characteristics_presence" type="number" min="1" max="7" value="1" />
+        <label data-i18n="presence">Presence</label>
+      </div>
+    </div>
+    <h2>Skills</h2>
+    <div class="skills_body section">
+      <div class="skills_general">     
+        <h3>General Skills</h3>
+        <div class="skill skill_heading">          
+          <div data-i18n="skill">Skill</div>
+          <div data-i18n="characteristics">Characteristic</div>
+          <div data-i18n="career">Career</div>
+          <div data-i18n="ranks">Ranks</div>
+          <div data-i18n="dice">Dice</div>
+          <div data-i18n="modifiers">Modifiers</div>
+          <div data-i18n="roll">Roll</div>
+        </div>       
+        <div name="attr_skill_astrogation" class="skill skill_astrogation">          
+          <label data-i18n="astrogation">Astrogation</label>
+          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+          <input type="checkbox" name="attr_skill_astrogation_career" value="true" />
+          <input type="number"  name="attr_skill_astrogation_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_astrogation_yd" value="(((@{intellect} + @{skill_astrogation_rank}) - abs(@{intellect} - @{skill_astrogation_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_astrogation_gd" value="((((@{intellect} + @{skill_astrogation_rank}) + abs(@{intellect} - @{skill_astrogation_rank})) / 2) - @{skill_astrogation_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_astrogation_modifiers" />
+          <button class="roll_button" type="roll" name="roll_skill_astrogation" value="!eed characterID(@{character_id}) label(skill:Astrogation) @{skill_astrogation_modifiers} skill(@{skill_astrogation_rank}|@{intellect}|Astrogation) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_athletics" class="skill skill_athletics">          
+          <label data-i18n="athletics">Athletics</label>
+          <div>(<span data-i18n="brawn_abbr">Bra</span>)</div>
+          <input type="checkbox" name="attr_skill_athletics_career" value="true" />
+          <input type="number"  name="attr_skill_athletics_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_athletics_yd" value="(((@{brawn} + @{skill_athletics_rank}) - abs(@{brawn} - @{skill_athletics_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_athletics_gd" value="((((@{brawn} + @{skill_athletics_rank}) + abs(@{brawn} - @{skill_athletics_rank})) / 2) - @{skill_athletics_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_athletics_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_athletics" value="!eed characterID(@{character_id}) label(skill:Athletics) @{skill_athletics_modifiers} skill(@{skill_athletics_rank}|@{brawn}|Athletics) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_charm" class="skill skill_charm">          
+          <label data-i18n="charm">Charm</label>
+          <div>(<span data-i18n="presence_abbr">Pr</span>)</div>
+          <input type="checkbox" name="attr_skill_charm_career" value="true" />
+          <input type="number"  name="attr_skill_charm_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_charm_yd" value="(((@{presence} + @{skill_charm_rank}) - abs(@{presence} - @{skill_charm_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_charm_gd" value="((((@{presence} + @{skill_charm_rank}) + abs(@{presence} - @{skill_charm_rank})) / 2) - @{skill_charm_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_charm_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_charm" value="!eed characterID(@{character_id}) label(skill:Charm) @{skill_charm_modifiers} skill(@{skill_charm_rank}|@{presence}|Charm) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_coercion" class="skill skill_coercion">          
+          <label data-i18n="coercion">Coercion</label>
+          <div>(<span data-i18n="willpower_abbr">Wil</span>)</div>
+          <input type="checkbox" name="attr_skill_coercion_career" value="true" />
+          <input type="number"  name="attr_skill_coercion_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_coercion_yd" value="(((@{willpower} + @{skill_coercion_rank}) - abs(@{willpower} - @{skill_coercion_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_coercion_gd" value="((((@{willpower} + @{skill_coercion_rank}) + abs(@{willpower} - @{skill_coercion_rank})) / 2) - @{skill_coercion_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_coercion_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_coercion" value="!eed characterID(@{character_id}) label(skill:Coercion) @{skill_coercion_modifiers} skill(@{skill_coercion_rank}|@{willpower}|Coercion) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_computers" class="skill skill_computers">          
+          <label data-i18n="computers">Computers</label>
+          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+          <input type="checkbox" name="attr_skill_computers_career" value="true" />
+          <input type="number"  name="attr_skill_computers_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_computers_yd" value="(((@{intellect} + @{skill_computers_rank}) - abs(@{intellect} - @{skill_computers_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_computers_gd" value="((((@{intellect} + @{skill_computers_rank}) + abs(@{intellect} - @{skill_computers_rank})) / 2) - @{skill_computers_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_computers_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_computers" value="!eed characterID(@{character_id}) label(skill:Computers) @{skill_computers_modifiers} skill(@{skill_computers_rank}|@{intellect}|Computers) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_cool" class="skill skill_cool">          
+          <label data-i18n="cool">Cool</label>
+          <div>(<span data-i18n="presence_abbr">Pr</span>)</div>
+          <input type="checkbox" name="attr_skill_cool_career" value="true" />
+          <input type="number"  name="attr_skill_cool_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_cool_yd" value="(((@{presence} + @{skill_cool_rank}) - abs(@{presence} - @{skill_cool_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_cool_gd" value="((((@{presence} + @{skill_cool_rank}) + abs(@{presence} - @{skill_cool_rank})) / 2) - @{skill_cool_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_cool_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_cool" value="!eed characterID(@{character_id}) label(skill:Cool) @{skill_cool_modifiers} skill(@{skill_cool_rank}|@{presence}|Cool) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_coordination" class="skill skill_coordination">          
+          <label data-i18n="coordination">Coordination</label>
+          <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
+          <input type="checkbox" name="attr_skill_coordination_career" value="true" />
+          <input type="number"  name="attr_skill_coordination_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_coordination_yd" value="(((@{agility} + @{skill_coordination_rank}) - abs(@{agility} - @{skill_coordination_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_coordination_gd" value="((((@{agility} + @{skill_coordination_rank}) + abs(@{agility} - @{skill_coordination_rank})) / 2) - @{skill_coordination_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_coordination_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_coordination" value="!eed characterID(@{character_id}) label(skill:Coordination) @{skill_coordination_modifiers} skill(@{skill_coordination_rank}|@{agility}|Coordination) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_deception" class="skill skill_deception">          
+          <label data-i18n="deception">Deception</label>
+          <div>(<span data-i18n="cunning_abbr">Cun</span>)</div>
+          <input type="checkbox" name="attr_skill_deception_career" value="true" />
+          <input type="number"  name="attr_skill_deception_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_deception_yd" value="(((@{cunning} + @{skill_deception_rank}) - abs(@{cunning} - @{skill_deception_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_deception_gd" value="((((@{cunning} + @{skill_deception_rank}) + abs(@{cunning} - @{skill_deception_rank})) / 2) - @{skill_deception_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_deception_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_deception" value="!eed characterID(@{character_id}) label(skill:Deception) @{skill_deception_modifiers} skill(@{skill_deception_rank}|@{cunning}|Deception) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_discipline" class="skill skill_discipline">          
+          <label data-i18n="discipline">Discipline</label>
+          <div>(<span data-i18n="willpower_abbr">Wil</span>)</div>
+          <input type="checkbox" name="attr_skill_discipline_career" value="true" />
+          <input type="number"  name="attr_skill_discipline_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_discipline_yd" value="(((@{willpower} + @{skill_discipline_rank}) - abs(@{willpower} - @{skill_discipline_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_discipline_gd" value="((((@{willpower} + @{skill_discipline_rank}) + abs(@{willpower} - @{skill_discipline_rank})) / 2) - @{skill_discipline_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_discipline_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_discipline" value="!eed characterID(@{character_id}) label(skill:Discipline) @{skill_discipline_modifiers} skill(@{skill_discipline_rank}|@{willpower}|Discipline) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_leadership" class="skill skill_leadership">          
+          <label data-i18n="leadership">Leadership</label>
+          <div>(<span data-i18n="presence_abbr">Pr</span>)</div>
+          <input type="checkbox" name="attr_skill_leadership_career" value="true" />
+          <input type="number"  name="attr_skill_leadership_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_leadership_yd" value="(((@{presence} + @{skill_leadership_rank}) - abs(@{presence} - @{skill_leadership_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_leadership_gd" value="((((@{presence} + @{skill_leadership_rank}) + abs(@{presence} - @{skill_leadership_rank})) / 2) - @{skill_leadership_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_leadership_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_leadership" value="!eed characterID(@{character_id}) label(skill:Leadership) @{skill_leadership_modifiers} skill(@{skill_leadership_rank}|@{presence}|Leadership) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_mechanics" class="skill skill_mechanics">          
+          <label data-i18n="mechanics">Mechanics</label>
+          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+          <input type="checkbox" name="attr_skill_mechanics_career" value="true" />
+          <input type="number"  name="attr_skill_mechanics_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_mechanics_yd" value="(((@{intellect} + @{skill_mechanics_rank}) - abs(@{intellect} - @{skill_mechanics_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_mechanics_gd" value="((((@{intellect} + @{skill_mechanics_rank}) + abs(@{intellect} - @{skill_mechanics_rank})) / 2) - @{skill_mechanics_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_mechanics_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_mechanics" value="!eed characterID(@{character_id}) label(skill:Mechanics) @{skill_mechanics_modifiers} skill(@{skill_mechanics_rank}|@{intellect}|Mechanics) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_medicine" class="skill skill_medicine">          
+          <label data-i18n="medicine">Medicine</label>
+          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+          <input type="checkbox" name="attr_skill_medicine_career" value="true" />
+          <input type="number"  name="attr_skill_medicine_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_medicine_yd" value="(((@{intellect} + @{skill_medicine_rank}) - abs(@{intellect} - @{skill_medicine_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_medicine_gd" value="((((@{intellect} + @{skill_medicine_rank}) + abs(@{intellect} - @{skill_medicine_rank})) / 2) - @{skill_medicine_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_medicine_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_medicine" value="!eed characterID(@{character_id}) label(skill:Medicine) @{skill_medicine_modifiers} skill(@{skill_medicine_rank}|@{intellect}|Medicine) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_negotiation" class="skill skill_negotiation">          
+          <label data-i18n="negotiation">Negotiation</label>
+          <div>(<span data-i18n="presence_abbr">Pr</span>)</div>
+          <input type="checkbox" name="attr_skill_negotiation_career" value="true" />
+          <input type="number"  name="attr_skill_negotiation_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_negotiation_yd" value="(((@{presence} + @{skill_negotiation_rank}) - abs(@{presence} - @{skill_negotiation_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_negotiation_gd" value="((((@{presence} + @{skill_negotiation_rank}) + abs(@{presence} - @{skill_negotiation_rank})) / 2) - @{skill_negotiation_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_negotiation_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_negotiation" value="!eed characterID(@{character_id}) label(skill:Negotiation) @{skill_negotiation_modifiers} skill(@{skill_negotiation_rank}|@{presence}|Negotiation) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_perception" class="skill skill_perception">          
+          <label data-i18n="perception">Perception</label>
+          <div>(<span data-i18n="cunning_abbr">Cun</span>)</div>
+          <input type="checkbox" name="attr_skill_perception_career" value="true" />
+          <input type="number"  name="attr_skill_perception_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_perception_yd" value="(((@{cunning} + @{skill_perception_rank}) - abs(@{cunning} - @{skill_perception_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_perception_gd" value="((((@{cunning} + @{skill_perception_rank}) + abs(@{cunning} - @{skill_perception_rank})) / 2) - @{skill_perception_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_perception_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_perception" value="!eed characterID(@{character_id}) label(skill:Perception) @{skill_perception_modifiers} skill(@{skill_perception_rank}|@{cunning}|Perception) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_piloting-planetary" class="skill skill_piloting-planetary">          
+          <label data-i18n="piloting-planetary">Piloting - Planetary</label>
+          <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
+          <input type="checkbox" name="attr_skill_piloting-planetary_career" value="true" />
+          <input type="number"  name="attr_skill_piloting-planetary_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_piloting-planetary_yd" value="(((@{agility} + @{skill_piloting-planetary_rank}) - abs(@{agility} - @{skill_piloting-planetary_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_piloting-planetary_gd" value="((((@{agility} + @{skill_piloting-planetary_rank}) + abs(@{agility} - @{skill_piloting-planetary_rank})) / 2) - @{skill_piloting-planetary_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_piloting-planetary_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_piloting-planetary" value="!eed characterID(@{character_id}) label(skill:Piloting - Planetary) @{skill_piloting-planetary_modifiers} skill(@{skill_piloting-planetary_rank}|@{agility}|Piloting - Planetary) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_piloting-space" class="skill skill_piloting-space">          
+          <label data-i18n="piloting-space">Piloting - Space</label>
+          <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
+          <input type="checkbox" name="attr_skill_piloting-space_career" value="true" />
+          <input type="number"  name="attr_skill_piloting-space_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_piloting-space_yd" value="(((@{agility} + @{skill_piloting-space_rank}) - abs(@{agility} - @{skill_piloting-space_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_piloting-space_gd" value="((((@{agility} + @{skill_piloting-space_rank}) + abs(@{agility} - @{skill_piloting-space_rank})) / 2) - @{skill_piloting-space_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_piloting-space_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_piloting-space" value="!eed characterID(@{character_id}) label(skill:Piloting - Space) @{skill_piloting-space_modifiers} skill(@{skill_piloting-space_rank}|@{agility}|Piloting - Space) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_resilience" class="skill skill_resilience">          
+          <label data-i18n="resilience">Resilience</label>
+          <div>(<span data-i18n="brawn_abbr">Bra</span>)</div>
+          <input type="checkbox" name="attr_skill_resilience_career" value="true" />
+          <input type="number"  name="attr_skill_resilience_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_resilience_yd" value="(((@{brawn} + @{skill_resilience_rank}) - abs(@{brawn} - @{skill_resilience_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_resilience_gd" value="((((@{brawn} + @{skill_resilience_rank}) + abs(@{brawn} - @{skill_resilience_rank})) / 2) - @{skill_resilience_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_resilience_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_resilience" value="!eed characterID(@{character_id}) label(skill:Resilience) @{skill_resilience_modifiers} skill(@{skill_resilience_rank}|@{brawn}|Resilience) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_skullduggery" class="skill skill_skullduggery">          
+          <label data-i18n="skullduggery">Skullduggery</label>
+          <div>(<span data-i18n="cunning_abbr">Cun</span>)</div>
+          <input type="checkbox" name="attr_skill_skullduggery_career" value="true" />
+          <input type="number"  name="attr_skill_skullduggery_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_skullduggery_yd" value="(((@{cunning} + @{skill_skullduggery_rank}) - abs(@{cunning} - @{skill_skullduggery_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_skullduggery_gd" value="((((@{cunning} + @{skill_skullduggery_rank}) + abs(@{cunning} - @{skill_skullduggery_rank})) / 2) - @{skill_skullduggery_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_skullduggery_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_skullduggery" value="!eed characterID(@{character_id}) label(skill:Skullduggery) @{skill_skullduggery_modifiers} skill(@{skill_skullduggery_rank}|@{cunning}|Skullduggery) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_stealth" class="skill skill_stealth">          
+          <label data-i18n="stealth">Stealth</label>
+          <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
+          <input type="checkbox" name="attr_skill_stealth_career" value="true" />
+          <input type="number"  name="attr_skill_stealth_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_stealth_yd" value="(((@{agility} + @{skill_stealth_rank}) - abs(@{agility} - @{skill_stealth_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_stealth_gd" value="((((@{agility} + @{skill_stealth_rank}) + abs(@{agility} - @{skill_stealth_rank})) / 2) - @{skill_stealth_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_stealth_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_stealth" value="!eed characterID(@{character_id}) label(skill:Stealth) @{skill_stealth_modifiers} skill(@{skill_stealth_rank}|@{agility}|Stealth) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_streetwise" class="skill skill_streetwise">          
+          <label data-i18n="streetwise">Streetwise</label>
+          <div>(<span data-i18n="cunning_abbr">Cun</span>)</div>
+          <input type="checkbox" name="attr_skill_streetwise_career" value="true" />
+          <input type="number"  name="attr_skill_streetwise_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_streetwise_yd" value="(((@{cunning} + @{skill_streetwise_rank}) - abs(@{cunning} - @{skill_streetwise_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_streetwise_gd" value="((((@{cunning} + @{skill_streetwise_rank}) + abs(@{cunning} - @{skill_streetwise_rank})) / 2) - @{skill_streetwise_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_streetwise_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_streetwise" value="!eed characterID(@{character_id}) label(skill:Streetwise) @{skill_streetwise_modifiers} skill(@{skill_streetwise_rank}|@{cunning}|Streetwise) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_survival" class="skill skill_survival">          
+          <label data-i18n="survival">Survival</label>
+          <div>(<span data-i18n="cunning_abbr">Cun</span>)</div>
+          <input type="checkbox" name="attr_skill_survival_career" value="true" />
+          <input type="number"  name="attr_skill_survival_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_survival_yd" value="(((@{cunning} + @{skill_survival_rank}) - abs(@{cunning} - @{skill_survival_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_survival_gd" value="((((@{cunning} + @{skill_survival_rank}) + abs(@{cunning} - @{skill_survival_rank})) / 2) - @{skill_survival_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_survival_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_survival" value="!eed characterID(@{character_id}) label(skill:Survival) @{skill_survival_modifiers} skill(@{skill_survival_rank}|@{cunning}|Survival) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_vigilance" class="skill skill_vigilance">          
+          <label data-i18n="vigilance">Vigilance</label>
+          <div>(<span data-i18n="willpower_abbr">Wil</span>)</div>
+          <input type="checkbox" name="attr_skill_vigilance_career" value="true" />
+          <input type="number"  name="attr_skill_vigilance_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_vigilance_yd" value="(((@{willpower} + @{skill_vigilance_rank}) - abs(@{willpower} - @{skill_vigilance_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_vigilance_gd" value="((((@{willpower} + @{skill_vigilance_rank}) + abs(@{willpower} - @{skill_vigilance_rank})) / 2) - @{skill_vigilance_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_vigilance_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_vigilance" value="!eed characterID(@{character_id}) label(skill:Vigilance) @{skill_vigilance_modifiers} skill(@{skill_vigilance_rank}|@{willpower}|Vigilance) @{dicePool}"></button>
+        </div>        
+      </div>
+      <div class="skills_combat">
+        <h3>Combat Skills</h3>
+        <div class="skill skill_heading">          
+          <div data-i18n="skill">Skill</div>
+          <div data-i18n="characteristics">Characteristic</div>
+          <div data-i18n="career">Career</div>
+          <div data-i18n="ranks">Ranks</div>
+          <div data-i18n="dice">Dice</div>
+          <div data-i18n="modifiers">Modifiers</div>
+          <div data-i18n="roll">Roll</div>
+        </div>
+        <div name="attr_skill_brawl" class="skill skill_brawl">          
+          <label data-i18n="brawl">Brawl</label>
+          <div>(<span data-i18n="brawn_abbr">Bra</span>)</div>
+          <input type="checkbox" name="attr_skill_brawl_career" value="true" />
+          <input type="number"  name="attr_skill_brawl_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_brawl_yd" value="(((@{brawn} + @{skill_brawl_rank}) - abs(@{brawn} - @{skill_brawl_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_brawl_gd" value="((((@{brawn} + @{skill_brawl_rank}) + abs(@{brawn} - @{skill_brawl_rank})) / 2) - @{skill_brawl_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_brawl_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_brawl" value="!eed characterID(@{character_id}) label(skill:Brawl) @{skill_brawl_modifiers} skill(@{skill_brawl_rank}|@{brawn}|Brawl) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_melee" class="skill skill_melee">          
+          <label data-i18n="melee">Melee</label>
+          <div>(<span data-i18n="brawn_abbr">Bra</span>)</div>
+          <input type="checkbox" name="attr_skill_melee_career" value="true" />
+          <input type="number"  name="attr_skill_melee_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_melee_yd" value="(((@{brawn} + @{skill_melee_rank}) - abs(@{brawn} - @{skill_melee_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_melee_gd" value="((((@{brawn} + @{skill_melee_rank}) + abs(@{brawn} - @{skill_melee_rank})) / 2) - @{skill_melee_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_melee_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_melee" value="!eed characterID(@{character_id}) label(skill:Melee) @{skill_melee_modifiers} skill(@{skill_melee_rank}|@{brawn}|Melee) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_gunnery" class="skill skill_gunnery">          
+          <label data-i18n="gunnery">Gunnery</label>
+          <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
+          <input type="checkbox" name="attr_skill_gunnery_career" value="true" />
+          <input type="number"  name="attr_skill_gunnery_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_gunnery_yd" value="(((@{agility} + @{skill_gunnery_rank}) - abs(@{agility} - @{skill_gunnery_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_gunnery_gd" value="((((@{agility} + @{skill_gunnery_rank}) + abs(@{agility} - @{skill_gunnery_rank})) / 2) - @{skill_gunnery_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_gunnery_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_gunnery" value="!eed characterID(@{character_id}) label(skill:Gunnery) @{skill_gunnery_modifiers} skill(@{skill_gunnery_rank}|@{agility}|Gunnery) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_lightsaber" class="skill skill_lightsaber">          
+          <label data-i18n="lightsaber">Lightsaber</label>
+          <div>
+            <select name="attr_skill_lightsaber_characteristic">
+              <option data-i18n="brawn" value="@{brawn}">Brawn</option>
+              <option data-i18n="agility" value="@{agility}">Agility</option>
+              <option data-i18n="intellect" value="@{intellect}">Intellect</option>
+              <option data-i18n="cunning" value="@{cunning}">Cunning</option>
+              <option data-i18n="willpower" value="@{willpower}">Willpower</option>
+              <option data-i18n="presence" value="@{presence}">Presence</option>
+            </select>
+          </div>
+          <input type="checkbox" name="attr_skill_lightsaber_career" value="true" />
+          <input type="number"  name="attr_skill_lightsaber_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_lightsaber_yd" value="(((@{skill_lightsaber_characteristic} + @{skill_lightsaber_rank}) - abs(@{skill_lightsaber_characteristic} - @{skill_lightsaber_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_lightsaber_gd" value="((((@{skill_lightsaber_characteristic} + @{skill_lightsaber_rank}) + abs(@{skill_lightsaber_characteristic} - @{skill_lightsaber_rank})) / 2) - @{skill_lightsaber_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_lightsaber_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_lightsaber" value="!eed characterID(@{character_id}) label(skill:Lightsaber) @{skill_lightsaber_modifiers} skill(@{skill_lightsaber_rank}|@{skill_lightsaber_characteristic}|Lightsaber) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_ranged-light" class="skill skill_ranged-light">          
+          <label data-i18n="ranged-light">Ranged - Light</label>
+          <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
+          <input type="checkbox" name="attr_skill_ranged-light_career" value="true" />
+          <input type="number"  name="attr_skill_ranged-light_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_ranged-light_yd" value="(((@{agility} + @{skill_ranged-light_rank}) - abs(@{agility} - @{skill_ranged-light_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_ranged-light_gd" value="((((@{agility} + @{skill_ranged-light_rank}) + abs(@{agility} - @{skill_ranged-light_rank})) / 2) - @{skill_ranged-light_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_ranged-light_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_ranged-light" value="!eed characterID(@{character_id}) label(skill:Ranged - Light) @{skill_ranged-light_modifiers} skill(@{skill_ranged-light_rank}|@{agility}|Ranged - Light) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_ranged-heavy" class="skill skill_ranged-heavy">          
+          <label data-i18n="ranged-heavy">Ranged - Heavy</label>
+          <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
+          <input type="checkbox" name="attr_skill_ranged-heavy_career" value="true" />
+          <input type="number"  name="attr_skill_ranged-heavy_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_ranged-heavy_yd" value="(((@{agility} + @{skill_ranged-heavy_rank}) - abs(@{agility} - @{skill_ranged-heavy_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_ranged-heavy_gd" value="((((@{agility} + @{skill_ranged-heavy_rank}) + abs(@{agility} - @{skill_ranged-heavy_rank})) / 2) - @{skill_ranged-heavy_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_ranged-heavy_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_ranged-heavy" value="!eed characterID(@{character_id}) label(skill:Ranged - Heavy) @{skill_ranged-heavy_modifiers} skill(@{skill_ranged-heavy_rank}|@{agility}|Ranged - Heavy) @{dicePool}"></button>
+        </div>
+      </div>
+      <div class="skills_knowledge">
+        <h3>Knowledge Skills</h3>
+        <div class="skill skill_heading">          
+          <div data-i18n="skill">Skill</div>
+          <div data-i18n="characteristics">Characteristic</div>
+          <div data-i18n="career">Career</div>
+          <div data-i18n="ranks">Ranks</div>
+          <div data-i18n="dice">Dice</div>
+          <div data-i18n="modifiers">Modifiers</div>
+          <div data-i18n="roll">Roll</div>
+        </div>
+        <div name="attr_skill_core-worlds" class="skill skill_core-worlds">          
+          <label data-i18n="core-worlds">Core Worlds</label>
+          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+          <input type="checkbox" name="attr_skill_core-worlds_career" value="true" />
+          <input type="number"  name="attr_skill_core-worlds_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_core-worlds_yd" value="(((@{intellect} + @{skill_core-worlds_rank}) - abs(@{intellect} - @{skill_core-worlds_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_core-worlds_gd" value="((((@{intellect} + @{skill_core-worlds_rank}) + abs(@{intellect} - @{skill_core-worlds_rank})) / 2) - @{skill_core-worlds_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_core-worlds_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_core-worlds" value="!eed characterID(@{character_id}) label(skill:Core Worlds) @{skill_core-worlds_modifiers} skill(@{skill_core-worlds_rank}|@{intellect}|Core Worlds) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_education" class="skill skill_education">          
+          <label data-i18n="education">Education</label>
+          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+          <input type="checkbox" name="attr_skill_education_career" value="true" />
+          <input type="number"  name="attr_skill_education_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_education_yd" value="(((@{intellect} + @{skill_education_rank}) - abs(@{intellect} - @{skill_education_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_education_gd" value="((((@{intellect} + @{skill_education_rank}) + abs(@{intellect} - @{skill_education_rank})) / 2) - @{skill_education_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_education_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_education" value="!eed characterID(@{character_id}) label(skill:Education) @{skill_education_modifiers} skill(@{skill_education_rank}|@{intellect}|Education) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_lore" class="skill skill_lore">          
+          <label data-i18n="lore">Lore</label>
+          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+          <input type="checkbox" name="attr_skill_lore_career" value="true" />
+          <input type="number"  name="attr_skill_lore_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_lore_yd" value="(((@{intellect} + @{skill_lore_rank}) - abs(@{intellect} - @{skill_lore_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_lore_gd" value="((((@{intellect} + @{skill_lore_rank}) + abs(@{intellect} - @{skill_lore_rank})) / 2) - @{skill_lore_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_lore_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_lore" value="!eed characterID(@{character_id}) label(skill:Lore) @{skill_lore_modifiers} skill(@{skill_lore_rank}|@{intellect}|Lore) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_outer-rim" class="skill skill_outer-rim">          
+          <label data-i18n="outer-rim">Outer Rim</label>
+          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+          <input type="checkbox" name="attr_skill_outer-rim_career" value="true" />
+          <input type="number"  name="attr_skill_outer-rim_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_outer-rim_yd" value="(((@{intellect} + @{skill_outer-rim_rank}) - abs(@{intellect} - @{skill_outer-rim_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_outer-rim_gd" value="((((@{intellect} + @{skill_outer-rim_rank}) + abs(@{intellect} - @{skill_outer-rim_rank})) / 2) - @{skill_outer-rim_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_outer-rim_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_outer-rim" value="!eed characterID(@{character_id}) label(skill:Outer Rim) @{skill_outer-rim_modifiers} skill(@{skill_outer-rim_rank}|@{intellect}|Outer Rim) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_underworld" class="skill skill_underworld">          
+          <label data-i18n="underworld">Underworld</label>
+          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+          <input type="checkbox" name="attr_skill_underworld_career" value="true" />
+          <input type="number"  name="attr_skill_underworld_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_underworld_yd" value="(((@{intellect} + @{skill_underworld_rank}) - abs(@{intellect} - @{skill_underworld_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_underworld_gd" value="((((@{intellect} + @{skill_underworld_rank}) + abs(@{intellect} - @{skill_underworld_rank})) / 2) - @{skill_underworld_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_underworld_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_underworld" value="!eed characterID(@{character_id}) label(skill:Underworld) @{skill_underworld_modifiers} skill(@{skill_underworld_rank}|@{intellect}|Underworld) @{dicePool}"></button>
+        </div>
+        <div name="attr_skill_xenology" class="skill skill_xenology">          
+          <label data-i18n="xenology">Xenology</label>
+          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+          <input type="checkbox" name="attr_skill_xenology_career" value="true" />
+          <input type="number"  name="attr_skill_xenology_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_skill_xenology_yd" value="(((@{intellect} + @{skill_xenology_rank}) - abs(@{intellect} - @{skill_xenology_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_skill_xenology_gd" value="((((@{intellect} + @{skill_xenology_rank}) + abs(@{intellect} - @{skill_xenology_rank})) / 2) - @{skill_xenology_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_skill_xenology_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_skill_xenology" value="!eed characterID(@{character_id}) label(skill:Xenology) @{skill_xenology_modifiers} skill(@{skill_xenology_rank}|@{intellect}|Xenology) @{dicePool}"></button>
+        </div> 
+      </div>
+    </div>
+  </div>
+  <div class="sheet-combat">
+    <h2 data-i18n="combat">Combat</h2>
+    <div class="section">Combat stuff</div>
+  </div>
+  <div class="sheet-equipment">
+    <h2 data-i18n="equipment">Equipment</h2>
+    <div class="section">Equipment stuff</div>    
+  </div>
+  <div class="sheet-talents">
+    <h2 data-i18n="talents">Talents</h2>
+    <div class="section">Talents stuff</div>    
+  </div>
+  <div class="sheet-force">
+    <h2 data-i18n="force_powers">Force Powers</h2>
+    <div class="section">Force stuff</div>    
+  </div>
+  <!-- General Settings -->
+  <div class="sheet-settings">
+    <h2 data-i18n="roll_result_suggestions">Roll Result Suggestions</h2>
+    <div class="settings_result_suggestions section">
+      <div data-i18n="setting">Setting</div>
+      <div data-i18n="option">Option</div>
+      <div data-i18n-title="select_skill_suggestions" title="Change the handling for skill suggestions" data-i18n="skill_suggestions_display">Skill Suggestions Display</div>
+      <select name="attr_skill_suggestion_setting_display">
+        <option value="none" data-i18n="none">None</option>
+        <option value="whisper" data-i18n="whisper_gm">Whisper GM</option>
+        <option value="button" data-i18n="show_suggestions_button">Show Suggestions Button</option>
+        <option value="always" data-i18n="display_inskill" selected>Display in Skill</option>
+      </select>
+      <div data-i18n-title="select_combat_suggestions" title="Enable suggestions for rolls made from the weapon combat section or vehicle sheet" data-i18n="enable_combat_suggestions">Enable Combat Suggestions?</div>
+      <select name="attr_skill_suggestion_setting_combat">
+        <option value="0" data-i18n="no" selected>No</option>
+        <option value="1" data-i18n="yes">Yes</option>
+      </select>
+      <div data-i18n-title="select_general_suggestions" title="Enable suggestions for rolls made from the general skill list" data-i18n="enable_general_suggestions">Enable General Suggestions?</div>
+      <select name="attr_skill_suggestion_setting_general">
+        <option value="0" data-i18n="no" selected>No</option>
+        <option value="1" data-i18n="yes">Yes</option>
+      </select>
+      <div data-i18n-title="select_fear_check" title="Allows Discipline and Cool skill checks to pull suggestions from the fear suggestion list." data-i18n="fear_check">Fear Check?</div>
+      <select name="attr_skill_suggestion_setting_fear">
+        <option value="0" selected data-i18n="no">No</option>
+        <option value="1" data-i18n="yes">Yes</option>
+      </select>
+    </div>    
+  </div>
+  <!-- End General Settings -->
+</div>
+
+<!-- Script worker for section tabs -->
+<script type="text/worker">
+  const buttonlist = ["skills","combat","equipment","talents","force"];
+  buttonlist.forEach(button => {
+    on(`clicked:${button}`, function() {
+      setAttrs({
+        sheetTab: button,
+        navSelection: button
+      });
+    });
+  });
+</script>
+<!-- End Script worker for section tabs -->
+
+<!-- Default Roll Template -->
+<rolltemplate class="sheet-rolltemplate-base">
+  <table>
+      <tr><th colspan="2">{{title}} {{#subtitle}}<br /><span class="subheader">{{subtitle}}</span>{{/subtitle}}</th></tr>
+      {{#flavor}}
+      <tr><td colspan="2"><span class="flavor">{{flavor}}</span></td></tr>
+      {{/flavor}}
+      {{#prewide}}
+      <tr><td colspan="2">{{prewide}}</td></tr>
+      {{/prewide}}
+      {{#header}}
+      <tr><td class="tcat-header"><span>{{header}}</span></td><td class="tcat-header"><span>{{item}}</span></td></tr>
+      {{/header}}
+      {{#allprops() title flavor wide roll results subtitle header item prewide wide2 wide3 wide4 wide5}}
+      <tr><td><span class="sheet-tcat">{{key}}</span></td><td>{{value}}</td></tr>
+      {{/allprops() title flavor wide roll results subtitle header item prewide wide2 wide3 wide4 wide5}}
+      {{#wide}}
+      <tr><td colspan="2">{{wide}}</td></tr>
+      {{/wide}}
+      {{#wide2}}
+      <tr><td colspan="2">{{wide2}}</td></tr>
+      {{/wide2}}
+      {{#wide3}}
+      <tr><td colspan="2">{{wide3}}</td></tr>
+      {{/wide3}}
+      {{#wide4}}
+      <tr><td colspan="2">{{wide4}}</td></tr>
+      {{/wide4}}
+      {{#wide5}}
+      <tr><td colspan="2">{{wide5}}</td></tr>
+      {{/wide5}}
+      {{#roll}}
+      <tr><td colspan="2"><span class="tcat" data-i18n="diceroll">Dice Roll</span></td></tr>
+      <tr><td colspan="2">{{roll}}</td></tr>
+      {{/roll}}
+      {{#results}}
+      <tr><td colspan="2"><span class="tcat" data-i18n="results">Results</span></td></tr>
+      <tr><td colspan="2">{{results}}</td></tr>
+      {{/results}}
+  </table>
+</rolltemplate>
+<!-- End Default Roll Template -->
+
+<!-- Roll Template with Spending Suggestions -->
+<rolltemplate class="sheet-rolltemplate-suggestion">
+  <table>
+      <tr><th colspan="2">{{title}} {{#subtitle}}<br /><span class="subheader">{{subtitle}}</span>{{/subtitle}}</th></tr>
+      {{#flavor}}
+      <tr><td colspan="2"><span class="flavor">{{flavor}}</span></td></tr>
+      {{/flavor}}
+      {{#prewide}}
+      <tr><td colspan="2">{{prewide}}</td></tr>
+      {{/prewide}}
+      {{#header}}
+      <tr><td class="tcat-header"><span>{{header}}</span></td><td class="tcat-header"><span>{{item}}</span></td></tr>
+      {{/header}}
+      {{#allprops() title flavor roll results subtitle header item suggestionsExist success advantage triumph failure threat despair 1advantage1triumph 2advantage1triumph 3advantage1triumph 1triumph 2triumph 1threat1despair 2threat1despair 3threat1despair 1despair 2despair}}
+      <tr><td><span class="sheet-tcat">{{key}}</span></td><td>{{value}}</td></tr>
+      {{/allprops() title flavor roll results subtitle header item suggestionsExist success advantage triumph failure threat despair 1advantage1triumph 2advantage1triumph 3advantage1triumph 1triumph 2triumph 1threat1despair 2threat1despair 3threat1despair 1despair 2despair}}
+      {{#wide}}
+      <tr><td colspan="2">{{wide}}</td></tr>
+      {{/wide}}
+      {{#wide2}}
+      <tr><td colspan="2">{{wide2}}</td></tr>
+      {{/wide2}}
+      {{#wide3}}
+      <tr><td colspan="2">{{wide3}}</td></tr>
+      {{/wide3}}
+      {{#wide4}}
+      <tr><td colspan="2">{{wide4}}</td></tr>
+      {{/wide4}}
+      {{#wide5}}
+      <tr><td colspan="2">{{wide5}}</td></tr>
+      {{/wide5}}
+      {{#roll}}
+      <tr><td colspan="2"><span class="tcat" data-i18n="diceroll">Dice Roll</span></td></tr>
+      <tr><td colspan="2">{{roll}}</td></tr>
+      {{/roll}}
+      {{#results}}
+      <tr><td colspan="2"><span class="tcat" data-i18n="results">Results</span></td></tr>
+      <tr><td colspan="2">{{results}}</td></tr>
+      {{/results}}
+      {{#suggestionsExist}}
+      <tr><td colspan="2"><span class="tcat" data-i18n="spendingsuggestions">Spending Suggestions</span></td></tr>
+      {{/suggestionsExist}}
+      {{#success}}
+      <tr><td><span class="sheet-tcat" data-i18n="success">Success</span></td><td>{{success}}</td></tr>
+      {{/success}}
+      {{#advantage}}
+      <tr><td><span class="sheet-tcat" data-i18n="advantage">Advantage</span></td><td>{{advantage}}</td></tr>
+      {{/advantage}}
+      {{#triumph}}
+      <tr><td><span class="sheet-tcat" data-i18n="triumph">Triumph</span></td><td>{{triumph}}</td></tr>
+      {{/triumph}}
+      {{#failure}}
+      <tr><td><span class="sheet-tcat" data-i18n="failure">Failure</span></td><td>{{failure}}</td></tr>
+      {{/failure}}
+      {{#threat}}
+      <tr><td><span class="sheet-tcat" data-i18n="threat">Threat</span></td><td>{{threat}}</td></tr>
+      {{/threat}}
+      {{#despair}}
+      <tr><td><span class="sheet-tcat" data-i18n="despair">Despair</span></td><td>{{despair}}</td></tr>
+      {{/despair}}
+      {{#1advantage1triumph}}
+      <tr><td><img src="https://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/> or <img src="https://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{1advantage1triumph}}</td></tr>
+      {{/1advantage1triumph}}
+      {{#2advantage1triumph}}
+      <tr><td><img src="https://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/><img src="https://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/> or <img src="https://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{2advantage1triumph}}</td></tr>
+      {{/2advantage1triumph}}
+      {{#3advantage1triumph}}
+      <tr><td><img src="https://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/><img src="https://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/><img src="https://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/> or <img src="https://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{3advantage1triumph}}</td></tr>
+      {{/3advantage1triumph}}
+      {{#1triumph}}
+      <tr><td><img src="https://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{1triumph}}</td></tr>
+      {{/1triumph}}
+      {{#2triumph}}
+      <tr><td><img src="https://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/><img src="https://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{2triumph}}</td></tr>
+      {{/2triumph}}
+      {{#1threat1despair}}
+      <tr><td><img src="https://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/> or <img src="https://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{1threat1despair}}</td></tr>
+      {{/1threat1despair}}
+      {{#2threat1despair}}
+      <tr><td><img src="https://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/><img src="https://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/> or <img src="https://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{2threat1despair}}</td></tr>
+      {{/2threat1despair}}
+      {{#3threat1despair}}
+      <tr><td><img src="https://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/><img src="https://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/><img src="https://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/> or <img src="https://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{3threat1despair}}</td></tr>
+      {{/3threat1despair}}
+      {{#1despair}}
+      <tr><td><img src="https://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{1despair}}</td></tr>
+      {{/1despair}}
+      {{#2despair}}
+      <tr><td><img src="https://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/><img src="https://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{2despair}}</td></tr>
+      {{/2despair}}
+  </table>
+</rolltemplate>
+<!-- End Roll Template with Spending Suggestions -->

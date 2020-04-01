@@ -1,0 +1,709 @@
+/* ======================================== */
+/* ========== START SHEET STYLES ========== */
+/* ======================================== */
+
+/* Palette */
+/* 
+Dark Red      - #781114
+Turquoise     - #74cddd
+Bluish Grey   - #354457
+Grungy Green  - #52644c
+Dull Tangerine- #C88C50
+Weird Flesh   - #C38D8D
+Burnt Orange  - #BC3F13
+Tan           - #E9E9E7
+Darker Tan    - #D0D0CE
+Grey Green    - #97ABA9
+*/
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
+/* Global Styles */
+
+.sheet-character_sheet {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  box-sizing: border-box;
+  font-size: 16px;
+  min-width: 800px;
+  font-family: 'Nunito', sans-serif;
+  margin-bottom: 2em;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.sheet-character_sheet h2 {
+  display: block;
+  font-size: 1.5em;
+  font-weight: 700;
+  text-align: center;
+  background-color: #354457;
+  color: #ffffff;
+  padding: 0.25em 0;
+  border: 1px solid #354457;
+  border-radius: 1em 1em 0 0;
+}
+
+.sheet-character_sheet h3 {
+  font-size: 1.2em;
+  font-weight: 700;
+  margin: 0 -0.75em 0 -0.85em;
+  padding: 0.5em;
+  border-bottom: 1px dotted #aaaaaa;
+  background-color: #ccc;
+}
+
+.sheet-character_sheet .sheet-section {
+  background-color: #eaeaea;
+  border-radius: 0 0 1em 1em;
+  margin-bottom: 3em;
+}
+
+.sheet-character_sheet label {
+  display: block;
+  font-weight: normal;
+  font-size: 1em;
+  margin: 0;
+}
+
+.sheet-character_sheet input {
+  width: 100%;
+  padding: 0.5em;
+  font-size: 1em;
+}
+
+.sheet-character_sheet input[type="number"] {
+  text-align: center;
+  width: 100%;
+  padding: 0.5em;
+}
+
+.sheet-character_sheet select {
+  padding: 0.25em;
+  width: 100%;
+  height: 100%;
+  font-size: 1em;
+}
+
+/* Grid styles */
+
+.sheet-cell_width_2 {
+  grid-column: span 2;
+}
+
+/* Pools - Dice and Destiny */
+
+.sheet-dice_pool_grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  background-color: #333333;
+  padding: 0 1em;
+  border-radius: 0 0 1em 1em;
+  column-gap: 2em;
+}
+
+.sheet-dice_pool input {
+  width: auto;
+  font-size: 1.25em;
+  border-radius: 0.5em;
+}
+
+.sheet-dice_pool img {
+  padding: 0.25em;
+}
+
+.sheet-three_dice {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 1.25em;
+  margin: 1em 0;
+}
+
+.sheet-three_dice div {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.sheet-upgrade_downgrade {
+  display: grid;
+  grid-template-columns: 3fr 2fr 2fr 3fr;
+  column-gap: 0.5em;
+  margin-bottom: 1em;
+}
+
+.sheet-upgrade_downgrade label {
+  color: #ffffff;
+  font-size: 0.85em;
+  padding: 0;
+  align-self: center;
+}
+
+.sheet-upgrade_label {
+  text-align: right;
+}
+
+.sheet-force_dice_dice_roll {
+  padding: 1em 0;
+}
+
+.sheet-force_dice {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 0 2em;
+}
+
+.sheet-dice_roll {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.5em;
+  margin-top: 1em;
+}
+
+.sheet-character_sheet .sheet-dice_roll button[type="roll"] {
+  margin: 0;
+  height: 100%;
+  font-size: 2.5em;
+}
+
+.sheet-character_sheet .sheet-dice_roll button[type="roll"].roll_ResetDicePool::before {
+  font-family: "Pictos";
+  content: "r";
+}
+
+.sheet-destiny_pool {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5em;
+  padding: 1em;
+}
+
+.sheet-destiny_pool button {
+  display: block;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  font-size: 1em;
+  margin: 0.5em;
+  width: 100%;
+  text-align: center;
+  border: 3px solid #354457;
+}
+
+.sheet-destiny_inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2em;
+}
+
+.sheet-destiny_inputs input {
+  font-size: 1.25em;
+  padding: 0.5em;
+  border-radius: 0.5em;
+}
+
+.sheet-destiny_inputs label {
+  text-align: center;
+  padding: 0.5em;
+}
+
+.sheet-destiny_inputs input.attr_destiny_dark {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/* Sheet Nagivation Tabs */
+
+.sheet-tab_navigation {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 2em 0;
+}
+
+.sheet-tab_navigation button {
+  width: 100%;  
+  font-size: 1.25em;
+  padding: 1em;
+  color: #ffffff;
+  border: 1px solid #a3bedf;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-bottom-width: 0;  
+  background: rgb(188,63,19);
+background: linear-gradient(180deg, rgba(188,63,19,1) 38%, rgba(168,44,0,1) 100%);
+}
+
+.sheet-tab_navigation div:last-child button {
+  border-radius: 0 2em 2em 0;
+  border-color: #354457;
+}
+
+.sheet-tab_navigation div:first-child button {
+  border-radius: 2em 0 0 2em;
+}
+
+.sheet-tab_navigation span {
+  display: block;
+}
+
+.sheet-tab_navigation button:hover {
+  background: rgb(84,105,131);
+  background: radial-gradient(circle, rgba(84,105,131,1) 0%, rgba(53,68,87,1) 100%);
+}
+
+.sheet-tab_navigation span:hover {
+  text-shadow: 0px 0px 8px #ffffff;
+}
+
+.sheet-skills,
+.sheet-combat,
+.sheet-equipment,
+.sheet-talents,
+.sheet-force {
+	display: none;
+}
+
+.sheet-tabstoggle[value="skills"] ~ div.sheet-skills,
+.sheet-tabstoggle[value="combat"] ~ div.sheet-combat,
+.sheet-tabstoggle[value="equipment"] ~ div.sheet-equipment,
+.sheet-tabstoggle[value="talents"] ~ div.sheet-talents,
+.sheet-tabstoggle[value="force"] ~ div.sheet-force {
+	display: block;
+}
+
+.sheet-tab_navigation [type=radio] {
+  display: none;
+}
+
+.sheet-tab_navigation [type=radio]:checked ~ button {
+  background: rgb(96,124,159);
+  background: radial-gradient(circle, rgba(96,124,159,1) 0%, rgba(53,68,87,1) 100%);
+}
+
+/* Body Stats - Wounds, Strain, Soak, Defense */
+
+.sheet-vital_stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 2em;
+  padding: 1em;
+}
+
+.sheet-vital_stats label {
+  padding: 0.5em;
+  margin: 0;
+  font-size: 1em;
+  text-align: center;
+  width: 100%;
+}
+
+.sheet-vital_stats input {
+  font-size: 1.5em;
+  border: none;
+}
+
+.sheet-vital_stats_column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  column-gap: 0.5em;
+}
+
+.sheet-vital_stats input {
+  width: 100%;
+  border-radius: 0.5em;
+}
+
+.sheet-vital_stats .sheet-stat_label {
+  background: rgb(120,17,20);
+  background: radial-gradient(circle, rgba(120,17,20,1) 0%, rgba(103,0,3,1) 62%);
+  color: #ffffff;
+  padding: 0.25em;
+  margin: 0.5em 0;
+  font-size: 1em;
+  text-align: center;
+  width: 100%;
+  border: 4px solid #354457;
+  border-radius: 1em;
+}
+
+.sheet-vital_stats input.sheet-wounds_threshold {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.sheet-vital_stats input.sheet-wounds_current {
+  box-shadow: inset 0 0 0 5px #7CC48A;
+}
+
+.sheet-vital_stats input.sheet-strain_threshold {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.sheet-vital_stats input.sheet-strain_current {
+  box-shadow: inset 0 0 0 5px #B31D1D;
+}
+
+/* Characteristics - Brawn, Agility, Intellect, Cunning, Willpower, Presence */
+
+.sheet-characteristics {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  column-gap: 1em;
+  background-color: #eaeaea;
+  padding: 1em;
+  border-radius: 0 0 1em 1em;
+}
+
+.sheet-characteristics input {
+  width: 100%;
+  padding: 1em;
+  font-size: 1.5em;
+  border: 4px solid #354457;
+  border-radius: 50%;
+}
+
+.sheet-characteristics label {
+  background-color: #C88C50;
+  color: #ffffff;
+  padding: 0.25em;
+  margin: 0.5em 0;
+  font-size: 1em;
+  text-align: center;
+  width: 100%;
+  border: 4px solid #354457;
+  border-radius: 1em;
+}
+
+/* Skills */
+
+.sheet-skills_body {
+  background-color: #eaeaea;
+  padding: 0 1em;
+  border-radius: 0 0 1em 1em;
+}
+
+.sheet-skill {
+  display: grid;
+  grid-template-columns: 1fr 8em 4em 3em 10em 6em 3em;
+  column-gap: 1em;
+  padding: 0.5em 0;
+  border-bottom: 1px dotted #aaaaaa;
+}
+
+.sheet-skill label,
+.sheet-skill div,
+.sheet-skill input,
+.sheet-skill button {
+  align-self: center;
+}
+
+.sheet-skill_heading {
+  padding-top: 1em;
+}
+
+.sheet-skill_heading div {
+  font-size: 0.85em;
+}
+
+.sheet-skill_rank_boxes {
+  display: flex;
+  background-color: #ffffff;
+  padding: 0.15em 0.25em;
+}
+
+.sheet-gd + span {
+  color: #00b300;
+  font-size: 1.5em;
+  letter-spacing: 3px;
+  margin-left: 2px;
+}
+
+.sheet-gd[value="0"] + span::after
+{
+  content: "";
+}
+
+.sheet-gd[value="1"] + span::after
+{
+  content: "♦";
+}
+
+.sheet-gd[value="2"] + span::after
+{
+  content: "♦♦";
+}
+
+.sheet-gd[value="3"] + span::after
+{
+  content: "♦♦♦";
+}
+
+.sheet-gd[value="4"] + span::after
+{
+  content: "♦♦♦♦";
+}
+
+.sheet-gd[value="5"] + span::after
+{
+  content: "♦♦♦♦♦";
+}
+
+.sheet-gd[value="6"] + span::after
+{
+  content: "♦♦♦♦♦♦";
+}
+
+.sheet-gd[value="7"] + span::after
+{
+  content: "♦♦♦♦♦♦♦";
+}
+
+.sheet-yd + span {
+  color: #c9cc00;
+  font-size: 1.5em;
+  line-height: 1.2;
+}
+
+.sheet-yd[value="0"] + span::after
+{
+  content: "";
+}
+
+.sheet-yd[value="1"] + span::after
+{
+  content: "◈";
+}
+
+.sheet-yd[value="2"] + span::after
+{
+  content: "◈◈";
+}
+
+.sheet-yd[value="3"] + span::after
+{
+  content: "◈◈◈";
+}
+
+.sheet-yd[value="4"] + span::after
+{
+  content: "◈◈◈◈";
+}
+
+.sheet-yd[value="5"] + span::after
+{
+  content: "◈◈◈◈◈";
+}
+
+.sheet-yd[value="6"] + span::after
+{
+  content: "◈◈◈◈◈◈";
+}
+
+.sheet-yd[value="7"] + span::after
+{
+  content: "◈◈◈◈◈◈◈";
+}
+
+.sheet-skill input[type="checkbox"],
+.sheet-skill input[type="number"]
+{
+  text-align: center;
+}
+
+.sheet-skill select {
+  padding: 0.25em;
+  margin: 0;
+  height: 100%;
+}
+
+.sheet-skills_combat,
+.sheet-skills_knowledge {
+  margin-top: 3em;
+}
+
+/* Roll button */
+
+.sheet-character_sheet button[type="roll"] {
+  font-size: 1.5em;
+  font-family: "dicefontd12";
+  color: #555555;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+.sheet-character_sheet button[type="roll"]::before {
+  font-family: "dicefontd12";
+  content: "L";
+}
+
+/* Combat */
+
+
+/* GM Settings */
+
+.sheet-settings_result_suggestions {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  column-gap: 1em;
+  row-gap: 1em;
+  padding: 2em;
+  background-color: #eaeaea;
+  border-radius: 0 0 1em 1em;
+  align-items: center;
+}
+
+.sheet-settings_result_suggestions input {
+  padding: 0.25em;
+  margin: 0;
+  height: 100%;
+}
+
+
+/* Roll Template Formatting - Critical */
+
+.sheet-rolltemplate-critical table {
+  width: 100%;
+  border: 1px solid;
+  color: black;
+  font-size: 1em;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.sheet-rolltemplate-critical th {
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(top, #ff0505, #000000);
+  background-image: -moz-linear-gradient(top, #ff0505, #000000);
+  background-image: -o-linear-gradient(top, #ff0505, #000000);
+  background-image: linear-gradient(to bottom, #ff0505, #000000);
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  padding: 2px;
+  line-height: 1.6em;
+  font-size: 1.2em;
+}
+
+.sheet-rolltemplate-critical .sheet-subheader {
+  font-size: 0.8em;
+  padding: 2px;
+}
+
+.sheet-rolltemplate-critical .sheet-tcat-header {
+  background-image: -webkit-linear-gradient(top, #ff0505, #000000);
+  background-image: -moz-linear-gradient(top, #ff0505, #000000);
+  background-image: -o-linear-gradient(top, #ff0505, #000000);
+  background-image: linear-gradient(to bottom, #ff0505, #000000);
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  padding: 2px;
+  line-height: 1.2em;
+  font-size: 0.8em;
+}
+
+.sheet-rolltemplate-critical td {
+  padding: 2px;
+}
+
+.sheet-rolltemplate-critical .sheet-tcat {
+  font-weight: bold;
+  padding: 2px;
+}
+
+.sheet-rolltemplate-critical .sheet-flavor {
+  font-style: italic;
+  padding: 2px;
+}
+
+.sheet-rolltemplate-critical tr:nth-child(odd) {
+  background-color: rgba(217, 217, 214, 1);
+  padding: 2px;
+}
+
+.sheet-rolltemplate-critical tr:nth-child(even) {
+  background-color: rgba(233, 233, 233, 1);
+  padding: 2px;
+}
+
+/* End Roll Template Formatting - Critical */
+
+/* Roll Template Formatting */
+
+.sheet-rolltemplate-base table, .sheet-rolltemplate-suggestion table {
+  width: 100%;
+  border: 1px solid;
+  color: black;
+  font-size: 1em;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.sheet-rolltemplate-base th, .sheet-rolltemplate-suggestion th {
+  border-radius: 3px;
+  /* background: url(https://i.imgur.com/H8YkiDQ.jpg); */
+  /* Starfield */
+  background-image: -webkit-linear-gradient(top, #485a6d, #2c3947);
+  background-image: -moz-linear-gradient(top, #485a6d, #2c3947);
+  background-image: -o-linear-gradient(top, #485a6d, #2c3947);
+  background-image: linear-gradient(to bottom, #485a6d, #2c3947);
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  padding: 2px;
+  line-height: 1.6em;
+  font-size: 1.2em;
+}
+
+.sheet-rolltemplate-base .sheet-subheader, .sheet-rolltemplate-suggestion .sheet-subheader {
+  font-size: 0.8em;
+  padding: 2px;
+}
+
+.sheet-rolltemplate-base .sheet-tcat-header, .sheet-rolltemplate-suggestion .sheet-tcat-header {
+  /* background: url(https://i.imgur.com/H8YkiDQ.jpg); */
+  /* Starfield */
+  background-image: -webkit-linear-gradient(top, #485a6d, #2c3947);
+  background-image: -moz-linear-gradient(top, #485a6d, #2c3947);
+  background-image: -o-linear-gradient(top, #485a6d, #2c3947);
+  background-image: linear-gradient(to bottom, #485a6d, #2c3947);
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  padding: 2px;
+  line-height: 1.2em;
+  font-size: 0.8em;
+}
+
+.sheet-rolltemplate-base td, .sheet-rolltemplate-suggestion td {
+  padding: 2px;
+}
+
+.sheet-rolltemplate-suggestion td {
+  width: 71px;
+}
+
+.sheet-rolltemplate-base .sheet-tcat, .sheet-rolltemplate-suggestion .sheet-tcat {
+  font-weight: bold;
+  padding: 2px;
+}
+
+.sheet-rolltemplate-base .sheet-flavor, .sheet-rolltemplate-suggestion .sheet-flavor {
+  font-style: italic;
+  padding: 2px;
+}
+
+.sheet-rolltemplate-base tr:nth-child(odd), .sheet-rolltemplate-suggestion tr:nth-child(odd) {
+  background-color: rgba(217, 217, 214, 1);
+  padding: 2px;
+}
+
+.sheet-rolltemplate-base tr:nth-child(even), .sheet-rolltemplate-suggestion tr:nth-child(even) {
+  background-color: rgba(233, 233, 233, 1);
+  padding: 2px;
+}
+
+/* End Roll Template Formatting - Base */
