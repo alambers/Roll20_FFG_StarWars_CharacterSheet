@@ -29,7 +29,7 @@
   "equipment": "Equipment",
   "talents": "Talents",
   "force_powers": "Force Powers",
-  "characteristics": "Characteristic",
+  "characteristics": "Characteristics",
   "brawn": "Brawn",
   "agility": "Agility",
   "intellect": "Intellect",
@@ -108,5 +108,12 @@
   "select_general_suggestions": "Enable suggestions for rolls made from the general skill list",
   "enable_general_suggestions": "Enable General Suggestions?",
   "select_fear_check": "Allows Discipline and Cool skill checks to pull suggestions from the fear suggestion list.",
-  "fear_check": "Fear Check?"
+  "fear_check": "Fear Check?",
+  "cool_if_prepared": "Cool (if prepared)",
+  "vigilance_if_unexpected": "Vigilance (if unexpected)",
+  "characteristic": "Characteristic",
+  "diceroll": "Dice Roll",
+  "results": "Results",
+  "initiative_cool": "",
+  "initiative_vigilance": ""
 }

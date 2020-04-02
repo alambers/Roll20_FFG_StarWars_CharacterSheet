@@ -96,6 +96,22 @@ Grey Green    - #97ABA9
   grid-column: span 2;
 }
 
+.sheet-cell_width_3 {
+  grid-column: span 3;
+}
+
+.sheet-cell_width_4 {
+  grid-column: span 4;
+}
+
+.sheet-cell_width_5 {
+  grid-column: span 5;
+}
+
+.sheet-cell_width_6 {
+  grid-column: span 6;
+}
+
 /* Pools - Dice and Destiny */
 
 .sheet-dice_pool_grid {
@@ -542,6 +558,29 @@ background: linear-gradient(180deg, rgba(188,63,19,1) 38%, rgba(168,44,0,1) 100%
 }
 
 /* Combat */
+
+.sheet-initiative,
+.sheet-criticals,
+.sheet-weapons,
+.sheet-combat_talents {
+  background-color: #eaeaea;
+  padding: 1em;
+  border-radius: 0 0 1em 1em;
+}
+
+.sheet-rolla_critical {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 1em;
+  padding: 1em;
+}
+
+.sheet-current_crits {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+  column-gap: 1em;
+  padding: 1em;
+}
 
 
 /* GM Settings */
