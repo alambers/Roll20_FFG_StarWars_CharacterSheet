@@ -111,6 +111,27 @@ Grey Green    - #97ABA9
   padding-left: 0.25em;
 }
 
+.sheet-help_info {
+  display: none;
+}
+
+.sheet-icon_help:hover + .sheet-help_info {
+  display: block;
+  position: absolute;
+  z-index: 10;
+  background-color: #ffffff;
+  padding: 1em 2em;
+  min-width: 20em;
+  text-align: left;
+  border: 3px solid #354457;
+  border-radius: 0.5em;
+  line-height: 1.5;
+}
+
+.sheet-help_info p {
+  margin-bottom: 1em;
+}
+
 /* Grid styles */
 
 .sheet-cell_width_2 {
@@ -693,6 +714,14 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   margin-top: 1em;
   padding: 1em;
   align-items: center;
+}
+
+.sheet-weapon_qualities input,
+.sheet-weapon_qualities select {
+  width: 100%;
+  height: 100%;
+  padding: 0.25em;
+  margin: 0;
 }
 
 .sheet-weapon_info label,
