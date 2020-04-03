@@ -90,6 +90,27 @@ Grey Green    - #97ABA9
   font-size: 1em;
 }
 
+.sheet-icon_help::after {
+  font-family: 'Pictos';
+  content: '?';
+  color: #555555;
+  padding-left: 0.25em;
+}
+
+.sheet-icon_active::after {
+  font-family: 'Pictos';
+  content: '9';
+  color: #781114;
+  padding-left: 0.25em;
+}
+
+.sheet-icon_passive::after {
+  font-family: 'Pictos';
+  content: 't';
+  color: #74cddd;
+  padding-left: 0.25em;
+}
+
 /* Grid styles */
 
 .sheet-cell_width_2 {
@@ -180,13 +201,13 @@ Grey Green    - #97ABA9
   margin-top: 1em;
 }
 
-.sheet-character_sheet .sheet-dice_roll button[type="roll"] {
+.sheet-character_sheet .sheet-dice_roll button.roll_button {
   margin: 0;
   height: 100%;
   font-size: 2.5em;
 }
 
-.sheet-character_sheet .sheet-dice_roll button[type="roll"].roll_ResetDicePool::before {
+.sheet-character_sheet .sheet-dice_roll button.roll_button.roll_ResetDicePool::before {
   font-family: "Pictos";
   content: "r";
 }
@@ -235,7 +256,7 @@ Grey Green    - #97ABA9
 
 .sheet-tab_navigation {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   margin: 2em 0;
 }
 
@@ -249,7 +270,7 @@ Grey Green    - #97ABA9
   border-left-width: 0;
   border-bottom-width: 0;  
   background: rgb(188,63,19);
-background: linear-gradient(180deg, rgba(188,63,19,1) 38%, rgba(168,44,0,1) 100%);
+  background: linear-gradient(180deg, rgba(188,63,19,1) 38%, rgba(168,44,0,1) 100%);
 }
 
 .sheet-tab_navigation div:last-child button {
@@ -278,7 +299,8 @@ background: linear-gradient(180deg, rgba(188,63,19,1) 38%, rgba(168,44,0,1) 100%
 .sheet-combat,
 .sheet-equipment,
 .sheet-talents,
-.sheet-force {
+.sheet-force,
+.sheet-settings {
 	display: none;
 }
 
@@ -286,7 +308,8 @@ background: linear-gradient(180deg, rgba(188,63,19,1) 38%, rgba(168,44,0,1) 100%
 .sheet-tabstoggle[value="combat"] ~ div.sheet-combat,
 .sheet-tabstoggle[value="equipment"] ~ div.sheet-equipment,
 .sheet-tabstoggle[value="talents"] ~ div.sheet-talents,
-.sheet-tabstoggle[value="force"] ~ div.sheet-force {
+.sheet-tabstoggle[value="force"] ~ div.sheet-force,
+.sheet-tabstoggle[value="settings"] ~ div.sheet-settings {
 	display: block;
 }
 
@@ -544,7 +567,7 @@ background: linear-gradient(180deg, rgba(188,63,19,1) 38%, rgba(168,44,0,1) 100%
 
 /* Roll button */
 
-.sheet-character_sheet button[type="roll"] {
+.sheet-character_sheet button.roll_button {
   font-size: 1.5em;
   font-family: "dicefontd12";
   color: #555555;
@@ -552,7 +575,7 @@ background: linear-gradient(180deg, rgba(188,63,19,1) 38%, rgba(168,44,0,1) 100%
   cursor: pointer;
 }
 
-.sheet-character_sheet button[type="roll"]::before {
+.sheet-character_sheet button.roll_button::before {
   font-family: "dicefontd12";
   content: "L";
 }
@@ -560,11 +583,16 @@ background: linear-gradient(180deg, rgba(188,63,19,1) 38%, rgba(168,44,0,1) 100%
 /* Combat */
 
 .sheet-initiative,
-.sheet-criticals,
 .sheet-weapons,
 .sheet-combat_talents {
   background-color: #eaeaea;
   padding: 1em;
+  border-radius: 0 0 1em 1em;
+}
+
+.sheet-criticals {
+  background-color: #eaeaea;
+  padding: 0 1em 1em 1em;
   border-radius: 0 0 1em 1em;
 }
 
@@ -577,10 +605,43 @@ background: linear-gradient(180deg, rgba(188,63,19,1) 38%, rgba(168,44,0,1) 100%
 
 .sheet-current_crits {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 2fr 2fr;
   column-gap: 1em;
+  row-gap: 1em;
   padding: 1em;
 }
+
+/* Weapons */
+
+.sheet-weapon {
+  padding-bottom: 1em;
+  border-bottom: 1px dotted #aaaaaa;
+  margin-bottom: 2em;
+}
+
+.sheet-weapon_info {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr 3fr;
+  column-gap: 3em;
+  row-gap: 0.5em;
+  padding: 1em;
+  align-items: center;
+}
+
+.sheet-weapon_qualities {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr 4em);
+  column-gap: 1em;
+  row-gap: 0.5em;
+  margin-top: 1em;
+  padding: 1em;
+  align-items: center;
+}
+
+.sheet-weapon_qualities label {
+  text-align: right;
+}
+
 
 
 /* GM Settings */
