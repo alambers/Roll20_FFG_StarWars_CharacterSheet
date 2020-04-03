@@ -201,13 +201,20 @@ Grey Green    - #97ABA9
   margin-top: 1em;
 }
 
-.sheet-character_sheet .sheet-dice_roll button.roll_button {
+.sheet-character_sheet .sheet-dice_roll button.roll_DicePool,
+.sheet-character_sheet .sheet-dice_roll button.roll_ResetDicePool {
   margin: 0;
   height: 100%;
   font-size: 2.5em;
+  padding: 0.5em;
 }
 
-.sheet-character_sheet .sheet-dice_roll button.roll_button.roll_ResetDicePool::before {
+.sheet-character_sheet .sheet-dice_roll button.roll_DicePool::before {
+  font-family: "dicefontd12";
+  content: "L";
+}
+
+.sheet-character_sheet .sheet-dice_roll button.roll_ResetDicePool::before {
   font-family: "Pictos";
   content: "r";
 }
@@ -619,13 +626,63 @@ Grey Green    - #97ABA9
   margin-bottom: 2em;
 }
 
+.sheet-weapon_stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  column-gap: 2em;
+  padding: 1em;
+}
+
+.sheet-weapon_name {
+  background: rgb(82,100,76);
+  background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%);
+  color: #ffffff;
+  text-align: center;
+}
+
+.sheet-weapon_stats label {
+  background: rgb(82,100,76);
+background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%);
+  color: #ffffff;
+  padding: 0.25em;
+  margin: 0.5em 0;
+  font-size: 1em;
+  text-align: center;
+  width: 100%;
+  border: 4px solid #354457;
+  border-radius: 1em;
+}
+
+.sheet-weapon_stats input {
+  text-align: center;
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  font-size: 1.5em;
+}
+
+.sheet-weapon_stats button[type="roll"] {
+  place-self: center;
+  font-size: 2.5em;
+  padding: 0.5em;
+}
+
+.sheet-weapon_stats button[type="roll"]::before {
+  font-family: "dicefontd12";
+  content: "L";
+}
+
 .sheet-weapon_info {
   display: grid;
   grid-template-columns: 2fr 3fr 2fr 3fr;
-  column-gap: 3em;
+  column-gap: 1em;
   row-gap: 0.5em;
   padding: 1em;
   align-items: center;
+}
+
+.sheet-weapon_info input[type="number"] {
+  border-radius: 0.5em;
 }
 
 .sheet-weapon_qualities {
@@ -638,10 +695,23 @@ Grey Green    - #97ABA9
   align-items: center;
 }
 
+.sheet-weapon_info label,
 .sheet-weapon_qualities label {
   text-align: right;
 }
 
+.sheet-weapon_mod label {
+  margin: 1em 0;
+}
+
+.sheet-weapon_mod input {
+  padding: 1em;
+}
+
+.sheet-weapon_mod textarea {
+  padding: 1em;
+  margin-bottom: 2em;
+}
 
 
 /* GM Settings */
