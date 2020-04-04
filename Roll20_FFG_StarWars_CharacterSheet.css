@@ -126,6 +126,15 @@ Grey Green    - #97ABA9
   border: 3px solid #354457;
   border-radius: 0.5em;
   line-height: 1.5;
+  margin-top: 0.75em;
+}
+
+.sheet-icon_help:hover + .sheet-help_info::before {
+  content: "▲";
+  position: absolute;
+  top: 0%;
+  left: 5.5em;
+  margin-top: -1.1em;
 }
 
 .sheet-help_info p {
@@ -727,19 +736,16 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 .sheet-weapon_info label,
 .sheet-weapon_qualities label {
   text-align: right;
+  position: relative;
 }
 
-.sheet-weapon_mod label {
+.sheet-weapon_qualities label::after {
+  content: ":";
+}
+
+.sheet-weapon_mods {
+  padding: 1em;
   margin: 1em 0;
-}
-
-.sheet-weapon_mod input {
-  padding: 1em;
-}
-
-.sheet-weapon_mod textarea {
-  padding: 1em;
-  margin-bottom: 2em;
 }
 
 
@@ -782,14 +788,14 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
   color: #ffffff;
-  padding: 2px;
+  padding: 0.5em;
   line-height: 1.6em;
   font-size: 1.2em;
 }
 
 .sheet-rolltemplate-critical .sheet-subheader {
   font-size: 0.8em;
-  padding: 2px;
+  padding: 0.5em;
 }
 
 .sheet-rolltemplate-critical .sheet-tcat-header {
@@ -800,50 +806,52 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
   color: #ffffff;
-  padding: 2px;
+  padding: 0.5em;
   line-height: 1.2em;
   font-size: 0.8em;
 }
 
 .sheet-rolltemplate-critical td {
-  padding: 2px;
+  padding: 0.5em;
 }
 
 .sheet-rolltemplate-critical .sheet-tcat {
   font-weight: bold;
-  padding: 2px;
+  padding: 0.5em;
 }
 
 .sheet-rolltemplate-critical .sheet-flavor {
   font-style: italic;
-  padding: 2px;
+  padding: 0.5em;
 }
 
 .sheet-rolltemplate-critical tr:nth-child(odd) {
   background-color: rgba(217, 217, 214, 1);
-  padding: 2px;
+  padding: 0.5em;
 }
 
 .sheet-rolltemplate-critical tr:nth-child(even) {
   background-color: rgba(233, 233, 233, 1);
-  padding: 2px;
+  padding: 0.5em;
 }
 
 /* End Roll Template Formatting - Critical */
 
 /* Roll Template Formatting */
 
+.sheet-rolltemplate-base{
+  font-size: 16px;
+}
+
 .sheet-rolltemplate-base table, .sheet-rolltemplate-suggestion table {
   width: 100%;
   border: 1px solid;
   color: black;
   font-size: 1em;
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 .sheet-rolltemplate-base th, .sheet-rolltemplate-suggestion th {
-  border-radius: 3px;
-  /* background: url(https://i.imgur.com/H8YkiDQ.jpg); */
   /* Starfield */
   background-image: -webkit-linear-gradient(top, #485a6d, #2c3947);
   background-image: -moz-linear-gradient(top, #485a6d, #2c3947);
@@ -852,18 +860,17 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
   color: #ffffff;
-  padding: 2px;
+  padding: 0.5em;
   line-height: 1.6em;
   font-size: 1.2em;
 }
 
 .sheet-rolltemplate-base .sheet-subheader, .sheet-rolltemplate-suggestion .sheet-subheader {
   font-size: 0.8em;
-  padding: 2px;
+  padding-left: 2em;
 }
 
 .sheet-rolltemplate-base .sheet-tcat-header, .sheet-rolltemplate-suggestion .sheet-tcat-header {
-  /* background: url(https://i.imgur.com/H8YkiDQ.jpg); */
   /* Starfield */
   background-image: -webkit-linear-gradient(top, #485a6d, #2c3947);
   background-image: -moz-linear-gradient(top, #485a6d, #2c3947);
@@ -872,13 +879,13 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
   color: #ffffff;
-  padding: 2px;
+  padding: 0.5em;
   line-height: 1.2em;
-  font-size: 0.8em;
+  font-size: 1em;
 }
 
 .sheet-rolltemplate-base td, .sheet-rolltemplate-suggestion td {
-  padding: 2px;
+  padding: 0.25em;
 }
 
 .sheet-rolltemplate-suggestion td {
@@ -887,22 +894,26 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 
 .sheet-rolltemplate-base .sheet-tcat, .sheet-rolltemplate-suggestion .sheet-tcat {
   font-weight: bold;
-  padding: 2px;
+  padding: 0.5em;
 }
 
 .sheet-rolltemplate-base .sheet-flavor, .sheet-rolltemplate-suggestion .sheet-flavor {
   font-style: italic;
-  padding: 2px;
+  padding: 0.5em;
 }
 
 .sheet-rolltemplate-base tr:nth-child(odd), .sheet-rolltemplate-suggestion tr:nth-child(odd) {
   background-color: rgba(217, 217, 214, 1);
-  padding: 2px;
+  padding: 0.5em;
 }
 
 .sheet-rolltemplate-base tr:nth-child(even), .sheet-rolltemplate-suggestion tr:nth-child(even) {
   background-color: rgba(233, 233, 233, 1);
-  padding: 2px;
+  padding: 0.5em;
+}
+
+.sheet-rolltemplate-base .sheet-dice_roll_icons {
+  padding: 0.5em;
 }
 
 /* End Roll Template Formatting - Base */

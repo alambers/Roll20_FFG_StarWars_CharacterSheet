@@ -99,7 +99,7 @@
           <label data-i18n="ranged" class="threshold_label">Ranged</label>
         </div>
         <div>            
-          <input name="attr_body_stats_defense_melee" type="number" maxlength="1" min="0" max="9" value="0" />
+          <input name="attr_body_stats_defense_melee" type="number" maxlength="1" min="0" max="9" value=0" />
           <label data-i18n="melee" class="current_label">Melee</label>
         </div>
       </div>
@@ -571,6 +571,7 @@
             <option data-i18n="willpower" value="@{willpower}">Willpower</option>
             <option data-i18n="presence" value="@{presence}">Presence</option>
           </select>
+          <input type="hidden" name="attr_lightsaber_characteristic_value" value="" />
           <input type="checkbox" name="attr_lightsaber_career" value="true" />
           <input type="number"  name="attr_lightsaber_rank" min="0" max="6" maxlength="1" value="0" />
           <div class="skill_rank_boxes">
@@ -807,7 +808,7 @@
               <label data-i18n="critical">Critical</label>
               <input type="number" name="attr_weapon_critical" max="9" min="0" value="0" />
             </div>
-            <button name="roll_weapon" type="roll" value="!eed characterID(@{character_id}) label(Weapon:@{make_model}|Damage:@{weapon_damage}|Critical:@{weapon_critical}|Range:@{weapon_range}) @{weapon_skill} @{weapon_condition} @{dicePool} calculateDamage(@{weapon_damage}|@{weapon_critical}|@{weapon_damage_bonus}|@{weapon_critical_bonus})"></button>
+            <button name="roll_weapon" type="roll" value="!eed characterID(@{character_id}) label(Weapon:@{make_model}|Type:@{weapon_skill}|Damage:@{weapon_damage}|Critical:@{weapon_critical}|Range:@{weapon_range}|Qualities:@{weapon_qualities_list}) @{weapon_skill_value} @{weapon_condition} @{weapon_qualities_pool} @{dicePool} calculateDamage(@{weapon_damage}|@{weapon_critical}|@{weapon_damage_bonus}|@{weapon_critical_bonus})"></button>
             <div>
               <label data-i18n="encumbrance_abbr">Encum</label>
               <input type="number" name="attr_weapon_encumbrance" max="9" min="0" value="0" />
@@ -823,19 +824,20 @@
             <label data-i18n="skill">Skill:</label>
             <select name="attr_weapon_skill" name="">
               <optgroup label="Combat Skills" data-i18n-label="combat_skills">
-                <option value="skill(@{brawl_rank}|@{brawn}|@{brawl_modifiers})" data-i18n="brawl">Brawl</option>
-                <option value="skill(@{gunnery_rank}|@{agility}|@{gunnery_modifiers})" data-i18n="gunnery">Gunnery</option>
-                <option value="skill(@{melee_rank}|@{brawn}|@{melee_modifiers})" data-i18n="melee">Melee</option>
-                <option value="skill(@{ranged-light_rank}|@{agility}|@{ranged-light_modifiers})" data-i18n="ranged-light">Ranged - Light</option>
-                <option value="skill(@{ranged-heavy_rank}|@{agility}|@{ranged-heavy_modifiers)" data-i18n="ranged-heavy">Ranged - Heavy</option>
-                <option value="skill(@{lightsaber_rank}|@{lightsaber_characteristic}|@{lightsaber_modifiers})" data-i18n="lightsaber">Lightsaber</option>
+                <option value="Brawl" data-i18n="brawl">Brawl</option>
+                <option value="Melee" data-i18n="melee">Melee</option>
+                <option value="Gunnery" data-i18n="gunnery">Gunnery</option>
+                <option value="Ranged - Light" data-i18n="ranged-light">Ranged - Light</option>
+                <option value="Ranged - Heavy" data-i18n="ranged-heavy">Ranged - Heavy</option>
+                <option value="Lightsaber" data-i18n="lightsaber">Lightsaber</option>
               </optgroup>
               <optgroup label="General Skills" data-i18n-label="general_skills">
-                  <option value="skill(@{mechanics_rank}|@{intellect})" data-i18n="mechanics">Mechanics</option>
-                  <option value="skill(@{medicine_rank}|@{intellect})" data-i18n="medecine">Medicine</option>
-                  <option value="skill(@{resilience_rank}|@{brawn})" data-i18n="resilience">Resilience</option>
+                <option value="Mechanics" data-i18n="mechanics">Mechanics</option>
+                <option value="Medicine" data-i18n="medecine">Medicine</option>
+                <option value="Resilience" data-i18n="resilience">Resilience</option>
               </optgroup>
             </select>
+            <input type="hidden" name="attr_weapon_skill_value" value="" />
             <label data-i18n="range">Range:</label>
             <select name="attr_weapon_range">
               <option value="Engaged" data-i18n="engaged">Engaged</option>
@@ -855,14 +857,16 @@
             <label data-i18n="critical_bonus">Critical Bonus:</label>
             <input name="attr_weapon_critical_bonus" type="number" step="10" value="0" min="0" max="100" />
             <label data-i18n="damage_bonus:">Damage Bonus:</label>
-            <input name="attr_weapon_damage_bonus" type="number" value="0" min="0" max="10" />
+            <input name="attr_weapon_damage_bonus" type="number" value="0" min="-10" max="10" />
           </div>
           <h3 data-i18n="weapon_qualities">Weapon Qualities</h3>
+          <input type="hidden" name="attr_weapon_qualities_pool" value="@{weapon_quality_accurate_value}b @{weapon_quality_inaccurate_value}blk @{weapon_quality_cumbersome_penalty}p" />
+          <input type="hidden" name="attr_weapon_qualities_list" value="None" />
           <div class="weapon_qualities">            
             <label><span data-i18n="accurate">Accurate</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
               <div class="help_info">
                 <p>Accurate weapons are easier to aim or wield, whether through design or technology. For each level of this trait, the attacker adds 1 blue to his attack dice pools while using this weapon.</p>
-              </div>:
+              </div>
             </label>
             <input name="attr_weapon_quality_accurate_value" type="number" value="0" min="0" max="9" />
             <label><span data-i18n="auto_fire">Auto-Fire</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
@@ -872,7 +876,7 @@
                 <p>If the attack hits, the attacker can trigger Auto-fire by spending 2 Advantages Auto-fire can be triggered multiple times. Each time the attacker triggers Autofire, it deals an additional hit to the target. Each of these counts as an additional hit from that weapon, and each hit deals base damage plus the number of uncanceled success on the check.</p>
                 <p>These additional hits can be allocated to the target, or to other targets within range of the weapon. If the attacker wishes to hit multiple targets, he must deci to do so before making the check. Furthermore, if h wishes to hit multiple targets, his initial target must always be the target with the highest difficulty and highest defense (if this is two separate targets, the GM chooses which target is the initial target). The initial hit must always be against the initial target. Subsequent hits generated can be allocated to any of the other designated targets.</p>
                 <p>Auto-fire weapons can also activate one Critical Injury for each hit generated on the attack per the normal cost; the Critical must target the target of the specific hit.</p>
-              </div>:
+              </div>
             </label>
             <select name="attr_weapon_quality_auto_fire_value">
               <option data-i18n="no">No</option>
@@ -883,89 +887,182 @@
                 <p>The weapon has a large spread, an explosive blast, or similar area of effect, like the detonation of a grenade or a warhead fired from a missile launcher. If the attack is successful and Blast activates, each character (friend or foe) engaged with the original target suffers damage equal to the weapon's Blast rating (plus an additional wound per success as usual).</p>
                 <p>In a relatively small and enclosed area, the Game Master might decide that everyone in the room suffers damage.</p>
                 <p>If the Blast quality doesn't activate, the ordnance still detonates, but bad luck or poor aim on the part of the firer (or quick reactions on the part of the victims) means the explosion may not catch anyone else in its radius. However, the user may also trigger Blast if the attack misses by spending 3 advantages. In this case, the original target and every target engaged with the original target suffers damage equal to the Blast rating of the weapon.</p>
-              </div>:
+              </div>
             </label>
             <input name="attr_weapon_quality_blast_value" type="number" value="0" min="0" max="9" />
             <label><span data-i18n="breach">Breach</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
               <div class="help_info">
                 <p>Weapons with Breach burn through the toughest armor, and are often heavy weapons or starship weapons.</p>
                 <p>Breach weapons ignore one point of armor for every rating of Breach (meaning they also ignore 10 points of soak for every rating of Breach).</p>
-              </div>:
+              </div>
             </label>
             <input name="attr_weapon_quality_breach_value" type="number" value="0" min="0" max="9" />
             <label><span data-i18n="burn">Burn</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
               <div class="help_info">
                 <p>Weapons with Burn inflict damage over time. If the attack is successful, the target continues to suffer the weapon's base damage each round for a number of rounds equal to the weapon's Burn rating. Damage is applied at the start of each of the target's turns.</p>
                 <p>A victim might be able to stop the damage by rolling around on the ground and making an Agility check as an action. This is an Average (2 purple dice) Coordination check on hard surfaces such as the hall of a spaceship, or an Easy (1 purple die) Coordination check on grass or soft ground. Jumping into a body of water stops the damage immediately. Both situations assume the flame is from actual combustion rather than a chemical reaction. With the latter, there is usually little the victim can do.</p>
-              </div>:
+              </div>
             </label>
             <input name="attr_weapon_quality_burn_value" type="number" value="0" min="0" max="9" />
             <label><span data-i18n="concussive">Concussive</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
               <div class="help_info">
                 <p>The weapon's attack can leave the target shell-shocked from mighty blows or punishing Shockwaves, unable to perform any but the most basic actions. The target is staggered for a number of rounds equal to the weapon's Concussive rating. A staggered target cannot perform actions.</p>
-              </div>:
+              </div>
             </label>
             <input name="attr_weapon_quality_concussive_value" type="number" value="0" min="0" max="9" />
             <label><span data-i18n="cortosis">Cortosis</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
               <div class="help_info">
                 <p>Cortosis is an ore principally found in the Outer Rim. It is extremely rare and valuable, and was used primarily during the Clone Wars against the Jedi Knights. There are two varieties of Cortosis ore. The rarest versions can actually short out a lightsaber's blade, causing it to fail temporarily. The far more common Cortosis ore is still a miraculous substance, because when molded into armor, it forms an interlocking molecular bond that is extremely resistant to energy weapons.</p>
                 <p>Weapons with the Cortosis quality are immune to the Sunder quality. Armor with the Cortosis quality makes the wearer's soak immune to the Pierce and Breach qualities.</p>
-              </div>:
+              </div>
             </label>
             <select name="attr_weapon_quality_cortosis_value">
               <option data-i18n="no">No</option>
               <option data-i18n="yes">Yes</option>
             </select>
-            <label><span data-i18n="cumbersome">Cumbersome</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
+            <label><span data-i18n="cumbersome">Cumbersome</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>A Cumbersome weapon is large, unwieldy, awkward, or heavy. To wield a Cumbersome weapon properly, the character needs a Brawn characteristic equal to or greater than the weapon's Cumbersome rating. For each point of Brawn by which the character is deficient, he must increase the difficulty of all checks made while using the weapon by one.</p>
+              </div>
+            </label>            
+            <input type="hidden" name="attr_weapon_quality_cumbersome_penalty" value="" />
             <input name="attr_weapon_quality_cumbersome_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="defensive">Defensive</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
+            <label><span data-i18n="defensive">Defensive</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>Defensive weapons are particularly good at fending off incoming melee attacks. A character wielding a weapon with the Defensive quality increases his melee defense by the weapon's Defensive rating.</p>
+              </div>
+            </label>
             <input name="attr_weapon_quality_defensive_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="deflection">Deflection</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
+            <label><span data-i18n="deflection">Deflection</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>An item with the Deflection quality increases the wearer's ranged defense equal to its Deflection rating.</p>
+              </div>
+            </label>
             <input name="attr_weapon_quality_deflection_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="disorient">Disorient</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
+            <label><span data-i18n="disorient">Disorient</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>A weapon with Disorient can daze an opponent. When Disorient is triggered, the target is disoriented for a number of rounds equal to the weapon's Disorient rating. (A disoriented target adds 1 black die to all skill checks he performs.)</p>
+              </div>
+            </label>
             <input name="attr_weapon_quality_disorient_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="ensnare">Ensnare</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
+            <label><span data-i18n="ensnare">Ensnare</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>A weapon with Ensnare binds a foe and restricts his movements. When Ensnare is triggered, the target is immobilized for a number of rounds equal to the weapon's Ensnare rating. An Ensnared target may attempt a Hard (3 purple dice) Athletics check as his action on his turn to break free from the effect. (An immobilized target cannot perform maneuvers.)</p>
+              </div>
+            </label>
             <input name="attr_weapon_quality_ensnare_value" type="number" value="0" min="0" max="9" />  
-            <label><span data-i18n="guided">Guided</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
+            <label><span data-i18n="guided">Guided</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>Certain types of projectiles, such as guided missiles, may benefit from course alterations after being fired. If a character misses while firing a Guided weapon and if Guided is activated, he may make an attack check at the end of the round. The difficulty of the check is calculated by comparing the weapon's silhouette of 0 to the silhouette of the target, and the check's green die equal the weapon's Guided rating. If the test is successful, the weapon strikes the target, and damage is dealt normally.</p>
+                <p>Guided requires 3 advantages to activate, unless otherwise specified in the weapon's description. Remember, the Guided effect can activate on its subsequent attacks, representing the projectile continuing to track the target.</p>
+                <p>"Spoofing" is a countermeasure designed to work against a particular type of projectile, such as flares designed to draw off infrared missiles. Spoofing directly increases the defense of the target against attacks with the Guided quality.</p>
+              </div>
+            </label>
             <input name="attr_weapon_quality_guided_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="knockdown">Knockdown</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
-            <input name="attr_weapon_quality_knockdown_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="inaccurate">Inaccurate</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
+            <label><span data-i18n="knockdown">Knockdown</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>When knockdown triggers, the target is knocked prone. Unless specified otherwise, Knockdown requires 2 advantages to trigger, plus one additional advantage per silhouette of the target beyond one. </p>
+              </div>
+            </label>
+            <select name="attr_weapon_quality_knockdown_value">
+              <option data-i18n="no">No</option>
+              <option data-i18n="yes">Yes</option>
+            </select>
+            <label><span data-i18n="inaccurate">Inaccurate</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>Inaccurate weapons are weapons of a shoddy or inferior construction, which means they are less likely to be accurate or precise. Alternatively, the weapon's nature may inhibit accuracy. Inaccurate weapons add 1 black die to the attacker's dice pool equal to their Inaccurate rating. </p>
+              </div>
+            </label>
             <input name="attr_weapon_quality_inaccurate_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="inferior">Inferior</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
-            <input name="attr_weapon_quality_accurate_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="ion">Ion</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
-            <input name="attr_weapon_quality_ion_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="limited_ammo">Limited Ammo</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
+            <label><span data-i18n="inferior">Inferior</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>An Inferior item is a lackluster example of its kind, representing shoddy and poor craftsmanship. An Inferior weapon generates automatic 1 disadvantage on all checks related to its use, and has its base damage decreased by one. Inferior armor has its encumbrance increased by one and its defense decreased by one. If it does not have defense, decrease its soak value by one, to a minimum of zero.</p>
+              </div>
+            </label>
+            <select name="attr_weapon_quality_inferior_value">
+              <option data-i18n="no">No</option>
+              <option data-i18n="yes">Yes</option>
+            </select>
+            <label><span data-i18n="ion">Ion</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>Ion weapons are designed to affect electrical systems instead of dealing raw damage. They are fitted to ships to knock out opponents' shields, sensors, and engines. They are shorter range than laser weapons and deal larger amounts of damage, but their damage is dealt to the target (usually a vehicle) as system strain. The damage is still reduced by armor and soak. Droids are affected by ion weapons, taking damage to their strain threshold.</p>
+              </div>
+            </label>
+            <select name="attr_weapon_quality_ion_value">
+              <option data-i18n="no">No</option>
+              <option data-i18n="yes">Yes</option>
+            </select>
+            <label><span data-i18n="limited_ammo">Limited Ammo</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>Some weapons fire particularly large or complex projectiles that cost significant numbers of credits or are themselves a complete weapon that, once launched, is expended. A weapon with the Limited Ammo quality may be used to make a number of attacks equal to its Limited Ammo rating before it must be reloaded with a maneuver. In addition, each shot expends one of a limited number of rounds of ammo, which, once used, must be purchased or otherwise obtained before firing the weapon again. This also applies to grenades and other "one use" weapons that have the Limited Ammo 1 quality (here, the user is not "reloading" the grenade, but drawing another to use—but mechanically they are equivalent).</p>
+              </div>
+            </label>
             <input name="attr_weapon_quality_limited_ammo_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="linked">Linked</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
-            <input name="attr_weapon_quality_linked_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="pierce">Pierce</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
+            <label><span data-i18n="linked">Linked</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>Some weapons, like the laser cannons fitted to the X-wing, are designed to fire together at the same target. This increases the possibility of a hit as well as the damage dealt. When firing a linked weapon, on a successful attack, the weapon deals one hit. The wielder may spend 2 advantages to gain an additional hit, and may do so a number of times equal to the weapon's Linked rating. Additional hits from the Linked weapon being used may only be applied against the original target. Each hit deals the weapon's base damage plus the total uncanceled successes scored on the check. </p>
+              </div>
+            </label>
+            <select name="attr_weapon_quality_linked_value">
+              <option data-i18n="no">No</option>
+              <option data-i18n="yes">Yes</option>
+            </select>
+            <label><span data-i18n="pierce">Pierce</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>An attack made with this weapon ignores one point of soak for each rank of Pierce. If the weapon has more ranks of Pierce than the target's total soak, it completely ignores the target's soak. For example. Pierce 3 against a soak of 2 ignores 2 points of soak, but the extra "point" of Pierce has no further effect. </p>
+              </div>
+            </label>
             <input name="attr_weapon_quality_pierce_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="prepare">Prepare</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
+            <label><span data-i18n="prepare">Prepare</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>Weapons with this quality require time to set up before being used. The user must perform a number of preparation maneuvers equal to the weapon's Prepare rating before making attacks with that weapon.</p>
+              </div>
+            </label>
             <input name="attr_weapon_quality_prepare_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="slow_firing">Slow-Firing</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
+            <label><span data-i18n="slow_firing">Slow-Firing</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>Slow-Firing weapons tend to be large, heavy, emplacement-mounted weapons like the turbolasers found on capital ships or planetary defense ion cannons. While they deal incredible damage, they need time to recharge or cool down between shots. A weapon's Slow-Firing rating dictates how quickly the weapon can be fired after an attack. For example, a heavy turbolaser with Slow-Firing 2 must wait two rounds after being fired before it can be fired again.</p>
+              </div>
+            </label>
             <input name="attr_weapon_quality_slow_firing_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="stun">Stun</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
-            <input name="attr_weapon_quality_stun_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="stun_damage">Stun Damage</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
-            <input name="attr_weapon_quality_stun_damage_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="sunder">Sunder</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
-            <input name="attr_weapon_quality_sunder_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="superior">Superior</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
-            <input name="attr_weapon_quality_superior_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="vicious">Vicious</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span><div class="help_info"></div>:</label>
+            <label><span data-i18n="stun_damage">Stun Damage/Setting</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>Some weapons deal Stun damage instead of regular damage. In this case, the weapon deals damage as strain instead of wounds. This damage is still reduced by a target's soak.</p>
+                <p>A variant of this is a Stun setting. As an incidental, the wielder can choose to switch the setting of his weapon to "Stun." In this case, it does Stun damage as described above. When weapons with a Stun setting are used to deal Stun damage, their range changes to short and cannot be increased.</p>
+              </div>
+            </label>
+            <select name="attr_weapon_quality_stun_damage_value">
+              <option data-i18n="no">No</option>
+              <option data-i18n="yes">Yes</option>
+            </select>
+            <label><span data-i18n="sunder">Sunder</span><span class="icon_active" title="Active" data-i18n-title="active"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>When activated, the attacker chooses one item openly wielded by the target (such as a weapon, shield, or item on a belt). That item is damaged one step: to minor if undamaged, from minor to moderate, or from moderate to major. If a weapon already suffering major damage is the target of a successful Sunder, it is destroyed.</p>
+                <p>Sunder requires 1 advantage to activate. If activated multiple times in the same attack, each activation can be applied against the same weapon, potentially taking a weapon from undamaged to destroyed in a single attack.</p>
+              </div>
+            </label>
+            <select name="attr_weapon_quality_sunder_value">
+              <option data-i18n="no">No</option>
+              <option data-i18n="yes">Yes</option>
+            </select>
+            <label><span data-i18n="superior">Superior</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>A Superior item is a sterling example of its kind, representing masterful craftsmanship. A Superior weapon generates automatic 1 advantage on all checks related to its use, and has its base damage increased by one. Superior armor has its encumbrance reduced by one and its soak value increased by one. </p>
+              </div>
+            </label>
+            <select name="attr_weapon_quality_superior_value">
+              <option data-i18n="no">No</option>
+              <option data-i18n="yes">Yes</option>
+            </select>
+            <label><span data-i18n="vicious">Vicious</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+              <div class="help_info">
+                <p>When this weapon scores a Critical Injury or Hit, the character adds ten times the Vicious rating to the Critical roll. With Vicious 3, for example, the victim adds + 30 to his Critical Hit result.</p>
+              </div>
+            </label>
             <input name="attr_weapon_quality_vicious_value" type="number" value="0" min="0" max="9" />
           </div>
           <h3 data-i18n="modifications">Modifications</h3>
-          <fieldset class="repeating_weapon_mods">
-            <div class="weapon_mod">
-              <label data-i18n="modification">Modification</label>
-              <input type="text" name="attr_weapon_mod_name" />
-              <label data-i18n="description">Description</label>              
-              <textarea name="attr_weapon_mod_description"></textarea>
-            </div>
-          </fieldset>
+          <textarea class="weapon_mods" name="attr_weapon_mods"></textarea>
         </div>
       </fieldset>          
     </div>
@@ -1059,11 +1156,11 @@
       {{/wide5}}
       {{#roll}}
       <tr><td colspan="2"><span class="tcat" data-i18n="diceroll">Dice Roll</span></td></tr>
-      <tr><td colspan="2">{{roll}}</td></tr>
+      <tr><td colspan="2" class="dice_roll_icons">{{roll}}</td></tr>
       {{/roll}}
       {{#results}}
       <tr><td colspan="2"><span class="tcat" data-i18n="results">Results</span></td></tr>
-      <tr><td colspan="2">{{results}}</td></tr>
+      <tr><td colspan="2" class="dice_roll_icons">{{results}}</td></tr>
       {{/results}}
   </table>
 </rolltemplate><!-- Roll Template-Base -->
@@ -1203,11 +1300,12 @@
 
 
 <!-- Sheet Workers -->
-<script type="text/worker">  
+<script type="text/worker">
+
   /* Worker for section tabs */
-  const buttonlist = ["skills","combat","equipment","talents","force","settings"];
+  const buttonlist = ['skills','combat','equipment','talents','force','settings'];
   buttonlist.forEach(button => {
-    on(`clicked:${button}`, function() {
+    on('clicked:${button}', function() {
       setAttrs({
         sheetTab: button,
         navSelection: button
@@ -1216,7 +1314,7 @@
   });
   
   /* Workers for skill dice */
-  var skillStat = {
+  const skillStat = {
     "astrogation":"intellect",
     "athletics":"brawn",
     "charm":"presence",
@@ -1228,7 +1326,7 @@
     "discipline":"willpower",
     "leadership":"presence",
     "mechanics":"intellect",
-    "medicine":"brawn",
+    "medicine":"intellect",
     "negotiation":"presence",
     "perception":"cunning",
     "piloting-planetary":"agility",
@@ -1253,17 +1351,19 @@
     "xenology":"intellect"
   };
   
-  var CalculateDice = function(eventInfo) {
-    var skill = (eventInfo.sourceAttribute).slice(0,-5);
-    var stat = skillStat[skill];
-    var rank = 0;
-    var yellowDice = 0;
-    var greenDice = 0;
-    var yellowDiceName = '';
-    var greenDiceName = '';
+  // When the skill rank changes, update the dice
+  const CalculateDice = function(eventInfo) {
+    const skill = (eventInfo.sourceAttribute).slice(0,-5);
+    const stat = skillStat[skill];
+    let rank = 0;
+    let yellowDice = 0;
+    let greenDice = 0;
+    let yellowDiceName = '';
+    let greenDiceName = '';
+    let statValue = 0;
     rank = parseInt(eventInfo.newValue);
-    getAttrs([stat], function(values){
-      var statValue = parseInt(values[stat]);
+    getAttrs([stat, 'lightsaber_characteristic_value'], function(values){
+      statValue = (skill === 'lightsaber') ? parseInt(values.lightsaber_characteristic_value) : parseInt(values[stat]);  
       yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
       greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
       yellowDiceName = skill + '_yd';
@@ -1278,12 +1378,207 @@
     on('change:' + skillRank, function(eventInfo) {
       CalculateDice(eventInfo);
     });
-  
-    // Worker for clicking a skill button; won't work with roll buttons for now
-    on('clicked:' + skill, function() {
-      console.log(skill + "button clicked");
-    });
   }
+  
+  // When the associated attribute changes, update the dice
+  const CalculateDiceStatChange = function(eventInfo,skill) {
+    //const stat = skillStat[skill];
+    const statValue = parseInt(eventInfo.newValue);
+    let rank = 0;
+    let yellowDice = 0;
+    let greenDice = 0;
+    let yellowDiceName = '';
+    let greenDiceName = '';
+    const rankAttr = skill+'_rank';
+    getAttrs([rankAttr], function(values){
+      rank = parseInt(values[rankAttr]);
+      yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
+      greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
+      yellowDiceName = skill + '_yd';
+      greenDiceName = skill + '_gd';
+      setAttrs({[yellowDiceName]: yellowDice, [greenDiceName]: greenDice});
+    });  
+  };
+  
+  for (const skill in skillStat) {
+    on('change:brawn change:agility change:intellect change:cunning change:willpower change:presence', function(eventInfo) {
+      if (skillStat[skill] === eventInfo.sourceAttribute) {
+        CalculateDiceStatChange(eventInfo,skill);
+      }
+    });  
+  };
+  
+  // When the Lightsaber skill changes, update the lightsaber dice
+  on('change:lightsaber_characteristic', function(eventInfo) {
+    const statAt = eventInfo.newValue;
+    const statAtLength = statAt.length;  
+    const stat = statAt.slice(2,statAtLength-1);
+    getAttrs(['lightsaber_rank',stat], function(values){
+      rank = parseInt(values.lightsaber_rank);
+      statValue = parseInt(values[stat]);
+      yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
+      greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
+      setAttrs({lightsaber_yd: yellowDice, lightsaber_gd: greenDice, lightsaber_characteristic_value: statValue});
+    });
+  });
+  
+  /* Workers for calculating weapon quality dice */
+  
+  // Cumbersome
+  on('change:repeating_weapons:weapon_quality_cumbersome_value', function(eventInfo) {
+    var cumbersome = parseInt(eventInfo.newValue);
+    getAttrs(['brawn'], function(values) {
+      var brawn = parseInt(values.brawn);
+      var penalty = cumbersome - brawn;    
+      if (penalty > 0) {
+        setAttrs({'repeating_weapons_weapon_quality_cumbersome_penalty':penalty});
+      }
+      else {
+        setAttrs({'repeating_weapons_weapon_quality_cumbersome_penalty':0});
+      }
+    });
+  });
+  
+  // Defensive
+  on('change:repeating_weapons:weapon_quality_defensive_value', function(eventInfo) {
+    var defensive = parseInt(eventInfo.newValue);
+    setAttrs({'body_stats_defense_melee':defensive});
+  });
+  
+  // Deflection
+  on('change:repeating_weapons:weapon_quality_deflection_value', function(eventInfo) {
+    var deflection = parseInt(eventInfo.newValue);
+    setAttrs({'body_stats_defense_ranged':deflection});
+  });
+  
+  // Inferior
+  on('change:repeating_weapons:weapon_quality_inferior_value', function(eventInfo) {
+    var inferior = eventInfo.newValue;
+    if (inferior === 'Yes') {
+      getAttrs(['repeating_weapons_weapon_damage_bonus'], function(values) {
+        var damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
+        setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus-1});
+      });
+    }
+    else {
+      getAttrs(['repeating_weapons_weapon_damage_bonus'], function(values) {
+        var damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
+        setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus+1});
+      });
+    }
+  });
+  
+  
+  /* Display wapon qualities in the roll template */
+  
+  var qualitiesObject = {
+    'weapon_quality_accurate_value':'Accurate',
+    'weapon_quality_auto_fire_value':'Auto-Fire',
+    'weapon_quality_blast_value':'Blast',
+    'weapon_quality_breach_value':'Breach',
+    'weapon_quality_burn_value':'Burn',
+    'weapon_quality_concussive_value':'Concussive',
+    'weapon_quality_cortosis_value':'Cortosis',
+    'weapon_quality_cumbersome_value':'Cumbersome',
+    'weapon_quality_defensive_value':'Defensive',
+    'weapon_quality_deflection_value':'Deflection',
+    'weapon_quality_disorient_value':'Disorient',
+    'weapon_quality_ensnare_value':'Ensnare',
+    'weapon_quality_guided_value':'Guided',  
+    'weapon_quality_knockdown_value':'Knockdown',
+    'weapon_quality_inaccurate_value':'Inaccurate',
+    'weapon_quality_inferior_value':'Inferior',
+    'weapon_quality_ion_value':'Ion',
+    'weapon_quality_limited_ammo_value':'Limited Ammo',
+    'weapon_quality_linked_value':'Linked',
+    'weapon_quality_pierce_value':'Pierce',
+    'weapon_quality_prepare_value':'Prepare',
+    'weapon_quality_slow_firing_value':'Slow-Firing',
+    'weapon_quality_stun_damage_value':'Stun Damage',
+    'weapon_quality_sunder_value':'Sunder',
+    'weapon_quality_superior_value':'Superior',
+    'weapon_quality_vicious_value':'Vicious'
+  };
+  
+  let weaponQualities = [];
+  
+  // Update the quality list for display in the roll template based on adding/removing/updating weapon qualities
+  for (const quality in qualitiesObject) {
+    const qualityTitle = qualitiesObject[quality];
+    let qualityList = '';
+    on('change:repeating_weapons:' + quality, function(eventInfo) {
+      const qualityValue = eventInfo.newValue;
+      const inArray = weaponQualities.findIndex(thisQuality => thisQuality.includes(qualityTitle));
+      if (inArray === -1){
+        switch(qualityValue) {
+          case 'Yes':
+            weaponQualities.push(qualityTitle);
+            break;
+          case 'No':
+            // Do nothing
+            break;
+          default:
+            weaponQualities.push(qualityTitle + ' ' + qualityValue);
+        }
+      }
+      else {
+        switch(qualityValue) {
+          case 'Yes':
+            // Do nothing
+            break;
+          case 'No':
+            let removed = weaponQualities.splice(inArray, 1);
+            break;
+          default:
+            if (parseInt(qualityValue) > 0){
+              let removed = weaponQualities.splice(inArray, 1, qualityTitle + ' ' + qualityValue);
+            }
+            else {
+              let removed = weaponQualities.splice(inArray, 1);
+            }
+        }
+      }
+      qualityList = weaponQualities.join(', ');
+      setAttrs({'repeating_weapons_weapon_qualities_list':qualityList}); 
+    })
+  };
+  
+  // Send weapon skill type dice to the roller based on weapon skill select box
+  on('change:repeating_weapons:weapon_skill', function(eventInfo) {
+    const skill = eventInfo.newValue;
+    let diceCalc = '';
+    switch (skill){
+      case 'Brawl':
+        diceCalc = 'skill(@{brawl_rank}|@{brawn}|@{brawl_modifiers})';
+        break;
+      case 'Melee':
+        diceCalc = 'skill(@{melee_rank}|@{brawn}|@{melee_modifiers})';
+        break;
+      case 'Gunnery':
+        diceCalc = 'skill(@{gunnery_rank}|@{agility}|@{gunnery_modifiers})';
+        break;
+      case 'Ranged - Light':
+        diceCalc = 'skill(@{ranged-light_rank}|@{agility}|@{ranged-light_modifiers})';
+        break;
+      case 'Ranged - Heavy':
+        diceCalc = 'skill(@{ranged-heavy_rank}|@{agility}|@{ranged-heavy_modifiers})';
+        break;
+      case 'Lightsaber':
+        diceCalc = 'skill(@{lightsaber_rank}|@{lightsaber_characteristic}|@{lightsaber_modifiers})';
+        break;
+      case 'Mechanics':
+        diceCalc = 'skill(@{mechanics_rank}|@{intellect})';
+        break;
+      case 'Medicine':
+        diceCalc = 'skill(@{medicine_rank}|@{intellect})';
+        break;
+      case 'Resilience':
+        diceCalc = 'skill(@{resilience_rank}|@{brawn})';
+        break;
+    };
+    setAttrs({repeating_weapons_weapon_skill_value:diceCalc});
+  });
+  
 </script>
 <!-- End Sheet Workers -->
 
