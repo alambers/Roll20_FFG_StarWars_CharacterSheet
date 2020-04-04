@@ -1305,7 +1305,7 @@
   /* Worker for section tabs */
   const buttonlist = ['skills','combat','equipment','talents','force','settings'];
   buttonlist.forEach(button => {
-    on('clicked:${button}', function() {
+    on(`clicked:${button}`, function() {
       setAttrs({
         sheetTab: button,
         navSelection: button
