@@ -862,7 +862,10 @@
               <option value="unusableWeapon" data-i18n="destroyed">Destroyed</option>
             </select>
             <label data-i18n="critical_bonus">Critical Bonus:</label>
-            <input name="attr_weapon_critical_bonus" type="number" step="10" value="0" min="0" max="100" />
+            <div class="weapon_critical_bonus">
+              <input name="attr_weapon_critical_bonus" type="number" step="10" value="0" min="0" max="200" />
+              <div><span name="attr_weapon_quality_vicious_crit_bonus"></span> <span data-i18n="from_vicious" class="from_vicious_text">from Vicious</span></div>
+            </div>            
             <label data-i18n="damage_bonus:">Damage Bonus:</label>
             <input name="attr_weapon_damage_bonus" type="number" value="0" min="-10" max="10" />
           </div>
@@ -1068,6 +1071,7 @@
                 <p>When this weapon scores a Critical Injury or Hit, the character adds ten times the Vicious rating to the Critical roll. With Vicious 3, for example, the victim adds + 30 to his Critical Hit result.</p>
               </div>
             </label>
+            <input type="hidden" name="attr_weapon_quality_vicious_crit_bonus" value="0" />
             <input name="attr_weapon_quality_vicious_value" type="number" value="0" min="0" max="9" />
           </div>
           <h3 data-i18n="modifications">Modifications</h3>
@@ -1407,7 +1411,7 @@
   
   for (const skill in skillStat) {
     // Worker for calculating skill dice
-    var skillRank = skill + '_rank';
+    const skillRank = skill + '_rank';
     on('change:' + skillRank, function(eventInfo) {
       CalculateDice(eventInfo);
     });
@@ -1459,10 +1463,10 @@
   
   // Cumbersome
   on('change:repeating_weapons:weapon_quality_cumbersome_value', function(eventInfo) {
-    var cumbersome = parseInt(eventInfo.newValue);
+    const cumbersome = parseInt(eventInfo.newValue);
     getAttrs(['brawn'], function(values) {
-      var brawn = parseInt(values.brawn);
-      var penalty = cumbersome - brawn;    
+      const brawn = parseInt(values.brawn);
+      const penalty = cumbersome - brawn;    
       if (penalty > 0) {
         setAttrs({'repeating_weapons_weapon_quality_cumbersome_penalty':penalty});
       }
@@ -1474,28 +1478,28 @@
   
   // Defensive
   on('change:repeating_weapons:weapon_quality_defensive_value', function(eventInfo) {
-    var defensive = parseInt(eventInfo.newValue);
+    const defensive = parseInt(eventInfo.newValue);
     setAttrs({'body_stats_defense_melee':defensive});
   });
   
   // Deflection
   on('change:repeating_weapons:weapon_quality_deflection_value', function(eventInfo) {
-    var deflection = parseInt(eventInfo.newValue);
+    const deflection = parseInt(eventInfo.newValue);
     setAttrs({'body_stats_defense_ranged':deflection});
   });
   
   // Inferior
   on('change:repeating_weapons:weapon_quality_inferior_value', function(eventInfo) {
-    var inferior = eventInfo.newValue;
+    const inferior = eventInfo.newValue;
     if (inferior === 'Yes') {
       getAttrs(['repeating_weapons_weapon_damage_bonus'], function(values) {
-        var damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
+        const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
         setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus-1, 'repeating_weapons_weapon_quality_inferior_penalty':'1t'});
       });
     }
     else {
       getAttrs(['repeating_weapons_weapon_damage_bonus'], function(values) {
-        var damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
+        const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
         setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus+1, 'repeating_weapons_weapon_quality_inferior_penalty':''});
       });
     }
@@ -1503,25 +1507,41 @@
 
   // Superior
   on('change:repeating_weapons:weapon_quality_superior_value', function(eventInfo) {
-    var superior = eventInfo.newValue;
+    const superior = eventInfo.newValue;
     if (superior === 'Yes') {
       getAttrs(['repeating_weapons_weapon_damage_bonus'], function(values) {
-        var damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
+        const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
         setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus+1, 'repeating_weapons_weapon_quality_superior_bonus':'1a'});
       });
     }
     else {
       getAttrs(['repeating_weapons_weapon_damage_bonus'], function(values) {
-        var damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
+        const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
         setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus-1, 'repeating_weapons_weapon_quality_superior_bonus':''});
       });
     }
   });
-  
+
+  // Vicious
+  on('change:repeating_weapons:weapon_quality_vicious_value', function(eventInfo) {
+    const viciousPrevious = parseInt(eventInfo.previousValue);
+    const viciousNew = parseInt(eventInfo.newValue);
+    getAttrs(['repeating_weapons_weapon_critical_bonus'], function(values) {
+      const criticalBonus = parseInt(values.repeating_weapons_weapon_critical_bonus);
+      const viciousPreviousBonus = parseInt(viciousPrevious*10);
+      const viciousNewBonus = parseInt(viciousNew*10);
+      let viciousBonus = Math.abs(parseInt(viciousNewBonus - viciousPreviousBonus));
+      if (viciousPreviousBonus > viciousNewBonus) {
+        viciousBonus = -(viciousBonus);
+      }
+      const totalBonus = criticalBonus + viciousBonus;
+      setAttrs({'repeating_weapons_weapon_critical_bonus':totalBonus, 'repeating_weapons_weapon_quality_vicious_crit_bonus':viciousNew*10});
+    });
+  });
   
   /* Display wapon qualities in the roll template */
   
-  var qualitiesObject = {
+  const qualitiesObject = {
     'weapon_quality_accurate_value':'Accurate',
     'weapon_quality_auto_fire_value':'Auto-Fire',
     'weapon_quality_blast_value':'Blast',
@@ -1628,7 +1648,6 @@
     };
     setAttrs({repeating_weapons_weapon_skill_value:diceCalc});
   });
-  
 </script>
 <!-- End Sheet Workers -->
 
