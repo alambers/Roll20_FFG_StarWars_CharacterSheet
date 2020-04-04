@@ -62,6 +62,7 @@ Grey Green    - #97ABA9
   background-color: #eaeaea;
   border-radius: 0 0 1em 1em;
   margin-bottom: 3em;
+  padding: 1em;
 }
 
 .sheet-character_sheet label {
@@ -619,14 +620,6 @@ Grey Green    - #97ABA9
 
 /* Combat */
 
-.sheet-initiative,
-.sheet-weapons,
-.sheet-combat_talents {
-  background-color: #eaeaea;
-  padding: 1em;
-  border-radius: 0 0 1em 1em;
-}
-
 .sheet-criticals {
   background-color: #eaeaea;
   padding: 0 1em 1em 1em;
@@ -663,7 +656,7 @@ Grey Green    - #97ABA9
   padding: 1em;
 }
 
-.sheet-weapon_name {
+.sheet-character_sheet h3.sheet-weapon_name {
   background: rgb(82,100,76);
   background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%);
   color: #ffffff;
@@ -713,6 +706,27 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 
 .sheet-weapon_info input[type="number"] {
   border-radius: 0.5em;
+}
+
+.sheet-character_sheet h3.sheet-weapon_qualities_header {
+  display: flex;
+  align-items: center;
+}
+
+.sheet-character_sheet h3 span.sheet-weapon_qualities_activation_icon {
+  background-image: url('https://imgsrv.roll20.net/?src=https%3A//i.imgur.com/Gav94H2.png');
+  background-repeat: repeat-x;
+  background-size: 1em;
+  width: 2em;
+  height: 1em;
+  display: block;
+  margin: 0 0.25em 0 1.5em;
+}
+
+.sheet-character_sheet h3 span.sheet-weapon_qualities_activation {
+  font-size: 0.75em;
+  font-weight: 500;
+  display: block;
 }
 
 .sheet-weapon_qualities {

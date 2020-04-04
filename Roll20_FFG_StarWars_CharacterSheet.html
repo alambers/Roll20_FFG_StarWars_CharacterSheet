@@ -859,7 +859,7 @@
             <label data-i18n="damage_bonus:">Damage Bonus:</label>
             <input name="attr_weapon_damage_bonus" type="number" value="0" min="-10" max="10" />
           </div>
-          <h3 data-i18n="weapon_qualities">Weapon Qualities</h3>
+          <h3 class="weapon_qualities_header"><span data-i18n="weapon_qualities">Weapon Qualities</span> <span class="weapon_qualities_activation_icon"></span><span class="weapon_qualities_activation" data-i18n="two_advantage_to_activate">Two Advantage to activate unless otherwise noted</span></h3>
           <input type="hidden" name="attr_weapon_qualities_pool" value="@{weapon_quality_accurate_value}b @{weapon_quality_inaccurate_value}blk @{weapon_quality_cumbersome_penalty}p" />
           <input type="hidden" name="attr_weapon_qualities_list" value="None" />
           <div class="weapon_qualities">            
@@ -1025,7 +1025,7 @@
               </div>
             </label>
             <input name="attr_weapon_quality_slow_firing_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="stun_damage">Stun Damage/Setting</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
+            <label><span data-i18n="stun">Stun</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span><span class="icon_help" title="Help" data-i18n-title="help"></span>
               <div class="help_info">
                 <p>Some weapons deal Stun damage instead of regular damage. In this case, the weapon deals damage as strain instead of wounds. This damage is still reduced by a target's soak.</p>
                 <p>A variant of this is a Stun setting. As an incidental, the wielder can choose to switch the setting of his weapon to "Stun." In this case, it does Stun damage as described above. When weapons with a Stun setting are used to deal Stun damage, their range changes to short and cannot be increased.</p>
@@ -1071,25 +1071,49 @@
       <fieldset class="repeating_combat_talents">
         <div>Talent - calculate stat/skill enhancements if applicable</div>
       </fieldset>
-    </div>    
+    </div>
+    <h2 data-i18n="armor">Armor</h2>
+    <div class="armor section">
+      <fieldset class="repeating_armor">
+        <div>Armor - calculate extra Soak and Defense</div>
+      </fieldset>
+    </div>   
   </div>
   <div class="sheet-equipment">
-    <h2 data-i18n="armor">Armor</h2>
-    <div class="section">Armor stuff - calculate extra Soak and Defense</div>
-    <h2 data-i18n="cybernetics">Cybernetics</h2>
-    <div class="section">Cybernetics stuff - calculate stat/skill enhancements if applicable</div>
     <h2 data-i18n="gear">Gear</h2>
-    <div class="section">Gear stuff - calculate stat/skill enhancements if applicable</div>    
+    <div class="gear section">
+      <fieldset class="repeating_gear">
+        <div>Gear - calculate stat/skill enhancements if applicable</div>
+      </fieldset>
+    </div>
+    <h2 data-i18n="cybernetics">Cybernetics</h2>
+    <div class="cybernetics section">
+      <fieldset class="repeating_cybernetics">
+        <div>Cybernetics - calculate stat/skill enhancements if applicable</div>
+      </fieldset>
+    </div>  
   </div>
   <div class="sheet-talents">
     <h2 data-i18n="non_combat_talents">Non-combat Talents</h2>
-    <div class="section">Non-combat Talents stuff - calculate stat/skill enhancements if applicable</div>
+    <div class="non_combat_talents section">
+      <fieldset class="repeating_non_combat_talents">
+        <div>Non-combat Talent - calculate stat/skill enhancements if applicable</div>
+      </fieldset>
+    </div>
     <h2 data-i18n="signature_abilities">Signature Abilities</h2>
-    <div class="section">Signature Abilities stuff - calculate stat/skill enhancements if applicable</div>   
+    <div class="signature_abilities section">
+      <fieldset class="repeating_signature_abilities">
+        <div>Signature Ability - calculate stat/skill enhancements if applicable</div>
+      </fieldset>
+    </div>   
   </div>
   <div class="sheet-force">
     <h2 data-i18n="force_powers">Force Powers</h2>
-    <div class="section">Force stuff - calculate stat/skill enhancements if applicable</div>    
+    <div class="force_powers section">
+      <fieldset class="repeating_force_powers">
+        <div>Force Power - calculate stat/skill enhancements if applicable</div>
+      </fieldset>
+    </div>    
   </div>
   <!-- General Settings -->
   <div class="sheet-settings">
