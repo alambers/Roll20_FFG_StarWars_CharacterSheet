@@ -250,6 +250,22 @@ Grey Green    - #97ABA9
   content: "r";
 }
 
+/* Hide GM Destiny Buttons */
+input[name="attr_gmdicepool"][value="1"]:checked ~ .sheet-character_sheet .sheet-destiny_pool .sheet-update_player_points,
+input[name="attr_gmdicepool"][value="1"]:checked ~ .sheet-character_sheet .sheet-destiny_pool .sheet-clear_pool,
+input[name="attr_gmdicepool"][value="1"]:checked ~ .sheet-character_sheet .sheet-destiny_pool .sheet-use_dark_side
+{
+  display: none;
+}
+
+/* Hide Player Destiny Buttons */
+input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet-destiny_pool .sheet-sync_pool_with_gm,
+input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet-destiny_pool .roll_destiny,
+input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet-destiny_pool .sheet-use_light_side
+{
+  display: none;
+}
+
 .sheet-destiny_pool {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -257,15 +273,60 @@ Grey Green    - #97ABA9
   padding: 1em;
 }
 
-.sheet-destiny_pool button {
+.sheet-destiny_pool button[type="roll"] {
   display: block;
   padding: 0.5em;
   border-radius: 0.5em;
   font-size: 1em;
-  margin: 0.5em;
   width: 100%;
   text-align: center;
   border: 3px solid #354457;
+}
+
+.sheet-destiny_pool button[type="roll"].sheet-use_light_side::before {
+  content: '✧';
+  color: #BC3F13;
+  margin-right: 0.25em;
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+.sheet-destiny_pool button[type="roll"].sheet-use_dark_side::before {
+  content: '☃';
+  margin-right: 0.25em;
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+.sheet-destiny_pool button[type="roll"].sheet-sync_pool_with_gm::before,
+.sheet-destiny_pool button[type="roll"].sheet-update_player_points::before
+{
+  content: '⟳';
+  margin-right: 0.25em;
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+.sheet-destiny_pool button[type="roll"].sheet-sync_pool_with_gm,
+.sheet-destiny_pool button[type="roll"].sheet-update_player_points
+{
+  margin-bottom: 0.5em;
+}
+
+.sheet-destiny_pool button[type="roll"].sheet-clear_pool::before
+{
+  content: '♺';
+  margin-right: 0.25em;
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+.sheet-destiny_pool button[type="roll"].roll_destiny::before {
+  font-family: 'dicefontd12';
+  content: '0';
+  margin-right: 0.25em;
+  font-size: 1.5em;
+  line-height: 1;
 }
 
 .sheet-destiny_inputs {
@@ -285,7 +346,7 @@ Grey Green    - #97ABA9
   padding: 0.5em;
 }
 
-.sheet-destiny_inputs input.attr_destiny_dark {
+.sheet-destiny_inputs .sheet-destiny_dark {
   background-color: #333333;
   color: #ffffff;
 }

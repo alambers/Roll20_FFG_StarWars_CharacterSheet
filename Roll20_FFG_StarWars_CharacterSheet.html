@@ -1,3 +1,7 @@
+<!--Detects a Player or GM sheet; use to show/hide elements with CSS-->
+<input type="radio" name="attr_gmdicepool" class="sheet-player" value="1" checked="checked" style="display:none">
+<input type="radio" name="attr_gmdicepool" class="sheet-gm" value="2" style="display:none">
+
 <div class="character_sheet">
   <div class="pools">
     <h2 data-i18n="dice_pool">Dice Pool</h2>
@@ -63,20 +67,23 @@
     <h2>Destiny Pool</h2>
     <div class="destiny_pool section">
       <div class="destiny_buttons">
-        <button class="sync_destiny_pool_button" name="Update-Dest-Pool" value="!eed characterID(@{character_id}) destiny registerPlayer" data-i18n="sync_pool_gm">Sync Pool with GM</button>
-        <button class="roll_destiny_button" name="Roll-Destiny" value="!eed characterID(@{character_id}) 1w destiny doRoll" data-i18n="roll_destiny">Roll Destiny</button>
+        <button type="roll" class="sync_pool_with_gm" name="Update-Dest-Pool" value="!eed characterID(@{character_id}) destiny registerPlayer" data-i18n="sync_pool_with_gm">Sync Pool with GM</button>
+        <button type="roll" class="roll_destiny" name="Roll-Destiny" value="!eed characterID(@{character_id}) 1w destiny doRoll" data-i18n="roll_destiny">Roll Destiny</button>
+        <button type="roll" class="update_player_points" value="!eed characterID(@{character_id}) destiny sendUpdate" data-i18n="update_player_points">Update Player Points</button>
+        <button type="roll" class="clear_pool" value="!eed characterID(@{character_id}) destiny clearPool" data-i18n="clear_pool">Clear Pool</button>
       </div>
       <div class="destiny_inputs">
         <div>
-          <input type="number" class="attr_destiny_light" min="0" max="99" value="0" />
-          <label class="destiny_light_label" name='attr_light' value="@{lightSidePoints}" data-i18n="light">Light</label>
+          <input class="destiny_light" name="attr_lightSidePoints" type="number" min="0" value="0" />
+          <label class="destiny_light_label" name="attr_light" value="@{destiny_light}" data-i18n="light">Light</label>
         </div>
         <div>
-          <button class="use_destiny_button" name="Use-Darkside-Point" value="!eed characterID(@{character_id}) destiny useLight" data-i18n="use_light_side_point">Use Light Side Point</button>
+          <button type="roll" class="use_dark_side" value="!eed characterID(@{character_id}) destiny useDark" data-i18n="use_dark_side">Use Dark Side</button>
+          <button type="roll" class="use_light_side" name="Use-Darkside-Point" value="!eed characterID(@{character_id}) destiny useLight" data-i18n="use_light_side">Use Light Side</button>
         </div>
         <div>
-          <input type="number" class="attr_destiny_dark" min="0" max="99" value="0" />
-          <label class="destiny_dark_label" name='attr_dark' value="@{darkSidePoints}" data-i18n="dark">Dark</label>
+          <input class="destiny_dark" name="attr_darkSidePoints" type="number" min="0" value="0" />
+          <label class="destiny_dark_label" name="attr_dark" value="@{destiny_dark}" data-i18n="dark">Dark</label>
         </div>
       </div>
     </div>
@@ -1328,7 +1335,7 @@
 
   /* Worker for section tabs */
   const buttonlist = ['skills','combat','equipment','talents','force','settings'];
-  buttonlist.forEach(button => {
+  buttonlist.forEach(button => {    
     on(`clicked:${button}`, function() {
       setAttrs({
         sheetTab: button,
