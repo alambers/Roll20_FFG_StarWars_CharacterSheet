@@ -1148,8 +1148,65 @@
   <div class="sheet-force">
     <h2 data-i18n="force_powers">Force Powers</h2>
     <div class="force_powers section">
+      <label data-i18n="force_rating">Force Rating</label>
+      <input type="number" name="attr_force_rating" min="0" max="9" value="0" />
       <fieldset class="repeating_force-powers">
-        <div>Force Power - calculate stat/skill enhancements if applicable</div>
+        <div class="force-power">
+          <h3><span name="attr_force-power-name-display"></span></h3>
+          <select name="attr_force-power-name">
+            <option value="alter">Alter</option>
+            <option value="battle_meditation">Battle Meditation</option>
+            <option value="bind">Bind</option>
+            <option value="conjure">Conjure</option>
+            <option value="ebb-flow">Ebb / Flow</option>
+            <option value="endure">Endure</option>
+            <option value="enhance">Enhance</option>
+            <option value="farsight">Farsight</option>
+            <option value="foresee">Foresee</option>
+            <option value="heal-harm">Heal / Harm</option>
+            <option value="imbue">Imbue</option>
+            <option value="influence">Influence</option>
+            <option value="manipulate">Manipulate</option>
+            <option value="misdirect">Misdirect</option>
+            <option value="move">Move</option>
+            <option value="protect-unleash">Protect / Unleash</option>
+            <option value="seek">Seek</option>
+            <option value="sense">Sense</option>
+            <option value="supress">Supress</option>
+            <option value="wardes-foresight">Warde's Foresight</option>
+          </select>
+          <div class="force-power-levels">
+            <div>
+              <label data-i18n="control">Control</label>
+              <input type="number" name="attr_force-power-control" min="0" max="5" value="0" />
+              <textarea name="attr_force-power-control-description"></textarea>
+            </div>
+            <div>
+              <label data-i18n="duration">Duration</label>
+              <input type="number" name="attr_force-power-duration" min="0" max="5" value="0" />
+              <textarea name="attr_force-power-duration-description"></textarea>
+            </div>
+            <div>
+              <label data-i18n="magnitude">Magnitude</label>
+              <input type="number" name="attr_force-power-magnitude" min="0" max="5" value="0" />
+              <textarea name="attr_force-power-magnitude-description"></textarea>
+            </div>
+            <div>
+              <label data-i18n="range">Range</label>
+              <input type="number" name="attr_force-power-range" min="0" max="5" value="0" />
+              <textarea name="attr_force-power-range-description"></textarea>
+            </div>
+            <div>
+              <label data-i18n="strength">Strength</label>
+              <input type="number" name="attr_force-power-strength" min="0" max="5" value="0" />
+              <textarea name="attr_force-power-strength-description"></textarea>
+            </div>
+          </div>
+          <div class="force-power-mastery">
+            <label data-i18n="mastery">Mastery</label>
+            <textarea name="attr_force-power-mastery-description"></textarea>
+          </div>
+        </div>
       </fieldset>
     </div>    
   </div>
@@ -1839,12 +1896,45 @@
     });
   });
 
+
   // Heal/remove a critical wound
   on('clicked:repeating_current-crits:healcrit', function(eventInfo) {
     const critButtonId = eventInfo.sourceAttribute;
     const critButtonIdLength = critButtonId.length;
     const critToHeal = critButtonId.slice(0, (critButtonIdLength-9));
     removeRepeatingRow(critToHeal);
+  });
+
+  /* Workers for Force Powers */
+
+  const forcePowerNames = {
+    "alter":"Alter",
+    "battle_meditation":"Battle Meditation",
+    "bind":"Bind",
+    "conjure":"Conjure",
+    "ebb-flow":"Ebb / Flow",
+    "endure":"Endure",
+    "enhance":"Enhance",
+    "farsight":"Farsight",
+    "foresee":"Foresee",
+    "heal-harm":"Heal / Harm",
+    "imbue":"Imbue",
+    "influence":"Influence",
+    "manipulate":"Manipulate",
+    "misdirect":"Misdirect",
+    "move":"Move",
+    "protect-unleash":"Protect / nleash",
+    "seek":"Seek",
+    "sense":"Sense",
+    "supress":"Supress",
+    "wardes-foresight":"Warde's Foresight"
+  }
+
+  // Change the power label based on the selected power name
+  on('change:repeating_force-powers:force-power-name', function(eventInfo){
+    const selectedPower = eventInfo.newValue;
+    const displayName = forcePowerNames[selectedPower];
+    setAttrs({'repeating_force-powers_force-power-name-display':displayName});
   });
 </script>
 <!-- End Sheet Workers -->
