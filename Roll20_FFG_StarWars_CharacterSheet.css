@@ -691,9 +691,29 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 
 .sheet-rolla_critical {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 3fr;
   column-gap: 1em;
   padding: 1em;
+  align-items: center;
+}
+
+.sheet-rolla_critical label {
+  text-align: right;
+}
+
+.sheet-rolla_critical label::after {
+  content: ':';
+}
+
+.sheet-rolla_critical button[type="roll"] {
+  padding: 1em;
+}
+
+.sheet-rolla_critical button[type="roll"]::before {
+  font-family: 'dicefontd10';
+  content: 'CC';
+  font-size: 1.5em;
+  margin-right: 0.25em;
 }
 
 .sheet-criticals h3 {

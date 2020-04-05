@@ -745,9 +745,9 @@
     <div class="criticals section">
       <h3 data-i18n="roll_critical">Roll Critical</h3>
       <div class="rolla_critical">
-        <div>Roll Critcal Hit</div>
-        <div>Crit Bonus</div>
-        <div><button>Roll</button></div>
+        <label data-i18n="critical_bonus">Critical Bonus</label>
+        <input name="attr_critical_bonus" type="number" step="10" value="0" min="0" max="200" />
+        <button type="roll" class="roll_crit_button" value="" data-i18n="roll_critical">Roll Critical</button>
       </div>
       <h3 data-i18n="current_critical_injuries">Current Critical Injuries</h3>
       <fieldset class="repeating_current-crits">
