@@ -102,11 +102,11 @@
       <label data-i18n="defense" class="stat_label">Defense</label>
       <div class="vital_stats_column">
         <div>            
-          <input name="attr_body_stats_defense_ranged" type="number" maxlength="1" min="0" max="9" value="0" />
+          <input name="attr_body_stats_defense_ranged" type="number" min="0" max="9" value="0" />
           <label data-i18n="ranged" class="threshold_label">Ranged</label>
         </div>
         <div>            
-          <input name="attr_body_stats_defense_melee" type="number" maxlength="1" min="0" max="9" value=0" />
+          <input name="attr_body_stats_defense_melee" type="number" min="0" max="9" value="0" />
           <label data-i18n="melee" class="current_label">Melee</label>
         </div>
       </div>
@@ -159,12 +159,8 @@
       <input type="radio" name="attr_navSelection" value="force" class="navSelection_radio" />
       <button type="action" name="act_force"><span data-i18n="the_force">The Force</span></button>
     </div>
-    <div>
-      <input type="radio" name="attr_navSelection" value="settings" class="navSelection_radio" />
-      <button type="action" name="act_settings"><span data-i18n="settings">Settings</span></button>
-    </div>
   </div>
-  <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab'  value='skills' />
+  <input type="hidden" class="sheet-tabstoggle" name="attr_sheetTab"  value="skills" />
   <div class="sheet-skills">
     <h2 data-i18n="characteristics">Characteristics</h2>
     <div class="characteristics section">
@@ -754,52 +750,59 @@
         <div><button>Roll</button></div>
       </div>
       <h3 data-i18n="current_critical_injuries">Current Critical Injuries</h3>
-      <fieldset class="repeating_critical_injuries">
-        <div class="current_crits">
-          <select>
-            <optgroup label="Easy (1 ♦)">
-              <option name="attr_crit_1" value="Minor Nick: Suffer 1 strain.">1 - 5</option>
-              <option name="attr_crit_2" value="Slowed Down: May only act during last allied Initiative slot on next turn.">6 - 10</option>
-              <option name="attr_crit_3" value="Sudden Jolt: May only act during last hero Initiative slot on next turn.">11 - 15</option>
-              <option name="attr_crit_4" value="Distracted: Cannot perform free maneuver on next turn.">16 - 20</option>
-              <option name="attr_crit_5" value="Off-Balance: Add 1 Setback die to next skill check.">21 - 25</option>
-              <option name="attr_crit_6" value="Discouraging Wound: Flip one light destiny to dark.">26 - 30</option>
-              <option name="attr_crit_7" value="Stunned: Staggered, cannot perform action on next turn.">31 - 35</option>
-              <option name="attr_crit_8" value="Stinger: Increase difficulty of next check by 1 Difficulty die.">36 - 40</option>
-            </optgroup>
-            <optgroup label="Average (2 ♦♦)">
-
-            </optgroup>
-            <optgroup label="Hard (3 ♦♦♦)">
-
-            </optgroup>
-            <optgroup label="Daunting (4 ♦♦♦♦)">
-
-            </optgroup>
-            <option>0-10</option>
-          </select>
-          <select>
-            <option>Easy (1 ♦)</option>
-            <option>Average (2 ♦♦)</option>
-            <option>Hard (3 ♦♦♦)</option>
-            <option>Daunting (4 ♦♦♦♦)</option>
-          </select>        
-          <div>
-            <select name="attr_crit_characteristic">
-              <option data-i18n="none" value="">None</option>
-              <option data-i18n="brawn" value="brawn">Brawn</option>
-              <option data-i18n="agility" value="agility">Agility</option>
-              <option data-i18n="intellect" value="intellect">Intellect</option>
-              <option data-i18n="cunning" value="cunning">Cunning</option>
-              <option data-i18n="willpower" value="willpower">Willpower</option>
-              <option data-i18n="presence" value="presence">Presence</option>
-              <option data-i18n="all" value="all">All</option>
+      <fieldset class="repeating_current-crits">
+        <input class="current_crit_severity_input" type="hidden" name="attr_current_crit_severity" value="" />
+        <div class="current_crit">
+          <div class="current_crit_container">
+            <div><span name="attr_current_crit_severity"></span></div>
+            <div><span name="attr_current_crit_type" class="current_crit_type"></span></div>
+            <select name="attr_current_crit_number">
+              <option class="disabled_option" value="0">Crit Roll</option>            
+              <optgroup label="Easy (1 ♦)">
+                <option value="5">1 - 5</option>
+                <option value="10">6 - 10</option>
+                <option value="15">11 - 15</option>
+                <option value="20">16 - 20</option>
+                <option value="25">21 - 25</option>
+                <option value="30">26 - 30</option>
+                <option value="35">31 - 35</option>
+                <option value="40">36 - 40</option>
+              </optgroup>
+              <optgroup label="Average (2 ♦♦)">
+                <option value="45">41 - 45</option>
+                <option value="50">46 - 50</option>
+                <option value="55">51 - 55</option>
+                <option value="60">56 - 60</option>
+                <option value="65">61 - 65</option>
+                <option value="70">66 - 70</option>
+                <option value="75">71 - 75</option>
+                <option value="80">76 - 80</option>
+                <option value="85">81 - 85</option>
+                <option value="90">86 - 90</option>
+              </optgroup>
+              <optgroup label="Hard (3 ♦♦♦)">
+                <option value="95">91 - 95</option>
+                <option value="100">96 - 100</option>
+                <option value="105">101 - 105</option>
+                <option value="110">106 - 110</option>
+                <option value="115">111 - 115</option>
+                <option value="120">116 - 120</option>
+                <option value="125">121 - 125</option>
+              </optgroup>
+              <optgroup label="Daunting (4 ♦♦♦♦)">
+                <option value="130">126 - 130</option>
+                <option value="140">131 - 140</option>
+                <option value="150">141 - 150</option>
+              </optgroup>
+              <optgroup label="Dead">
+                <option value="151">151+</option>
+              </optgroup>
             </select>
-          </div>
-          <div><input type="text" value="modifiers" /></div>
-          <div class="cell-width-4">Description</div>
+            <div class="current_crit_description"><span name="attr_current_crit_description"></span></div>
+          </div>          
+          <button type="action" name="act_healcrit" data-i18n="heal_this_wound">Heal this wound</button>
         </div>
-      </fieldset>
+      </fieldset>      
     </div>
     <h2 data-i18n="weapons">Weapons</h2>
     <div class="weapons section">
@@ -826,10 +829,10 @@
             </div>
           </div>
           <div class="weapon_info">
-            <label data-i18n="make_model">Make-Model:</label>
+            <label data-i18n="make_model">Make-Model</label>
             <input type="text" name="attr_make_model" />
-            <label data-i18n="skill">Skill:</label>
-            <select name="attr_weapon_skill" name="">
+            <label data-i18n="skill">Skill</label>
+            <select name="attr_weapon_skill">
               <optgroup label="Combat Skills" data-i18n-label="combat_skills">
                 <option value="Brawl" data-i18n="brawl">Brawl</option>
                 <option value="Melee" data-i18n="melee">Melee</option>
@@ -845,7 +848,7 @@
               </optgroup>
             </select>
             <input type="hidden" name="attr_weapon_skill_value" value="" />
-            <label data-i18n="range">Range:</label>
+            <label data-i18n="range">Range</label>
             <select name="attr_weapon_range">
               <option value="Engaged" data-i18n="engaged">Engaged</option>
               <option value="Short" data-i18n="short">Short</option>
@@ -853,7 +856,7 @@
               <option value="Long" data-i18n="long">Long</option>
               <option value="Extreme" data-i18n="extreme">Extreme</option>
             </select>
-            <label data-i18n="condition">Condition:</label>
+            <label data-i18n="condition">Condition</label>
             <select name="attr_weapon_condition">
               <option value="" data-i18n="undamaged">Undamaged</option>
               <option value="1blk" data-i18n="minor">Minor</option>
@@ -861,12 +864,12 @@
               <option value="unusableWeapon" data-i18n="major">Major</option>
               <option value="unusableWeapon" data-i18n="destroyed">Destroyed</option>
             </select>
-            <label data-i18n="critical_bonus">Critical Bonus:</label>
+            <label data-i18n="critical_bonus">Critical Bonus</label>
             <div class="weapon_critical_bonus">
               <input name="attr_weapon_critical_bonus" type="number" step="10" value="0" min="0" max="200" />
               <div><span name="attr_weapon_quality_vicious_crit_bonus"></span> <span data-i18n="from_vicious" class="from_vicious_text">from Vicious</span></div>
             </div>            
-            <label data-i18n="damage_bonus:">Damage Bonus:</label>
+            <label data-i18n="damage_bonus:">Damage Bonus</label>
             <input name="attr_weapon_damage_bonus" type="number" value="0" min="-10" max="10" />
           </div>
           <h3 class="weapon_qualities_header"><span data-i18n="weapon_qualities">Weapon Qualities</span> <span class="weapon_qualities_activation_icon"></span><span class="weapon_qualities_activation" data-i18n="two_advantage_to_activate">Two Advantage to activate unless otherwise noted</span></h3>
@@ -1081,15 +1084,37 @@
     </div>
     <h2 data-i18n="combat_talents">Combat Talents</h2>
     <div class="combat_talents section">
-      <fieldset class="repeating_combat_talents">
+      <fieldset class="repeating_combat-talents">
         <div>Talent - calculate stat/skill enhancements if applicable</div>
       </fieldset>
     </div>
     <h2 data-i18n="armor">Armor</h2>
     <div class="armor section">
-      <fieldset class="repeating_armor">
-        <div>Armor - calculate extra Soak and Defense</div>
-      </fieldset>
+      <div class="armor_item armor_heading">
+        <div data-i18n="name">Name</div>
+        <div data-i18n="defense_melee">Defense - Melee</div>
+        <div data-i18n="defense_ranged">Defense - Ranged</div>
+        <div data-i18n="soak">Soak</div>
+        <div data-i18n="encum">Encum</div>
+        <div data-i18n="hard_points">Hard Points</div>
+        <div data-i18n="quality">Quality</div>
+      </div>
+      <div class="armor_item">
+        <input type="text" name="attr_armor_name" />
+        <input type="number" name="attr_armor_defense_bonus_melee_one" min="0" max="9" value="0" />
+        <input type="number" name="attr_armor_defense_bonus_ranged_one" min="0" max="9" value="0" />
+        <input type="number" name="attr_armor_defense_bonus_soak_one" min="0" max="9" value="0" />
+        <input type="number" name="attr_armor_encumbrance_one" min="0" max="9" value="0" />
+        <input type="number" name="attr_armor_hard_points_one" min="0" max="9" value="0" />
+        <select name="attr_armor_quality_one">
+          <option value="normal" data-i18n="normal">Normal</option>
+          <option value="nuperior" data-i18n="superior">Superior</option>
+          <option value="inferior" data-i18n="inferior">Inferior</option>
+        </select>
+        <div></div>
+        <label>Special</label>
+        <textarea name="attr_armor_special_one" class="cell_width_5"></textarea>
+      </div>
     </div>   
   </div>
   <div class="sheet-equipment">
@@ -1109,13 +1134,13 @@
   <div class="sheet-talents">
     <h2 data-i18n="non_combat_talents">Non-combat Talents</h2>
     <div class="non_combat_talents section">
-      <fieldset class="repeating_non_combat_talents">
+      <fieldset class="repeating_non-combat-talents">
         <div>Non-combat Talent - calculate stat/skill enhancements if applicable</div>
       </fieldset>
     </div>
     <h2 data-i18n="signature_abilities">Signature Abilities</h2>
     <div class="signature_abilities section">
-      <fieldset class="repeating_signature_abilities">
+      <fieldset class="repeating_signature-abilities">
         <div>Signature Ability - calculate stat/skill enhancements if applicable</div>
       </fieldset>
     </div>   
@@ -1123,7 +1148,7 @@
   <div class="sheet-force">
     <h2 data-i18n="force_powers">Force Powers</h2>
     <div class="force_powers section">
-      <fieldset class="repeating_force_powers">
+      <fieldset class="repeating_force-powers">
         <div>Force Power - calculate stat/skill enhancements if applicable</div>
       </fieldset>
     </div>    
@@ -1238,7 +1263,7 @@
       {{/roll}}
       {{#results}}
       <tr><td colspan="2"><span class="tcat" data-i18n="results">Results</span></td></tr>
-      <tr><td colspan="2">{{results}}</td></tr>
+      <tr><td colspan="2" class="critical_results">{{results}}</td></tr>
       {{/results}}
   </table>
 </rolltemplate><!-- Roll Template-Critical -->
@@ -1303,34 +1328,34 @@
       <tr><td><span class="sheet-tcat" data-i18n="despair">Despair</span></td><td>{{despair}}</td></tr>
       {{/despair}}
       {{#1advantage1triumph}}
-      <tr><td><img src="http://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/> or <img src="http://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{1advantage1triumph}}</td></tr>
+      <tr><td><img src="https://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/> or <img src="https://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{1advantage1triumph}}</td></tr>
       {{/1advantage1triumph}}
       {{#2advantage1triumph}}
-      <tr><td><img src="http://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/><img src="http://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/> or <img src="http://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{2advantage1triumph}}</td></tr>
+      <tr><td><img src="https://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/><img src="https://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/> or <img src="https://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{2advantage1triumph}}</td></tr>
       {{/2advantage1triumph}}
       {{#3advantage1triumph}}
-      <tr><td><img src="http://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/><img src="http://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/><img src="http://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/> or <img src="http://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{3advantage1triumph}}</td></tr>
+      <tr><td><img src="https://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/><img src="https://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/><img src="https://i.imgur.com/Gav94H2.png" title="advantage" height="20" width="20"/> or <img src="https://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{3advantage1triumph}}</td></tr>
       {{/3advantage1triumph}}
       {{#1triumph}}
-      <tr><td><img src="http://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{1triumph}}</td></tr>
+      <tr><td><img src="https://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{1triumph}}</td></tr>
       {{/1triumph}}
       {{#2triumph}}
-      <tr><td><img src="http://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/><img src="http://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{2triumph}}</td></tr>
+      <tr><td><img src="https://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/><img src="https://i.imgur.com/1lJCfnB.png" title="triumph" height="20" width="20"/></td><td>{{2triumph}}</td></tr>
       {{/2triumph}}
       {{#1threat1despair}}
-      <tr><td><img src="http://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/> or <img src="http://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{1threat1despair}}</td></tr>
+      <tr><td><img src="https://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/> or <img src="https://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{1threat1despair}}</td></tr>
       {{/1threat1despair}}
       {{#2threat1despair}}
-      <tr><td><img src="http://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/><img src="http://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/> or <img src="http://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{2threat1despair}}</td></tr>
+      <tr><td><img src="https://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/><img src="https://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/> or <img src="https://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{2threat1despair}}</td></tr>
       {{/2threat1despair}}
       {{#3threat1despair}}
-      <tr><td><img src="http://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/><img src="http://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/><img src="http://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/> or <img src="http://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{3threat1despair}}</td></tr>
+      <tr><td><img src="https://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/><img src="https://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/><img src="https://i.imgur.com/o8EQ4z6.png" title="threat" height="20" width="20"/> or <img src="https://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{3threat1despair}}</td></tr>
       {{/3threat1despair}}
       {{#1despair}}
-      <tr><td><img src="http://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{1despair}}</td></tr>
+      <tr><td><img src="https://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{1despair}}</td></tr>
       {{/1despair}}
       {{#2despair}}
-      <tr><td><img src="http://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/><img src="http://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{2despair}}</td></tr>
+      <tr><td><img src="https://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/><img src="https://i.imgur.com/rOEJlCc.png" title="despair" height="20" width="20"/></td><td>{{2despair}}</td></tr>
       {{/2despair}}
   </table>
 </rolltemplate><!-- Roll Template-Suggestions -->
@@ -1338,9 +1363,8 @@
 
 <!-- Sheet Workers -->
 <script type="text/worker">
-
   /* Worker for section tabs */
-  const buttonlist = ['skills','combat','equipment','talents','force','settings'];
+  const buttonlist = ['skills','combat','equipment','talents','force'];
   buttonlist.forEach(button => {    
     on(`clicked:${button}`, function() {
       setAttrs({
@@ -1352,40 +1376,40 @@
   
   /* Workers for skill dice */
   const skillStat = {
-    "astrogation":"intellect",
-    "athletics":"brawn",
-    "charm":"presence",
-    "coercion":"willpower",
-    "computers":"intellect",
-    "cool":"presence",
-    "coordination":"agility",
-    "deception":"cunning",
-    "discipline":"willpower",
-    "leadership":"presence",
-    "mechanics":"intellect",
-    "medicine":"intellect",
-    "negotiation":"presence",
-    "perception":"cunning",
-    "piloting-planetary":"agility",
-    "piloting-space":"agility",
-    "resilience":"brawn",
-    "skullduggery":"cunning",
-    "stealth":"agility",
-    "streetwise":"cunning",
-    "survival":"cunning",
-    "vigilance":"willpower",
-    "brawl":"brawn",
-    "melee":"brawn",
-    "gunnery":"agility",
-    "lightsaber":"brawn",
-    "ranged-light":"agility",
-    "ranged-heavy":"agility",
-    "core-worlds":"intellect",
-    "education":"intellect",
-    "lore":"intellect",
-    "outer-rim":"intellect",
-    "underworld":"intellect",
-    "xenology":"intellect"
+    'astrogation':'intellect',
+    'athletics':'brawn',
+    'charm':'presence',
+    'coercion':'willpower',
+    'computers':'intellect',
+    'cool':'presence',
+    'coordination':'agility',
+    'deception':'cunning',
+    'discipline':'willpower',
+    'leadership':'presence',
+    'mechanics':'intellect',
+    'medicine':'intellect',
+    'negotiation':'presence',
+    'perception':'cunning',
+    'piloting-planetary':'agility',
+    'piloting-space':'agility',
+    'resilience':'brawn',
+    'skullduggery':'cunning',
+    'stealth':'agility',
+    'streetwise':'cunning',
+    'survival':'cunning',
+    'vigilance':'willpower',
+    'brawl':'brawn',
+    'melee':'brawn',
+    'gunnery':'agility',
+    'lightsaber':'brawn',
+    'ranged-light':'agility',
+    'ranged-heavy':'agility',
+    'core-worlds':'intellect',
+    'education':'intellect',
+    'lore':'intellect',
+    'outer-rim':'intellect',
+    'underworld':'intellect',
+    'xenology':'intellect'
   };
   
   // When the skill rank changes, update the dice
@@ -1647,6 +1671,180 @@
         break;
     };
     setAttrs({repeating_weapons_weapon_skill_value:diceCalc});
+  });
+
+  /* Workers for critical hits */
+
+  const critTable = {
+    '5':{
+      severity: 'Easy (1 ♦)',
+      type: 'Minor Nick',
+      description: 'Suffer 1 strain.'
+    },
+    '10':{
+      severity: 'Easy (1 ♦)',
+      type: 'Slowed Down',
+      description: 'May only act during last allied Initiative slot on next turn.'
+    },
+    '15':{
+      severity: 'Easy (1 ♦)',
+      type: 'Sudden Jolt',
+      description: 'May only act during last hero Initiative slot on next turn.'
+    },
+    '20':{
+      severity: 'Easy (1 ♦)',
+      type: 'Distracted',
+      description: 'Cannot perform free maneuver on next turn.'
+    },
+    '25':{
+      severity: 'Easy (1 ♦)',
+      type: 'Off-Balance',
+      description: 'Add 1 Setback die to next skill check.'
+    },
+    '30':{
+      severity: 'Easy (1 ♦)',
+      type: 'Discouraging Wound',
+      description: 'Flip one light destiny to dark.'
+    },
+    '35':{
+      severity: 'Easy (1 ♦)',
+      type: 'Stunned',
+      description: 'Staggered, cannot perform action on next turn.'
+    },
+    '40':{
+      severity: 'Easy (1 ♦)',
+      type: 'Stinger',
+      description: 'Increase difficulty of next check by 1 Difficulty die.'
+    },
+    //----------------------------- Severity 2
+    '45':{
+      severity: 'Average (2 ♦♦)',
+      type: 'Bowled Over',
+      description: 'Knocked prone and suffer 1 strain.'
+    },
+    '50':{
+      severity: 'Average (2 ♦♦)',
+      type: 'Head Ringer',
+      description: 'Increase difficulty of all Intellect and Cunning checks by 1 Difficulty die until end of encounter.'
+    },
+    '55':{
+      severity: 'Average (2 ♦♦)',
+      type: 'Fearsome Wound',
+      description: 'Increase difficulty of all Presence and Willpower checks by 1 Difficulty die until end of encounter.'
+    },
+    '60':{
+      severity: 'Average (2 ♦♦)',
+      type: 'Agonizing Wound',
+      description: 'Increase difficulty of all Brawn and Agility checks by 1 Difficulty die until end of encounter.'
+    },
+    '65':{
+      severity: 'Average (2 ♦♦)',
+      type: 'Slightly Dazed',
+      description: 'Add 1 Setback die to all skill checks until end of encounter.'
+    },
+    '70':{
+      severity: 'Average (2 ♦♦)',
+      type: 'Scattered Senses',
+      description: 'Remove all Boost dice from all skill checks until end of encounter.'
+    },
+    '75':{
+      severity: 'Average (2 ♦♦)',
+      type: 'Hamstrung',
+      description: 'Lose free maneuver until end of encounter.'
+    },
+    '80':{
+      severity: 'Average (2 ♦♦)',
+      type: 'Staggered',
+      description: 'Attacker may immediately attempt another free attack against you using same dice pool as original attack.'
+    },
+    '85':{
+      severity: 'Average (2 ♦♦)',
+      type: 'Winded',
+      description: 'Cannot voluntarily suffer strain to activate abilities or gain additional maneuvers until end of encounter.'
+    },
+    '90':{
+      severity: 'Average (2 ♦♦)',
+      type: 'Compromised',
+      description: 'Increase difficulty of all skill checks by 1 Difficulty die until end of encounter.'
+    },
+    //---------------------------------------- Severity 3
+    '95':{
+      severity: 'Hard (3 ♦♦♦)',
+      type: 'At the Brink',
+      description: 'Suffer 1 strain each time you perform an action.'
+    },
+    '100':{
+      severity: 'Hard (3 ♦♦♦)',
+      type: 'Crippled',
+      description: 'Limb crippled until healed or replaced. Increase difficulty of all checks that use that limb by 1 Difficulty die.'
+    },
+    '105':{
+      severity: 'Hard (3 ♦♦♦)',
+      type: 'Maimed',
+      description: 'Limb permanently lost. Unless you have a cybernetic replacement, cannot perform actions that use that limb. Add 1 Setback to all other actions.'
+    },
+    '110':{
+      severity: 'Hard (3 ♦♦♦)',
+      type: 'Horrific Injury',
+      description: 'Roll 1d10 to determine one wounded characteristic -- roll results(1-3 = Brawn, 4-6 = Agility, 7 = Intellect, 8 = Cunning, 9 = Presence, 10 = Willpower. Until Healed, treat characteristic as one point lower.'
+    },
+    '115':{
+      severity: 'Hard (3 ♦♦♦)',
+      type: 'Temporarily Lame',
+      description: 'Until healed, may not perform more than one maneuver each turn.'
+    },
+    '120':{
+      severity: 'Hard (3 ♦♦♦)',
+      type: 'Blinded',
+      description: 'Can no longer see. Upgrade the difficulty of Perception and Vigilance checks three times, and all other checks twice.'
+    },
+    '125':{
+      severity: 'Hard (3 ♦♦♦)',
+      type: 'Knocked Senseless',
+      description: 'You can no longer upgrade dice for checks.'
+    },
+    //---------------------------------------- Severity 4
+    '130':{
+      severity: 'Daunting (4 ♦♦♦♦)',
+      type: 'Gruesome Injury',
+      description: 'Roll 1d10 to determine one wounded characteristic -- roll results(1-3 = Brawn, 4-6 = Agility, 7 = Intellect, 8 = Cunning, 9 = Presence, 10 = Willpower. Characteristic is permanently one point lower.'
+    },
+    '140':{
+      severity: 'Daunting (4 ♦♦♦♦)',
+      type: 'Bleeding Out',
+      description: 'Suffer 1 wound and 1 strain every round at the beginning of turn. For every 5 wounds suffered beyond wound threshold, suffer one additional Critical Injury (ignore the details for any result below this result).'
+    },
+    '150':{
+      severity: 'Daunting (4 ♦♦♦♦)',
+      type: 'The End is Nigh',
+      description: 'Die after the last Initiative slot during the next round.'
+    },
+    //---------------------------------------- DEAD
+    '151':{
+      severity: 'DEAD',
+      type: 'Dead',
+      description: 'Complete, absolute death.'
+    }
+  };
+
+  on('change:repeating_current-crits:current_crit_number', function(eventInfo) {
+    const critNumber = eventInfo.newValue;
+    const critSeverity = critTable[critNumber].severity;
+    const critType =  critTable[critNumber].type;
+    const critDescription =  critTable[critNumber].description;
+    setAttrs({
+      'repeating_current-crits_current_crit_severity':critSeverity,
+      'repeating_current-crits_current_crit_type':critType,
+      'repeating_current-crits_current_crit_description':critDescription
+    });
+  });
+
+  // Heal/remove a critical wound
+  on('clicked:repeating_current-crits:healcrit', function(eventInfo) {
+    const critButtonId = eventInfo.sourceAttribute;
+    const critButtonIdLength = critButtonId.length;
+    const critToHeal = critButtonId.slice(0, (critButtonIdLength-9));
+    removeRepeatingRow(critToHeal);
   });
 </script>
 <!-- End Sheet Workers -->

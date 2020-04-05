@@ -358,7 +358,7 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 
 .sheet-tab_navigation {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   margin: 2em 0;
 }
 
@@ -410,8 +410,7 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 .sheet-tabstoggle[value="combat"] ~ div.sheet-combat,
 .sheet-tabstoggle[value="equipment"] ~ div.sheet-equipment,
 .sheet-tabstoggle[value="talents"] ~ div.sheet-talents,
-.sheet-tabstoggle[value="force"] ~ div.sheet-force,
-.sheet-tabstoggle[value="settings"] ~ div.sheet-settings {
+.sheet-tabstoggle[value="force"] ~ div.sheet-force {
 	display: block;
 }
 
@@ -697,14 +696,84 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   padding: 1em;
 }
 
-.sheet-current_crits {
+.sheet-criticals h3 {
+  margin-bottom: 1em;
+}
+
+.sheet-current_crit {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 2fr;
+  grid-template-columns: 4fr 1fr;
   column-gap: 1em;
   row-gap: 1em;
   padding: 1em;
+  align-items: center;
+  border-radius: 0.5em;
+  margin: 2em 0;
+  color: #ffffff;
 }
 
+.sheet-disabled_option {
+  font-style: italic;
+  color: #cccccc;
+}
+
+.sheet-current_crit_severity_input[value="Easy (1 ♦)"] + .sheet-current_crit {
+  background: rgb(168,54,57);
+  background: radial-gradient(circle, rgba(168,54,57,0.1) 38%, rgba(120,17,20,0.1) 100%);
+  border: 3px solid #781114;
+  color: #000000;
+}
+
+.sheet-current_crit_severity_input[value="Average (2 ♦♦)"] + .sheet-current_crit {
+  background: rgb(168,54,57);
+  background: radial-gradient(circle, rgba(168,54,57,0.3) 38%, rgba(120,17,20,0.3) 100%);
+  border: 3px solid #781114;
+  color: #000000;
+}
+
+.sheet-current_crit_severity_input[value="Hard (3 ♦♦♦)"] + .sheet-current_crit {
+  background: rgb(168,54,57);
+  background: radial-gradient(circle, rgba(168,54,57,0.7) 38%, rgba(120,17,20,0.7) 100%);
+  border: 3px solid #781114;
+}
+
+.sheet-current_crit_severity_input[value="Daunting (4 ♦♦♦♦)"] + .sheet-current_crit {
+  background: rgb(168,54,57);
+  background: radial-gradient(circle, rgba(168,54,57,1) 38%, rgba(120,17,20,1) 100%);
+  border: 3px solid #781114;
+}
+
+.sheet-current_crit_severity_input[value="DEAD"] + .sheet-current_crit {
+  background: #000000;
+  border: 3px solid #000000;
+  color: #ccc;
+}
+
+.sheet-current_crit_container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  column-gap: 2em;
+  row-gap: 1em;
+  align-items: center;
+}
+
+.sheet-current_crit .sheet-current_crit_type {
+  font-weight: bold;
+}
+
+.sheet-current_crit .sheet-current_crit_description {
+  font-size: 1em;
+}
+
+.sheet-current_crit button {
+  border: 5px solid #2c3947;
+  font-size: 1em;
+  border-radius: 0.5em;
+  height: 100%;
+  background: rgb(35,140,0);
+  background: radial-gradient(circle, rgba(35,140,0,1) 38%, rgba(82,100,76,1) 100%);
+  color: #ffffff;
+}
 /* Weapons */
 
 .sheet-weapon {
@@ -829,6 +898,7 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   position: relative;
 }
 
+.sheet-weapon_info label::after,
 .sheet-weapon_qualities label::after {
   content: ":";
 }
@@ -836,6 +906,40 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 .sheet-weapon_mods {
   padding: 1em;
   margin: 1em 0;
+}
+
+/* Armor */
+
+.sheet-armor_item {
+  display: grid;
+  grid-template-columns: 3fr repeat(5, 4em) 2fr;
+  column-gap: 1em;
+  row-gap: 0.5em;
+  margin-bottom: 1em;
+  align-items: center;
+}
+
+.sheet-armor_heading {
+  margin-top: 1em;
+  border-bottom: 1px dotted #aaaaaa;
+}
+
+.sheet-armor_heading div {
+  font-size: 0.85em;
+}
+
+.sheet-armor_item label {
+  text-align: right;
+}
+
+.sheet-armor_item label::after {
+  content: ':';
+}
+
+.sheet-armor_item textarea {
+  height: 4em;
+  padding: 0.5em;
+  font-size: 1em;
 }
 
 
@@ -922,6 +1026,16 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 
 .sheet-rolltemplate-critical tr:nth-child(even) {
   background-color: rgba(233, 233, 233, 1);
+  padding: 0.5em;
+}
+
+.sheet-rolltemplate-critical h4
+{
+  padding: 0 0.5em;
+}
+
+.sheet-rolltemplate-critical p
+{
   padding: 0.5em;
 }
 
