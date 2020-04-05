@@ -567,12 +567,12 @@
         <div class="skill">          
           <label data-i18n="lightsaber">Lightsaber</label>
           <select name="attr_lightsaber_characteristic">
-            <option data-i18n="brawn" value="@{brawn}">Brawn</option>
-            <option data-i18n="agility" value="@{agility}">Agility</option>
-            <option data-i18n="intellect" value="@{intellect}">Intellect</option>
-            <option data-i18n="cunning" value="@{cunning}">Cunning</option>
-            <option data-i18n="willpower" value="@{willpower}">Willpower</option>
-            <option data-i18n="presence" value="@{presence}">Presence</option>
+            <option data-i18n="brawn" value="brawn">Brawn</option>
+            <option data-i18n="agility" value="agility">Agility</option>
+            <option data-i18n="intellect" value="intellect">Intellect</option>
+            <option data-i18n="cunning" value="cunning">Cunning</option>
+            <option data-i18n="willpower" value="willpower">Willpower</option>
+            <option data-i18n="presence" value="presence">Presence</option>
           </select>
           <input type="hidden" name="attr_lightsaber_characteristic_value" value="" />
           <input type="checkbox" name="attr_lightsaber_career" value="true" />
@@ -584,7 +584,7 @@
             <span class="icon-ability-dice"></span>            
           </div>
           <input type="text" name="attr_lightsaber_modifiers" />
-          <button class="roll_button" type="roll" name="roll_lightsaber" value="!eed characterID(@{character_id}) label(skill:Lightsaber) @{lightsaber_modifiers} skill(@{lightsaber_rank}|@{lightsaber_characteristic}|Lightsaber) @{dicePool}"></button>
+          <button class="roll_button" type="roll" name="roll_lightsaber" value="!eed characterID(@{character_id}) label(skill:Lightsaber) @{lightsaber_modifiers} skill(@{lightsaber_rank}|@{lightsaber_characteristic_value}|Lightsaber) @{dicePool}"></button>
         </div>
         <div class="skill">          
           <label data-i18n="ranged-light">Ranged - Light</label>
@@ -1423,7 +1423,7 @@
   /* Worker for section tabs */
   const buttonlist = ['skills','combat','equipment','talents','force'];
   buttonlist.forEach(button => {    
-    on(`clicked:${button}`, function() {
+    on(`clicked:${button}`, () => {
       setAttrs({
         sheetTab: button,
         navSelection: button
@@ -1470,7 +1470,7 @@
   };
   
   // When the skill rank changes, update the dice
-  const CalculateDice = function(eventInfo) {
+  const CalculateDice = (eventInfo) => {
     const skill = (eventInfo.sourceAttribute).slice(0,-5);
     const stat = skillStat[skill];
     let rank = 0;
@@ -1480,7 +1480,7 @@
     let greenDiceName = '';
     let statValue = 0;
     rank = parseInt(eventInfo.newValue);
-    getAttrs([stat, 'lightsaber_characteristic_value'], function(values){
+    getAttrs([stat, 'lightsaber_characteristic_value'], (values) => {
       statValue = (skill === 'lightsaber') ? parseInt(values.lightsaber_characteristic_value) : parseInt(values[stat]);  
       yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
       greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
@@ -1493,14 +1493,13 @@
   for (const skill in skillStat) {
     // Worker for calculating skill dice
     const skillRank = skill + '_rank';
-    on('change:' + skillRank, function(eventInfo) {
+    on('change:' + skillRank, (eventInfo) => {
       CalculateDice(eventInfo);
     });
   }
   
   // When the associated attribute changes, update the dice
-  const CalculateDiceStatChange = function(eventInfo,skill) {
-    //const stat = skillStat[skill];
+  const CalculateDiceStatChange = (eventInfo,skill,stat) => {
     const statValue = parseInt(eventInfo.newValue);
     let rank = 0;
     let yellowDice = 0;
@@ -1508,32 +1507,48 @@
     let yellowDiceName = '';
     let greenDiceName = '';
     const rankAttr = skill+'_rank';
-    getAttrs([rankAttr], function(values){
+    getAttrs([rankAttr, 'lightsaber_characteristic', 'lightsaber_characteristic_value'], (values) => {
+      const lightsaberStat = values.lightsaber_characteristic;
+      const lightsaberValue = values.lightsaber_characteristic_value;
+      let newLightSaberValue = lightsaberValue;
+      if (stat === lightsaberStat) {
+        newLightSaberValue = statValue;
+      }
       rank = parseInt(values[rankAttr]);
       yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
       greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
       yellowDiceName = skill + '_yd';
       greenDiceName = skill + '_gd';
-      setAttrs({[yellowDiceName]: yellowDice, [greenDiceName]: greenDice});
-    });  
+      setAttrs({[yellowDiceName]: yellowDice, [greenDiceName]: greenDice, 'lightsaber_characteristic_value': newLightSaberValue});
+    });
   };
   
   for (const skill in skillStat) {
-    on('change:brawn change:agility change:intellect change:cunning change:willpower change:presence', function(eventInfo) {
-      if (skillStat[skill] === eventInfo.sourceAttribute) {
-        CalculateDiceStatChange(eventInfo,skill);
+    on('change:brawn change:agility change:intellect change:cunning change:willpower change:presence', (eventInfo) => {
+      const stat = eventInfo.sourceAttribute;
+      if (skillStat[skill] === stat) {
+        CalculateDiceStatChange(eventInfo,skill,stat);
       }
     });  
   };
   
   // When the Lightsaber skill changes, update the lightsaber dice
-  on('change:lightsaber_characteristic', function(eventInfo) {
-    const statAt = eventInfo.newValue;
-    const statAtLength = statAt.length;  
-    const stat = statAt.slice(2,statAtLength-1);
-    getAttrs(['lightsaber_rank',stat], function(values){
+  on('change:lightsaber_characteristic', (eventInfo) => { 
+    const stat = eventInfo.newValue;;
+    getAttrs(['lightsaber_rank',stat], (values) => {
       rank = parseInt(values.lightsaber_rank);
       statValue = parseInt(values[stat]);
+      yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
+      greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
+      setAttrs({lightsaber_yd: yellowDice, lightsaber_gd: greenDice, lightsaber_characteristic_value: statValue});
+    });
+  });
+
+  // When the Lightsaber attribute value changes, update the lightsaber dice
+  on('change:lightsaber_characteristic_value', (eventInfo) => {
+    const statValue = eventInfo.newValue;;
+    getAttrs(['lightsaber_rank'], (values) => {
+      rank = parseInt(values.lightsaber_rank);
       yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
       greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
       setAttrs({lightsaber_yd: yellowDice, lightsaber_gd: greenDice, lightsaber_characteristic_value: statValue});
@@ -1543,9 +1558,9 @@
   /* Workers for calculating weapon quality dice */
   
   // Cumbersome
-  on('change:repeating_weapons:weapon_quality_cumbersome_value', function(eventInfo) {
+  on('change:repeating_weapons:weapon_quality_cumbersome_value', (eventInfo) => {
     const cumbersome = parseInt(eventInfo.newValue);
-    getAttrs(['brawn'], function(values) {
+    getAttrs(['brawn'], (values) => {
       const brawn = parseInt(values.brawn);
       const penalty = cumbersome - brawn;    
       if (penalty > 0) {
@@ -1558,28 +1573,28 @@
   });
   
   // Defensive
-  on('change:repeating_weapons:weapon_quality_defensive_value', function(eventInfo) {
+  on('change:repeating_weapons:weapon_quality_defensive_value', (eventInfo) => {
     const defensive = parseInt(eventInfo.newValue);
     setAttrs({'body_stats_defense_melee':defensive});
   });
   
   // Deflection
-  on('change:repeating_weapons:weapon_quality_deflection_value', function(eventInfo) {
+  on('change:repeating_weapons:weapon_quality_deflection_value', (eventInfo) => {
     const deflection = parseInt(eventInfo.newValue);
     setAttrs({'body_stats_defense_ranged':deflection});
   });
   
   // Inferior
-  on('change:repeating_weapons:weapon_quality_inferior_value', function(eventInfo) {
+  on('change:repeating_weapons:weapon_quality_inferior_value', (eventInfo) => {
     const inferior = eventInfo.newValue;
     if (inferior === 'Yes') {
-      getAttrs(['repeating_weapons_weapon_damage_bonus'], function(values) {
+      getAttrs(['repeating_weapons_weapon_damage_bonus'], (values) => {
         const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
         setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus-1, 'repeating_weapons_weapon_quality_inferior_penalty':'1t'});
       });
     }
     else {
-      getAttrs(['repeating_weapons_weapon_damage_bonus'], function(values) {
+      getAttrs(['repeating_weapons_weapon_damage_bonus'], (values) =>  {
         const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
         setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus+1, 'repeating_weapons_weapon_quality_inferior_penalty':''});
       });
@@ -1587,16 +1602,16 @@
   });
 
   // Superior
-  on('change:repeating_weapons:weapon_quality_superior_value', function(eventInfo) {
+  on('change:repeating_weapons:weapon_quality_superior_value', (eventInfo) => {
     const superior = eventInfo.newValue;
     if (superior === 'Yes') {
-      getAttrs(['repeating_weapons_weapon_damage_bonus'], function(values) {
+      getAttrs(['repeating_weapons_weapon_damage_bonus'], (values) =>  {
         const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
         setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus+1, 'repeating_weapons_weapon_quality_superior_bonus':'1a'});
       });
     }
     else {
-      getAttrs(['repeating_weapons_weapon_damage_bonus'], function(values) {
+      getAttrs(['repeating_weapons_weapon_damage_bonus'], (values) =>  {
         const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
         setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus-1, 'repeating_weapons_weapon_quality_superior_bonus':''});
       });
@@ -1604,10 +1619,10 @@
   });
 
   // Vicious
-  on('change:repeating_weapons:weapon_quality_vicious_value', function(eventInfo) {
+  on('change:repeating_weapons:weapon_quality_vicious_value', (eventInfo) => {
     const viciousPrevious = parseInt(eventInfo.previousValue);
     const viciousNew = parseInt(eventInfo.newValue);
-    getAttrs(['repeating_weapons_weapon_critical_bonus'], function(values) {
+    getAttrs(['repeating_weapons_weapon_critical_bonus'], (values) =>  {
       const criticalBonus = parseInt(values.repeating_weapons_weapon_critical_bonus);
       const viciousPreviousBonus = parseInt(viciousPrevious*10);
       const viciousNewBonus = parseInt(viciousNew*10);
@@ -1657,7 +1672,7 @@
   for (const quality in qualitiesObject) {
     const qualityTitle = qualitiesObject[quality];
     let qualityList = '';
-    on('change:repeating_weapons:' + quality, function(eventInfo) {
+    on('change:repeating_weapons:' + quality, (eventInfo) => {
       const qualityValue = eventInfo.newValue;
       const inArray = weaponQualities.findIndex(thisQuality => thisQuality.includes(qualityTitle));
       if (inArray === -1){
@@ -1695,7 +1710,7 @@
   };
   
   // Send weapon skill type dice to the roller based on weapon skill select box
-  on('change:repeating_weapons:weapon_skill', function(eventInfo) {
+  on('change:repeating_weapons:weapon_skill', (eventInfo) => {
     const skill = eventInfo.newValue;
     let diceCalc = '';
     switch (skill){
@@ -1884,7 +1899,7 @@
     }
   };
 
-  on('change:repeating_current-crits:current_crit_number', function(eventInfo) {
+  on('change:repeating_current-crits:current_crit_number', (eventInfo) => {
     const critNumber = eventInfo.newValue;
     const critSeverity = critTable[critNumber].severity;
     const critType =  critTable[critNumber].type;
@@ -1898,7 +1913,7 @@
 
 
   // Heal/remove a critical wound
-  on('clicked:repeating_current-crits:healcrit', function(eventInfo) {
+  on('clicked:repeating_current-crits:healcrit', (eventInfo) => {
     const critButtonId = eventInfo.sourceAttribute;
     const critButtonIdLength = critButtonId.length;
     const critToHeal = critButtonId.slice(0, (critButtonIdLength-9));
@@ -1931,7 +1946,7 @@
   }
 
   // Change the power label based on the selected power name
-  on('change:repeating_force-powers:force-power-name', function(eventInfo){
+  on('change:repeating_force-powers:force-power-name', (eventInfo) => {
     const selectedPower = eventInfo.newValue;
     const displayName = forcePowerNames[selectedPower];
     setAttrs({'repeating_force-powers_force-power-name-display':displayName});
