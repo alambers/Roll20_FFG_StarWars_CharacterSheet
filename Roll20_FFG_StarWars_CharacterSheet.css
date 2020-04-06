@@ -848,14 +848,16 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   content: "L";
 }
 
-.sheet-weapon_critical_bonus {
+.sheet-weapon_critical_bonus,
+.sheet-weapon_damage_bonus {
   display: grid;
   grid-template-columns: 2fr 3fr;
   column-gap: 1em;
   align-items: center;
 }
 
-.sheet-from_vicious_text {
+.sheet-from_vicious_text,
+.sheet-from_superior_inferior_text {
   font-size: 0.85em;
   padding: 0 0.25em;
 }
