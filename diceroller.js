@@ -3912,7 +3912,7 @@ eote.process.rollEnemyCritical = function(diceObj)
 
 eote.process.rollRandomCritical = function(diceObj)
 {
-    var criticalBonus = findObjs({_type: "attribute",name: "critical-bonus",_characterid: diceObj.vars.characterID})[0];
+    var criticalBonus = findObjs({_type: "attribute",name: "critical-bonus-standalone",_characterid: diceObj.vars.characterID})[0];
     var bonus = 0;
     if (typeof criticalBonus !== 'undefined') {
         bonus = parseInt(criticalBonus.get('current'));

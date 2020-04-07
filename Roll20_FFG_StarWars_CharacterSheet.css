@@ -900,6 +900,27 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   align-items: center;
 }
 
+.sheet-weapon_bonus_text {
+  text-align: right;
+  padding: 0.25em;
+}
+
+.sheet-critical_damage_cell {
+  align-self: start;
+}
+
+.sheet-weapon_critical_bonus_vicious,
+.sheet-weapon_damage_bonus_superior,
+.sheet-weapon_damage_bonus_inferior {
+  display: none;
+}
+
+.sheet-weapon_critical_bonus_vicious:not([value="0"]) + div,
+.sheet-weapon_quality_superior_bonus_damage:not([value="0"]) + div,
+.sheet-weapon_quality_inferior_penalty_damage:not([value="0"]) + div {
+  display: grid;
+}
+
 .sheet-from_vicious_text,
 .sheet-from_superior_inferior_text {
   font-size: 0.85em;
@@ -962,6 +983,7 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 .sheet-weapon_qualities label {
   text-align: right;
   position: relative;
+  padding: 0.25em;
 }
 
 .sheet-weapon_info label::after,

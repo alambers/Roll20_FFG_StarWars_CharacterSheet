@@ -750,7 +750,7 @@
       <h3 data-i18n="roll_a_critical">Roll a Critical (for any target)</h3>
       <div class="rolla_critical">
         <label data-i18n="critical_bonus">Critical Bonus</label>
-        <input name="attr_critical-bonus" type="number" step="10" value="0" min="0" max="120" />
+        <input name="attr_critical-bonus-standalone" type="number" step="10" value="0" min="0" max="120" />
         <input name="attr_target-type" type="hidden" value="NPC" />
         <button type="roll" class="roll_crit_button" value="!eed characterID(@{character_id}) rollRandomCritical" data-i18n="roll_critical">Roll Critical</button>
       </div>
@@ -823,7 +823,7 @@
               <label data-i18n="critical">Critical</label>
               <input type="number" name="attr_weapon_critical" max="9" min="0" value="0" />
             </div>
-            <button name="roll_weapon" type="roll" value="!eed characterID(@{character_id}) label(Weapon:@{make_model}|Type:@{weapon_skill}|Damage:@{weapon_damage}|Critical:@{weapon_critical}|Range:@{weapon_range}|Qualities:@{weapon_qualities_list}) @{weapon_skill_value} @{weapon_condition} @{weapon_qualities_pool} @{dicePool} calculateDamage(@{weapon_damage}|@{weapon_critical}|@{weapon_damage_bonus}|@{weapon_critical_bonus})"></button>
+            <button name="roll_weapon" type="roll" value="!eed characterID(@{character_id}) label(Weapon:@{make_model}|Type:@{weapon_skill}|Damage:@{weapon_damage}|Critical:@{weapon_critical}|Range:@{weapon_range}|Qualities:@{weapon_qualities_list}) @{weapon_skill_value} @{weapon_condition} @{weapon_qualities_pool} @{dicePool} calculateDamage(@{weapon_damage}|@{weapon_critical}|@{weapon_damage_bonus_total}|@{weapon_critical_bonus_total}|@{weapon_quality_superior_bonus_damage})"></button>
             <div>
               <label data-i18n="encumbrance_abbr">Encum</label>
               <input type="number" name="attr_weapon_encumbrance" max="9" min="0" value="0" />
@@ -869,17 +869,65 @@
               <option value="unusableWeapon" data-i18n="major">Major</option>
               <option value="unusableWeapon" data-i18n="destroyed">Destroyed</option>
             </select>
-            <label data-i18n="critical_bonus">Critical Bonus</label>
-            <div class="weapon_critical_bonus">
-              <input name="attr_weapon_critical_bonus" type="number" step="10" value="0" min="0" max="200" />
-              <div><span name="attr_weapon_quality_vicious_crit_bonus"></span> <span data-i18n="from_vicious" class="from_vicious_text">from Vicious</span></div>
+            <label class="critical_damage_cell" data-i18n="critical_bonus">Critical Bonus</label>
+            <div class="critical_damage_cell">              
+              <div class="weapon_critical_bonus">
+                <input name="attr_weapon_critical_bonus" type="number" step="10" value="0" min="0" max="200" />
+                <div><span data-i18n="from_other">from Other</span><span class="icon_help"></span>
+                  <div class="help_info">
+                    <p>Include a critical bonus for this weapon from a source other than Vicious, such as a weapon attachment/mod or a talent. It is added to a roll when activating a critical injury with this weapon.</p>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" class="weapon_critical_bonus_vicious" name="attr_weapon_quality_vicious_crit_bonus" value="0" />
+              <div class="weapon_critical_bonus weapon_critical_bonus_vicious">
+                <div class="weapon_bonus_text">+<span name="attr_weapon_quality_vicious_crit_bonus"></span></div>
+                <div><span data-i18n="from_vicious">from Vicious</span><span class="icon_help"></span>
+                  <div class="help_info">
+                    <p>This shows the critical bonus added to the weapon due to a Vicious quality.  It is automatically added to a roll when activating a critical injury with this weapon.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="weapon_critical_bonus">
+                <input name="attr_weapon_critical_bonus_total" type="hidden" value="0" />
+                <div class="weapon_bonus_text">+<span name="attr_weapon_critical_bonus_total"></span></div>
+                <div><span data-i18n="total_bonus">Total Bonus</span></div>
+              </div>
+            </div>           
+            <label class="critical_damage_cell" data-i18n="damage_bonus:">Damage Bonus</label>
+            <div class="critical_damage_cell">        
+              <div class="weapon_damage_bonus">
+                <input name="attr_weapon_damage_bonus" type="number" value="0" min="-10" max="10" />
+                <div><span data-i18n="from_other">from Other</span><span class="icon_help"></span>
+                  <div class="help_info">
+                    <p>Include a damage bonus for this weapon from a source other than Superior or Inferior, such as a weapon attachment/mod or a talent. It is added to a roll when calculating damage with this weapon.</p>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" class="weapon_quality_superior_bonus_damage" name="attr_weapon_quality_superior_bonus_damage" value="0" />
+              <div class="weapon_damage_bonus weapon_damage_bonus_superior">
+                <div class="weapon_bonus_text">+<span name="attr_weapon_quality_superior_bonus_damage"></span></div>
+                <div><span data-i18n="from_superior">from Superior</span><span class="icon_help"></span>
+                  <div class="help_info">
+                    <p>This shows the damage bonus added to the weapon due to a Superior quality. It is automatically added to a roll when calculating damage with this weapon.</p>
+                  </div>
+                </div>
+              </div>              
+              <input type="hidden" class="weapon_quality_inferior_penalty_damage" name="attr_weapon_quality_inferior_penalty_damage" value="0" />
+              <div class="weapon_damage_bonus weapon_damage_bonus_inferior">
+                <div class="weapon_bonus_text">-<span name="attr_weapon_quality_inferior_penalty_damage"></span></div>
+                <div><span data-i18n="from_inferior">from Inferior</span><span class="icon_help"></span>
+                  <div class="help_info">
+                    <p>This shows the damage subtracted from the weapon due to an Inferior quality. It is automatically subtracted from a roll when calculating damage with this weapon.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="weapon_damage_bonus">                
+                <input name="attr_weapon_damage_bonus_total" type="hidden" value="0" />
+                <div class="weapon_bonus_text">+<span name="attr_weapon_damage_bonus_total"></span></div>
+                <div><span data-i18n="total_bonus">Total Bonus</span></div>
+              </div>
             </div>            
-            <label data-i18n="damage_bonus:">Damage Bonus</label>
-            <div class="weapon_damage_bonus">
-              <input name="attr_weapon_damage_bonus" type="number" value="0" min="-10" max="10" />
-              <div class="from_superior_inferior_text"><span name="attr_weapon_quality_superior_bonus_damage"></span><span name="attr_weapon_quality_inferior_penalty_damage"></span></div>
-            </div>
-            
           </div>
           <h3 class="weapon_qualities_header"><span data-i18n="weapon_qualities">Weapon Qualities</span> <span class="weapon_qualities_activation_icon"></span><span class="weapon_qualities_activation" data-i18n="two_advantage_to_activate">Two Advantage to activate unless otherwise noted</span></h3>
           <input type="hidden" name="attr_weapon_qualities_pool" value="@{weapon_quality_accurate_value}b @{weapon_quality_inaccurate_value}blk @{weapon_quality_cumbersome_penalty}p @{weapon_quality_inferior_penalty} @{weapon_quality_superior_bonus}" />
@@ -1002,7 +1050,6 @@
               </div>
             </label>
             <input type="hidden" name="attr_weapon_quality_inferior_penalty" value="" />
-            <input type="hidden" name="attr_weapon_quality_inferior_penalty_damage" value="" />
             <select name="attr_weapon_quality_inferior_value">
               <option data-i18n="no">No</option>
               <option data-i18n="yes">Yes</option>
@@ -1075,7 +1122,6 @@
               </div>
             </label>            
             <input type="hidden" name="attr_weapon_quality_superior_bonus" value="" />
-            <input type="hidden" name="attr_weapon_quality_superior_bonus_damage" value="" />
             <select name="attr_weapon_quality_superior_value">
               <option data-i18n="no">No</option>
               <option data-i18n="yes">Yes</option>
@@ -1085,7 +1131,6 @@
                 <p>When this weapon scores a Critical Injury or Hit, the character adds ten times the Vicious rating to the Critical roll. With Vicious 3, for example, the victim adds + 30 to his Critical Hit result.</p>
               </div>
             </label>
-            <input type="hidden" name="attr_weapon_quality_vicious_crit_bonus" value="0" />
             <input name="attr_weapon_quality_vicious_value" type="number" value="0" min="0" max="9" />
           </div>
           <h3 data-i18n="modifications">Modifications</h3>
@@ -1621,15 +1666,15 @@
   on('change:repeating_weapons:weapon_quality_inferior_value', (eventInfo) => {
     const inferior = eventInfo.newValue;
     if (inferior === 'Yes') {
-      getAttrs(['repeating_weapons_weapon_damage_bonus'], (values) => {
-        const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
-        setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus-1, 'repeating_weapons_weapon_quality_inferior_penalty':'1t', 'repeating_weapons_weapon_quality_inferior_penalty_damage':'-1 from Inferior'});
+      getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) => {
+        const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus_total);
+        setAttrs({'repeating_weapons_weapon_damage_bonus_total':damageBonus-1, 'repeating_weapons_weapon_quality_inferior_penalty':'1t', 'repeating_weapons_weapon_quality_inferior_penalty_damage':'1'});
       });
     }
     else {
-      getAttrs(['repeating_weapons_weapon_damage_bonus'], (values) =>  {
-        const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
-        setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus+1, 'repeating_weapons_weapon_quality_inferior_penalty':'', 'repeating_weapons_weapon_quality_inferior_penalty_damage':''});
+      getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) =>  {
+        const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus_total);
+        setAttrs({'repeating_weapons_weapon_damage_bonus_total':damageBonus+1, 'repeating_weapons_weapon_quality_inferior_penalty':'', 'repeating_weapons_weapon_quality_inferior_penalty_damage':''});
       });
     }
   });
@@ -1638,15 +1683,15 @@
   on('change:repeating_weapons:weapon_quality_superior_value', (eventInfo) => {
     const superior = eventInfo.newValue;
     if (superior === 'Yes') {
-      getAttrs(['repeating_weapons_weapon_damage_bonus'], (values) =>  {
-        const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
-        setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus+1, 'repeating_weapons_weapon_quality_superior_bonus':'1a', 'repeating_weapons_weapon_quality_superior_bonus_damage':'+1 from Superior'});
+      getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) =>  {
+        const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus_total);
+        setAttrs({'repeating_weapons_weapon_damage_bonus_total':damageBonus+1, 'repeating_weapons_weapon_quality_superior_bonus':'1a', 'repeating_weapons_weapon_quality_superior_bonus_damage':'1'});
       });
     }
     else {
-      getAttrs(['repeating_weapons_weapon_damage_bonus'], (values) =>  {
-        const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus);
-        setAttrs({'repeating_weapons_weapon_damage_bonus':damageBonus-1, 'repeating_weapons_weapon_quality_superior_bonus':'', 'repeating_weapons_weapon_quality_superior_bonus_damage':''});
+      getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) =>  {
+        const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus_total);
+        setAttrs({'repeating_weapons_weapon_damage_bonus_total':damageBonus-1, 'repeating_weapons_weapon_quality_superior_bonus':'', 'repeating_weapons_weapon_quality_superior_bonus_damage':''});
       });
     }
   });
@@ -1655,8 +1700,8 @@
   on('change:repeating_weapons:weapon_quality_vicious_value', (eventInfo) => {
     const viciousPrevious = parseInt(eventInfo.previousValue);
     const viciousNew = parseInt(eventInfo.newValue);
-    getAttrs(['repeating_weapons_weapon_critical_bonus'], (values) =>  {
-      const criticalBonus = parseInt(values.repeating_weapons_weapon_critical_bonus);
+    getAttrs(['repeating_weapons_weapon_critical_bonus_total'], (values) =>  {
+      const criticalBonus = parseInt(values.repeating_weapons_weapon_critical_bonus_total);
       const viciousPreviousBonus = parseInt(viciousPrevious*10);
       const viciousNewBonus = parseInt(viciousNew*10);
       let viciousBonus = Math.abs(parseInt(viciousNewBonus - viciousPreviousBonus));
@@ -1664,7 +1709,37 @@
         viciousBonus = -(viciousBonus);
       }
       const totalBonus = criticalBonus + viciousBonus;
-      setAttrs({'repeating_weapons_weapon_critical_bonus':totalBonus, 'repeating_weapons_weapon_quality_vicious_crit_bonus':viciousNew*10});
+      setAttrs({'repeating_weapons_weapon_critical_bonus_total':totalBonus, 'repeating_weapons_weapon_quality_vicious_crit_bonus':viciousNew*10});
+    });
+  });
+
+  // Other critical bonuses
+  on('change:repeating_weapons:weapon_critical_bonus', (eventInfo) => {
+    const bonusPrevious = parseInt(eventInfo.previousValue);
+    const bonusNew = parseInt(eventInfo.newValue);
+    getAttrs(['repeating_weapons_weapon_critical_bonus_total'], (values) =>  {
+      const currentBonus = parseInt(values.repeating_weapons_weapon_critical_bonus_total);
+      let newBonus = Math.abs(parseInt(bonusNew - bonusPrevious));
+      if (bonusPrevious > bonusNew) {
+        newBonus = -(newBonus);
+      }
+      const totalBonus = currentBonus + newBonus;
+      setAttrs({'repeating_weapons_weapon_critical_bonus_total':totalBonus});
+    });
+  });
+
+  // Other damage bonuses
+  on('change:repeating_weapons:weapon_damage_bonus', (eventInfo) => {
+    const bonusPrevious = parseInt(eventInfo.previousValue);
+    const bonusNew = parseInt(eventInfo.newValue);
+    getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) =>  {
+      const currentBonus = parseInt(values.repeating_weapons_weapon_damage_bonus_total);
+      let newBonus = Math.abs(parseInt(bonusNew - bonusPrevious));
+      if (bonusPrevious > bonusNew) {
+        newBonus = -(newBonus);
+      }
+      const totalBonus = currentBonus + newBonus;
+      setAttrs({'repeating_weapons_weapon_damage_bonus_total':totalBonus});
     });
   });
   
