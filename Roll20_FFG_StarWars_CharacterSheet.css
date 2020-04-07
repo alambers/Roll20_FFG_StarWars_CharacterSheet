@@ -1026,15 +1026,11 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   text-align: center;
 }
 
-.sheet-force_rating_roll {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  column-gap: 5em;
-  margin-bottom: 2em;
-  align-items: center;
+.sheet-force_rating {
+
 }
 
-.sheet-force_rating_roll label {
+.sheet-force_rating label {
   background: rgb(120,17,20);
   background: radial-gradient(circle, rgba(120,17,20,1) 0%, rgba(103,0,3,1) 62%);
   color: #ffffff;
@@ -1047,7 +1043,7 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   border-radius: 1em;
 }
 
-.sheet-force_rating_roll input {
+.sheet-force_rating input {
   padding: 0.5em;
   font-size: 1.5em;
   text-align: center;
@@ -1055,15 +1051,24 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   border-radius: 0.5em;
 }
 
-.sheet-force_rating_roll button.roll_force_die {
+.sheet-force-power-roll {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2em;
+  align-items: center;
+  padding-bottom: 2em;
+}
+
+.sheet-force-power button.roll_force_die {
   margin: 0;
   font-size: 1.5em;
   padding: 0.5em;
   border: 3px solid #354457;
   border-radius: 0.5em;
+  width: 100%;
 }
 
-.sheet-force_rating_roll button[type="roll"].roll_force_die::before {
+.sheet-force-power button[type="roll"].roll_force_die::before {
   font-family: "dicefontd12";
   content: "0";
   margin-right: 0.25em;

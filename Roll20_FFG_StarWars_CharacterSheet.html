@@ -1159,42 +1159,41 @@
   <div class="force">
     <h2 data-i18n="force_powers">Force Powers</h2>
     <div class="force_powers section">
-      <div class="force_rating_roll">
-        <div></div>
-        <div>          
-          <label data-i18n="force_rating">Force Rating</label>
-          <input type="number" name="attr_force_rating" min="0" max="9" value="0" />
-        </div>
-        <div>
-          <button type="roll" class="roll_force_die" name="roll_force_die" value="!eed characterID(@{character_id}) label(Dice:Rolling The Schwartz) @{force_rating}w" data-i18n="roll_force_die">Roll Force Die</button>
-        </div>
-        <div></div>
+      <div class="force_rating">
+        <label data-i18n="force_rating">Force Rating</label>
+        <input type="number" name="attr_force_rating" min="0" max="9" value="0" />
       </div>      
       <fieldset class="repeating_force-powers">
         <div class="force-power">
+          <input type="hidden" name="attr_force-power-name-display" value="Force Die" />
           <h3><span name="attr_force-power-name-display"></span></h3>
-          <select name="attr_force-power-name">
-            <option value="alter">Alter</option>
-            <option value="battle_meditation">Battle Meditation</option>
-            <option value="bind">Bind</option>
-            <option value="conjure">Conjure</option>
-            <option value="ebb-flow">Ebb / Flow</option>
-            <option value="endure">Endure</option>
-            <option value="enhance">Enhance</option>
-            <option value="farsight">Farsight</option>
-            <option value="foresee">Foresee</option>
-            <option value="heal-harm">Heal / Harm</option>
-            <option value="imbue">Imbue</option>
-            <option value="influence">Influence</option>
-            <option value="manipulate">Manipulate</option>
-            <option value="misdirect">Misdirect</option>
-            <option value="move">Move</option>
-            <option value="protect-unleash">Protect / Unleash</option>
-            <option value="seek">Seek</option>
-            <option value="sense">Sense</option>
-            <option value="supress">Supress</option>
-            <option value="wardes-foresight">Warde's Foresight</option>
-          </select>
+          <div class="force-power-roll">
+            <select name="attr_force-power-name">
+              <option value="alter">Alter</option>
+              <option value="battle_meditation">Battle Meditation</option>
+              <option value="bind">Bind</option>
+              <option value="conjure">Conjure</option>
+              <option value="ebb-flow">Ebb / Flow</option>
+              <option value="endure">Endure</option>
+              <option value="enhance">Enhance</option>
+              <option value="farsight">Farsight</option>
+              <option value="foresee">Foresee</option>
+              <option value="heal-harm">Heal / Harm</option>
+              <option value="imbue">Imbue</option>
+              <option value="influence">Influence</option>
+              <option value="manipulate">Manipulate</option>
+              <option value="misdirect">Misdirect</option>
+              <option value="move">Move</option>
+              <option value="protect-unleash">Protect / Unleash</option>
+              <option value="seek">Seek</option>
+              <option value="sense">Sense</option>
+              <option value="supress">Supress</option>
+              <option value="wardes-foresight">Warde's Foresight</option>
+            </select>
+            <div>
+              <button type="roll" class="roll_force_die" name="roll_force_die" value="!eed characterID(@{character_id}) label(Dice:@{force-power-name-display}) @{force_rating}w">Roll <span name="attr_force-power-name-display"></span></button>
+            </div>
+          </div>
           <div class="force-power-levels">
             <div>
               <label data-i18n="control">Control</label>
