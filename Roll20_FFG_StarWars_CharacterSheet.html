@@ -747,13 +747,14 @@
     </div>
     <h2 data-i18n="criticals">Criticals</h2>
     <div class="criticals section">
-      <h3 data-i18n="roll_critical">Roll Critical</h3>
+      <h3 data-i18n="roll_a_critical">Roll a Critical (for any target)</h3>
       <div class="rolla_critical">
         <label data-i18n="critical_bonus">Critical Bonus</label>
-        <input name="attr_critical_bonus" type="number" step="10" value="0" min="0" max="200" />
-        <button type="roll" class="roll_crit_button" value="" data-i18n="roll_critical">Roll Critical</button>
+        <input name="attr_critical-bonus" type="number" step="10" value="0" min="0" max="120" />
+        <input name="attr_target-type" type="hidden" value="NPC" />
+        <button type="roll" class="roll_crit_button" value="!eed characterID(@{character_id}) rollRandomCritical" data-i18n="roll_critical">Roll Critical</button>
       </div>
-      <h3 data-i18n="current_critical_injuries">Current Critical Injuries</h3>
+      <h3 data-i18n="your_current_critical_injuries">Your Current Critical Injuries</h3>
       <fieldset class="repeating_current-crits">
         <input class="current_crit_severity_input" type="hidden" name="attr_current_crit_severity" value="" />
         <div class="current_crit">
