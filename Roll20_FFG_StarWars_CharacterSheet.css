@@ -31,6 +31,48 @@ Grey Green    - #97ABA9
   margin-bottom: 2em;
 }
 
+/* Font size selector */
+
+input[name="attr_settings_font_size"][value="8"] + .sheet-character_sheet {
+  font-size: 8px;
+}
+
+input[name="attr_settings_font_size"][value="10"] + .sheet-character_sheet {
+  font-size: 10px;
+}
+
+input[name="attr_settings_font_size"][value="12"] + .sheet-character_sheet {
+  font-size: 12px;
+}
+
+input[name="attr_settings_font_size"][value="14"] + .sheet-character_sheet {
+  font-size: 14px;
+}
+
+input[name="attr_settings_font_size"][value="16"] + .sheet-character_sheet {
+  font-size: 16px;
+}
+
+input[name="attr_settings_font_size"][value="18"] + .sheet-character_sheet {
+  font-size: 18px;
+}
+
+input[name="attr_settings_font_size"][value="20"] + .sheet-character_sheet {
+  font-size: 20px;
+}
+
+input[name="attr_settings_font_size"][value="22"] + .sheet-character_sheet {
+  font-size: 22px;
+}
+
+input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
+  font-size: 24px;
+}
+
+
+
+
+
 *,
 *::before,
 *::after {
@@ -358,7 +400,7 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 
 .sheet-tab_navigation {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   margin: 2em 0;
 }
 
@@ -402,7 +444,8 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 .sheet-equipment,
 .sheet-talents,
 .sheet-force,
-.sheet-settings {
+.sheet-settings,
+.sheet-settings-gm {
 	display: none;
 }
 
@@ -410,15 +453,16 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 .sheet-tabstoggle[value="combat"] ~ div.sheet-combat,
 .sheet-tabstoggle[value="equipment"] ~ div.sheet-equipment,
 .sheet-tabstoggle[value="talents"] ~ div.sheet-talents,
-.sheet-tabstoggle[value="force"] ~ div.sheet-force {
+.sheet-tabstoggle[value="force"] ~ div.sheet-force,
+.sheet-tabstoggle[value="settings"] ~ div.sheet-settings {
 	display: block;
 }
 
-.sheet-tab_navigation [type=radio] {
+.sheet-tab_navigation [type="radio"] {
   display: none;
 }
 
-.sheet-tab_navigation [type=radio]:checked ~ button {
+.sheet-tab_navigation [type="radio"]:checked ~ button {
   background: rgb(96,124,159);
   background: radial-gradient(circle, rgba(96,124,159,1) 0%, rgba(53,68,87,1) 100%);
 }
@@ -529,7 +573,7 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 
 .sheet-skill {
   display: grid;
-  grid-template-columns: 1fr 8em 4em 3em 10em 6em 3em;
+  grid-template-columns: 1fr 8em 4em 4em 10em 6em 3em;
   column-gap: 1em;
   padding: 0.5em 0;
   border-bottom: 1px dotted #aaaaaa;
@@ -672,7 +716,7 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   font-size: 1.5em;
   font-family: "dicefontd12";
   color: #555555;
-  padding: 0.5em;
+  padding: 0.25em;
   cursor: pointer;
 }
 
@@ -1081,21 +1125,33 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 
 /* GM Settings */
 
-.sheet-settings_result_suggestions {
+
+input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet-settings-gm {
+  display: block;
+}
+
+.sheet-settings_grid {
   display: grid;
   grid-template-columns: 1fr 2fr;
   column-gap: 1em;
   row-gap: 1em;
   padding: 2em;
-  background-color: #eaeaea;
-  border-radius: 0 0 1em 1em;
   align-items: center;
 }
 
-.sheet-settings_result_suggestions input {
-  padding: 0.25em;
+.sheet-settings_grid input {
+  padding: 0.5em;
   margin: 0;
-  height: 100%;
+  font-size: 1.25em;
+  border-radius: 0.5em;
+}
+
+.sheet-settings_grid label {
+  text-align: right;
+}
+
+.sheet-settings_grid label::after {
+  content: ':';
 }
 
 

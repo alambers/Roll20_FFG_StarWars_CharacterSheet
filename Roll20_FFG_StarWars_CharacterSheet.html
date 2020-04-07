@@ -1,7 +1,7 @@
 <!--Detects a Player or GM sheet; use to show/hide elements with CSS-->
 <input type="radio" name="attr_gmdicepool" class="sheet-player" value="1" checked="checked" style="display:none">
 <input type="radio" name="attr_gmdicepool" class="sheet-gm" value="2" style="display:none">
-
+<input type="hidden" name="attr_settings_font_size" value="16" />
 <div class="character_sheet">
   <div class="pools">
     <h2 data-i18n="dice_pool">Dice Pool</h2>
@@ -159,9 +159,13 @@
       <input type="radio" name="attr_navSelection" value="force" class="navSelection_radio" />
       <button type="action" name="act_force"><span data-i18n="the_force">The Force</span></button>
     </div>
+    <div>
+      <input type="radio" name="attr_navSelection" value="settings" class="navSelection_radio" />
+      <button type="action" name="act_settings"><span data-i18n="settings">Settings</span></button>
+    </div>
   </div>
-  <input type="hidden" class="sheet-tabstoggle" name="attr_sheetTab"  value="skills" />
-  <div class="sheet-skills">
+  <input type="hidden" class="tabstoggle" name="attr_sheetTab"  value="skills" />
+  <div class="skills">
     <h2 data-i18n="characteristics">Characteristics</h2>
     <div class="characteristics section">
       <div>
@@ -713,7 +717,7 @@
       </div>
     </div>
   </div>
-  <div class="sheet-combat">
+  <div class="combat">
     <h2 data-i18n="initiative">Initiative</h2>
     <div class="initiative section">
       <div class="skill skill_cool">          
@@ -1123,7 +1127,7 @@
       </div>
     </div>   
   </div>
-  <div class="sheet-equipment">
+  <div class="equipment">
     <h2 data-i18n="gear">Gear</h2>
     <div class="gear section">
       <fieldset class="repeating_gear">
@@ -1137,7 +1141,7 @@
       </fieldset>
     </div>  
   </div>
-  <div class="sheet-talents">
+  <div class="talents">
     <h2 data-i18n="non_combat_talents">Non-combat Talents</h2>
     <div class="non_combat_talents section">
       <fieldset class="repeating_non-combat-talents">
@@ -1151,7 +1155,7 @@
       </fieldset>
     </div>   
   </div>
-  <div class="sheet-force">
+  <div class="force">
     <h2 data-i18n="force_powers">Force Powers</h2>
     <div class="force_powers section">
       <div class="force_rating_roll">
@@ -1226,7 +1230,16 @@
     </div>    
   </div>
   <!-- General Settings -->
-  <div class="sheet-settings">
+  <div class="settings">
+    <h2 data-i18n="general_settings">General Settings</h2>
+    <div class="settings_grid section">
+      <label data-i18n="change_font_size_zoom">Change font size / zoom</label>
+      <input type="number" name="attr_settings_font_size_selector" min="8" max="24" step="2" value="16" />
+    </div>    
+  </div>
+  <!-- End General Settings -->
+  <!-- GM Settings -->
+  <div class="settings-gm">
     <h2 data-i18n="roll_result_suggestions">Roll Result Suggestions</h2>
     <div class="settings_result_suggestions section">
       <div data-i18n="setting">Setting</div>
@@ -1436,7 +1449,7 @@
 <!-- Sheet Workers -->
 <script type="text/worker">
   /* Worker for section tabs */
-  const buttonlist = ['skills','combat','equipment','talents','force'];
+  const buttonlist = ['skills','combat','equipment','talents','force','settings'];
   buttonlist.forEach(button => {    
     on(`clicked:${button}`, () => {
       setAttrs({
@@ -1444,6 +1457,11 @@
         navSelection: button
       });
     });
+  });
+
+  /* Worker for font size */
+  on('change:settings_font_size_selector', (eventInfo) => {
+    setAttrs({'settings_font_size':eventInfo.newValue});
   });
   
   /* Workers for skill dice */
