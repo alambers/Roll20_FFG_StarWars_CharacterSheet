@@ -1720,6 +1720,9 @@
     getAttrs(['repeating_weapons_weapon_critical_bonus_total'], (values) =>  {
       const currentBonus = parseInt(values.repeating_weapons_weapon_critical_bonus_total);
       let newBonus = Math.abs(parseInt(bonusNew - bonusPrevious));
+      if (bonusPrevious === bonusNew) {
+        newBonus = bonusNew;   // Weird quirk in Roll20 - if the field isn't initiated with change, it will set the value to 1 regardless of the HTML value attribute; this is a workaround for that
+      }
       if (bonusPrevious > bonusNew) {
         newBonus = -(newBonus);
       }
@@ -1732,13 +1735,18 @@
   on('change:repeating_weapons:weapon_damage_bonus', (eventInfo) => {
     const bonusPrevious = parseInt(eventInfo.previousValue);
     const bonusNew = parseInt(eventInfo.newValue);
+    console.log(eventInfo);
     getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) =>  {
       const currentBonus = parseInt(values.repeating_weapons_weapon_damage_bonus_total);
       let newBonus = Math.abs(parseInt(bonusNew - bonusPrevious));
+      if (bonusPrevious === bonusNew) {
+        newBonus = bonusNew;   // Weird quirk in Roll20 - if the field isn't initiated with change, it will set the value to 1 regardless of the HTML value attribute; this is a workaround for that
+      }
       if (bonusPrevious > bonusNew) {
         newBonus = -(newBonus);
       }
       const totalBonus = currentBonus + newBonus;
+      console.log(currentBonus,newBonus);
       setAttrs({'repeating_weapons_weapon_damage_bonus_total':totalBonus});
     });
   });
