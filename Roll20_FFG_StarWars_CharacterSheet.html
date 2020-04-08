@@ -835,7 +835,7 @@
           </div>
           <div class="weapon_info">
             <label data-i18n="make_model">Make-Model</label>
-            <input type="text" name="attr_make_model" />
+            <input class="cell_width_3" type="text" name="attr_make_model" />
             <label data-i18n="skill">Skill</label>
             <select name="attr_weapon_skill">
               <optgroup label="Combat Skills" data-i18n-label="combat_skills">
@@ -852,6 +852,13 @@
                 <option value="Resilience" data-i18n="resilience">Resilience</option>
               </optgroup>
             </select>
+            <label><span name="attr_weapon_skill"></span></label>
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_weapon_skill_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_weapon_skill_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
             <input type="hidden" name="attr_weapon_skill_value" value="" />
             <label data-i18n="range">Range</label>
             <select name="attr_weapon_range">
@@ -1832,36 +1839,58 @@
   on('change:repeating_weapons:weapon_skill', (eventInfo) => {
     const skill = eventInfo.newValue;
     let diceCalc = '';
-    switch (skill){
-      case 'Brawl':
-        diceCalc = 'skill(@{brawl_rank}|@{brawn}|@{brawl_modifiers})';
-        break;
-      case 'Melee':
-        diceCalc = 'skill(@{melee_rank}|@{brawn}|@{melee_modifiers})';
-        break;
-      case 'Gunnery':
-        diceCalc = 'skill(@{gunnery_rank}|@{agility}|@{gunnery_modifiers})';
-        break;
-      case 'Ranged - Light':
-        diceCalc = 'skill(@{ranged-light_rank}|@{agility}|@{ranged-light_modifiers})';
-        break;
-      case 'Ranged - Heavy':
-        diceCalc = 'skill(@{ranged-heavy_rank}|@{agility}|@{ranged-heavy_modifiers})';
-        break;
-      case 'Lightsaber':
-        diceCalc = 'skill(@{lightsaber_rank}|@{lightsaber_characteristic_value}|@{lightsaber_modifiers})';
-        break;
-      case 'Mechanics':
-        diceCalc = 'skill(@{mechanics_rank}|@{intellect})';
-        break;
-      case 'Medicine':
-        diceCalc = 'skill(@{medicine_rank}|@{intellect})';
-        break;
-      case 'Resilience':
-        diceCalc = 'skill(@{resilience_rank}|@{brawn})';
-        break;
-    };
-    setAttrs({repeating_weapons_weapon_skill_value:diceCalc});
+    let yellowDice = 0;
+    let greenDice = 0;
+    getAttrs(['brawl_yd','brawl_gd','melee_yd','melee_gd','gunnery_yd','gunnery_gd','ranged-light_yd','ranged-light_gd','ranged-heavy_yd','ranged-heavy_gd','lightsaber_yd','lightsaber_gd','mechanics_yd','mechanics_gd','medicine_yd','medicine_gd','resilience_yd','resilience_gd'], (values) => {
+      switch (skill){
+        case 'Brawl':
+          diceCalc = 'skill(@{brawl_rank}|@{brawn}|@{brawl_modifiers})';
+          yellowDice = values.brawl_yd;
+          greenDice = values.brawl_gd;
+          break;
+        case 'Melee':
+          diceCalc = 'skill(@{melee_rank}|@{brawn}|@{melee_modifiers})';
+          yellowDice = values.melee_yd;
+          greenDice = values.melee_gd;
+          break;
+        case 'Gunnery':
+          diceCalc = 'skill(@{gunnery_rank}|@{agility}|@{gunnery_modifiers})';
+          yellowDice = values.gunnery_yd;
+          greenDice = values.gunnery_gd;
+          break;
+        case 'Ranged - Light':
+          diceCalc = 'skill(@{ranged-light_rank}|@{agility}|@{ranged-light_modifiers})';
+          yellowDice = values['ranged-light_yd'];
+          greenDice = values['ranged-light_gd'];
+          break;
+        case 'Ranged - Heavy':
+          diceCalc = 'skill(@{ranged-heavy_rank}|@{agility}|@{ranged-heavy_modifiers})';
+          yellowDice = values['ranged-heavy_yd'];
+          greenDice = values['ranged-heavy_gd'];
+          break;
+        case 'Lightsaber':
+          diceCalc = 'skill(@{lightsaber_rank}|@{lightsaber_characteristic_value}|@{lightsaber_modifiers})';
+          yellowDice = values.lightsaber_yd;
+          greenDice = values.lightsaber_gd;
+          break;
+        case 'Mechanics':
+          diceCalc = 'skill(@{mechanics_rank}|@{intellect})';
+          yellowDice = values.mechanics_yd;
+          greenDice = values.mechanics_gd;
+          break;
+        case 'Medicine':
+          diceCalc = 'skill(@{medicine_rank}|@{intellect})';
+          yellowDice = values.medicine_yd;
+          greenDice = values.medicine_gd;
+          break;
+        case 'Resilience':
+          diceCalc = 'skill(@{resilience_rank}|@{brawn})';
+          yellowDice = values.resilience_yd;
+          greenDice = values.resilience_gd;
+          break;
+      };
+      setAttrs({'repeating_weapons_weapon_skill_value':diceCalc,'repeating_weapons_weapon_skill_yd':yellowDice,'repeating_weapons_weapon_skill_gd':greenDice});
+    });
   });
 
   /* Workers for critical hits */
