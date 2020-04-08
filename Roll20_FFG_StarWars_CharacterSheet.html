@@ -823,7 +823,7 @@
               <label data-i18n="critical">Critical</label>
               <input type="number" name="attr_weapon_critical" max="9" min="0" value="0" />
             </div>
-            <button name="roll_weapon" type="roll" value="!eed characterID(@{character_id}) label(Weapon:@{make_model}|Type:@{weapon_skill}|Damage:@{weapon_damage}|Critical:@{weapon_critical}|Range:@{weapon_range}|Qualities:@{weapon_qualities_list}) @{weapon_skill_value} @{weapon_condition} @{weapon_qualities_pool} @{dicePool} calculateDamage(@{weapon_damage}|@{weapon_critical}|@{weapon_damage_bonus_total}|@{weapon_critical_bonus_total}|@{weapon_quality_superior_bonus_damage})"></button>
+            <button name="roll_weapon" type="roll" value="!eed characterID(@{character_id}) label(Weapon:@{make_model}|Type:@{weapon_skill}|Damage:@{weapon_damage}|Critical:@{weapon_critical}|Range:@{weapon_range}|Qualities:@{weapon_qualities_list}) @{weapon_skill_value} @{weapon_condition} @{weapon_qualities_pool} @{dicePool} calculateDamage(@{weapon_damage}|@{weapon_critical}|@{weapon_damage_bonus_total}|@{weapon_critical_bonus_total})"></button>
             <div>
               <label data-i18n="encumbrance_abbr">Encum</label>
               <input type="number" name="attr_weapon_encumbrance" max="9" min="0" value="0" />
@@ -888,9 +888,9 @@
                   </div>
                 </div>
               </div>
-              <div class="weapon_critical_bonus">
+              <div class="weapon_critical_bonus weapon_critical_bonus_total">
                 <input name="attr_weapon_critical_bonus_total" type="hidden" value="0" />
-                <div class="weapon_bonus_text">+<span name="attr_weapon_critical_bonus_total"></span></div>
+                <div class="weapon_bonus_text"><span name="attr_weapon_critical_bonus_total"></span></div>
                 <div><span data-i18n="total_bonus">Total Bonus</span></div>
               </div>
             </div>           
@@ -922,9 +922,9 @@
                   </div>
                 </div>
               </div>
-              <div class="weapon_damage_bonus">                
+              <div class="weapon_damage_bonus weapon_damage_bonus_total">                
                 <input name="attr_weapon_damage_bonus_total" type="hidden" value="0" />
-                <div class="weapon_bonus_text">+<span name="attr_weapon_damage_bonus_total"></span></div>
+                <div class="weapon_bonus_text"><span name="attr_weapon_damage_bonus_total"></span></div>
                 <div><span data-i18n="total_bonus">Total Bonus</span></div>
               </div>
             </div>            

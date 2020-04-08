@@ -921,6 +921,13 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   display: grid;
 }
 
+.sheet-weapon_critical_bonus_total,
+.sheet-weapon_damage_bonus_total {
+  border-top: 1px dotted #aaaaaa;
+  margin-top: 0.5em;
+  padding-top: 0.5em;
+}
+
 .sheet-from_vicious_text,
 .sheet-from_superior_inferior_text {
   font-size: 0.85em;
