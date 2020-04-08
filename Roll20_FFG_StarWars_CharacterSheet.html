@@ -1705,6 +1705,9 @@
       const viciousPreviousBonus = parseInt(viciousPrevious*10);
       const viciousNewBonus = parseInt(viciousNew*10);
       let viciousBonus = Math.abs(parseInt(viciousNewBonus - viciousPreviousBonus));
+      if (viciousPreviousBonus === viciousNewBonus) {
+        viciousBonus = viciousNewBonus;   // Weird quirk in Roll20 - if the field isn't initiated with change, it will set the value to 1 regardless of the HTML value attribute; this is a workaround for that
+      }
       if (viciousPreviousBonus > viciousNewBonus) {
         viciousBonus = -(viciousBonus);
       }
