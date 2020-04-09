@@ -1140,7 +1140,7 @@
             </label>
             <input name="attr_weapon_quality_vicious_value" type="number" value="0" min="0" max="9" />
           </div>
-          <h3 data-i18n="modifications">Modifications</h3>
+          <h3 data-i18n="modifications_notes">Modifications / Notes</h3>
           <textarea class="weapon_mods" name="attr_weapon_mods"></textarea>
         </div>
       </fieldset>          
@@ -1791,15 +1791,20 @@
     'weapon_quality_superior_value':'Superior',
     'weapon_quality_vicious_value':'Vicious'
   };
-  
-  let weaponQualities = [];
-  
+    
   // Update the quality list for display in the roll template based on adding/removing/updating weapon qualities
   for (const quality in qualitiesObject) {
     const qualityTitle = qualitiesObject[quality];
-    let qualityList = '';
     on('change:repeating_weapons:' + quality, (eventInfo) => {
+      getAttrs(['repeating_weapons_weapon_qualities_list'], (values) => {
+        const currentList = values.repeating_weapons_weapon_qualities_list;
+        let weaponQualities = currentList.split(',');
+        let qualityList = '';
       const qualityValue = eventInfo.newValue;
+      const inArrayNone = weaponQualities.findIndex(thisQuality => thisQuality.includes('None'));
+      if (inArrayNone > -1){
+        let removed = weaponQualities.splice(inArrayNone, 1);
+      }
       const inArray = weaponQualities.findIndex(thisQuality => thisQuality.includes(qualityTitle));
       if (inArray === -1){
         switch(qualityValue) {
@@ -1832,7 +1837,8 @@
       }
       qualityList = weaponQualities.join(', ');
       setAttrs({'repeating_weapons_weapon_qualities_list':qualityList}); 
-    })
+      });      
+    });
   };
   
   // Send weapon skill type dice to the roller based on weapon skill select box
