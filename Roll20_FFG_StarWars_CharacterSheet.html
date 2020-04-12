@@ -94,7 +94,7 @@
       <label data-i18n="soak" class="stat_label">Soak</label>
       <div class="vital_stats_column">
         <div class="cell_width_2">
-          <input name="attr_body_stats_soak" class="soak" type="number" maxlength="1" min="1" max="9" value="0" />
+          <input name="attr_body_stats_soak" class="soak" type="number" maxlength="1" min="1" max="9" value="1" />
         </div>
       </div>
     </div>
@@ -115,7 +115,7 @@
       <label data-i18n="wounds" class="stat_label">Wounds</label>
       <div class="vital_stats_column">
         <div>            
-          <input name="attr_body_stats_wounds_threshold" class="wounds_threshold" type="number" maxlength="2" min="1" max="99" value="0" />
+          <input name="attr_body_stats_wounds_threshold" class="wounds_threshold" type="number" maxlength="2" min="1" max="99" value="1" />
           <label data-i18n="threshold" class="threshold_label">Threshold</label>
         </div>
         <div>            
@@ -128,7 +128,7 @@
       <label data-i18n="strain" class="stat_label">Strain</label>
       <div class="vital_stats_column">
         <div>            
-          <input name="attr_body_stats_strain_threshold" class="strain_threshold" type="number" maxlength="2" min="1" max="99" value="0" />
+          <input name="attr_body_stats_strain_threshold" class="strain_threshold" type="number" maxlength="2" min="1" max="99" value="1" />
           <label data-i18n="threshold" class="threshold_label">Threshold</label>
         </div>
         <div>            
@@ -169,27 +169,27 @@
     <h2 data-i18n="characteristics">Characteristics</h2>
     <div class="characteristics section">
       <div>
-        <input name="attr_brawn" class="characteristics_brawn" type="number" min="1" max="7" value="1" />
+        <input name="attr_brawn" class="characteristics_brawn" type="number" min="1" max="7" value="0" />
         <label data-i18n="brawn">Brawn</label>
       </div>
       <div>
-        <input name="attr_agility" class="characteristics_agility" type="number" min="1" max="7" value="1" />
+        <input name="attr_agility" class="characteristics_agility" type="number" min="1" max="7" value="0" />
         <label data-i18n="agility">Agility</label>
       </div>
       <div>
-        <input name="attr_intellect" class="characteristics_intellect" type="number" min="1" max="7" value="1" />
+        <input name="attr_intellect" class="characteristics_intellect" type="number" min="1" max="7" value="0" />
         <label data-i18n="intellect">Intellect</label>
       </div>
       <div>
-        <input name="attr_cunning" class="characteristics_cunning" type="number" min="1" max="7" value="1" />
+        <input name="attr_cunning" class="characteristics_cunning" type="number" min="1" max="7" value="0" />
         <label data-i18n="cunning">Cunning</label>
       </div>
       <div>
-        <input name="attr_willpower" class="characteristics_willpower" type="number" min="1" max="7" value="1" />
+        <input name="attr_willpower" class="characteristics_willpower" type="number" min="1" max="7" value="0" />
         <label data-i18n="willpower">Willpower</label>
       </div>
       <div>
-        <input name="attr_presence" class="characteristics_presence" type="number" min="1" max="7" value="1" />
+        <input name="attr_presence" class="characteristics_presence" type="number" min="1" max="7" value="0" />
         <label data-i18n="presence">Presence</label>
       </div>
     </div>
@@ -571,7 +571,7 @@
         <div class="skill">          
           <label data-i18n="lightsaber">Lightsaber</label>
           <select name="attr_lightsaber_characteristic">
-            <option data-i18n="brawn" value="brawn">Brawn</option>
+            <option data-i18n="brawn" value="brawn" selected="selected">Brawn</option>
             <option data-i18n="agility" value="agility">Agility</option>
             <option data-i18n="intellect" value="intellect">Intellect</option>
             <option data-i18n="cunning" value="cunning">Cunning</option>
@@ -1633,8 +1633,8 @@
     const rankAttr = skill+'_rank';
     getAttrs([rankAttr, 'lightsaber_characteristic', 'lightsaber_characteristic_value'], (values) => {
       const lightsaberStat = values.lightsaber_characteristic;
-      const lightsaberValue = values.lightsaber_characteristic_value;
-      let newLightSaberValue = lightsaberValue;
+      const lightsaberValue = isNaN(values.lightsaber_characteristic_value) ? 1 : parseInt(values.lightsaber_characteristic_value);
+      let newLightSaberValue = isNaN(lightsaberValue) ? 1 : lightsaberValue;
       if (stat === lightsaberStat) {
         newLightSaberValue = statValue;
       }
@@ -2138,6 +2138,13 @@
     "wardes-foresight":"Warde's Foresight"
   }
 
+  // Change the power label based on the selected power name
+  on('change:repeating_force-powers:force-power-name', (eventInfo) => {
+    const selectedPower = eventInfo.newValue;
+    const displayName = forcePowerNames[selectedPower];
+    setAttrs({'repeating_force-powers_force-power-name-display':displayName});
+  });
+
   /* Calculate attachment hard points and subtract from the total */
 
   on('change:repeating_weapons:mod1_hp change:repeating_weapons:mod2_hp change:repeating_weapons:mod3_hp change:repeating_weapons:mod4_hp change:repeating_weapons:mod5_hp', (eventInfo) => {
@@ -2150,6 +2157,27 @@
       const newHp = weaponHp + (previousHpTotal - hpTotal);
       const isNegative = newHp < 0 ? 'true' : 'false';
       setAttrs({'repeating_weapons_weapon_hard_points':newHp, 'repeating_weapons_weapon_mods_negative':isNegative});
+    });
+  });
+
+  /* Initialize Stats with a change when the sheet is opened in order to trigger other workers */
+  
+  const statList = [
+    'brawn',
+    'agility',
+    'intellect',
+    'cunning',
+    'willpower',
+    'presence'
+  ];
+
+  statList.forEach((stat) => {
+    on('sheet:opened', () => {    
+      getAttrs([stat], (values) => {
+        const thisStat = isNaN(values[stat]) ? 1 : parseInt(values[stat]);
+        const statValue = thisStat > 0 ? thisStat : 1;
+        setAttrs({[stat]:statValue});
+      });
     });
   });
 </script>
