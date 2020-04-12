@@ -1140,7 +1140,46 @@
             </label>
             <input name="attr_weapon_quality_vicious_value" type="number" value="0" min="0" max="9" />
           </div>
-          <h3 data-i18n="modifications_notes">Modifications / Notes</h3>
+          <h3><span data-i18n="attachments_mods">Attachments / Mods</span></h3>
+          <input class="weapon_mods_negative" type="hidden" name="attr_weapon_mods_negative" value="false" />
+          <div class="weapon_mods_negative_message">The total hard points for attachments has exceeded the weapon's available hard points.</div>
+          <div class="attachments_mods_container">
+            <div class="weapon_mods_table_header">
+              <div data-i18n="name">Name</div>
+              <div><span data-i18n="hp">HP</span><span class="icon_help"></span>
+                <div class="help_info">
+                  <p>The number of hard points is subtracted from the available weapon hard points above.  Make sure the weapon hard points are set before adding attachments.</p>
+                </div>
+              </div>  
+              <div data-i18n="benefit">Benefit</div>
+            </div>
+            <div class="weapon_mod">
+              <input type="text" name="attr_mod1_name" value="" />
+              <input type="number" name="attr_mod1_hp" min="0" max="5" value="0" />
+              <textarea name="attr_mod1_description"></textarea>
+            </div>
+            <div class="weapon_mod">
+              <input type="text" name="attr_mod2_name" value="" />
+              <input type="number" name="attr_mod2_hp" min="0" max="5" value="0" />
+              <textarea name="attr_mod2_description"></textarea>
+            </div>
+            <div class="weapon_mod">
+              <input type="text" name="attr_mod3_name" value="" />
+              <input type="number" name="attr_mod3_hp" min="0" max="5" value="0" />
+              <textarea name="attr_mod3_description"></textarea>
+            </div>
+            <div class="weapon_mod">
+              <input type="text" name="attr_mod4_name" value="" />
+              <input type="number" name="attr_mod4_hp" min="0" max="5" value="0" />
+              <textarea name="attr_mod4_description"></textarea>
+            </div>
+            <div class="weapon_mod">
+              <input type="text" name="attr_mod5_name" value="" />
+              <input type="number" name="attr_mod5_hp" min="0" max="5" value="0" />
+              <textarea name="attr_mod5_description"></textarea>
+            </div>           
+          </div>
+          <h3 data-i18n="notes">Notes</h3>
           <textarea class="weapon_mods" name="attr_weapon_mods"></textarea>
         </div>
       </fieldset>          
@@ -2099,11 +2138,19 @@
     "wardes-foresight":"Warde's Foresight"
   }
 
-  // Change the power label based on the selected power name
-  on('change:repeating_force-powers:force-power-name', (eventInfo) => {
-    const selectedPower = eventInfo.newValue;
-    const displayName = forcePowerNames[selectedPower];
-    setAttrs({'repeating_force-powers_force-power-name-display':displayName});
+  /* Calculate attachment hard points and subtract from the total */
+
+  on('change:repeating_weapons:mod1_hp change:repeating_weapons:mod2_hp change:repeating_weapons:mod3_hp change:repeating_weapons:mod4_hp change:repeating_weapons:mod5_hp', (eventInfo) => {
+    getAttrs(['repeating_weapons_weapon_hard_points','repeating_weapons_mod1_hp','repeating_weapons_mod2_hp','repeating_weapons_mod3_hp','repeating_weapons_mod4_hp','repeating_weapons_mod5_hp'], (values) => {
+      const weaponHp = parseInt(values.repeating_weapons_weapon_hard_points);
+      const hpTotal = (parseInt(values.repeating_weapons_mod1_hp)) + (parseInt(values.repeating_weapons_mod2_hp)) + (parseInt(values.repeating_weapons_mod3_hp)) + (parseInt(values.repeating_weapons_mod4_hp)) + (parseInt(values.repeating_weapons_mod5_hp));
+      let hpDifference = Math.abs(eventInfo.previousValue - eventInfo.newValue);
+      hpDifference = eventInfo.previousValue > eventInfo.newValue ? -(hpDifference) : hpDifference;
+      const previousHpTotal = hpTotal - hpDifference;
+      const newHp = weaponHp + (previousHpTotal - hpTotal);
+      const isNegative = newHp < 0 ? 'true' : 'false';
+      setAttrs({'repeating_weapons_weapon_hard_points':newHp, 'repeating_weapons_weapon_mods_negative':isNegative});
+    });
   });
 </script>
 <!-- End Sheet Workers -->

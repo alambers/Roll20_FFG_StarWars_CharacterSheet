@@ -31,6 +31,10 @@ Grey Green    - #97ABA9
   margin-bottom: 2em;
 }
 
+.repcontrol {
+  margin-top: 1em;
+}
+
 /* Font size selector */
 
 input[name="attr_settings_font_size"][value="8"] + .sheet-character_sheet {
@@ -69,14 +73,54 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   font-size: 24px;
 }
 
-
-
-
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+/* Selectbox styles */
+.sheet-character_sheet select {
+	display: block;
+	font-size: 1em;
+	line-height: 1.3;
+	padding: .5em;
+  width: 100%;
+  height: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+	margin: 0;
+	border-radius: .25em;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #fff;
+	background-repeat: no-repeat, repeat;
+	background-position: right .7em top 50%, 0 0;
+	background-size: .65em auto, 100%;
+}
+.sheet-character_sheet select::-ms-expand {
+	display: none;
+}
+.sheet-character_sheet selects:hover {
+	border-color: #888;
+}
+
+.sheet-character_sheet select option {
+	font-weight:normal;
+}
+
+.sheet-character_sheet .sheet-select_wrapper {
+	position: relative;
+}
+
+.sheet-character_sheet .sheet-select_wrapper:after {
+  content: '▼';
+  font-size: 0.75em;
+  position: absolute;
+  top:1em;
+  right: 0.5em;
+  pointer-events: none;
 }
 
 .sheet-character_sheet h2 {
@@ -94,7 +138,7 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
 .sheet-character_sheet h3 {
   font-size: 1.2em;
   font-weight: 700;
-  margin: 0 -0.75em 0 -0.85em;
+  margin: 0 -0.85em 0 -0.75em;
   padding: 0.5em;
   border-bottom: 1px dotted #aaaaaa;
   background-color: #ccc;
@@ -128,13 +172,7 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   margin: 0;
 }
 
-.sheet-character_sheet select {
-  padding: 0.25em;
-  width: 100%;
-  height: 100%;
-  font-size: 1em;
-  margin: 0;
-}
+
 
 .sheet-icon_help::after {
   font-family: 'Pictos';
@@ -155,6 +193,15 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   content: 't';
   color: #74cddd;
   padding-left: 0.25em;
+}
+
+.sheet-icon_remove::after {
+  font-family: 'Pictos';
+  content: 'D';
+  color: #781114;
+  padding-left: 0.25em;
+  font-size: 1.25em;
+  cursor: pointer;
 }
 
 .sheet-help_info {
@@ -952,6 +999,85 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   align-items: center;
 }
 
+.sheet-weapon_mods_negative_message {
+  margin: 1em 0;
+  background-color: #B31D1D;
+  color: #ffffff;
+  padding: 1em;
+  display: none;
+}
+
+.sheet-weapon_mods_negative_message::before {
+  font-family: 'Pictos';
+  content: '!';
+  margin-right: 0.5em;
+}
+
+.sheet-weapon_mods_negative[value='true'] + .sheet-weapon_mods_negative_message {
+  display: block;
+}
+
+.sheet-weapon_mods_table_header {
+  display: grid;
+  grid-template-columns: 4fr 1fr 8fr;
+  column-gap: 1em;
+  padding: 1em 0 0.5em 0;
+  border-bottom: 1px dotted #aaaaaa;
+}
+
+.sheet-weapon_mods_table_header > * {
+  font-size: 0.85em;
+}
+
+.sheet-weapon_mods_table_header .sheet-icon_help:hover + .sheet-help_info {
+  display: block;
+  position: absolute;
+  z-index: 10;
+  background-color: #ffffff;
+  padding: 1em 2em;
+  min-width: 20em;
+  text-align: left;
+  border: 3px solid #354457;
+  border-radius: 0.5em;
+  line-height: 1.5;
+  margin-top: 0.75em;
+}
+
+.sheet-weapon_mods_table_header .sheet-icon_help:hover + .sheet-help_info::before {
+  content: "▲";
+  position: absolute;
+  top: 0%;
+  left: 0;
+  margin-top: -1.1em;
+}
+
+.sheet-weapon_mod {
+  display: grid;
+  grid-template-columns: 4fr 1fr 8fr;
+  column-gap: 1em;
+  padding: 1em 0 0.5em 0;
+  border-bottom: 1px dotted #aaaaaa;
+}
+
+.sheet-weapon_mod:last-child {
+  border: none;
+}
+
+.sheet-weapon_mod > * {
+  font-size: 0.85em;
+}
+
+.sheet-weapon_mod > textarea {
+  padding: 1em;
+  height: 6em;
+}
+
+.sheet-weapon_mod > input,
+.sheet-weapon_mod > select {
+  height: max-content;
+  font-size: 0.85em;
+}
+
 .sheet-character_sheet h3 span.sheet-weapon_qualities_activation_icon {
   background-image: url('https://imgsrv.roll20.net/?src=https%3A//i.imgur.com/Gav94H2.png');
   background-repeat: repeat-x;
@@ -976,6 +1102,7 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   margin-top: 1em;
   padding: 1em;
   align-items: center;
+  font-size: 0.85em;
 }
 
 .sheet-weapon_qualities input,
