@@ -94,7 +94,7 @@
       <label data-i18n="soak" class="stat_label">Soak</label>
       <div class="vital_stats_column">
         <div class="cell_width_2">
-          <input name="attr_body_stats_soak" class="soak" type="number" maxlength="1" min="1" max="9" value="1" />
+          <input name="attr_soak" class="soak" type="number" maxlength="1" min="1" max="9" value="1" />
         </div>
       </div>
     </div>
@@ -102,11 +102,11 @@
       <label data-i18n="defense" class="stat_label">Defense</label>
       <div class="vital_stats_column">
         <div>            
-          <input name="attr_body_stats_defense_ranged" type="number" min="0" max="9" value="0" />
+          <input name="attr_defense_ranged" type="number" min="0" max="9" value="0" />
           <label data-i18n="ranged" class="threshold_label">Ranged</label>
         </div>
         <div>            
-          <input name="attr_body_stats_defense_melee" type="number" min="0" max="9" value="0" />
+          <input name="attr_defense_melee" type="number" min="0" max="9" value="0" />
           <label data-i18n="melee" class="current_label">Melee</label>
         </div>
       </div>
@@ -115,11 +115,11 @@
       <label data-i18n="wounds" class="stat_label">Wounds</label>
       <div class="vital_stats_column">
         <div>            
-          <input name="attr_body_stats_wounds_threshold" class="wounds_threshold" type="number" maxlength="2" min="1" max="99" value="1" />
+          <input name="attr_wounds_threshold" class="wounds_threshold" type="number" maxlength="2" min="1" max="99" value="1" />
           <label data-i18n="threshold" class="threshold_label">Threshold</label>
         </div>
         <div>            
-          <input name="attr_body_stats_wounds_current" class="wounds_current" type="number" maxlength="2" min="0" max="99" value="0" />
+          <input name="attr_wounds_current" class="wounds_current" type="number" maxlength="2" min="0" max="99" value="0" />
           <label data-i18n="current" class="current_label">Current</label>
         </div>
       </div>        
@@ -128,11 +128,11 @@
       <label data-i18n="strain" class="stat_label">Strain</label>
       <div class="vital_stats_column">
         <div>            
-          <input name="attr_body_stats_strain_threshold" class="strain_threshold" type="number" maxlength="2" min="1" max="99" value="1" />
+          <input name="attr_strain_threshold" class="strain_threshold" type="number" maxlength="2" min="1" max="99" value="1" />
           <label data-i18n="threshold" class="threshold_label">Threshold</label>
         </div>
         <div>            
-          <input name="attr_body_stats_strain_current" class="strain_current" type="number" maxlength="2" min="0" max="99" value="0" />
+          <input name="attr_strain_current" class="strain_current" type="number" maxlength="2" min="0" max="99" value="0" />
           <label data-i18n="current" class="current_label">Current</label>
         </div>
       </div>        
@@ -1699,13 +1699,13 @@
   // Defensive
   on('change:repeating_weapons:weapon_quality_defensive_value', (eventInfo) => {
     const defensive = parseInt(eventInfo.newValue);
-    setAttrs({'body_stats_defense_melee':defensive});
+    setAttrs({'defense_melee':defensive});
   });
   
   // Deflection
   on('change:repeating_weapons:weapon_quality_deflection_value', (eventInfo) => {
     const deflection = parseInt(eventInfo.newValue);
-    setAttrs({'body_stats_defense_ranged':deflection});
+    setAttrs({'defense_ranged':deflection});
   });
   
   // Inferior
@@ -2178,6 +2178,19 @@
         const statValue = thisStat > 0 ? thisStat : 1;
         setAttrs({[stat]:statValue});
       });
+    });
+  });
+
+  /* Calculate Soak */
+
+  on('change:brawn', (eventInfo) => {
+    getAttrs(['soak'], (values) => {
+      const currentSoak = parseInt(values.soak);
+      let brawnDifference = Math.abs(eventInfo.previousValue - eventInfo.newValue);
+      brawnDifference = eventInfo.previousValue > eventInfo.newValue ? -(brawnDifference) : brawnDifference;
+      const newSoak = currentSoak + brawnDifference;
+      console.log(currentSoak,brawnDifference,newSoak);
+      setAttrs({'soak':newSoak});
     });
   });
 </script>
