@@ -531,9 +531,17 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   width: 100%;
 }
 
-.sheet-vital_stats input {
+.sheet-vital_stats input,
+.sheet-vital_stats span {
   font-size: 1.5em;
   border: none;
+}
+
+.sheet-vital_stats span {
+  text-align: center;
+  padding: 0.5em;
+  background-color: #ffffff;
+  display: block;
 }
 
 .sheet-vital_stats_column {
@@ -543,7 +551,8 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   column-gap: 0.5em;
 }
 
-.sheet-vital_stats input {
+.sheet-vital_stats input,
+.sheet-vital_stats span {
   width: 100%;
   border-radius: 0.5em;
 }
@@ -1043,7 +1052,9 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   margin-top: 0.75em;
 }
 
-.sheet-weapon_mods_table_header .sheet-icon_help:hover + .sheet-help_info::before {
+.sheet-weapon_mods_table_header .sheet-icon_help:hover + .sheet-help_info::before,
+.sheet-armor_heading .sheet-icon_help:hover + .sheet-help_info::before
+{
   content: "▲";
   position: absolute;
   top: 0%;
@@ -1144,6 +1155,7 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 .sheet-armor_heading {
   margin-top: 1em;
   border-bottom: 1px dotted #aaaaaa;
+  padding-bottom: 0.5em;
 }
 
 .sheet-armor_heading div {
