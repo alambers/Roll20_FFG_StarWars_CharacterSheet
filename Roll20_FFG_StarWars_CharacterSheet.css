@@ -172,8 +172,6 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   margin: 0;
 }
 
-
-
 .sheet-icon_help::after {
   font-family: 'Pictos';
   content: '?';
@@ -518,7 +516,7 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 
 .sheet-vital_stats {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   column-gap: 2em;
   padding: 1em;
 }
@@ -526,7 +524,7 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 .sheet-vital_stats label {
   padding: 0.5em;
   margin: 0;
-  font-size: 1em;
+  font-size: 0.75em;
   text-align: center;
   width: 100%;
 }
@@ -539,9 +537,14 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 
 .sheet-vital_stats span {
   text-align: center;
-  padding: 0.5em;
+  padding: 0.42em;
   background-color: #ffffff;
   display: block;
+}
+
+.sheet-vital_stats span.sheet-encumbrance_threshold {
+  background-color: #333333;
+  color: #ffffff;
 }
 
 .sheet-vital_stats_column {
@@ -570,7 +573,8 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   border-radius: 1em;
 }
 
-.sheet-vital_stats input.sheet-wounds_threshold {
+.sheet-vital_stats input.sheet-wounds_threshold,
+.sheet-vital_stats input.sheet-strain_threshold {
   background-color: #333333;
   color: #ffffff;
 }
@@ -579,13 +583,37 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   box-shadow: inset 0 0 0 5px #7CC48A;
 }
 
-.sheet-vital_stats input.sheet-strain_threshold {
-  background-color: #333333;
-  color: #ffffff;
-}
-
 .sheet-vital_stats input.sheet-strain_current {
   box-shadow: inset 0 0 0 5px #B31D1D;
+}
+
+.sheet-stat_label span {
+  display: inline;
+  font-size: 1em;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.sheet-stat_label .sheet-help_info {
+  color: #000000;
+  right: 3em;
+  max-width: 50em;
+}
+
+.sheet-stat_label .sheet-icon_help::after {
+  color: #aaaaaa;
+  margin-left: 0.25em;
+  font-size: 0.85em;
+}
+
+.sheet-stat_label .sheet-icon_help:hover + .sheet-help_info::before {
+  content: "▲";
+  position: absolute;
+  top: 0%;
+  left: 90%;
+  margin-top: -1.1em;
+  color: #000000;
 }
 
 /* Characteristics - Brawn, Agility, Intellect, Cunning, Willpower, Presence */
@@ -806,7 +834,7 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 }
 
 .sheet-rolla_critical button[type="roll"] {
-  padding: 1em;
+  padding: 0.25em;
 }
 
 .sheet-rolla_critical button[type="roll"]::before {

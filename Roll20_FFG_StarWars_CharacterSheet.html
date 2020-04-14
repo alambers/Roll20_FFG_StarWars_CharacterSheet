@@ -140,6 +140,25 @@
         </div>
       </div>        
     </div>
+    <div class="strain">
+      <label class="stat_label"><span data-i18n="encumbrance">Encumbrance</span><span class="icon_help"></span>
+        <div class="help_info">
+          <p>The Encumbrance threshold is calculated by Brawn + 5 + Container threshold.</p>
+          <p>The current Encumbrance takes into account weapons, armor, and other gear that have an Encumbrance stat set.  If things get out of sync, just reset this field to match what it should be.</p>
+        </div>
+      </label>
+      <div class="vital_stats_column">
+        <div>            
+          <input name="attr_encumbrance_threshold" class="encumbrance_threshold" type="hidden" value="1" />
+          <span class="encumbrance_threshold" name="attr_encumbrance_threshold"></span>
+          <label data-i18n="threshold" class="threshold_label">Threshold</label>
+        </div>
+        <div>            
+          <input name="attr_encumbrance_current" class="encumbrance_current" type="number" min="-10" max="30" value="0" />
+          <label data-i18n="current" class="current_label">Current</label>
+        </div>
+      </div>        
+    </div>
   </div>
   <div class="tab_navigation">
     <div>
@@ -2348,6 +2367,27 @@
           }
       }
       setAttrs({'armor_bonus_defense_ranged':newRanged, 'armor_bonus_defense_melee':newMelee, 'armor_bonus_soak':newSoak, 'armor_encumbrance': newEncum});
+    });
+  });
+
+  /* Calculate Encumbrance */
+
+  on('change:brawn', (eventInfo) => {
+    const newBrawn = parseInt(eventInfo.newValue);
+    const newEncumThreshold = newBrawn + 5;
+    setAttrs({'encumbrance_threshold':newEncumThreshold});
+  });
+
+  on('change:repeating_weapons:weapon_encumbrance change:armor_encumbrance', (eventInfo) => {
+    getAttrs(['encumbrance_current'], (values) => {
+      const previousEncum = parseInt(eventInfo.previousValue);
+      const newEncum = parseInt(eventInfo.newValue);
+      const currentEncum = parseInt(values.encumbrance_current);
+      let encumDifference = Math.abs(previousEncum - newEncum);
+      encumDifference = previousEncum > newEncum ? -(encumDifference) : encumDifference;
+      const setEncum = currentEncum + encumDifference;
+      setAttrs({'encumbrance_current':setEncum});
+      console.log(newEncum);
     });
   });
 </script>
