@@ -64,7 +64,7 @@
         </div>
       </div>
     </div>
-    <h2>Destiny Pool<button type="action" name="act_show_destiny_pool"><span name="attr_show_destiny_pool_label"></span></button></h2>    
+    <h2><span data-i18n="destiny_pool">Destiny Pool</span><button type="action" name="act_show_destiny_pool"><span name="attr_show_destiny_pool_label"></span></button></h2>    
     <input type="hidden" name="attr_show_destiny_pool_label" value="hide" />
     <input class="show_section" type="hidden" name="attr_show_destiny_pool" value="true" />
     <div class="destiny_pool section">
@@ -90,7 +90,9 @@
       </div>
     </div>
   </div>
-  <h2>Vital Stats</h2>
+  <h2><span data-i18n="vital_stats">Vital Stats</span><button type="action" name="act_show_vital_stats"><span name="attr_show_vital_stats_label"></span></button></h2>    
+  <input type="hidden" name="attr_show_vital_stats_label" value="hide" />
+  <input class="show_section" type="hidden" name="attr_show_vital_stats" value="true" />
   <div class="vital_stats section"> 
     <div class="soak">
       <label data-i18n="soak" class="stat_label">Soak</label>
@@ -190,7 +192,9 @@
   </div>
   <input type="hidden" class="tabstoggle" name="attr_sheetTab"  value="skills" />
   <div class="skills">
-    <h2 data-i18n="characteristics">Characteristics</h2>
+    <h2><span data-i18n="characteristics">Characteristics</span><button type="action" name="act_show_characteristics"><span name="attr_show_characteristics_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_characteristics_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_characteristics" value="true" />
     <div class="characteristics section">
       <div>
         <input name="attr_brawn" class="characteristics_brawn" type="number" min="1" max="7" value="0" />
@@ -217,7 +221,9 @@
         <label data-i18n="presence">Presence</label>
       </div>
     </div>
-    <h2>Skills</h2>
+    <h2><span data-i18n="skills">Skills</span><button type="action" name="act_show_skills"><span name="attr_show_skills_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_skills_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_skills" value="true" />
     <div class="skills_body section">
       <div class="skills_general">     
         <h3>General Skills</h3>
@@ -742,7 +748,9 @@
     </div>
   </div>
   <div class="combat">
-    <h2 data-i18n="initiative">Initiative</h2>
+    <h2><span data-i18n="initiative">Initiative</span><button type="action" name="act_show_initiative"><span name="attr_show_initiative_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_initiative_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_initiative" value="true" />
     <div class="initiative section">
       <div class="skill skill_cool">          
         <label class="cell_width_3" data-i18n="cool_if_prepared">Cool (if prepared)</label>
@@ -769,7 +777,9 @@
         <button class="roll_button" type="roll" name="attr_roll_init_vigilance" value="!eed characterID(@{character_id}) label(skill:Initiative Vigilance) @{vigilance_modifiers} @{init_vigilance_modifiers} skill(@{vigilance_rank}|@{willpower}|Vigilance) @{dicePool}"></button>
       </div>
     </div>
-    <h2 data-i18n="criticals">Criticals</h2>
+    <h2><span data-i18n="criticals">Criticals</span><button type="action" name="act_show_criticals"><span name="attr_show_criticals_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_criticals_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_criticals" value="true" />
     <div class="criticals section">
       <h3 data-i18n="roll_a_critical">Roll a Critical (for any target)</h3>
       <div class="rolla_critical">
@@ -833,7 +843,9 @@
         </div>
       </fieldset>      
     </div>
-    <h2 data-i18n="weapons">Weapons</h2>
+    <h2><span data-i18n="weapons">Weapons</span><button type="action" name="act_show_weapons"><span name="attr_show_weapons_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_weapons_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_weapons" value="true" />
     <div class="weapons section">
       <fieldset class="repeating_weapons">
         <div class="weapon">
@@ -1208,13 +1220,17 @@
         </div>
       </fieldset>          
     </div>
-    <h2 data-i18n="combat_talents">Combat Talents</h2>
+    <h2><span data-i18n="combat_talents">Combat Talents</span><button type="action" name="act_show_combat_talents"><span name="attr_show_combat_talents_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_combat_talents_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_combat_talents" value="true" />
     <div class="combat_talents section">
       <fieldset class="repeating_combat-talents">
         <div>Talent - calculate stat/skill enhancements if applicable</div>
       </fieldset>
     </div>
-    <h2 data-i18n="armor">Armor</h2>
+    <h2><span data-i18n="armor">Armor</span><button type="action" name="act_show_armor"><span name="attr_show_armor_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_armor_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_armor" value="true" />
     <div class="armor section">
       <div class="armor_item armor_heading">
         <div data-i18n="name">Name</div>
@@ -1271,13 +1287,17 @@
     </div>   
   </div>
   <div class="equipment">
-    <h2 data-i18n="gear">Gear</h2>
+    <h2><span data-i18n="gear">Armor</span><button type="action" name="act_show_gear"><span name="attr_show_gear_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_gear_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_gear" value="true" />
     <div class="gear section">
       <fieldset class="repeating_gear">
         <div>Gear - calculate stat/skill enhancements if applicable</div>
       </fieldset>
     </div>
-    <h2 data-i18n="cybernetics">Cybernetics</h2>
+    <h2><span data-i18n="cybernetics">Armor</span><button type="action" name="act_show_cybernetics"><span name="attr_show_cybernetics_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_cybernetics_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_cybernetics" value="true" />
     <div class="cybernetics section">
       <fieldset class="repeating_cybernetics">
         <div>Cybernetics - calculate stat/skill enhancements if applicable</div>
@@ -1285,13 +1305,17 @@
     </div>  
   </div>
   <div class="talents">
-    <h2 data-i18n="non_combat_talents">Non-combat Talents</h2>
+    <h2><span data-i18n="non_combat_talents">Armor</span><button type="action" name="act_show_non_combat_talents"><span name="attr_show_non_combat_talents_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_non_combat_talents_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_non_combat_talents" value="true" />
     <div class="non_combat_talents section">
       <fieldset class="repeating_non-combat-talents">
         <div>Non-combat Talent - calculate stat/skill enhancements if applicable</div>
       </fieldset>
     </div>
-    <h2 data-i18n="signature_abilities">Signature Abilities</h2>
+    <h2><span data-i18n="signature_abilities">Armor</span><button type="action" name="act_show_signature_abilities"><span name="attr_show_signature_abilities_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_signature_abilities_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_signature_abilities" value="true" />
     <div class="signature_abilities section">
       <fieldset class="repeating_signature-abilities">
         <div>Signature Ability - calculate stat/skill enhancements if applicable</div>
@@ -1299,7 +1323,9 @@
     </div>   
   </div>
   <div class="force">
-    <h2 data-i18n="force_powers">Force Powers</h2>
+    <h2><span data-i18n="force_powers">Armor</span><button type="action" name="act_show_force_powers"><span name="attr_show_force_powers_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_force_powers_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_force_powers" value="true" />
     <div class="force_powers section">
       <div class="force_rating">
         <label data-i18n="force_rating">Force Rating</label>
@@ -2394,12 +2420,30 @@
   });
 
   /* Collapse sections */
-  on('clicked:show_destiny_pool', () => {
-    getAttrs(['show_destiny_pool'], (values) => {
-      const currentValue = values.show_destiny_pool;
-      const newValue = currentValue === 'true' ? 'false' : 'true';
-      const newLabel = currentValue === 'true' ? 'show' : 'hide';
-      setAttrs({show_destiny_pool:newValue, show_destiny_pool_label:newLabel});
+  const showSectionsList = [
+    'show_destiny_pool',
+    'show_vital_stats',
+    'show_characteristics',
+    'show_skills',
+    'show_initiative',
+    'show_criticals',
+    'show_weapons',
+    'show_combat_talents',
+    'show_gear',
+    'show_cybernetics',
+    'show_non_combat_talents',
+    'show_signature_abilities',
+    'show_force_powers'
+  ];
+
+  showSectionsList.forEach((section) => {
+    on('clicked:' + section, () => {
+      getAttrs([section], (values) => {
+        const currentValue = values[section];
+        const newValue = currentValue === 'true' ? 'false' : 'true';
+        const newLabel = currentValue === 'true' ? 'show' : 'hide';
+        setAttrs({[section]:newValue, [section+'_label']:newLabel});
+      });
     });
   });
 </script>

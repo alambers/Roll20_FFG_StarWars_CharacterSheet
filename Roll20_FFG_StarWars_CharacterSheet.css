@@ -237,10 +237,11 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
 /* Show/Hide sections */
 h2 button {
   position: absolute;
-  right: 5em;
-  top: 25%;
+  right: 1.5em;
+  top: 1em;
   border-radius: 0.5em;
-  color: #2c3947;
+  border-width: 2px;
+  background: transparent;
 }
 
 input.sheet-show_section[value="true"] + .sheet-section {
