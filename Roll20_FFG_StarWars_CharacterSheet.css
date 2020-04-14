@@ -124,6 +124,7 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
 }
 
 .sheet-character_sheet h2 {
+  position: relative;
   display: block;
   font-size: 1.5em;
   font-weight: 700;
@@ -133,6 +134,7 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   padding: 0.25em 0;
   border: 1px solid #354457;
   border-radius: 1em 1em 0 0;
+  margin-top: 1em;
 }
 
 .sheet-character_sheet h3 {
@@ -230,6 +232,23 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
 
 .sheet-help_info p {
   margin-bottom: 1em;
+}
+
+/* Show/Hide sections */
+h2 button {
+  position: absolute;
+  right: 5em;
+  top: 25%;
+  border-radius: 0.5em;
+  color: #2c3947;
+}
+
+input.sheet-show_section[value="true"] + .sheet-section {
+  display: grid;
+}
+
+input.sheet-show_section[value="false"] + .sheet-section {
+  display: none;
 }
 
 /* Grid styles */

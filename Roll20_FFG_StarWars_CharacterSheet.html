@@ -64,7 +64,9 @@
         </div>
       </div>
     </div>
-    <h2>Destiny Pool</h2>
+    <h2>Destiny Pool<button type="action" name="act_show_destiny_pool"><span name="attr_show_destiny_pool_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_destiny_pool_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_destiny_pool" value="true" />
     <div class="destiny_pool section">
       <div class="destiny_buttons">
         <button type="roll" class="sync_pool_with_gm" name="Update-Dest-Pool" value="!eed characterID(@{character_id}) destiny registerPlayer" data-i18n="sync_pool_with_gm">Sync Pool with GM</button>
@@ -2388,6 +2390,16 @@
       const setEncum = currentEncum + encumDifference;
       setAttrs({'encumbrance_current':setEncum});
       console.log(newEncum);
+    });
+  });
+
+  /* Collapse sections */
+  on('clicked:show_destiny_pool', () => {
+    getAttrs(['show_destiny_pool'], (values) => {
+      const currentValue = values.show_destiny_pool;
+      const newValue = currentValue === 'true' ? 'false' : 'true';
+      const newLabel = currentValue === 'true' ? 'show' : 'hide';
+      setAttrs({show_destiny_pool:newValue, show_destiny_pool_label:newLabel});
     });
   });
 </script>
