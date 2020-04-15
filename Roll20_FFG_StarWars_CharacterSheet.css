@@ -393,18 +393,25 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   border: 3px solid #354457;
 }
 
+.sheet-destiny_pool button[type="roll"].sheet-use_dark_side {
+  background: #333333;
+  color: #ffffff;
+  border-color: #aaaaaa;
+  text-shadow: none;
+}
+
 .sheet-destiny_pool button[type="roll"].sheet-use_light_side::before {
   content: '✧';
   color: #BC3F13;
   margin-right: 0.25em;
-  font-size: 1.5em;
+  font-size: 1.2em;
   line-height: 1;
 }
 
 .sheet-destiny_pool button[type="roll"].sheet-use_dark_side::before {
   content: '☃';
   margin-right: 0.25em;
-  font-size: 1.5em;
+  font-size: 1em;
   line-height: 1;
 }
 
