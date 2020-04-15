@@ -615,13 +615,16 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   padding: 0;
 }
 
-.sheet-stat_label .sheet-help_info {
+.sheet-stat_label .sheet-help_info,
+h2 .sheet-help_info {
   color: #000000;
   right: 3em;
   max-width: 50em;
+  font-weight: normal;
 }
 
-.sheet-stat_label .sheet-icon_help::after {
+.sheet-stat_label .sheet-icon_help::after,
+h2 .sheet-icon_help::after {
   color: #aaaaaa;
   margin-left: 0.25em;
   font-size: 0.85em;
@@ -1222,6 +1225,33 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   height: 4em;
   padding: 0.5em;
   font-size: 1em;
+}
+
+/* Containers */
+.sheet-container {
+  display: grid;
+  grid-template-columns: 3fr 3fr 8fr;
+  column-gap: 1em;
+  row-gap: 1em;
+}
+
+.sheet-container_heading {
+  padding-bottom: 0.5em;
+  border-bottom: 1px dotted #aaaaaa;
+  margin-bottom: 1em; 
+}
+
+.sheet-container_heading div {
+  font-size: 0.85em;
+}
+
+.sheet-container input {
+  height: max-content;
+}
+
+.sheet-container textarea {
+  padding: 1em;
+  height: 5em;
 }
 
 /* The Force */

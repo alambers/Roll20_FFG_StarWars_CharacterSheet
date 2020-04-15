@@ -1287,7 +1287,7 @@
     </div>   
   </div>
   <div class="equipment">
-    <h2><span data-i18n="gear">Armor</span><button type="action" name="act_show_gear"><span name="attr_show_gear_label"></span></button></h2>    
+    <h2><span data-i18n="gear">Gear</span><button type="action" name="act_show_gear"><span name="attr_show_gear_label"></span></button></h2>    
     <input type="hidden" name="attr_show_gear_label" value="hide" />
     <input class="show_section" type="hidden" name="attr_show_gear" value="true" />
     <div class="gear section">
@@ -1295,7 +1295,39 @@
         <div>Gear - calculate stat/skill enhancements if applicable</div>
       </fieldset>
     </div>
-    <h2><span data-i18n="cybernetics">Armor</span><button type="action" name="act_show_cybernetics"><span name="attr_show_cybernetics_label"></span></button></h2>    
+    <h2><span data-i18n="containers">Containers</span><span class="icon_help"></span>
+      <div class="help_info">
+        <p>Gear that adds Encumbrance threshold - backpacks, utility belts, etc.</p>
+      </div>
+      <button type="action" name="act_show_containers"><span name="attr_show_containers_label"></span></button>
+    </h2>    
+    <input type="hidden" name="attr_show_containers_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_containers" value="true" />
+    <div class="containers section">
+      <div class="container container_heading">
+        <div data-i18n="name">Name</div>
+        <div data-i18n="add_encum_threshold">+ Encum Threshold</div>
+        <div data-i18n="description">Description</div>
+      </div>
+      <div class="container">
+        <input type="text" name="attr_container1_name" />
+        <input type="number" name="attr_container1_encumbrance" min="0" max="5" value="0" />
+        <textarea name="attr_container1_description"></textarea>
+        <input type="text" name="attr_container2_name" />
+        <input type="number" name="attr_container2_encumbrance" min="0" max="5" value="0" />
+        <textarea name="attr_container2_description"></textarea>
+        <input type="text" name="attr_container3_name" />
+        <input type="number" name="attr_container3_encumbrance" min="0" max="5" value="0" />
+        <textarea name="attr_container3_description"></textarea>
+        <input type="text" name="attr_container4_name" />
+        <input type="number" name="attr_container4_encumbrance" min="0" max="5" value="0" />
+        <textarea name="attr_container4_description"></textarea>
+        <input type="text" name="attr_container5_name" />
+        <input type="number" name="attr_container5_encumbrance" min="0" max="5" value="0" />
+        <textarea name="attr_container5_description"></textarea>
+      </div>
+    </div>
+    <h2><span data-i18n="cybernetics">Cybernetics</span><button type="action" name="act_show_cybernetics"><span name="attr_show_cybernetics_label"></span></button></h2>    
     <input type="hidden" name="attr_show_cybernetics_label" value="hide" />
     <input class="show_section" type="hidden" name="attr_show_cybernetics" value="true" />
     <div class="cybernetics section">
@@ -1305,7 +1337,7 @@
     </div>  
   </div>
   <div class="talents">
-    <h2><span data-i18n="non_combat_talents">Armor</span><button type="action" name="act_show_non_combat_talents"><span name="attr_show_non_combat_talents_label"></span></button></h2>    
+    <h2><span data-i18n="non_combat_talents">Non-combat Talents</span><button type="action" name="act_show_non_combat_talents"><span name="attr_show_non_combat_talents_label"></span></button></h2>    
     <input type="hidden" name="attr_show_non_combat_talents_label" value="hide" />
     <input class="show_section" type="hidden" name="attr_show_non_combat_talents" value="true" />
     <div class="non_combat_talents section">
@@ -1313,7 +1345,7 @@
         <div>Non-combat Talent - calculate stat/skill enhancements if applicable</div>
       </fieldset>
     </div>
-    <h2><span data-i18n="signature_abilities">Armor</span><button type="action" name="act_show_signature_abilities"><span name="attr_show_signature_abilities_label"></span></button></h2>    
+    <h2><span data-i18n="signature_abilities">Signature Abilities</span><button type="action" name="act_show_signature_abilities"><span name="attr_show_signature_abilities_label"></span></button></h2>    
     <input type="hidden" name="attr_show_signature_abilities_label" value="hide" />
     <input class="show_section" type="hidden" name="attr_show_signature_abilities" value="true" />
     <div class="signature_abilities section">
@@ -1323,7 +1355,7 @@
     </div>   
   </div>
   <div class="force">
-    <h2><span data-i18n="force_powers">Armor</span><button type="action" name="act_show_force_powers"><span name="attr_show_force_powers_label"></span></button></h2>    
+    <h2><span data-i18n="force_powers">Force Powers</span><button type="action" name="act_show_force_powers"><span name="attr_show_force_powers_label"></span></button></h2>    
     <input type="hidden" name="attr_show_force_powers_label" value="hide" />
     <input class="show_section" type="hidden" name="attr_show_force_powers" value="true" />
     <div class="force_powers section">
@@ -2400,10 +2432,28 @@
 
   /* Calculate Encumbrance */
 
-  on('change:brawn', (eventInfo) => {
-    const newBrawn = parseInt(eventInfo.newValue);
-    const newEncumThreshold = newBrawn + 5;
-    setAttrs({'encumbrance_threshold':newEncumThreshold});
+  const encumbranceFactors = [
+    'brawn',
+    'container1_encumbrance',
+    'container2_encumbrance',
+    'container3_encumbrance',
+    'container4_encumbrance',
+    'container5_encumbrance'
+  ];
+
+  encumbranceFactors.forEach((factor) => {
+    on('change:' + factor, (eventInfo) => {
+      getAttrs(encumbranceFactors, (values) => {
+        const newBrawn = parseInt(values.brawn);
+        const c1 = parseInt(values.container1_encumbrance);
+        const c2 = parseInt(values.container2_encumbrance);
+        const c3 = parseInt(values.container3_encumbrance);
+        const c4 = parseInt(values.container4_encumbrance);
+        const c5 = parseInt(values.container5_encumbrance);
+        const newThreshold = newBrawn + 5 + c1 + c2 + c3 + c4 + c5;
+        setAttrs({'encumbrance_threshold':newThreshold});
+      });
+    });
   });
 
   on('change:repeating_weapons:weapon_encumbrance change:armor_encumbrance', (eventInfo) => {
@@ -2430,6 +2480,7 @@
     'show_weapons',
     'show_combat_talents',
     'show_gear',
+    'show_containers',
     'show_cybernetics',
     'show_non_combat_talents',
     'show_signature_abilities',
