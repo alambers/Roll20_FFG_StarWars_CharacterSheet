@@ -1402,9 +1402,9 @@
       </div>
       <fieldset class="repeating_gear">
         <div class="gear_item">
-          <input type="text" name="attr_gear-item-name" />
-          <input type="number" name="attr_gear-item-encumbrance" min="0" max="5" value="0" />
-          <textarea name="attr_gear-item-description"></textarea>
+          <input type="text" name="attr_gear_item_name" />
+          <input type="number" name="attr_gear_item_encumbrance" min="0" max="5" value="0" />
+          <textarea name="attr_gear_item_description"></textarea>
         </div>
       </fieldset>      
     </div>
@@ -2013,8 +2013,10 @@
       const viciousPreviousBonus = parseInt(viciousPrevious*10);
       const viciousNewBonus = parseInt(viciousNew*10);
       let viciousBonus = Math.abs(parseInt(viciousNewBonus - viciousPreviousBonus));
+      // Workaround for newly added items in repeating sections; number fields have no value until initialized with a change
+      // This will break if the user happens to manually change a number to the same number
       if (viciousPreviousBonus === viciousNewBonus) {
-        viciousBonus = viciousNewBonus;   // Weird quirk in Roll20 - if the field isn't initiated with change, it will set the value to 1 regardless of the HTML value attribute; this is a workaround for that
+        viciousBonus = viciousNewBonus;
       }
       if (viciousPreviousBonus > viciousNewBonus) {
         viciousBonus = -(viciousBonus);
@@ -2575,6 +2577,7 @@
 
   /* Calculate Encumbrance */
 
+  // Calculate Encumbrance Threshold from Brawn + 5 + Containers
   const encumbranceFactors = [
     'brawn',
     'container1_encumbrance',
@@ -2599,25 +2602,44 @@
     });
   });
 
-  on('change:repeating_weapons:weapon_encumbrance change:armor_encumbrance change:repeating_gear:gear-item-encumbrance', (eventInfo) => {
+  // When changing a weapon, armor, or gear item encumbrance, change the total encumbrance
+  on('change:repeating_weapons:weapon_encumbrance change:armor_encumbrance change:repeating_gear:gear_item_encumbrance', (eventInfo) => {
     getAttrs(['encumbrance_current'], (values) => {
       const previousEncum = parseInt(eventInfo.previousValue);
       const newEncum = parseInt(eventInfo.newValue);
       const currentEncum = parseInt(values.encumbrance_current);
       let encumDifference = Math.abs(previousEncum - newEncum);
-      encumDifference = previousEncum > newEncum ? -(encumDifference) : encumDifference;
+      encumDifference = (previousEncum > newEncum) ? -(encumDifference) : encumDifference;
+      // Workaround for newly added items in repeating sections; number fields have no value until initialized with a change
+      // This will break if the user happens to manually change a number to the same number
+      if (previousEncum === newEncum) {
+        encumDifference = newEncum;
+      }
       const setEncum = currentEncum + encumDifference;
       setAttrs({'encumbrance_current':setEncum});
     });
   });
 
+  // When removing a gear item, remove it's encumbrance from the total encumbrance
   on('remove:repeating_gear', (eventInfo) => {
+    const itemId = (eventInfo.sourceAttribute).slice(15);    
     getAttrs(['encumbrance_current'], (values) => {
       const removedItems = eventInfo.removedInfo;
-      let removedEncum = 0;
-      for(let value in removedItems) {
-        removedEncum = parseInt(removedItems[value]);
-      }
+      const removedEncumKey = 'repeating_gear_' + itemId + '_gear_item_encumbrance';
+      const removedEncum = parseInt(removedItems[removedEncumKey]);
+      const currentEncum = parseInt(values.encumbrance_current);
+      setEncum = currentEncum - removedEncum;
+      setAttrs({'encumbrance_current':setEncum});
+    });
+  });
+
+  // When removing a weapon, remove it's encumbrance from the total encumbrance
+  on('remove:repeating_weapons', (eventInfo) => {
+    const itemId = (eventInfo.sourceAttribute).slice(18);
+    getAttrs(['encumbrance_current'], (values) => {
+      const removedItems = eventInfo.removedInfo;
+      const removedEncumKey = 'repeating_weapons_' + itemId + '_weapon_encumbrance';
+      const removedEncum = parseInt(removedItems[removedEncumKey]);
       const currentEncum = parseInt(values.encumbrance_current);
       setEncum = currentEncum - removedEncum;
       setAttrs({'encumbrance_current':setEncum});
@@ -2658,7 +2680,6 @@
     const section = 'repeating_weapons_show-weapon-qualities';
     getAttrs([section], (values) => {    
       const currentValue = values[section];
-      console.log(currentValue);
       const newValue = currentValue === 'true' ? 'false' : 'true';
       const newLabel = currentValue === 'true' ? 'show' : 'hide';
       setAttrs({[section]:newValue, [section+'_label']:newLabel});
@@ -2669,7 +2690,6 @@
     const section = 'repeating_weapons_show-weapon-attachments';
     getAttrs([section], (values) => {    
       const currentValue = values[section];
-      console.log(currentValue);
       const newValue = currentValue === 'true' ? 'false' : 'true';
       const newLabel = currentValue === 'true' ? 'show' : 'hide';
       setAttrs({[section]:newValue, [section+'_label']:newLabel});
@@ -2680,7 +2700,6 @@
     const section = 'repeating_weapons_show-weapon-notes';
     getAttrs([section], (values) => {    
       const currentValue = values[section];
-      console.log(currentValue);
       const newValue = currentValue === 'true' ? 'false' : 'true';
       const newLabel = currentValue === 'true' ? 'show' : 'hide';
       setAttrs({[section]:newValue, [section+'_label']:newLabel});
