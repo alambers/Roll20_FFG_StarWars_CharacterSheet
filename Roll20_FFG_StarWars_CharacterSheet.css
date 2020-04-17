@@ -124,8 +124,9 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
 }
 
 .sheet-character_sheet h2 {
-  position: relative;
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  align-items: center;
   font-size: 1.5em;
   font-weight: 700;
   text-align: center;
@@ -138,6 +139,9 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
 }
 
 .sheet-character_sheet h3 {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  align-items: center;
   font-size: 1.2em;
   font-weight: 700;
   margin: 0 -0.85em 0 -0.75em;
@@ -174,74 +178,16 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   margin: 0;
 }
 
-.sheet-icon_help::after {
-  font-family: 'Pictos';
-  content: '?';
-  color: #555555;
-  padding-left: 0.25em;
-}
-
-.sheet-icon_active::after {
-  font-family: 'Pictos';
-  content: '9';
-  color: #781114;
-  padding-left: 0.25em;
-}
-
-.sheet-icon_passive::after {
-  font-family: 'Pictos';
-  content: 't';
-  color: #74cddd;
-  padding-left: 0.25em;
-}
-
-.sheet-icon_remove::after {
-  font-family: 'Pictos';
-  content: 'D';
-  color: #781114;
-  padding-left: 0.25em;
-  font-size: 1.25em;
-  cursor: pointer;
-}
-
-.sheet-help_info {
-  display: none;
-}
-
-.sheet-icon_help:hover + .sheet-help_info {
-  display: block;
-  position: absolute;
-  z-index: 10;
-  background-color: #ffffff;
-  padding: 1em 2em;
-  min-width: 20em;
-  text-align: left;
-  border: 3px solid #354457;
-  border-radius: 0.5em;
-  line-height: 1.5;
-  margin-top: 0.75em;
-}
-
-.sheet-icon_help:hover + .sheet-help_info::before {
-  content: "▲";
-  position: absolute;
-  top: 0%;
-  left: 5.5em;
-  margin-top: -1.1em;
-}
-
-.sheet-help_info p {
-  margin-bottom: 1em;
-}
-
 /* Show/Hide sections */
-h2 button {
-  position: absolute;
-  right: 1.5em;
-  top: 1em;
+
+h2 button,
+h3 button {
   border-radius: 0.5em;
   border-width: 2px;
   background: transparent;
+  width: max-content;
+  height: max-content;
+  margin-right: 2em;
 }
 
 input.sheet-show_section[value="true"] + .sheet-section {
@@ -622,28 +568,20 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   padding: 0;
 }
 
-.sheet-stat_label .sheet-help_info,
-h2 .sheet-help_info {
+.sheet-stat_label .sheet-help_info {
+  position: absolute;
   color: #000000;
   right: 3em;
   max-width: 50em;
   font-weight: normal;
 }
 
-.sheet-stat_label .sheet-icon_help::after,
-h2 .sheet-icon_help::after {
-  color: #aaaaaa;
-  margin-left: 0.25em;
-  font-size: 0.85em;
-}
-
-.sheet-stat_label .sheet-icon_help:hover + .sheet-help_info::before {
-  content: "▲";
+h2 .sheet-help_info {
   position: absolute;
-  top: 0%;
-  left: 90%;
-  margin-top: -1.1em;
   color: #000000;
+  right: 40%;
+  max-width: 50em;
+  font-weight: normal;
 }
 
 /* Characteristics - Brawn, Agility, Intellect, Cunning, Willpower, Presence */
@@ -1061,7 +999,7 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   border-radius: 0.5em;
 }
 
-.sheet-character_sheet h3.sheet-weapon_qualities_header {
+.sheet-character_sheet .sheet-weapon_qualities_header {
   display: flex;
   align-items: center;
 }
@@ -1094,30 +1032,6 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 
 .sheet-weapon_mods_table_header > * {
   font-size: 0.85em;
-}
-
-.sheet-weapon_mods_table_header .sheet-icon_help:hover + .sheet-help_info {
-  display: block;
-  position: absolute;
-  z-index: 10;
-  background-color: #ffffff;
-  padding: 1em 2em;
-  min-width: 20em;
-  text-align: left;
-  border: 3px solid #354457;
-  border-radius: 0.5em;
-  line-height: 1.5;
-  margin-top: 0.75em;
-}
-
-.sheet-weapon_mods_table_header .sheet-icon_help:hover + .sheet-help_info::before,
-.sheet-armor_heading .sheet-icon_help:hover + .sheet-help_info::before
-{
-  content: "▲";
-  position: absolute;
-  top: 0%;
-  left: 0;
-  margin-top: -1.1em;
 }
 
 .sheet-weapon_mod {
@@ -1194,7 +1108,7 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   content: ":";
 }
 
-.sheet-weapon_mods {
+.sheet-weapon_notes {
   padding: 1em;
   margin: 1em 0;
 }
@@ -1203,7 +1117,7 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 
 .sheet-armor_item {
   display: grid;
-  grid-template-columns: 3fr repeat(5, 4em) 2fr;
+  grid-template-columns: 3fr repeat(5, 5em) 2fr;
   column-gap: 1em;
   row-gap: 0.5em;
   margin-bottom: 1em;
@@ -1234,7 +1148,41 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   font-size: 1em;
 }
 
+.sheet-armor strong {
+  color: #c9cc00;
+  font-style: italic;
+}
+
+/* Gear */
+
+.sheet-gear_item {
+  display: grid;
+  grid-template-columns: 4fr 1fr 8fr;
+  column-gap: 1em;
+  row-gap: 1em;
+}
+
+.sheet-gear_heading {
+  padding-bottom: 0.5em;
+  border-bottom: 1px dotted #aaaaaa;
+  margin-bottom: 1em; 
+}
+
+.sheet-gear_heading div {
+  font-size: 0.85em;
+}
+
+.sheet-gear_item input {
+  height: max-content;
+}
+
+.sheet-gear_item textarea {
+  padding: 1em;
+  height: 5em;
+}
+
 /* Containers */
+
 .sheet-container {
   display: grid;
   grid-template-columns: 3fr 3fr 8fr;
@@ -1257,6 +1205,34 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 }
 
 .sheet-container textarea {
+  padding: 1em;
+  height: 5em;
+}
+
+/* Cybernetics */
+
+.sheet-cyber {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  column-gap: 1em;
+  row-gap: 1em;
+}
+
+.sheet-cybernetics_heading {
+  padding-bottom: 0.5em;
+  border-bottom: 1px dotted #aaaaaa;
+  margin-bottom: 1em; 
+}
+
+.sheet-cybernetics_heading div {
+  font-size: 0.85em;
+}
+
+.sheet-cybernetics input {
+  height: max-content;
+}
+
+.sheet-cybernetics textarea {
   padding: 1em;
   height: 5em;
 }
@@ -1380,6 +1356,107 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 
 .sheet-force-power-mastery label + textarea {
   height: 4em;
+}
+
+/* Tooltips */
+
+.sheet-icon_help {
+  position: relative;
+  display: inline-block;
+}
+
+.sheet-icon_help .sheet-help_info,
+.sheet-icon_help .sheet-help_info_left {
+  display: none;
+  width: 20em;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  text-align: left;
+  padding: 1em;
+  border-radius: 0.5em;
+  position: absolute;
+  z-index: 1;
+}
+
+.sheet-icon_help .sheet-help_info {
+  top: 125%;
+  left: 50%;
+  margin-left: -10em;
+}
+
+.sheet-icon_help .sheet-help_info::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -0.25em;
+  border-width: 0.5em;
+  border-style: solid;
+  border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
+}
+
+.sheet-icon_help .sheet-help_info_left {
+  top: 0;
+  right: 105%;
+}
+
+.sheet-icon_help .sheet-help_info_left::after {
+  content: " ";
+  position: absolute;
+  top: 5%;
+  left: 100%;
+  margin-left: -0.25em;
+  border-width: 0.5em;
+  border-style: solid;
+  border-color: transparent transparent transparent rgba(0, 0, 0, 0.85);
+}
+
+.sheet-icon_help:hover .sheet-help_info,
+.sheet-icon_help:hover .sheet-help_info_left {
+  display: block;
+}
+
+.sheet-icon_help::after {
+  font-family: 'Pictos';
+  content: '?';
+  color: #555555;
+  padding: 0.25em;
+}
+
+h2 .sheet-icon_help::after {
+  color: #cccccc;
+  font-size: 0.75em;
+}
+
+.sheet-stat_label .sheet-icon_help::after {
+  color: #aaaaaa;
+}
+
+.sheet-icon_active::after {
+  font-family: 'Pictos';
+  content: '9';
+  color: #781114;
+  padding-left: 0.25em;
+}
+
+.sheet-icon_passive::after {
+  font-family: 'Pictos';
+  content: 't';
+  color: #74cddd;
+  padding-left: 0.25em;
+}
+
+.sheet-icon_remove::after {
+  font-family: 'Pictos';
+  content: 'D';
+  color: #781114;
+  padding-left: 0.25em;
+  font-size: 1.25em;
+  cursor: pointer;
+}
+
+.sheet-help_info p {
+  margin-bottom: 1em;
 }
 
 
