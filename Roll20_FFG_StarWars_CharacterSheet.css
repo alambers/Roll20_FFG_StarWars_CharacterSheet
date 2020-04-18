@@ -999,6 +999,10 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   border-radius: 0.5em;
 }
 
+.sheet-weapon_qualities_cell {
+  grid-column: span 3;
+}
+
 .sheet-character_sheet .sheet-weapon_qualities_header {
   display: flex;
   align-items: center;
