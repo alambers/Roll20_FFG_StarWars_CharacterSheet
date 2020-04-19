@@ -178,6 +178,10 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   margin: 0;
 }
 
+.sheet-character_sheet input[type="checkbox"]:checked {
+  background-color: #7CC48A;
+}
+
 /* Show/Hide sections */
 
 h2 button,
@@ -418,7 +422,7 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 
 .sheet-tab_navigation {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   margin: 2em 0;
 }
 
@@ -457,6 +461,7 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   text-shadow: 0px 0px 8px #ffffff;
 }
 
+.sheet-bio,
 .sheet-skills,
 .sheet-combat,
 .sheet-equipment,
@@ -467,6 +472,7 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 	display: none;
 }
 
+.sheet-tabstoggle[value="bio"] ~ div.sheet-bio,
 .sheet-tabstoggle[value="skills"] ~ div.sheet-skills,
 .sheet-tabstoggle[value="combat"] ~ div.sheet-combat,
 .sheet-tabstoggle[value="equipment"] ~ div.sheet-equipment,
@@ -483,6 +489,37 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 .sheet-tab_navigation [type="radio"]:checked ~ button {
   background: rgb(96,124,159);
   background: radial-gradient(circle, rgba(96,124,159,1) 0%, rgba(53,68,87,1) 100%);
+}
+
+/* Bio */
+.sheet-name {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr 3fr;
+  column-gap: 3em;
+  row-gap: 1em;
+}
+
+.sheet-name label {
+  padding: 0.5em 0;
+  text-align: right;
+}
+
+.sheet-name label::after {
+  content: ":";
+  text-align: right;
+}
+
+.sheet-name .sheet-specialization_trees_container select {
+  margin-bottom: 0.5em;
+}
+
+.sheet-xp_grid {
+  display: grid;
+  grid-template-columns: 1fr 1em 1fr;
+  column-gap: 1em;
+  align-items: center;
+  text-align: center;
+  height: max-content;
 }
 
 /* Body Stats - Wounds, Strain, Soak, Defense */
@@ -625,7 +662,7 @@ h2 .sheet-help_info {
 
 .sheet-skill {
   display: grid;
-  grid-template-columns: 1fr 8em 4em 4em 10em 6em 3em;
+  grid-template-columns: 1fr 8em 4em 4em 10em 10em 3em;
   column-gap: 1em;
   padding: 0.5em 0;
   border-bottom: 1px dotted #aaaaaa;
@@ -752,7 +789,6 @@ h2 .sheet-help_info {
 }
 
 .sheet-skill select {
-  padding: 0.25em;
   margin: 0;
   height: 100%;
 }
@@ -1239,6 +1275,74 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 .sheet-cybernetics textarea {
   padding: 1em;
   height: 5em;
+}
+
+/* Talents */
+
+.sheet-combat_talent,
+.sheet-non_combat_talent {
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr 8fr;
+  column-gap: 1em;
+  row-gap: 1em;
+}
+
+.sheet-combat_talents_heading,
+.sheet-non_combat_talents_heading {
+  padding-bottom: 0.5em;
+  border-bottom: 1px dotted #aaaaaa;
+  margin-bottom: 1em; 
+}
+
+.sheet-combat_talents_heading div,
+.sheet-non_combat_talents_heading div {
+  font-size: 0.85em;
+}
+
+.sheet-combat_talent input,
+.sheet-non_combat_talent input {
+  height: max-content;
+}
+
+.sheet-combat_talent input[type="checkbox"],
+.sheet-non_combat_talent input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-top: 0.5em;
+}
+
+.sheet-combat_talent textarea,
+.sheet-non_combat_talent textarea {
+  padding: 1em;
+  height: 5em;
+}
+
+.sheet-combat_talent_checkbox_container,
+.sheet-non_combat_talent_checkbox_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.25em;
+}
+
+.sheet-combat_talent .sheet-icon_active,
+.sheet-non_combat_talent .sheet-icon_active {
+  display: none;
+}
+
+.sheet-combat_talent .sheet-icon_passive,
+.sheet-non_combat_talent .sheet-icon_passive {
+  display: block;
+  font-size: 1.5em;
+}
+
+.sheet-combat_talent_active_checkbox:checked ~ .sheet-icon_active,
+.sheet-non_combat_talent_active_checkbox:checked ~ .sheet-icon_active {
+  display: block;
+  font-size: 1.5em;
+}
+
+.sheet-combat_talent_active_checkbox:checked ~ .sheet-icon_passive,
+.sheet-non_combat_talent_active_checkbox:checked ~ .sheet-icon_passive {  
+  display: none;
 }
 
 /* The Force */
