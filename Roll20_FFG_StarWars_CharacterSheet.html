@@ -2258,9 +2258,9 @@
     statListOne.forEach((stat) => {
       on('sheet:opened', () => {    
         getAttrs([stat], (values) => {
-          const thisStat = isNaN(values[stat]) ? 1 : parseInt(values[stat]);
+          const thisStat = (isNaN(values[stat]) || (values[stat]) === 0  || (values[stat]) === "0") ? 1 : parseInt(values[stat]);
           const statValue = thisStat > 0 ? thisStat : 1;
-          setAttrs({[stat]:statValue});
+          setAttrs({[stat]:statValue});  // Properly sets the stats, but boes not fire a on:change event; bug reported
         });
       });
     });
@@ -2278,7 +2278,7 @@
         getAttrs([stat], (values) => {
           const thisStat = isNaN(values[stat]) ? 0 : parseInt(values[stat]);
           const statValue = thisStat > 0 ? thisStat : 0;
-          setAttrs({[stat]:statValue});
+          setAttrs({[stat]:statValue});  // Properly sets the stats, but boes not fire a on:change event; bug reported
         });
       });
     });
@@ -2343,7 +2343,6 @@
   };
   
   for (const skill in skillStat) {
-    // Worker for calculating skill dice
     const skillRank = skill + '_rank';
     on('change:' + skillRank, (eventInfo) => {
       CalculateDice(eventInfo);
@@ -2379,7 +2378,7 @@
     on('change:brawn change:agility change:intellect change:cunning change:willpower change:presence', (eventInfo) => {
       const stat = eventInfo.sourceAttribute;
       if (skillStat[skill] === stat) {
-        CalculateDiceStatChange(eventInfo,skill,stat);
+        CalculateDiceStatChange(eventInfo,skill,stat);  // Goes on to do the calcs on a manual change, but not from the sheet:opened event
       }
     });  
   };
