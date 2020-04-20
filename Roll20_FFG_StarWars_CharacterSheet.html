@@ -2243,6 +2243,46 @@
   on('change:settings_font_size_selector', (eventInfo) => {
     setAttrs({'settings_font_size':eventInfo.newValue});
   });
+
+    /* Initialize Stats with a change when the sheet is opened in order to trigger other workers */
+  
+    // Stats to initialize with a value of 1
+    const statListOne = [
+      'brawn',
+      'agility',
+      'intellect',
+      'cunning',
+      'willpower',
+      'presence'
+    ];
+  
+    statListOne.forEach((stat) => {
+      on('sheet:opened', () => {    
+        getAttrs([stat], (values) => {
+          const thisStat = isNaN(values[stat]) ? 1 : parseInt(values[stat]);
+          const statValue = thisStat > 0 ? thisStat : 1;
+          setAttrs({[stat]:statValue});
+        });
+      });
+    });
+
+    // Stats to initialize with a value of 0
+    const statListZero = [
+      'defense_ranged',
+      'defense_melee',
+      'encumbrance_current',
+      'force_rating'
+    ];
+  
+    statListZero.forEach((stat) => {
+      on('sheet:opened', () => {    
+        getAttrs([stat], (values) => {
+          const thisStat = isNaN(values[stat]) ? 0 : parseInt(values[stat]);
+          const statValue = thisStat > 0 ? thisStat : 0;
+          setAttrs({[stat]:statValue});
+        });
+      });
+    });
   
   /* Workers for skill dice */
   const skillStat = {
@@ -2873,37 +2913,14 @@
     });
   });
 
-  /* Initialize Stats with a change when the sheet is opened in order to trigger other workers */
-  
-  const statList = [
-    'brawn',
-    'agility',
-    'intellect',
-    'cunning',
-    'willpower',
-    'presence'
-  ];
-
-  statList.forEach((stat) => {
-    on('sheet:opened', () => {    
-      getAttrs([stat], (values) => {
-        const thisStat = isNaN(values[stat]) ? 1 : parseInt(values[stat]);
-        const statValue = thisStat > 0 ? thisStat : 1;
-        setAttrs({[stat]:statValue});
-      });
-    });
-  });
-
   /* Calculate Soak and Defense */
 
   on('change:brawn change:armor_bonus_soak', (eventInfo) => {
     getAttrs(['brawn','armor_bonus_soak'], (values) => {
-      const currentBrawn = parseInt(values.brawn);
-      const currentArmor = parseInt(values.armor_bonus_soak);
+      const currentBrawn = isNaN(values.brawn) ? 0 : parseInt(values.brawn);
+      const currentArmor = isNaN(values.armor_bonus_soak) ? 0 : parseInt(values.armor_bonus_soak);
       const triggerName = eventInfo.triggerName;
-      let previousBrawn = currentBrawn;
       let newBrawn = currentBrawn;
-      let previousArmor = currentArmor;
       let newArmor = currentArmor;
       switch (triggerName) {
         case 'brawn':
@@ -2911,8 +2928,8 @@
           newBrawn = parseInt(eventInfo.newValue);
           break;
         case 'armor_bonus_soak':
-          previousArmor = parseInt(eventInfo.previousValue);
-          newArmor = parseInt(eventInfo.newValue);
+          previousArmor = isNaN(eventInfo.previousValue) ? 0 : parseInt(eventInfo.previousValue);
+          newArmor = isNaN(eventInfo.newValue) ? 0 : parseInt(eventInfo.newValue);
           break;
         default:
           // Do nothing
@@ -2924,11 +2941,16 @@
 
   on('change:armor_bonus_defense_melee', (eventInfo) => {
     getAttrs(['defense_melee'], (values) => {
-      const previousDefense = parseInt(eventInfo.previousValue);
-      const newDefense = parseInt(eventInfo.newValue);
-      const currentDefense = parseInt(values.defense_melee);
+      const previousDefense = isNaN(eventInfo.previousValue) ? 0 : parseInt(eventInfo.previousValue);
+      const newDefense = isNaN(eventInfo.newValue) ? 0 : parseInt(eventInfo.newValue);
+      const currentDefense = isNaN(values.defense_melee) ? 0 : parseInt(values.defense_melee);
       let armorBonus = Math.abs(previousDefense - newDefense);
       armorBonus = previousDefense > newDefense ? -(armorBonus) : armorBonus;
+      // Workaround for newly added items in repeating sections; number fields have no value until initialized with a change
+      // This will break if the user happens to manually change a number to the same number
+      if(previousDefense === newDefense){
+        armorBonus = newDefense;
+      }
       const setDefense = currentDefense + armorBonus >= 0 ? currentDefense + armorBonus : 0;
       setAttrs({'defense_melee':setDefense});
     });
@@ -2936,11 +2958,16 @@
 
   on('change:armor_bonus_defense_ranged', (eventInfo) => {
     getAttrs(['defense_ranged'], (values) => {
-      const previousDefense = parseInt(eventInfo.previousValue);
-      const newDefense = parseInt(eventInfo.newValue);
-      const currentDefense = parseInt(values.defense_ranged);
+      const previousDefense = isNaN(eventInfo.previousValue) ? 0 : parseInt(eventInfo.previousValue);
+      const newDefense = isNaN(eventInfo.newValue) ? 0 : parseInt(eventInfo.newValue);
+      const currentDefense = isNaN(values.defense_ranged) ? 0 : parseInt(values.defense_ranged);
       let armorBonus = Math.abs(previousDefense - newDefense);
       armorBonus = previousDefense > newDefense ? -(armorBonus) : armorBonus;
+      // Workaround for newly added items in repeating sections; number fields have no value until initialized with a change
+      // This will break if the user happens to manually change a number to the same number
+      if(previousDefense === newDefense){
+        armorBonus = newDefense;
+      }
       const setDefense = currentDefense + armorBonus >= 0 ? currentDefense + armorBonus : 0;
       setAttrs({'defense_ranged':setDefense});
     });
@@ -3183,6 +3210,7 @@
       setAttrs({[section]:newValue, [section+'_label']:newLabel});
     });
   });
+
 </script>
 <!-- End Sheet Workers -->
 
