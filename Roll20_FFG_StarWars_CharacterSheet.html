@@ -664,7 +664,7 @@
           <input type="checkbox" name="attr_computers_career" value="true" />
           <input type="number"  name="attr_computers_rank" min="0" max="6" maxlength="1" value="0" />
           <div class="skill_rank_boxes">
-            <input class="ydcool" type="hidden" name="attr_computers_yd" value="" />
+            <input class="yd" type="hidden" name="attr_computers_yd" value="" />
             <span class="icon-proficiency-dice"></span>
             <input class="gd" type="hidden" name="attr_computers_gd" value="" />
             <span class="icon-ability-dice"></span>            
@@ -1097,6 +1097,20 @@
           </div>
           <input type="text" name="attr_underworld_modifiers" />
           <button class="roll_button" type="roll" name="roll_underworld" value="!eed characterID(@{character_id}) label(skill:Underworld) @{underworld_modifiers} skill(@{underworld_rank}|@{intellect}|Underworld) @{dicePool}"></button>
+        </div>
+        <div class="skill">          
+          <label data-i18n="warfare">Warfare</label>
+          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+          <input type="checkbox" name="attr_warfare_career" value="true" />
+          <input type="number"  name="attr_warfare_rank" min="0" max="6" maxlength="1" value="0" />
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_warfare_yd" value="" />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_warfare_gd" value="" />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_warfare_modifiers" />
+          <button class="roll_button" type="roll" name="roll_warfare" value="!eed characterID(@{character_id}) label(skill:Warfare) @{warfare_modifiers} skill(@{warfare_rank}|@{intellect}|Warfare) @{dicePool}"></button>
         </div>
         <div class="skill">          
           <label data-i18n="xenology">Xenology</label>
