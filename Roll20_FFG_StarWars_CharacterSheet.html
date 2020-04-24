@@ -2053,6 +2053,7 @@
       </div>
     </div>    
   </div>
+  <input type="hidden" name="attr_skillStatStore" value='{"astrogation":"intellect","athletics":"brawn","charm":"presence","coercion":"willpower","computers":"intellect","cool":"presence","coordination":"agility","deception":"cunning","discipline":"willpower","leadership":"presence","mechanics":"intellect","medicine":"intellect","negotiation":"presence","perception":"cunning","piloting-planetary":"agility","piloting-space":"agility","resilience":"brawn","skullduggery":"cunning","stealth":"agility","streetwise":"cunning","survival":"cunning","vigilance":"willpower","brawl":"brawn","melee":"brawn","gunnery":"agility","lightsaber":"brawn","ranged-light":"agility","ranged-heavy":"agility","core-worlds":"intellect","education":"intellect","lore":"intellect","outer-rim":"intellect","underworld":"intellect","warfare":"intellect","xenology":"intellect"}' />
   <!-- End General Settings -->
 </div>
 
@@ -2298,7 +2299,7 @@
     });
   
   /* Workers for skill dice */
-  const skillStat = {
+  const skills = {
     'astrogation':'intellect',
     'athletics':'brawn',
     'charm':'presence',
@@ -2336,10 +2337,9 @@
     'xenology':'intellect'
   };
   
+  
   // When the skill rank changes, update the dice
-  const CalculateDice = (eventInfo) => {
-    const skill = (eventInfo.sourceAttribute).slice(0,-5);
-    const stat = skillStat[skill];
+  const CalculateDice = (eventInfo, skill, stat) => {
     let rank = 0;
     let yellowDice = 0;
     let greenDice = 0;
@@ -2347,8 +2347,8 @@
     let greenDiceName = '';
     let statValue = 0;
     rank = parseInt(eventInfo.newValue);
-    getAttrs([stat, 'lightsaber_characteristic_value'], (values) => {
-      statValue = (skill === 'lightsaber') ? parseInt(values.lightsaber_characteristic_value) : parseInt(values[stat]);  
+    getAttrs([stat], (values) => {
+      statValue = parseInt(values[stat]);
       yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
       greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
       yellowDiceName = skill + '_yd';
@@ -2357,15 +2357,19 @@
     });
   };
   
-  for (const skill in skillStat) {
+  for (const skill in skills) {
     const skillRank = skill + '_rank';
     on('change:' + skillRank, (eventInfo) => {
-      CalculateDice(eventInfo);
+      getAttrs(['skillStatStore'], (values) => {
+        const skillStat = JSON.parse(values.skillStatStore);
+        const stat = skillStat[skill];
+        CalculateDice(eventInfo, skill, stat)
+      });
     });
   }
   
   // When the associated attribute changes, update the dice
-  const CalculateDiceStatChange = (eventInfo,skill,stat) => {
+  const CalculateDiceStatChange = (eventInfo, skill) => {
     const statValue = parseInt(eventInfo.newValue);
     let rank = 0;
     let yellowDice = 0;
@@ -2373,54 +2377,48 @@
     let yellowDiceName = '';
     let greenDiceName = '';
     const rankAttr = skill+'_rank';
-    getAttrs([rankAttr, 'lightsaber_characteristic', 'lightsaber_characteristic_value'], (values) => {
-      const lightsaberStat = values.lightsaber_characteristic;
-      const lightsaberValue = isNaN(values.lightsaber_characteristic_value) ? 1 : parseInt(values.lightsaber_characteristic_value);
-      let newLightSaberValue = isNaN(lightsaberValue) ? 1 : lightsaberValue;
-      if (stat === lightsaberStat) {
-        newLightSaberValue = statValue;
-      }
+    getAttrs([rankAttr], (values) => {
       rank = parseInt(values[rankAttr]);
       yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
       greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
       yellowDiceName = skill + '_yd';
       greenDiceName = skill + '_gd';
-      setAttrs({[yellowDiceName]: yellowDice, [greenDiceName]: greenDice, 'lightsaber_characteristic_value': newLightSaberValue});
+      setAttrs({[yellowDiceName]: yellowDice, [greenDiceName]: greenDice});
     });
   };
   
-  for (const skill in skillStat) {
-    on('change:brawn change:agility change:intellect change:cunning change:willpower change:presence', (eventInfo) => {
-      const stat = eventInfo.sourceAttribute;
-      if (skillStat[skill] === stat) {
-        CalculateDiceStatChange(eventInfo,skill,stat);  // Goes on to do the calcs on a manual change, but not from the sheet:opened event
-      }
-    });  
-  };
   
-  // When the Lightsaber skill changes, update the lightsaber dice
+  on('change:brawn change:agility change:intellect change:cunning change:willpower change:presence', (eventInfo) => {
+      const stat = eventInfo.sourceAttribute;
+      
+      getAttrs(['skillStatStore'], (values) => {
+        const skillStat = JSON.parse(values.skillStatStore);
+      
+        for (const skill in skillStat) {
+          if (skillStat[skill] === stat) {
+            CalculateDiceStatChange(eventInfo, skill);  // Goes on to do the calcs on a manual change, but not from the sheet:opened event
+          }
+        }
+      });
+  });
+  
+    // When the Lightsaber characteristic changes, update the lightsaber dice
   on('change:lightsaber_characteristic', (eventInfo) => { 
     const stat = eventInfo.newValue;;
-    getAttrs(['lightsaber_rank',stat], (values) => {
+	getAttrs(['lightsaber_rank', stat, 'skillStatStore'], (values) => {
+	  let skillStat = JSON.parse(values.skillStatStore);
+	  skillStat['lightsaber'] = stat;
+	  skillStat = JSON.stringify(skillStat);
+	  
       rank = parseInt(values.lightsaber_rank);
       statValue = parseInt(values[stat]);
       yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
       greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
-      setAttrs({lightsaber_yd: yellowDice, lightsaber_gd: greenDice, lightsaber_characteristic_value: statValue});
-    });
-  });
-
-  // When the Lightsaber attribute value changes, update the lightsaber dice
-  on('change:lightsaber_characteristic_value', (eventInfo) => {
-    const statValue = eventInfo.newValue;;
-    getAttrs(['lightsaber_rank'], (values) => {
-      rank = parseInt(values.lightsaber_rank);
-      yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
-      greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
-      setAttrs({lightsaber_yd: yellowDice, lightsaber_gd: greenDice, lightsaber_characteristic_value: statValue});
+      setAttrs({lightsaber_yd: yellowDice, lightsaber_gd: greenDice, skillStatStore: skillStat});
     });
   });
   
+
   /* Workers for calculating weapon quality dice */
   
   // Cumbersome
