@@ -1308,6 +1308,8 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 .sheet-non_combat_talent input[type="checkbox"] {
   transform: scale(1.5);
   margin-top: 0.5em;
+  width: max-content;
+  justify-self: center;
 }
 
 .sheet-combat_talent textarea,
