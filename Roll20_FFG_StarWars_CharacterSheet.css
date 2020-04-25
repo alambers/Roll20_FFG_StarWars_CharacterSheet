@@ -182,6 +182,10 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   background-color: #7CC48A;
 }
 
+.sheet-centered_heading {
+  text-align: center;
+}
+
 /* Show/Hide sections */
 
 h2 button,
@@ -1153,6 +1157,13 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   margin: 1em 0;
 }
 
+.sheet-weapon_carried_grid {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  column-gap: 0.5em;
+  align-items: center;
+}
+
 /* Armor */
 
 .sheet-armor_item {
@@ -1197,7 +1208,7 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 
 .sheet-gear_item {
   display: grid;
-  grid-template-columns: 4fr 1fr 8fr;
+  grid-template-columns: 4fr 1fr 1fr 8fr;
   column-gap: 1em;
   row-gap: 1em;
 }
@@ -1305,7 +1316,8 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 }
 
 .sheet-combat_talent input[type="checkbox"],
-.sheet-non_combat_talent input[type="checkbox"] {
+.sheet-non_combat_talent input[type="checkbox"],
+.sheet-gear_item input[type="checkbox"] {
   transform: scale(1.5);
   margin-top: 0.5em;
   width: max-content;

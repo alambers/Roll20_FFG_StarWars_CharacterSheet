@@ -1256,7 +1256,16 @@
           </div>
           <div class="weapon_info">
             <label data-i18n="make_model">Make-Model</label>
-            <input class="cell_width_3" type="text" name="attr_make_model" />
+            <input type="text" name="attr_make_model" />
+            <label data-i18n="carried_">Carried?</label>
+            <div class="weapon_carried_grid">
+              <input type="checkbox" name="attr_weapon_carried" value="true" />
+              <span class="icon_help">
+                <div class="help_info_left">
+                  <p>Check this box if the character is currently carrying this weapon.  Carried weapons count toward total encumbrance.</p>
+                </div>
+              </span>
+            </div>            
             <label data-i18n="skill">Skill</label>
             <div class="select_wrapper">
               <select name="attr_weapon_skill">
@@ -1819,17 +1828,26 @@
   <div class="equipment">
     <h2><span data-i18n="gear">Gear</span><button type="action" name="act_show_gear"><span name="attr_show_gear_label"></span></button></h2>    
     <input type="hidden" name="attr_show_gear_label" value="hide" />
-    <input class="show_section" type="hidden" name="attr_show_gear" value="true" />
+    <input class="show_section" type="hidden" name="attr_show_gear" />
     <div class="gear section">
       <div class="gear_item gear_heading">
         <div data-i18n="name">Name</div>
         <div data-i18n="encum">Encum</div>
+        <div class="centered_heading">
+          <span data-i18n="carried_">Carried?</span>
+          <span class="icon_help">
+            <div class="help_info_left">
+              <p>Check this box if the character is currently carrying this item.  Carried items count toward total encumbrance.</p>
+            </div>
+          </span>
+        </div>
         <div data-i18n="description">Description</div>
       </div>
       <fieldset class="repeating_gear">
         <div class="gear_item">
           <input type="text" name="attr_gear_item_name" />
           <input type="number" name="attr_gear_item_encumbrance" min="0" max="5" value="0" />
+          <input type="checkbox" name="attr_gear_item_carried" value="true" />
           <textarea name="attr_gear_item_description"></textarea>
         </div>
       </fieldset>      
@@ -2233,8 +2251,9 @@
 
 
 <!-- Sheet Workers -->
+<!-- worker  javascript -->
 <script type="text/worker">
-  /* Worker for section tabs */
+  /* Worker for sectionjavascript tabs */
   const buttonlist = [
     'bio',
     'skills',
@@ -3129,11 +3148,10 @@
     });
   });
 
-  // When changing a weapon, armor, or gear item encumbrance, change the total encumbrance
-  on('change:repeating_weapons:weapon_encumbrance change:armor_encumbrance change:repeating_gear:gear_item_encumbrance', (eventInfo) => {
+  const encumbranceCalc = (previousValue, newValue) => {
     getAttrs(['encumbrance_current'], (values) => {
-      const previousEncum = parseInt(eventInfo.previousValue);
-      const newEncum = parseInt(eventInfo.newValue);
+      const previousEncum = parseInt(previousValue);
+      const newEncum = parseInt(newValue);
       const currentEncum = parseInt(values.encumbrance_current);
       let encumDifference = Math.abs(previousEncum - newEncum);
       encumDifference = (previousEncum > newEncum) ? -(encumDifference) : encumDifference;
@@ -3145,22 +3163,87 @@
       const setEncum = currentEncum + encumDifference;
       setAttrs({ 'encumbrance_current': setEncum });
     });
+  };
+
+  // When changing a weapon, armor, or gear item encumbrance, change the total encumbrance
+  on('change:repeating_weapons change:armor_encumbrance change:repeating_gear', (eventInfo) => {
+    let itemId = '';
+    let carriedId = '';
+    let encumbranceId = '';
+    let previousValue = eventInfo.previousValue;
+    let newValue = eventInfo.newValue;
+    switch (true) {
+      // This is a gear item encumbrance value changing
+      case(eventInfo.sourceAttribute.indexOf('gear_item_encumbrance') > -1):
+        itemId = (eventInfo.triggerName).slice(15);
+        carriedId = 'repeating_gear'+itemId+'_gear_item_carried';
+        getAttrs([carriedId], (values) => {
+          // If the item is carried, calculate encumbrance; if not, ignore the change
+          if(values[carriedId] === 'true'){
+            encumbranceCalc(previousValue, newValue);
+          };
+        });
+        break;
+      // This is a gear item carried value changing
+      case(eventInfo.sourceAttribute.indexOf('gear_item_carried') > -1):
+        itemId = (eventInfo.triggerName).slice(15);
+        encumbranceId = 'repeating_gear'+itemId+'_gear_item_encumbrance';
+        getAttrs([encumbranceId], (values) => {
+          // If the item is carried, add encumbrance value; if not, remove encumbrance value
+          previousValue = (eventInfo.newValue === 'true') ? 0 : values[encumbranceId];
+          newValue = (eventInfo.newValue === '0') ? 0 : values[encumbranceId];
+          encumbranceCalc(previousValue, newValue);          
+        });        
+        break;
+      // This is a weapon encumbrance value changing
+      case(eventInfo.sourceAttribute.indexOf('weapon_encumbrance') > -1):
+        itemId = (eventInfo.triggerName).slice(18);
+        carriedId = 'repeating_weapons'+itemId+'_weapon_carried';
+        getAttrs([carriedId], (values) => {
+          // If the item is carried, calculate encumbrance; if not, ignore the change
+          if(values[carriedId] === 'true'){
+            encumbranceCalc(previousValue, newValue);
+          };
+        });
+        break;
+      // This is a weapon carried value changing
+      case(eventInfo.sourceAttribute.indexOf('weapon_carried') > -1):
+        itemId = (eventInfo.triggerName).slice(18);
+        encumbranceId = 'repeating_weapons'+itemId+'_weapon_encumbrance';
+        getAttrs([encumbranceId], (values) => {
+          // If the item is carried, add encumbrance value; if not, remove encumbrance value
+          previousValue = (eventInfo.newValue === 'true') ? 0 : values[encumbranceId];
+          newValue = (eventInfo.newValue === '0') ? 0 : values[encumbranceId];
+          encumbranceCalc(previousValue, newValue);          
+        });
+        break;
+      // This is a armor encumbrance value changing
+      case(eventInfo.sourceAttribute.indexOf('armor_encumbrance') > -1):
+        encumbranceCalc(previousValue, newValue);
+        break;
+      default:
+        // Do nothing
+    }
   });
 
   // When removing a gear item, remove it's encumbrance from the total encumbrance
   on('remove:repeating_gear', (eventInfo) => {
     const itemId = (eventInfo.sourceAttribute).slice(15);
     const removedItems = eventInfo.removedInfo;
+    const removedCarriedKey = 'repeating_gear_' + itemId + '_gear_item_carried';
+    const removedEncumKey = 'repeating_gear_' + itemId + '_gear_item_encumbrance';
     // If the repeating item values were never initialized by a user changing a value, the removedInfo will be empty.
     // The item's encumbrance, then does not exist (rather than being zero) and would throw an error.
     if (Object.keys(removedItems).length > 0 && removedItems.constructor === Object) {
-      getAttrs(['encumbrance_current'], (values) => {
-        const removedEncumKey = 'repeating_gear_' + itemId + '_gear_item_encumbrance';
-        const removedEncum = parseInt(removedItems[removedEncumKey]);
-        const currentEncum = parseInt(values.encumbrance_current);
-        setEncum = currentEncum - removedEncum;
-        setAttrs({ 'encumbrance_current': setEncum });
-      });
+      // Only remove encumbrance if the item is currently carried
+      if (removedItems[removedCarriedKey] === 'true') { 
+        getAttrs(['encumbrance_current'], (values) => { 
+          const removedEncum = parseInt(removedItems[removedEncumKey]);
+          const currentEncum = parseInt(values.encumbrance_current);
+          setEncum = currentEncum - removedEncum;
+          setAttrs({ 'encumbrance_current': setEncum });
+        });
+      }
     }
   });
 
@@ -3168,33 +3251,37 @@
   // Also remove any bonus for Defensive or Deflection
   on('remove:repeating_weapons', (eventInfo) => {
     const itemId = (eventInfo.sourceAttribute).slice(18);
-    const removedItems = eventInfo.removedInfo;
+    const removedItems = eventInfo.removedInfo;    
+    const removedCarriedKey = 'repeating_weapons_' + itemId + '_weapon_carried';
+    const removedEncumKey = 'repeating_weapons_' + itemId + '_weapon_encumbrance';
     // If the repeating item values were never initialized by a user changing a value, the removedInfo will be empty.
     // The item's encumbrance, then does not exist (rather than being zero) and would throw an error.
     if (Object.keys(removedItems).length > 0) {
-      getAttrs(['encumbrance_current', 'defense_ranged', 'defense_melee'], (values) => {
-        const removedEncumKey = 'repeating_weapons_' + itemId + '_weapon_encumbrance';
-        const removedDefensiveKey = 'repeating_weapons_' + itemId + '_weapon_quality_defensive_value';
-        const removedDeflectionKey = 'repeating_weapons_' + itemId + '_weapon_quality_deflection_value';
-        if (removedItems[removedEncumKey]) {
-          const removedEncum = parseInt(removedItems[removedEncumKey]);
-          const currentEncum = parseInt(values.encumbrance_current);
-          const setEncum = currentEncum - removedEncum;
-          setAttrs({ 'encumbrance_current': setEncum });
-        }
-        if (removedItems[removedDefensiveKey]) {
-          const removedDefensive = parseInt(removedItems[removedDefensiveKey]);
-          const currentMelee = parseInt(values.defense_melee);
-          setMelee = currentMelee - removedDefensive;
-          setAttrs({ 'defense_melee': setMelee });
-        }
-        if (removedItems[removedDeflectionKey]) {
-          const removedDeflection = parseInt(removedItems[removedDeflectionKey]);
-          const currentRanged = parseInt(values.defense_ranged);
-          const setRanged = currentRanged - removedDeflection;
-          setAttrs({ 'defense_ranged': setRanged });
-        }
-      });
+      // Only remove encumbrance if the weapon is currently carried
+      if (removedItems[removedCarriedKey] === 'true') {
+        getAttrs(['encumbrance_current', 'defense_ranged', 'defense_melee'], (values) => {
+          const removedDefensiveKey = 'repeating_weapons_' + itemId + '_weapon_quality_defensive_value';
+          const removedDeflectionKey = 'repeating_weapons_' + itemId + '_weapon_quality_deflection_value';
+          if (removedItems[removedEncumKey]) {
+            const removedEncum = parseInt(removedItems[removedEncumKey]);
+            const currentEncum = parseInt(values.encumbrance_current);
+            const setEncum = currentEncum - removedEncum;
+            setAttrs({ 'encumbrance_current': setEncum });
+          }
+          if (removedItems[removedDefensiveKey]) {
+            const removedDefensive = parseInt(removedItems[removedDefensiveKey]);
+            const currentMelee = parseInt(values.defense_melee);
+            setMelee = currentMelee - removedDefensive;
+            setAttrs({ 'defense_melee': setMelee });
+          }
+          if (removedItems[removedDeflectionKey]) {
+            const removedDeflection = parseInt(removedItems[removedDeflectionKey]);
+            const currentRanged = parseInt(values.defense_ranged);
+            const setRanged = currentRanged - removedDeflection;
+            setAttrs({ 'defense_ranged': setRanged });
+          }
+        });
+      }
     }
   });
 
