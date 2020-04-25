@@ -1128,7 +1128,7 @@
         </div> 
       </div>
     </div>
-    <input type="hidden" name="attr_skillStatStore" value="{'astrogation':'intellect','athletics':'brawn','charm':'presence','coercion':'willpower','computers':'intellect','cool':'presence','coordination':'agility','deception':'cunning','discipline':'willpower','leadership':'presence','mechanics':'intellect','medicine':'intellect','negotiation':'presence','perception':'cunning','piloting-planetary':'agility','piloting-space':'agility','resilience':'brawn','skullduggery':'cunning','stealth':'agility','streetwise':'cunning','survival':'cunning','vigilance':'willpower','brawl':'brawn','melee':'brawn','gunnery':'agility','lightsaber':'brawn','ranged-light':'agility','ranged-heavy':'agility','core-worlds':'intellect','education':'intellect','lore':'intellect','outer-rim':'intellect','underworld':'intellect','warfare':'intellect','xenology':'intellect'}" />
+    <input type="hidden" name="attr_skillStatStore" value='{"astrogation":"intellect","athletics":"brawn","charm":"presence","coercion":"willpower","computers":"intellect","cool":"presence","coordination":"agility","deception":"cunning","discipline":"willpower","leadership":"presence","mechanics":"intellect","medicine":"intellect","negotiation":"presence","perception":"cunning","piloting-planetary":"agility","piloting-space":"agility","resilience":"brawn","skullduggery":"cunning","stealth":"agility","streetwise":"cunning","survival":"cunning","vigilance":"willpower","brawl":"brawn","melee":"brawn","gunnery":"agility","lightsaber":"brawn","ranged-light":"agility","ranged-heavy":"agility","core-worlds":"intellect","education":"intellect","lore":"intellect","outer-rim":"intellect","underworld":"intellect","warfare":"intellect","xenology":"intellect"}' />
   </div>
   <div class="combat">
     <h2><span data-i18n="initiative">Initiative</span><button type="action" name="act_show_initiative"><span name="attr_show_initiative_label"></span></button></h2>    
@@ -2244,7 +2244,7 @@
     'force',
     'settings'
   ];
-  buttonlist.forEach(button => {    
+  buttonlist.forEach(button => {
     on(`clicked:${button}`, () => {
       setAttrs({
         sheetTab: button,
@@ -2255,13 +2255,33 @@
 
   /* Worker for font size */
   on('change:settings_font_size_selector', (eventInfo) => {
-    setAttrs({'settings_font_size':eventInfo.newValue});
+    setAttrs({ 'settings_font_size': eventInfo.newValue });
   });
 
-    /* Initialize Stats with a change when the sheet is opened in order to trigger other workers */
-  
-    // Stats to initialize with a value of 1
-    const statListOne = [
+  /* Initialize Stats with a change when the sheet is opened in order to trigger other workers */
+  on('sheet:opened', () => {
+    let skillStat = {};
+
+    getAttrs(['skillStatStore', 'lightsaber_characteristic'], (values) => {
+      try {
+        skillStat = JSON.parse(decodeURIComponent(values.skillStatStore));
+      } catch {
+        skillStat = JSON.parse('{"astrogation":"intellect","athletics":"brawn","charm":"presence","coercion":"willpower","computers":"intellect","cool":"presence","coordination":"agility","deception":"cunning","discipline":"willpower","leadership":"presence","mechanics":"intellect","medicine":"intellect","negotiation":"presence","perception":"cunning","piloting-planetary":"agility","piloting-space":"agility","resilience":"brawn","skullduggery":"cunning","stealth":"agility","streetwise":"cunning","survival":"cunning","vigilance":"willpower","brawl":"brawn","melee":"brawn","gunnery":"agility","lightsaber":"brawn","ranged-light":"agility","ranged-heavy":"agility","core-worlds":"intellect","education":"intellect","lore":"intellect","outer-rim":"intellect","underworld":"intellect","warfare":"intellect","xenology":"intellect"}');
+        
+        try {
+            skillStat['lightsaber'] = values[lightsaber_characteristic];
+        } catch {
+            skillStat['lightsaber'] = 'brawn';
+        }
+        skillStat = encodeURIComponent(JSON.parse(skillStat));
+        setAttrs({skillStatStore:skillStat, 'lightsaber_characteristic':'brawn'});
+      }
+    });
+  });
+
+
+  // Stats to initialize with a value of 1
+  const statListOne = [
       'brawn',
       'agility',
       'intellect',
@@ -2269,75 +2289,92 @@
       'willpower',
       'presence'
     ];
-  
-    statListOne.forEach((stat) => {
-      on('sheet:opened', () => {    
+
+
+  on('sheet:opened', () => {
+    getAttrs(['skillStatStore'], (values) => {
+      const skillStat = JSON.parse(decodeURIComponent(values.skillStatStore));
+
+      statListOne.forEach((stat) => {
         getAttrs([stat], (values) => {
-          const thisStat = (isNaN(values[stat]) || (values[stat]) === 0  || (values[stat]) === "0") ? 1 : parseInt(values[stat]);
+          const thisStat = (isNaN(values[stat]) || (values[stat]) === 0 || (values[stat]) === "0") ? 1 : parseInt(values[stat]);
           const statValue = thisStat > 0 ? thisStat : 1;
-          setAttrs({[stat]:statValue});  // Properly sets the stats, but boes not fire a on:change event; bug reported
+          setAttrs({[stat]: statValue }); // Properly sets the stats, but boes not fire a on:change event; bug reported
+
+          // Until they fix it..    
+          const tmp = { 'newValue': statValue };
+
+          for (const skill in skillStat) {
+            if (skillStat[skill] === stat) {
+              CalculateDiceStatChange(tmp, skill);
+            }
+          }
         });
       });
     });
+  });
 
-    // Stats to initialize with a value of 0
-    const statListZero = [
+  // Stats to initialize with a value of 0
+  const statListZero = [
       'defense_ranged',
       'defense_melee',
       'encumbrance_current',
       'force_rating'
     ];
-  
+
+  on('sheet:opened', () => {
     statListZero.forEach((stat) => {
-      on('sheet:opened', () => {    
-        getAttrs([stat], (values) => {
-          const thisStat = isNaN(values[stat]) ? 0 : parseInt(values[stat]);
-          const statValue = thisStat > 0 ? thisStat : 0;
-          setAttrs({[stat]:statValue});  // Properly sets the stats, but boes not fire a on:change event; bug reported
-        });
+      getAttrs([stat], (values) => {
+        const thisStat = isNaN(values[stat]) ? 0 : parseInt(values[stat]);
+        const statValue = thisStat > 0 ? thisStat : 0;
+        setAttrs({[stat]: statValue }); // Properly sets the stats, but boes not fire a on:change event; bug reported
+        // What should get triggered here? -Aaron
       });
     });
-  
+  });
+
+
+
   /* Workers for skill dice */
   const skills = {
-    'astrogation':'intellect',
-    'athletics':'brawn',
-    'charm':'presence',
-    'coercion':'willpower',
-    'computers':'intellect',
-    'cool':'presence',
-    'coordination':'agility',
-    'deception':'cunning',
-    'discipline':'willpower',
-    'leadership':'presence',
-    'mechanics':'intellect',
-    'medicine':'intellect',
-    'negotiation':'presence',
-    'perception':'cunning',
-    'piloting-planetary':'agility',
-    'piloting-space':'agility',
-    'resilience':'brawn',
-    'skullduggery':'cunning',
-    'stealth':'agility',
-    'streetwise':'cunning',
-    'survival':'cunning',
-    'vigilance':'willpower',
-    'brawl':'brawn',
-    'melee':'brawn',
-    'gunnery':'agility',
-    'lightsaber':'brawn',
-    'ranged-light':'agility',
-    'ranged-heavy':'agility',
-    'core-worlds':'intellect',
-    'education':'intellect',
-    'lore':'intellect',
-    'outer-rim':'intellect',
-    'underworld':'intellect',
-    'warfare':'intellect',
-    'xenology':'intellect'
+    'astrogation': 'intellect',
+    'athletics': 'brawn',
+    'charm': 'presence',
+    'coercion': 'willpower',
+    'computers': 'intellect',
+    'cool': 'presence',
+    'coordination': 'agility',
+    'deception': 'cunning',
+    'discipline': 'willpower',
+    'leadership': 'presence',
+    'mechanics': 'intellect',
+    'medicine': 'intellect',
+    'negotiation': 'presence',
+    'perception': 'cunning',
+    'piloting-planetary': 'agility',
+    'piloting-space': 'agility',
+    'resilience': 'brawn',
+    'skullduggery': 'cunning',
+    'stealth': 'agility',
+    'streetwise': 'cunning',
+    'survival': 'cunning',
+    'vigilance': 'willpower',
+    'brawl': 'brawn',
+    'melee': 'brawn',
+    'gunnery': 'agility',
+    'lightsaber': 'brawn',
+    'ranged-light': 'agility',
+    'ranged-heavy': 'agility',
+    'core-worlds': 'intellect',
+    'education': 'intellect',
+    'lore': 'intellect',
+    'outer-rim': 'intellect',
+    'underworld': 'intellect',
+    'warfare': 'intellect',
+    'xenology': 'intellect'
   };
-  
-  
+
+
   // When the skill rank changes, update the dice
   const CalculateDice = (eventInfo, skill, stat) => {
     let rank = 0;
@@ -2349,25 +2386,25 @@
     rank = parseInt(eventInfo.newValue);
     getAttrs([stat], (values) => {
       statValue = parseInt(values[stat]);
-      yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
+      yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank)) / 2;
       greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
       yellowDiceName = skill + '_yd';
       greenDiceName = skill + '_gd';
-      setAttrs({[yellowDiceName]: yellowDice, [greenDiceName]: greenDice});
+      setAttrs({[yellowDiceName]: yellowDice, [greenDiceName]: greenDice });
     });
   };
-  
+
   for (const skill in skills) {
     const skillRank = skill + '_rank';
     on('change:' + skillRank, (eventInfo) => {
       getAttrs(['skillStatStore'], (values) => {
-        const skillStat = JSON.parse(values.skillStatStore);
+        const skillStat = JSON.parse(decodeURIComponent(values.skillStatStore));
         const stat = skillStat[skill];
         CalculateDice(eventInfo, skill, stat)
       });
     });
   }
-  
+
   // When the associated attribute changes, update the dice
   const CalculateDiceStatChange = (eventInfo, skill) => {
     const statValue = parseInt(eventInfo.newValue);
@@ -2376,66 +2413,66 @@
     let greenDice = 0;
     let yellowDiceName = '';
     let greenDiceName = '';
-    const rankAttr = skill+'_rank';
+    const rankAttr = skill + '_rank';
     getAttrs([rankAttr], (values) => {
       rank = parseInt(values[rankAttr]);
-      yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
+      yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank)) / 2;
       greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
       yellowDiceName = skill + '_yd';
       greenDiceName = skill + '_gd';
-      setAttrs({[yellowDiceName]: yellowDice, [greenDiceName]: greenDice});
+      setAttrs({[yellowDiceName]: yellowDice, [greenDiceName]: greenDice });
     });
   };
-  
-  
+
+
   on('change:brawn change:agility change:intellect change:cunning change:willpower change:presence', (eventInfo) => {
-      const stat = eventInfo.sourceAttribute;
-      
-      getAttrs(['skillStatStore'], (values) => {
-        const skillStat = JSON.parse(values.skillStatStore);
-      
-        for (const skill in skillStat) {
-          if (skillStat[skill] === stat) {
-            CalculateDiceStatChange(eventInfo, skill);  // Goes on to do the calcs on a manual change, but not from the sheet:opened event
-          }
+    const stat = eventInfo.sourceAttribute;
+
+    getAttrs(['skillStatStore'], (values) => {
+      const skillStat = JSON.parse(decodeURIComponent(values.skillStatStore));
+
+      for (const skill in skillStat) {
+        if (skillStat[skill] === stat) {
+          CalculateDiceStatChange(eventInfo, skill); // Goes on to do the calcs on a manual change, but not from the sheet:opened event
         }
-      });
-  });
-  
-    // When the Lightsaber characteristic changes, update the lightsaber dice
-  on('change:lightsaber_characteristic', (eventInfo) => { 
-    const stat = eventInfo.newValue;;
-	getAttrs(['lightsaber_rank', stat, 'skillStatStore'], (values) => {
-	  let skillStat = JSON.parse(values.skillStatStore);
-	  skillStat['lightsaber'] = stat;
-	  skillStat = JSON.stringify(skillStat);
-	  
-      rank = parseInt(values.lightsaber_rank);
-      statValue = parseInt(values[stat]);
-      yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank))/2;
-      greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
-      setAttrs({lightsaber_yd: yellowDice, lightsaber_gd: greenDice, skillStatStore: skillStat});
+      }
     });
   });
-  
+
+  // When the Lightsaber characteristic changes, update the lightsaber dice
+  on('change:lightsaber_characteristic', (eventInfo) => {
+    const stat = eventInfo.newValue;;
+    getAttrs(['lightsaber_rank', stat, 'skillStatStore'], (values) => {
+      let skillStat = JSON.parse(decodeURIComponent(values.skillStatStore));
+      skillStat['lightsaber'] = stat;
+      skillStat = encodeURIComponent(JSON.stringify(skillStat));
+
+      rank = parseInt(values.lightsaber_rank);
+      statValue = parseInt(values[stat]);
+      yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank)) / 2;
+      greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
+      setAttrs({ lightsaber_yd: yellowDice, lightsaber_gd: greenDice, skillStatStore: skillStat });
+    });
+  });
+
 
   /* Workers for calculating weapon quality dice */
-  
+
   // Cumbersome
   on('change:repeating_weapons:weapon_quality_cumbersome_value', (eventInfo) => {
     const cumbersome = parseInt(eventInfo.newValue);
     getAttrs(['brawn'], (values) => {
       const brawn = parseInt(values.brawn);
-      const penalty = cumbersome - brawn;    
+      const penalty = cumbersome - brawn;
       if (penalty > 0) {
-        setAttrs({'repeating_weapons_weapon_quality_cumbersome_penalty':penalty});
+        setAttrs({ 'repeating_weapons_weapon_quality_cumbersome_penalty': penalty });
       }
       else {
-        setAttrs({'repeating_weapons_weapon_quality_cumbersome_penalty':0});
+        setAttrs({ 'repeating_weapons_weapon_quality_cumbersome_penalty': 0 });
       }
     });
   });
-  
+
   // Defensive
   on('change:repeating_weapons:weapon_quality_defensive_value', (eventInfo) => {
     getAttrs(['defense_melee'], (values) => {
@@ -2445,15 +2482,15 @@
       let armorBonus = Math.abs(previousDefensive - newDefensive);
       // Workaround for newly added items in repeating sections; number fields have no value until initialized with a change
       // This will break if the user happens to manually change a number to the same number
-      if(previousDefensive === newDefensive){
+      if (previousDefensive === newDefensive) {
         armorBonus = newDefensive;
       }
       armorBonus = previousDefensive > newDefensive ? -(armorBonus) : armorBonus;
       const newDefense = currentDefense + armorBonus > 0 ? currentDefense + armorBonus : 0;
-      setAttrs({'defense_melee':newDefense});
+      setAttrs({ 'defense_melee': newDefense });
     });
   });
-  
+
   // Deflection
   on('change:repeating_weapons:weapon_quality_deflection_value', (eventInfo) => {
     getAttrs(['defense_ranged'], (values) => {
@@ -2463,28 +2500,28 @@
       let armorBonus = Math.abs(previousDeflection - newDeflection);
       // Workaround for newly added items in repeating sections; number fields have no value until initialized with a change
       // This will break if the user happens to manually change a number to the same number
-      if(previousDeflection === newDeflection){
+      if (previousDeflection === newDeflection) {
         armorBonus = newDeflection;
       }
       armorBonus = previousDeflection > newDeflection ? -(armorBonus) : armorBonus;
       const newDefense = currentDefense + armorBonus > 0 ? currentDefense + armorBonus : 0;
-      setAttrs({'defense_ranged':newDefense});
+      setAttrs({ 'defense_ranged': newDefense });
     });
   });
-  
+
   // Inferior
   on('change:repeating_weapons:weapon_quality_inferior_value', (eventInfo) => {
     const inferior = eventInfo.newValue;
     if (inferior === 'Yes') {
       getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) => {
         const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus_total);
-        setAttrs({'repeating_weapons_weapon_damage_bonus_total':damageBonus-1, 'repeating_weapons_weapon_quality_inferior_penalty':'1t', 'repeating_weapons_weapon_quality_inferior_penalty_damage':'1'});
+        setAttrs({ 'repeating_weapons_weapon_damage_bonus_total': damageBonus - 1, 'repeating_weapons_weapon_quality_inferior_penalty': '1t', 'repeating_weapons_weapon_quality_inferior_penalty_damage': '1' });
       });
     }
     else {
-      getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) =>  {
+      getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) => {
         const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus_total);
-        setAttrs({'repeating_weapons_weapon_damage_bonus_total':damageBonus+1, 'repeating_weapons_weapon_quality_inferior_penalty':'', 'repeating_weapons_weapon_quality_inferior_penalty_damage':''});
+        setAttrs({ 'repeating_weapons_weapon_damage_bonus_total': damageBonus + 1, 'repeating_weapons_weapon_quality_inferior_penalty': '', 'repeating_weapons_weapon_quality_inferior_penalty_damage': '' });
       });
     }
   });
@@ -2493,15 +2530,15 @@
   on('change:repeating_weapons:weapon_quality_superior_value', (eventInfo) => {
     const superior = eventInfo.newValue;
     if (superior === 'Yes') {
-      getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) =>  {
+      getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) => {
         const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus_total);
-        setAttrs({'repeating_weapons_weapon_damage_bonus_total':damageBonus+1, 'repeating_weapons_weapon_quality_superior_bonus':'1a', 'repeating_weapons_weapon_quality_superior_bonus_damage':'1'});
+        setAttrs({ 'repeating_weapons_weapon_damage_bonus_total': damageBonus + 1, 'repeating_weapons_weapon_quality_superior_bonus': '1a', 'repeating_weapons_weapon_quality_superior_bonus_damage': '1' });
       });
     }
     else {
-      getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) =>  {
+      getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) => {
         const damageBonus = parseInt(values.repeating_weapons_weapon_damage_bonus_total);
-        setAttrs({'repeating_weapons_weapon_damage_bonus_total':damageBonus-1, 'repeating_weapons_weapon_quality_superior_bonus':'', 'repeating_weapons_weapon_quality_superior_bonus_damage':''});
+        setAttrs({ 'repeating_weapons_weapon_damage_bonus_total': damageBonus - 1, 'repeating_weapons_weapon_quality_superior_bonus': '', 'repeating_weapons_weapon_quality_superior_bonus_damage': '' });
       });
     }
   });
@@ -2510,10 +2547,10 @@
   on('change:repeating_weapons:weapon_quality_vicious_value', (eventInfo) => {
     const viciousPrevious = parseInt(eventInfo.previousValue);
     const viciousNew = parseInt(eventInfo.newValue);
-    getAttrs(['repeating_weapons_weapon_critical_bonus_total'], (values) =>  {
+    getAttrs(['repeating_weapons_weapon_critical_bonus_total'], (values) => {
       const criticalBonus = parseInt(values.repeating_weapons_weapon_critical_bonus_total);
-      const viciousPreviousBonus = parseInt(viciousPrevious*10);
-      const viciousNewBonus = parseInt(viciousNew*10);
+      const viciousPreviousBonus = parseInt(viciousPrevious * 10);
+      const viciousNewBonus = parseInt(viciousNew * 10);
       let viciousBonus = Math.abs(parseInt(viciousNewBonus - viciousPreviousBonus));
       // Workaround for newly added items in repeating sections; number fields have no value until initialized with a change
       // This will break if the user happens to manually change a number to the same number
@@ -2524,7 +2561,7 @@
         viciousBonus = -(viciousBonus);
       }
       const totalBonus = criticalBonus + viciousBonus;
-      setAttrs({'repeating_weapons_weapon_critical_bonus_total':totalBonus, 'repeating_weapons_weapon_quality_vicious_crit_bonus':viciousNew*10});
+      setAttrs({ 'repeating_weapons_weapon_critical_bonus_total': totalBonus, 'repeating_weapons_weapon_quality_vicious_crit_bonus': viciousNew * 10 });
     });
   });
 
@@ -2532,17 +2569,17 @@
   on('change:repeating_weapons:weapon_critical_bonus', (eventInfo) => {
     const bonusPrevious = parseInt(eventInfo.previousValue);
     const bonusNew = parseInt(eventInfo.newValue);
-    getAttrs(['repeating_weapons_weapon_critical_bonus_total'], (values) =>  {
+    getAttrs(['repeating_weapons_weapon_critical_bonus_total'], (values) => {
       const currentBonus = parseInt(values.repeating_weapons_weapon_critical_bonus_total);
       let newBonus = Math.abs(parseInt(bonusNew - bonusPrevious));
       if (bonusPrevious === bonusNew) {
-        newBonus = bonusNew;   // Weird quirk in Roll20 - if the field isn't initiated with change, it will set the value to 1 regardless of the HTML value attribute; this is a workaround for that
+        newBonus = bonusNew; // Weird quirk in Roll20 - if the field isn't initiated with change, it will set the value to 1 regardless of the HTML value attribute; this is a workaround for that
       }
       if (bonusPrevious > bonusNew) {
         newBonus = -(newBonus);
       }
       const totalBonus = currentBonus + newBonus;
-      setAttrs({'repeating_weapons_weapon_critical_bonus_total':totalBonus});
+      setAttrs({ 'repeating_weapons_weapon_critical_bonus_total': totalBonus });
     });
   });
 
@@ -2550,51 +2587,51 @@
   on('change:repeating_weapons:weapon_damage_bonus', (eventInfo) => {
     const bonusPrevious = parseInt(eventInfo.previousValue);
     const bonusNew = parseInt(eventInfo.newValue);
-    getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) =>  {
+    getAttrs(['repeating_weapons_weapon_damage_bonus_total'], (values) => {
       const currentBonus = parseInt(values.repeating_weapons_weapon_damage_bonus_total);
       let newBonus = Math.abs(parseInt(bonusNew - bonusPrevious));
       if (bonusPrevious === bonusNew) {
-        newBonus = bonusNew;   // Weird quirk in Roll20 - if the field isn't initiated with change, it will set the value to 1 regardless of the HTML value attribute; this is a workaround for that
+        newBonus = bonusNew; // Weird quirk in Roll20 - if the field isn't initiated with change, it will set the value to 1 regardless of the HTML value attribute; this is a workaround for that
       }
       if (bonusPrevious > bonusNew) {
         newBonus = -(newBonus);
       }
       const totalBonus = currentBonus + newBonus;
-      setAttrs({'repeating_weapons_weapon_damage_bonus_total':totalBonus});
+      setAttrs({ 'repeating_weapons_weapon_damage_bonus_total': totalBonus });
     });
   });
-  
+
   /* Display wapon qualities in the roll template */
-  
+
   const qualitiesObject = {
-    'weapon_quality_accurate_value':'Accurate',
-    'weapon_quality_auto_fire_value':'Auto-Fire',
-    'weapon_quality_blast_value':'Blast',
-    'weapon_quality_breach_value':'Breach',
-    'weapon_quality_burn_value':'Burn',
-    'weapon_quality_concussive_value':'Concussive',
-    'weapon_quality_cortosis_value':'Cortosis',
-    'weapon_quality_cumbersome_value':'Cumbersome',
-    'weapon_quality_defensive_value':'Defensive',
-    'weapon_quality_deflection_value':'Deflection',
-    'weapon_quality_disorient_value':'Disorient',
-    'weapon_quality_ensnare_value':'Ensnare',
-    'weapon_quality_guided_value':'Guided',  
-    'weapon_quality_knockdown_value':'Knockdown',
-    'weapon_quality_inaccurate_value':'Inaccurate',
-    'weapon_quality_inferior_value':'Inferior',
-    'weapon_quality_ion_value':'Ion',
-    'weapon_quality_limited_ammo_value':'Limited Ammo',
-    'weapon_quality_linked_value':'Linked',
-    'weapon_quality_pierce_value':'Pierce',
-    'weapon_quality_prepare_value':'Prepare',
-    'weapon_quality_slow_firing_value':'Slow-Firing',
-    'weapon_quality_stun_damage_value':'Stun Damage',
-    'weapon_quality_sunder_value':'Sunder',
-    'weapon_quality_superior_value':'Superior',
-    'weapon_quality_vicious_value':'Vicious'
+    'weapon_quality_accurate_value': 'Accurate',
+    'weapon_quality_auto_fire_value': 'Auto-Fire',
+    'weapon_quality_blast_value': 'Blast',
+    'weapon_quality_breach_value': 'Breach',
+    'weapon_quality_burn_value': 'Burn',
+    'weapon_quality_concussive_value': 'Concussive',
+    'weapon_quality_cortosis_value': 'Cortosis',
+    'weapon_quality_cumbersome_value': 'Cumbersome',
+    'weapon_quality_defensive_value': 'Defensive',
+    'weapon_quality_deflection_value': 'Deflection',
+    'weapon_quality_disorient_value': 'Disorient',
+    'weapon_quality_ensnare_value': 'Ensnare',
+    'weapon_quality_guided_value': 'Guided',
+    'weapon_quality_knockdown_value': 'Knockdown',
+    'weapon_quality_inaccurate_value': 'Inaccurate',
+    'weapon_quality_inferior_value': 'Inferior',
+    'weapon_quality_ion_value': 'Ion',
+    'weapon_quality_limited_ammo_value': 'Limited Ammo',
+    'weapon_quality_linked_value': 'Linked',
+    'weapon_quality_pierce_value': 'Pierce',
+    'weapon_quality_prepare_value': 'Prepare',
+    'weapon_quality_slow_firing_value': 'Slow-Firing',
+    'weapon_quality_stun_damage_value': 'Stun Damage',
+    'weapon_quality_sunder_value': 'Sunder',
+    'weapon_quality_superior_value': 'Superior',
+    'weapon_quality_vicious_value': 'Vicious'
   };
-    
+
   // Update the quality list for display in the roll template based on adding/removing/updating weapon qualities
   for (const quality in qualitiesObject) {
     const qualityTitle = qualitiesObject[quality];
@@ -2603,55 +2640,55 @@
         const currentList = values.repeating_weapons_weapon_qualities_list;
         let weaponQualities = currentList.split(',');
         let qualityList = '';
-      const qualityValue = eventInfo.newValue;
-      const inArrayNone = weaponQualities.findIndex(thisQuality => thisQuality.includes('None'));
-      if (inArrayNone > -1){
-        let removed = weaponQualities.splice(inArrayNone, 1);
-      }
-      const inArray = weaponQualities.findIndex(thisQuality => thisQuality.includes(qualityTitle));
-      if (inArray === -1){
-        switch(qualityValue) {
-          case 'Yes':
-            weaponQualities.push(qualityTitle);
-            break;
-          case 'No':
-            // Do nothing
-            break;
-          default:
-            weaponQualities.push(qualityTitle + ' ' + qualityValue);
+        const qualityValue = eventInfo.newValue;
+        const inArrayNone = weaponQualities.findIndex(thisQuality => thisQuality.includes('None'));
+        if (inArrayNone > -1) {
+          let removed = weaponQualities.splice(inArrayNone, 1);
         }
-      }
-      else {
-        switch(qualityValue) {
-          case 'Yes':
-            // Do nothing
-            break;
-          case 'No':
-            let removed = weaponQualities.splice(inArray, 1);
-            break;
-          default:
-            if (parseInt(qualityValue) > 0){
-              let removed = weaponQualities.splice(inArray, 1, qualityTitle + ' ' + qualityValue);
-            }
-            else {
+        const inArray = weaponQualities.findIndex(thisQuality => thisQuality.includes(qualityTitle));
+        if (inArray === -1) {
+          switch (qualityValue) {
+            case 'Yes':
+              weaponQualities.push(qualityTitle);
+              break;
+            case 'No':
+              // Do nothing
+              break;
+            default:
+              weaponQualities.push(qualityTitle + ' ' + qualityValue);
+          }
+        }
+        else {
+          switch (qualityValue) {
+            case 'Yes':
+              // Do nothing
+              break;
+            case 'No':
               let removed = weaponQualities.splice(inArray, 1);
-            }
+              break;
+            default:
+              if (parseInt(qualityValue) > 0) {
+                let removed = weaponQualities.splice(inArray, 1, qualityTitle + ' ' + qualityValue);
+              }
+              else {
+                let removed = weaponQualities.splice(inArray, 1);
+              }
+          }
         }
-      }
-      qualityList = weaponQualities.join(', ');
-      setAttrs({'repeating_weapons_weapon_qualities_list':qualityList}); 
-      });      
+        qualityList = weaponQualities.join(', ');
+        setAttrs({ 'repeating_weapons_weapon_qualities_list': qualityList });
+      });
     });
   };
-  
+
   // Send weapon skill type dice to the roller based on weapon skill select box
   on('change:repeating_weapons:weapon_skill', (eventInfo) => {
     const skill = eventInfo.newValue;
     let diceCalc = '';
     let yellowDice = 0;
     let greenDice = 0;
-    getAttrs(['brawl_yd','brawl_gd','melee_yd','melee_gd','gunnery_yd','gunnery_gd','ranged-light_yd','ranged-light_gd','ranged-heavy_yd','ranged-heavy_gd','lightsaber_yd','lightsaber_gd','mechanics_yd','mechanics_gd','medicine_yd','medicine_gd','resilience_yd','resilience_gd'], (values) => {
-      switch (skill){
+    getAttrs(['brawl_yd', 'brawl_gd', 'melee_yd', 'melee_gd', 'gunnery_yd', 'gunnery_gd', 'ranged-light_yd', 'ranged-light_gd', 'ranged-heavy_yd', 'ranged-heavy_gd', 'lightsaber_yd', 'lightsaber_gd', 'mechanics_yd', 'mechanics_gd', 'medicine_yd', 'medicine_gd', 'resilience_yd', 'resilience_gd'], (values) => {
+      switch (skill) {
         case 'Brawl':
           diceCalc = 'skill(@{brawl_rank}|@{brawn}|@{brawl_modifiers})';
           yellowDice = values.brawl_yd;
@@ -2698,158 +2735,158 @@
           greenDice = values.resilience_gd;
           break;
       };
-      setAttrs({'repeating_weapons_weapon_skill_value':diceCalc,'repeating_weapons_weapon_skill_yd':yellowDice,'repeating_weapons_weapon_skill_gd':greenDice});
+      setAttrs({ 'repeating_weapons_weapon_skill_value': diceCalc, 'repeating_weapons_weapon_skill_yd': yellowDice, 'repeating_weapons_weapon_skill_gd': greenDice });
     });
   });
 
   /* Workers for critical hits */
 
   const critTable = {
-    '5':{
+    '5': {
       severity: 'Easy (1 ♦)',
       type: 'Minor Nick',
       description: 'Suffer 1 strain.'
     },
-    '10':{
+    '10': {
       severity: 'Easy (1 ♦)',
       type: 'Slowed Down',
       description: 'May only act during last allied Initiative slot on next turn.'
     },
-    '15':{
+    '15': {
       severity: 'Easy (1 ♦)',
       type: 'Sudden Jolt',
       description: 'May only act during last hero Initiative slot on next turn.'
     },
-    '20':{
+    '20': {
       severity: 'Easy (1 ♦)',
       type: 'Distracted',
       description: 'Cannot perform free maneuver on next turn.'
     },
-    '25':{
+    '25': {
       severity: 'Easy (1 ♦)',
       type: 'Off-Balance',
       description: 'Add 1 Setback die to next skill check.'
     },
-    '30':{
+    '30': {
       severity: 'Easy (1 ♦)',
       type: 'Discouraging Wound',
       description: 'Flip one light destiny to dark.'
     },
-    '35':{
+    '35': {
       severity: 'Easy (1 ♦)',
       type: 'Stunned',
       description: 'Staggered, cannot perform action on next turn.'
     },
-    '40':{
+    '40': {
       severity: 'Easy (1 ♦)',
       type: 'Stinger',
       description: 'Increase difficulty of next check by 1 Difficulty die.'
     },
     //----------------------------- Severity 2
-    '45':{
+    '45': {
       severity: 'Average (2 ♦♦)',
       type: 'Bowled Over',
       description: 'Knocked prone and suffer 1 strain.'
     },
-    '50':{
+    '50': {
       severity: 'Average (2 ♦♦)',
       type: 'Head Ringer',
       description: 'Increase difficulty of all Intellect and Cunning checks by 1 Difficulty die until end of encounter.'
     },
-    '55':{
+    '55': {
       severity: 'Average (2 ♦♦)',
       type: 'Fearsome Wound',
       description: 'Increase difficulty of all Presence and Willpower checks by 1 Difficulty die until end of encounter.'
     },
-    '60':{
+    '60': {
       severity: 'Average (2 ♦♦)',
       type: 'Agonizing Wound',
       description: 'Increase difficulty of all Brawn and Agility checks by 1 Difficulty die until end of encounter.'
     },
-    '65':{
+    '65': {
       severity: 'Average (2 ♦♦)',
       type: 'Slightly Dazed',
       description: 'Add 1 Setback die to all skill checks until end of encounter.'
     },
-    '70':{
+    '70': {
       severity: 'Average (2 ♦♦)',
       type: 'Scattered Senses',
       description: 'Remove all Boost dice from all skill checks until end of encounter.'
     },
-    '75':{
+    '75': {
       severity: 'Average (2 ♦♦)',
       type: 'Hamstrung',
       description: 'Lose free maneuver until end of encounter.'
     },
-    '80':{
+    '80': {
       severity: 'Average (2 ♦♦)',
       type: 'Staggered',
       description: 'Attacker may immediately attempt another free attack against you using same dice pool as original attack.'
     },
-    '85':{
+    '85': {
       severity: 'Average (2 ♦♦)',
       type: 'Winded',
       description: 'Cannot voluntarily suffer strain to activate abilities or gain additional maneuvers until end of encounter.'
     },
-    '90':{
+    '90': {
       severity: 'Average (2 ♦♦)',
       type: 'Compromised',
       description: 'Increase difficulty of all skill checks by 1 Difficulty die until end of encounter.'
     },
     //---------------------------------------- Severity 3
-    '95':{
+    '95': {
       severity: 'Hard (3 ♦♦♦)',
       type: 'At the Brink',
       description: 'Suffer 1 strain each time you perform an action.'
     },
-    '100':{
+    '100': {
       severity: 'Hard (3 ♦♦♦)',
       type: 'Crippled',
       description: 'Limb crippled until healed or replaced. Increase difficulty of all checks that use that limb by 1 Difficulty die.'
     },
-    '105':{
+    '105': {
       severity: 'Hard (3 ♦♦♦)',
       type: 'Maimed',
       description: 'Limb permanently lost. Unless you have a cybernetic replacement, cannot perform actions that use that limb. Add 1 Setback to all other actions.'
     },
-    '110':{
+    '110': {
       severity: 'Hard (3 ♦♦♦)',
       type: 'Horrific Injury',
       description: 'Roll 1d10 to determine one wounded characteristic -- roll results(1-3 = Brawn, 4-6 = Agility, 7 = Intellect, 8 = Cunning, 9 = Presence, 10 = Willpower. Until Healed, treat characteristic as one point lower.'
     },
-    '115':{
+    '115': {
       severity: 'Hard (3 ♦♦♦)',
       type: 'Temporarily Lame',
       description: 'Until healed, may not perform more than one maneuver each turn.'
     },
-    '120':{
+    '120': {
       severity: 'Hard (3 ♦♦♦)',
       type: 'Blinded',
       description: 'Can no longer see. Upgrade the difficulty of Perception and Vigilance checks three times, and all other checks twice.'
     },
-    '125':{
+    '125': {
       severity: 'Hard (3 ♦♦♦)',
       type: 'Knocked Senseless',
       description: 'You can no longer upgrade dice for checks.'
     },
     //---------------------------------------- Severity 4
-    '130':{
+    '130': {
       severity: 'Daunting (4 ♦♦♦♦)',
       type: 'Gruesome Injury',
       description: 'Roll 1d10 to determine one wounded characteristic -- roll results(1-3 = Brawn, 4-6 = Agility, 7 = Intellect, 8 = Cunning, 9 = Presence, 10 = Willpower. Characteristic is permanently one point lower.'
     },
-    '140':{
+    '140': {
       severity: 'Daunting (4 ♦♦♦♦)',
       type: 'Bleeding Out',
       description: 'Suffer 1 wound and 1 strain every round at the beginning of turn. For every 5 wounds suffered beyond wound threshold, suffer one additional Critical Injury (ignore the details for any result below this result).'
     },
-    '150':{
+    '150': {
       severity: 'Daunting (4 ♦♦♦♦)',
       type: 'The End is Nigh',
       description: 'Die after the last Initiative slot during the next round.'
     },
     //---------------------------------------- DEAD
-    '151':{
+    '151': {
       severity: 'DEAD',
       type: 'Dead',
       description: 'Complete, absolute death.'
@@ -2859,12 +2896,12 @@
   on('change:repeating_current-crits:current_crit_number', (eventInfo) => {
     const critNumber = eventInfo.newValue;
     const critSeverity = critTable[critNumber].severity;
-    const critType =  critTable[critNumber].type;
-    const critDescription =  critTable[critNumber].description;
+    const critType = critTable[critNumber].type;
+    const critDescription = critTable[critNumber].description;
     setAttrs({
-      'repeating_current-crits_current_crit_severity':critSeverity,
-      'repeating_current-crits_current_crit_type':critType,
-      'repeating_current-crits_current_crit_description':critDescription
+      'repeating_current-crits_current_crit_severity': critSeverity,
+      'repeating_current-crits_current_crit_type': critType,
+      'repeating_current-crits_current_crit_description': critDescription
     });
   });
 
@@ -2873,46 +2910,46 @@
   on('clicked:repeating_current-crits:healcrit', (eventInfo) => {
     const critButtonId = eventInfo.sourceAttribute;
     const critButtonIdLength = critButtonId.length;
-    const critToHeal = critButtonId.slice(0, (critButtonIdLength-9));
+    const critToHeal = critButtonId.slice(0, (critButtonIdLength - 9));
     removeRepeatingRow(critToHeal);
   });
 
   /* Workers for Force Powers */
 
   const forcePowerNames = {
-    "alter":"Alter",
-    "battle_meditation":"Battle Meditation",
-    "bind":"Bind",
-    "conjure":"Conjure",
-    "ebb-flow":"Ebb / Flow",
-    "endure":"Endure",
-    "enhance":"Enhance",
-    "farsight":"Farsight",
-    "foresee":"Foresee",
-    "heal-harm":"Heal / Harm",
-    "imbue":"Imbue",
-    "influence":"Influence",
-    "manipulate":"Manipulate",
-    "misdirect":"Misdirect",
-    "move":"Move",
-    "protect-unleash":"Protect / nleash",
-    "seek":"Seek",
-    "sense":"Sense",
-    "supress":"Supress",
-    "wardes-foresight":"Warde's Foresight"
+    "alter": "Alter",
+    "battle_meditation": "Battle Meditation",
+    "bind": "Bind",
+    "conjure": "Conjure",
+    "ebb-flow": "Ebb / Flow",
+    "endure": "Endure",
+    "enhance": "Enhance",
+    "farsight": "Farsight",
+    "foresee": "Foresee",
+    "heal-harm": "Heal / Harm",
+    "imbue": "Imbue",
+    "influence": "Influence",
+    "manipulate": "Manipulate",
+    "misdirect": "Misdirect",
+    "move": "Move",
+    "protect-unleash": "Protect / nleash",
+    "seek": "Seek",
+    "sense": "Sense",
+    "supress": "Supress",
+    "wardes-foresight": "Warde's Foresight"
   }
 
   // Change the power label based on the selected power name
   on('change:repeating_force-powers:force-power-name', (eventInfo) => {
     const selectedPower = eventInfo.newValue;
     const displayName = forcePowerNames[selectedPower];
-    setAttrs({'repeating_force-powers_force-power-name-display':displayName});
+    setAttrs({ 'repeating_force-powers_force-power-name-display': displayName });
   });
 
   /* Calculate attachment hard points and subtract from the total */
 
   on('change:repeating_weapons:mod1_hp change:repeating_weapons:mod2_hp change:repeating_weapons:mod3_hp change:repeating_weapons:mod4_hp change:repeating_weapons:mod5_hp', (eventInfo) => {
-    getAttrs(['repeating_weapons_weapon_hard_points','repeating_weapons_mod1_hp','repeating_weapons_mod2_hp','repeating_weapons_mod3_hp','repeating_weapons_mod4_hp','repeating_weapons_mod5_hp'], (values) => {
+    getAttrs(['repeating_weapons_weapon_hard_points', 'repeating_weapons_mod1_hp', 'repeating_weapons_mod2_hp', 'repeating_weapons_mod3_hp', 'repeating_weapons_mod4_hp', 'repeating_weapons_mod5_hp'], (values) => {
       const weaponHp = parseInt(values.repeating_weapons_weapon_hard_points);
       const hpTotal = (parseInt(values.repeating_weapons_mod1_hp)) + (parseInt(values.repeating_weapons_mod2_hp)) + (parseInt(values.repeating_weapons_mod3_hp)) + (parseInt(values.repeating_weapons_mod4_hp)) + (parseInt(values.repeating_weapons_mod5_hp));
       let hpDifference = Math.abs(eventInfo.previousValue - eventInfo.newValue);
@@ -2920,14 +2957,14 @@
       const previousHpTotal = hpTotal - hpDifference;
       const newHp = weaponHp + (previousHpTotal - hpTotal);
       const isNegative = newHp < 0 ? 'true' : 'false';
-      setAttrs({'repeating_weapons_weapon_hard_points':newHp, 'repeating_weapons_weapon_mods_negative':isNegative});
+      setAttrs({ 'repeating_weapons_weapon_hard_points': newHp, 'repeating_weapons_weapon_mods_negative': isNegative });
     });
   });
 
   /* Calculate Soak and Defense */
 
   on('change:brawn change:armor_bonus_soak', (eventInfo) => {
-    getAttrs(['brawn','armor_bonus_soak'], (values) => {
+    getAttrs(['brawn', 'armor_bonus_soak'], (values) => {
       const currentBrawn = isNaN(values.brawn) ? 0 : parseInt(values.brawn);
       const currentArmor = isNaN(values.armor_bonus_soak) ? 0 : parseInt(values.armor_bonus_soak);
       const triggerName = eventInfo.triggerName;
@@ -2946,7 +2983,7 @@
           // Do nothing
       }
       const newSoak = newBrawn + newArmor >= newBrawn ? newBrawn + newArmor : newBrawn;
-      setAttrs({'soak':newSoak});
+      setAttrs({ 'soak': newSoak });
     });
   });
 
@@ -2959,11 +2996,11 @@
       armorBonus = previousDefense > newDefense ? -(armorBonus) : armorBonus;
       // Workaround for newly added items in repeating sections; number fields have no value until initialized with a change
       // This will break if the user happens to manually change a number to the same number
-      if(previousDefense === newDefense){
+      if (previousDefense === newDefense) {
         armorBonus = newDefense;
       }
       const setDefense = currentDefense + armorBonus >= 0 ? currentDefense + armorBonus : 0;
-      setAttrs({'defense_melee':setDefense});
+      setAttrs({ 'defense_melee': setDefense });
     });
   });
 
@@ -2976,40 +3013,40 @@
       armorBonus = previousDefense > newDefense ? -(armorBonus) : armorBonus;
       // Workaround for newly added items in repeating sections; number fields have no value until initialized with a change
       // This will break if the user happens to manually change a number to the same number
-      if(previousDefense === newDefense){
+      if (previousDefense === newDefense) {
         armorBonus = newDefense;
       }
       const setDefense = currentDefense + armorBonus >= 0 ? currentDefense + armorBonus : 0;
-      setAttrs({'defense_ranged':setDefense});
+      setAttrs({ 'defense_ranged': setDefense });
     });
   });
 
-  on('change:armor_quality', (eventInfo) => {    
-    getAttrs(['armor_bonus_soak','armor_encumbrance','armor_bonus_defense_ranged','armor_bonus_defense_melee'], (values) => {
+  on('change:armor_quality', (eventInfo) => {
+    getAttrs(['armor_bonus_soak', 'armor_encumbrance', 'armor_bonus_defense_ranged', 'armor_bonus_defense_melee'], (values) => {
       const previousQuality = eventInfo.previousValue;
-      const newQuality = eventInfo.newValue;      
+      const newQuality = eventInfo.newValue;
       const currentRanged = parseInt(values.armor_bonus_defense_ranged);
       const currentMelee = parseInt(values.armor_bonus_defense_melee);
       const currentSoak = parseInt(values.armor_bonus_soak);
       const currentEncum = parseInt(values.armor_encumbrance);
-      const hasDefense = (currentRanged >= 1 ) || (currentMelee >= 1 ) ? true : false;
+      const hasDefense = (currentRanged >= 1) || (currentMelee >= 1) ? true : false;
       let newRanged = currentRanged;
       let newMelee = currentMelee;
-      let newSoak = currentSoak;      
+      let newSoak = currentSoak;
       let newEncum = currentEncum;
       switch (newQuality) {
         case 'superior':
-          if(previousQuality === 'inferior'){
-            if(hasDefense){
+          if (previousQuality === 'inferior') {
+            if (hasDefense) {
               newSoak = currentSoak + 1;
               newRanged = currentRanged + 1;
-              newMelee = currentMelee + 1;               
+              newMelee = currentMelee + 1;
             }
             else {
               // No defense; adjust soak instead
               newSoak = currentSoak + 2;
             }
-            newEncum = currentEncum - 2;           
+            newEncum = currentEncum - 2;
           }
           else {
             newSoak = currentSoak + 1;
@@ -3017,22 +3054,22 @@
           }
           break;
         case 'inferior':
-          if(previousQuality === 'superior'){
-            if(hasDefense){
+          if (previousQuality === 'superior') {
+            if (hasDefense) {
               newSoak = currentSoak - 1;
               newRanged = currentRanged - 1;
-              newMelee = currentMelee - 1;               
+              newMelee = currentMelee - 1;
             }
             else {
               // No defense; adjust soak instead
               newSoak = currentSoak - 2;
             }
-            newEncum = currentEncum + 2;           
+            newEncum = currentEncum + 2;
           }
           else {
-            if(hasDefense){
+            if (hasDefense) {
               newRanged = currentRanged - 1;
-              newMelee = currentMelee - 1;               
+              newMelee = currentMelee - 1;
             }
             else {
               // No defense; adjust soak instead
@@ -3043,15 +3080,15 @@
           break;
         default:
           // normal
-          if(previousQuality === 'superior'){
+          if (previousQuality === 'superior') {
             newSoak = currentSoak - 1;
-            newEncum = currentEncum + 1;           
+            newEncum = currentEncum + 1;
           }
           else {
             // inferior
-            if(hasDefense){
+            if (hasDefense) {
               newRanged = currentRanged + 1;
-              newMelee = currentMelee + 1;               
+              newMelee = currentMelee + 1;
             }
             else {
               // No defense; adjust soak instead
@@ -3060,7 +3097,7 @@
             newEncum = currentEncum - 1;
           }
       }
-      setAttrs({'armor_bonus_defense_ranged':newRanged, 'armor_bonus_defense_melee':newMelee, 'armor_bonus_soak':newSoak, 'armor_encumbrance': newEncum});
+      setAttrs({ 'armor_bonus_defense_ranged': newRanged, 'armor_bonus_defense_melee': newMelee, 'armor_bonus_soak': newSoak, 'armor_encumbrance': newEncum });
     });
   });
 
@@ -3086,7 +3123,7 @@
         const c4 = parseInt(values.container4_encumbrance);
         const c5 = parseInt(values.container5_encumbrance);
         const newThreshold = newBrawn + 5 + c1 + c2 + c3 + c4 + c5;
-        setAttrs({'encumbrance_threshold':newThreshold});
+        setAttrs({ 'encumbrance_threshold': newThreshold });
       });
     });
   });
@@ -3105,7 +3142,7 @@
         encumDifference = newEncum;
       }
       const setEncum = currentEncum + encumDifference;
-      setAttrs({'encumbrance_current':setEncum});
+      setAttrs({ 'encumbrance_current': setEncum });
     });
   });
 
@@ -3115,15 +3152,15 @@
     const removedItems = eventInfo.removedInfo;
     // If the repeating item values were never initialized by a user changing a value, the removedInfo will be empty.
     // The item's encumbrance, then does not exist (rather than being zero) and would throw an error.
-    if(Object.keys(removedItems).length > 0 && removedItems.constructor === Object){
-      getAttrs(['encumbrance_current'], (values) => {      
+    if (Object.keys(removedItems).length > 0 && removedItems.constructor === Object) {
+      getAttrs(['encumbrance_current'], (values) => {
         const removedEncumKey = 'repeating_gear_' + itemId + '_gear_item_encumbrance';
         const removedEncum = parseInt(removedItems[removedEncumKey]);
         const currentEncum = parseInt(values.encumbrance_current);
         setEncum = currentEncum - removedEncum;
-        setAttrs({'encumbrance_current':setEncum});
+        setAttrs({ 'encumbrance_current': setEncum });
       });
-    }    
+    }
   });
 
   // When removing a weapon, remove it's encumbrance from the total encumbrance
@@ -3133,31 +3170,31 @@
     const removedItems = eventInfo.removedInfo;
     // If the repeating item values were never initialized by a user changing a value, the removedInfo will be empty.
     // The item's encumbrance, then does not exist (rather than being zero) and would throw an error.
-    if(Object.keys(removedItems).length > 0){
-      getAttrs(['encumbrance_current','defense_ranged','defense_melee'], (values) => {
+    if (Object.keys(removedItems).length > 0) {
+      getAttrs(['encumbrance_current', 'defense_ranged', 'defense_melee'], (values) => {
         const removedEncumKey = 'repeating_weapons_' + itemId + '_weapon_encumbrance';
         const removedDefensiveKey = 'repeating_weapons_' + itemId + '_weapon_quality_defensive_value';
         const removedDeflectionKey = 'repeating_weapons_' + itemId + '_weapon_quality_deflection_value';
-        if(removedItems[removedEncumKey]){
+        if (removedItems[removedEncumKey]) {
           const removedEncum = parseInt(removedItems[removedEncumKey]);
           const currentEncum = parseInt(values.encumbrance_current);
           const setEncum = currentEncum - removedEncum;
-          setAttrs({'encumbrance_current':setEncum});
+          setAttrs({ 'encumbrance_current': setEncum });
         }
-        if(removedItems[removedDefensiveKey]){
+        if (removedItems[removedDefensiveKey]) {
           const removedDefensive = parseInt(removedItems[removedDefensiveKey]);
-          const currentMelee = parseInt(values.defense_melee);          
+          const currentMelee = parseInt(values.defense_melee);
           setMelee = currentMelee - removedDefensive;
-          setAttrs({'defense_melee':setMelee});
+          setAttrs({ 'defense_melee': setMelee });
         }
-        if(removedItems[removedDeflectionKey]){
+        if (removedItems[removedDeflectionKey]) {
           const removedDeflection = parseInt(removedItems[removedDeflectionKey]);
-          const currentRanged = parseInt(values.defense_ranged);          
+          const currentRanged = parseInt(values.defense_ranged);
           const setRanged = currentRanged - removedDeflection;
-          setAttrs({'defense_ranged':setRanged});
+          setAttrs({ 'defense_ranged': setRanged });
         }
       });
-    }    
+    }
   });
 
   /* Collapse sections */
@@ -3187,41 +3224,44 @@
         const currentValue = values[section];
         const newValue = currentValue === 'true' ? 'false' : 'true';
         const newLabel = currentValue === 'true' ? 'show' : 'hide';
-        setAttrs({[section]:newValue, [section+'_label']:newLabel});
+        setAttrs({
+          [section]: newValue, [section + '_label']: newLabel });
       });
     });
   });
 
   on('clicked:repeating_weapons:show-weapon-qualities', () => {
     const section = 'repeating_weapons_show-weapon-qualities';
-    getAttrs([section], (values) => {    
+    getAttrs([section], (values) => {
       const currentValue = values[section];
       const newValue = currentValue === 'true' ? 'false' : 'true';
       const newLabel = currentValue === 'true' ? 'show' : 'hide';
-      setAttrs({[section]:newValue, [section+'_label']:newLabel});
+      setAttrs({
+        [section]: newValue, [section + '_label']: newLabel });
     });
   });
 
   on('clicked:repeating_weapons:show-weapon-attachments', () => {
     const section = 'repeating_weapons_show-weapon-attachments';
-    getAttrs([section], (values) => {    
+    getAttrs([section], (values) => {
       const currentValue = values[section];
       const newValue = currentValue === 'true' ? 'false' : 'true';
       const newLabel = currentValue === 'true' ? 'show' : 'hide';
-      setAttrs({[section]:newValue, [section+'_label']:newLabel});
+      setAttrs({
+        [section]: newValue, [section + '_label']: newLabel });
     });
   });
 
   on('clicked:repeating_weapons:show-weapon-notes', () => {
     const section = 'repeating_weapons_show-weapon-notes';
-    getAttrs([section], (values) => {    
+    getAttrs([section], (values) => {
       const currentValue = values[section];
       const newValue = currentValue === 'true' ? 'false' : 'true';
       const newLabel = currentValue === 'true' ? 'show' : 'hide';
-      setAttrs({[section]:newValue, [section+'_label']:newLabel});
+      setAttrs({
+        [section]: newValue, [section + '_label']: newLabel });
     });
   });
-
 </script>
 <!-- End Sheet Workers -->
 
