@@ -2266,6 +2266,7 @@
       try {
         skillStat = JSON.parse(decodeURIComponent(values.skillStatStore));
       } catch {
+        // Should switch this to a one-line variant of the "skills" object for efficiency -A
         skillStat = JSON.parse('{"astrogation":"intellect","athletics":"brawn","charm":"presence","coercion":"willpower","computers":"intellect","cool":"presence","coordination":"agility","deception":"cunning","discipline":"willpower","leadership":"presence","mechanics":"intellect","medicine":"intellect","negotiation":"presence","perception":"cunning","piloting-planetary":"agility","piloting-space":"agility","resilience":"brawn","skullduggery":"cunning","stealth":"agility","streetwise":"cunning","survival":"cunning","vigilance":"willpower","brawl":"brawn","melee":"brawn","gunnery":"agility","lightsaber":"brawn","ranged-light":"agility","ranged-heavy":"agility","core-worlds":"intellect","education":"intellect","lore":"intellect","outer-rim":"intellect","underworld":"intellect","warfare":"intellect","xenology":"intellect"}');
         
         try {
@@ -2446,12 +2447,10 @@
       let skillStat = JSON.parse(decodeURIComponent(values.skillStatStore));
       skillStat['lightsaber'] = stat;
       skillStat = encodeURIComponent(JSON.stringify(skillStat));
-
-      rank = parseInt(values.lightsaber_rank);
-      statValue = parseInt(values[stat]);
-      yellowDice = parseInt((statValue + rank) - Math.abs(statValue - rank)) / 2;
-      greenDice = parseInt((((statValue + rank) + Math.abs(statValue - rank)) / 2) - yellowDice);
-      setAttrs({ lightsaber_yd: yellowDice, lightsaber_gd: greenDice, skillStatStore: skillStat });
+      setAttrs({ skillStatStore: skillStat });
+      
+      const tmp = { 'newValue': parseInt(values[stat]) };
+      CalculateDiceStatChange(tmp, 'lightsaber');
     });
   });
 
