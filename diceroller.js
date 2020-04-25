@@ -171,7 +171,7 @@ Charsheet.Generate = function (msg) {
       _characterid: character.id
   });
   sendChat("Dice System", "/w " + msg.who + " a blank character sheet was created for you named \"" + character_name);
-  sendChat("GM", "/w " + "gm " + "A blank character sheet was created for " + msg.who)
+  sendChat("GM", "/w " + "gm " + "A blank character sheet was created for " + msg.who);
 };
 
 if (!Date.now) {
@@ -195,7 +195,7 @@ function SuggestionEngine () {
   function convertToBoolean (value) {
       // will trap the following properly: false, true, "false", "true", 0, 1, "", and undefined
       //noinspection RedundantConditionalExpressionJS
-      return !value || value == 1 || value === 'true'
+      return !value || value == 1 || value === 'true';
   }
 
   this.suggestions = {
@@ -2192,7 +2192,7 @@ eote.process.destiny = function (cmd, diceObj) {
       // falls through on purpose (I think) to sync automatically when destiny point is rolled
       case "registerPlayer":
           if (!doRoll) {
-              sendChat("Dice System", "/w " + diceObj.vars.characterName + '&{template:base} {{title=Syncing your Destiny Pool to the GM\'s}}')
+              sendChat("Dice System", "/w " + diceObj.vars.characterName + '&{template:base} {{title=Syncing your Destiny Pool to the GM\'s}}');
           }
           darkSide = darkSide + diceObj.totals.dark;
           lightSide = lightSide + diceObj.totals.light;
@@ -2354,7 +2354,7 @@ eote.process.resetdice = function (cmd, diceObj) {
               current: 0,
               update: true
           }
-      ]
+      ];
   }
 
   if (cmd[1] == 'resetgmdice') {
@@ -2414,7 +2414,7 @@ eote.process.resetdice = function (cmd, diceObj) {
               current: 0,
               update: true
           }
-      ]
+      ];
   }
   eote.updateAddAttribute(characterObj, resetdice);
 };
@@ -2517,7 +2517,7 @@ eote.process.calculateDamage = function (cmd, diceObj) {
   }
   var bonusText = "";
   if (globalDamageBonus > 0 || damageBonus > 0) {
-      bonusText = " (after bonuses)"
+      bonusText = " (after bonuses)";
   }
   var calculatedDamage = ((diceObj.totals.success + baseDamage) - 1) + damageBonus + globalDamageBonus;
   if (diceObj.totals.success > 0) {
@@ -2525,7 +2525,7 @@ eote.process.calculateDamage = function (cmd, diceObj) {
   } else {
       diceObj.vars.calculatedDamage = "{{Hit For=<span style='color:lightgray'>0</span>}}";
   }
-  if (diceObj.totals.advantage >= critical)  {
+  if ((diceObj.totals.success > 0 ) && (diceObj.totals.advantage >= critical))  {
       diceObj.vars.inflictedCritical = true;
       diceObj.vars.calculatedDamage = diceObj.vars.calculatedDamage + "{{Critical Hit=<strong style='color:maroon;'>Critical Hit!</strong>}}";
       if (typeof criticalBonus !== 'undefined' && ! isNaN(criticalBonus) && criticalBonus > 0) {
