@@ -2323,18 +2323,18 @@
       'force_rating'
     ];
 
-  on('sheet:opened', () => {
-    statListZero.forEach((stat) => {
-      getAttrs([stat], (values) => {
-        const thisStat = (isNaN(values[stat]) || (values[stat]) === "0")) ? 0 : parseInt(values[stat]);
-        const statValue = thisStat > 0 ? thisStat : 0;
-        setAttrs({[stat]: statValue }); // Properly sets the stats, but boes not fire a on:change event; bug reported
-        // What should get triggered here? -Aaron
-        // Anything that should init with a zero(0) value, as opposed to the same function above that inits with one(1) value.
-        // I forgot to check for the string zero, though, like I did above; added that
+    on('sheet:opened', () => {
+      statListZero.forEach((stat) => {
+        getAttrs([stat], (values) => {
+          const thisStat = (isNaN(values[stat]) || (values[stat]) === "0") ? 0 : parseInt(values[stat]);
+          const statValue = thisStat > 0 ? thisStat : 0;
+          setAttrs({[stat]: statValue }); // Properly sets the stats, but boes not fire a on:change event; bug reported
+          // What should get triggered here? -Aaron
+          // Anything that should init with a zero(0) value, as opposed to the same function above that inits with one(1) value.
+          // I forgot to check for the string zero, though, like I did above; added that
+        });
       });
     });
-  });
 
 
 
