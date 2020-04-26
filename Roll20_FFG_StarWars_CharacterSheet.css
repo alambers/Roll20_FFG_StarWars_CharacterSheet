@@ -19,20 +19,16 @@ Grey Green    - #97ABA9
 /* Fonts */
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
-/* Global Styles */
+
+/* ==================== GLOBAL STYLES ==================== */
 
 .sheet-character_sheet {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
   box-sizing: border-box;
-  font-size: 16px;
-  min-width: 900px;
+  font-size: 14px;
   font-family: 'Nunito', sans-serif;
   margin-bottom: 2em;
-}
-
-.repcontrol {
-  margin-top: 1em;
 }
 
 /* Font size selector */
@@ -123,6 +119,8 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   pointer-events: none;
 }
 
+/* Headings - h1, h2, h3, h4, h5 */
+
 .sheet-character_sheet h2 {
   display: grid;
   grid-template-columns: 1fr max-content;
@@ -150,12 +148,16 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   background-color: #ccc;
 }
 
+/* The section boxes, topped by an h2 */
+
 .sheet-character_sheet .sheet-section {
   background-color: #eaeaea;
   border-radius: 0 0 1em 1em;
   margin-bottom: 3em;
   padding: 1em;
 }
+
+/* Global inputs and labels */
 
 .sheet-character_sheet label {
   display: block;
@@ -228,7 +230,17 @@ input.sheet-show_section[value="false"] + .sheet-section {
   grid-column: span 6;
 }
 
+
+/* ==================== SECTION STYLES ==================== */
+
+
 /* Pools - Dice and Destiny */
+
+.sheet-pools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+  column-gap: 5em;
+}
 
 .sheet-dice_pool_grid {
   display: grid;
@@ -662,6 +674,9 @@ h2 .sheet-help_info {
   background-color: #eaeaea;
   padding: 0 1em;
   border-radius: 0 0 1em 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+  column-gap: 5em;
 }
 
 .sheet-skill {
@@ -797,9 +812,10 @@ h2 .sheet-help_info {
   height: 100%;
 }
 
-.sheet-skills_combat,
-.sheet-skills_knowledge {
-  margin-top: 3em;
+.sheet-skills_general .sheet-skill:last-child,
+.sheet-skills_combat .sheet-skill:last-child,
+.sheet-skills_knowledge  .sheet-skill:last-child {
+  border-bottom: none;
 }
 
 /* Roll button */
@@ -930,7 +946,14 @@ h2 .sheet-help_info {
   background: radial-gradient(circle, rgba(35,140,0,1) 38%, rgba(82,100,76,1) 100%);
   color: #ffffff;
 }
+
 /* Weapons */
+
+.sheet-weapons .repcontainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+  column-gap: 10em;
+}
 
 .sheet-weapon {
   padding-bottom: 1em;
@@ -1210,9 +1233,15 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
 
 /* Gear */
 
+.sheet-gear_containers_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+  column-gap: 5em;
+}
+
 .sheet-gear_item {
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr 8fr;
+  grid-template-columns: 4fr 1fr minmax(5em, 1fr) 8fr;
   column-gap: 1em;
   row-gap: 1em;
 }
@@ -1369,6 +1398,12 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   border-bottom: 1px dotted #aaaaaa;
   padding-bottom: 2em;
   margin-bottom: 2em;
+}
+
+.sheet-force_powers .repcontainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+  column-gap: 5em;
 }
 
 .sheet-force-power h3 {
@@ -1617,6 +1652,12 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   content: ':';
 }
 
+/* ==================== MEDIA QUERIES ==================== */
+
+/* Large screens - over 1300px */
+@media only screen and (min-width : 1300px) {
+
+}
 
 /* Roll Template Formatting - Critical */
 

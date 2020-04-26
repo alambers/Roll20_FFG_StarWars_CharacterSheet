@@ -4,88 +4,92 @@
 <input type="hidden" name="attr_settings_font_size" value="16" />
 <div class="character_sheet">
   <div class="pools">
-    <h2 data-i18n="dice_pool">Dice Pool</h2>
-    <div class="dice_pool section">      
-      <div class="dice_pool_grid">
-        <div class="positive_dice">
-          <div class="three_dice">
-            <div>
-              <img src="https://i.imgur.com/nlIAfJx.png" data-i18n-title="boost_die" title="Boost Die" />
-              <input name="attr_b" class="dice_pool_boost" type="number" min="0" max="7" value="0" />
+    <div>
+      <h2 data-i18n="dice_pool">Dice Pool</h2>
+      <div class="dice_pool section">      
+        <div class="dice_pool_grid">
+          <div class="positive_dice">
+            <div class="three_dice">
+              <div>
+                <img src="https://i.imgur.com/nlIAfJx.png" data-i18n-title="boost_die" title="Boost Die" />
+                <input name="attr_b" class="dice_pool_boost" type="number" min="0" max="7" value="0" />
+              </div>
+              <div>
+                <img src="https://i.imgur.com/g3hoJRG.png" data-i18n-title="ability_die" title="Ability Die" />
+                <input name="attr_g" class="dice_pool_ability" type="number" min="0" max="7" value="0" />
+              </div>
+              <div>
+                <img src="https://i.imgur.com/4bQ0dY8.png" data-i18n-title="proficiency_die" title="Proficiency Die" />
+                <input name="attr_y" class="dice_pool_proficiency" type="number" min="0" max="7" value="0" />
+              </div>
             </div>
-            <div>
-              <img src="https://i.imgur.com/g3hoJRG.png" data-i18n-title="ability_die" title="Ability Die" />
-              <input name="attr_g" class="dice_pool_ability" type="number" min="0" max="7" value="0" />
-            </div>
-            <div>
-              <img src="https://i.imgur.com/4bQ0dY8.png" data-i18n-title="proficiency_die" title="Proficiency Die" />
-              <input name="attr_y" class="dice_pool_proficiency" type="number" min="0" max="7" value="0" />
-            </div>
-          </div>
-          <div class="upgrade_downgrade">
-            <label class="upgrade_label" data-i18n="upgrade">Upgrade :</label>
-            <input name="attr_upgradeAbility" class="dice_pool_upgrade_positive" type="number" min="0" max="7" value="0" />
-            <input name="attr_downgradeProficiency" class="dice_pool_downgrade_positive" type="number" min="0" max="7" value="0" />
-            <label class="downgrade_label" data-i18n="downgrade">: Downgrade</label>
-          </div>
-        </div>
-        <div class="force_dice_dice_roll">
-          <div class="force_dice">
-            <img src="https://i.imgur.com/JCI7Mgm.png" data-i18n-title="force_die" title="Force Die" />
-            <input name="attr_w" class="dice_pool_force" type="number" min="0" max="7" value="0" />
-          </div>
-          <div class="dice_roll">
-            <input type="hidden" name="attr_dicePool" value="@{g}g @{y}y @{p}p @{r}r @{b}b @{blk}blk @{w}w upgrade(ability|@{upgradeAbility}) downgrade(proficiency|@{downgradeProficiency}) upgrade(difficulty|@{upgradeDifficulty}) downgrade(challenge|@{downgradeChallenge})" />
-            <button type="roll" name="roll_DicePool" class="roll_DicePool" data-i18n-title="roll_dice_pool" title="Roll dice pool" value="!eed characterID(@{character_id}) label(Dice:Dice Pool) @{dicePool}"></button>
-            <button type="roll" name="roll_ResetDicePool" class="roll_ResetDicePool" data-i18n-title="reset_dice_pool" title="Reset dice pool" value="!eed resetdice characterID(@{character_id})"></button>
-          </div>
-        </div>
-        <div class="negative_dice">
-          <div class="three_dice">
-            <div>
-              <img src="https://i.imgur.com/n9W07Lp.png" data-i18n-title="setback_die" title="Setback Die" />
-              <input name="attr_blk" class="dice_pool_setback" type="number" min="-7" max="7" value="0" />
-            </div>
-            <div>
-              <img src="https://i.imgur.com/oxbKghK.png" data-i18n-title="difficulty_die" title="Difficulty Die" />
-              <input name="attr_p" class="dice_pool_difficulty" type="number" min="0" max="7" value="0" />
-            </div>
-            <div>
-              <img src="https://i.imgur.com/GInMHEN.png" data-i18n-title="challenge_die" title="Challenge Die" />
-              <input name="attr_r" class="dice_pool_challenge" type="number" min="0" max="7" value="0" />
+            <div class="upgrade_downgrade">
+              <label class="upgrade_label" data-i18n="upgrade">Upgrade :</label>
+              <input name="attr_upgradeAbility" class="dice_pool_upgrade_positive" type="number" min="0" max="7" value="0" />
+              <input name="attr_downgradeProficiency" class="dice_pool_downgrade_positive" type="number" min="0" max="7" value="0" />
+              <label class="downgrade_label" data-i18n="downgrade">: Downgrade</label>
             </div>
           </div>
-          <div class="upgrade_downgrade">
-            <label class="upgrade_label" data-i18n="upgrade">Upgrade :</label>
-            <input name="attr_upgradeDifficulty" class="dice_pool_upgrade_negative" type="number" min="0" max="7" value="0" />
-            <input name="attr_downgradeChallenge" class="dice_pool_downgrade_negative" type="number" min="0" max="7" value="0" />
-            <label class="downgrade_label" data-i18n="downgrade">: Downgrade</label>
+          <div class="force_dice_dice_roll">
+            <div class="force_dice">
+              <img src="https://i.imgur.com/JCI7Mgm.png" data-i18n-title="force_die" title="Force Die" />
+              <input name="attr_w" class="dice_pool_force" type="number" min="0" max="7" value="0" />
+            </div>
+            <div class="dice_roll">
+              <input type="hidden" name="attr_dicePool" value="@{g}g @{y}y @{p}p @{r}r @{b}b @{blk}blk @{w}w upgrade(ability|@{upgradeAbility}) downgrade(proficiency|@{downgradeProficiency}) upgrade(difficulty|@{upgradeDifficulty}) downgrade(challenge|@{downgradeChallenge})" />
+              <button type="roll" name="roll_DicePool" class="roll_DicePool" data-i18n-title="roll_dice_pool" title="Roll dice pool" value="!eed characterID(@{character_id}) label(Dice:Dice Pool) @{dicePool}"></button>
+              <button type="roll" name="roll_ResetDicePool" class="roll_ResetDicePool" data-i18n-title="reset_dice_pool" title="Reset dice pool" value="!eed resetdice characterID(@{character_id})"></button>
+            </div>
+          </div>
+          <div class="negative_dice">
+            <div class="three_dice">
+              <div>
+                <img src="https://i.imgur.com/n9W07Lp.png" data-i18n-title="setback_die" title="Setback Die" />
+                <input name="attr_blk" class="dice_pool_setback" type="number" min="-7" max="7" value="0" />
+              </div>
+              <div>
+                <img src="https://i.imgur.com/oxbKghK.png" data-i18n-title="difficulty_die" title="Difficulty Die" />
+                <input name="attr_p" class="dice_pool_difficulty" type="number" min="0" max="7" value="0" />
+              </div>
+              <div>
+                <img src="https://i.imgur.com/GInMHEN.png" data-i18n-title="challenge_die" title="Challenge Die" />
+                <input name="attr_r" class="dice_pool_challenge" type="number" min="0" max="7" value="0" />
+              </div>
+            </div>
+            <div class="upgrade_downgrade">
+              <label class="upgrade_label" data-i18n="upgrade">Upgrade :</label>
+              <input name="attr_upgradeDifficulty" class="dice_pool_upgrade_negative" type="number" min="0" max="7" value="0" />
+              <input name="attr_downgradeChallenge" class="dice_pool_downgrade_negative" type="number" min="0" max="7" value="0" />
+              <label class="downgrade_label" data-i18n="downgrade">: Downgrade</label>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <h2><span data-i18n="destiny_pool">Destiny Pool</span><button type="action" name="act_show_destiny_pool"><span name="attr_show_destiny_pool_label"></span></button></h2>    
-    <input type="hidden" name="attr_show_destiny_pool_label" value="hide" />
-    <input class="show_section" type="hidden" name="attr_show_destiny_pool" value="true" />
-    <div class="destiny_pool section">
-      <div class="destiny_buttons">
-        <button type="roll" class="sync_pool_with_gm" name="Update-Dest-Pool" value="!eed characterID(@{character_id}) destiny registerPlayer" data-i18n="sync_pool_with_gm">Sync Pool with GM</button>
-        <button type="roll" class="roll_destiny" name="Roll-Destiny" value="!eed characterID(@{character_id}) 1w destiny doRoll" data-i18n="roll_destiny">Roll Destiny</button>
-        <button type="roll" class="update_player_points" value="!eed characterID(@{character_id}) destiny sendUpdate" data-i18n="update_player_points">Update Player Points</button>
-        <button type="roll" class="clear_pool" value="!eed characterID(@{character_id}) destiny clearPool" data-i18n="clear_pool">Clear Pool</button>
-      </div>
-      <div class="destiny_inputs">
-        <div>
-          <input class="destiny_light" name="attr_lightSidePoints" type="number" min="0" value="0" />
-          <label class="destiny_light_label" name="attr_light" value="@{destiny_light}" data-i18n="light">Light</label>
+    <div>
+      <h2><span data-i18n="destiny_pool">Destiny Pool</span><button type="action" name="act_show_destiny_pool"><span name="attr_show_destiny_pool_label"></span></button></h2>    
+      <input type="hidden" name="attr_show_destiny_pool_label" value="hide" />
+      <input class="show_section" type="hidden" name="attr_show_destiny_pool" value="true" />
+      <div class="destiny_pool section">
+        <div class="destiny_buttons">
+          <button type="roll" class="sync_pool_with_gm" name="Update-Dest-Pool" value="!eed characterID(@{character_id}) destiny registerPlayer" data-i18n="sync_pool_with_gm">Sync Pool with GM</button>
+          <button type="roll" class="roll_destiny" name="Roll-Destiny" value="!eed characterID(@{character_id}) 1w destiny doRoll" data-i18n="roll_destiny">Roll Destiny</button>
+          <button type="roll" class="update_player_points" value="!eed characterID(@{character_id}) destiny sendUpdate" data-i18n="update_player_points">Update Player Points</button>
+          <button type="roll" class="clear_pool" value="!eed characterID(@{character_id}) destiny clearPool" data-i18n="clear_pool">Clear Pool</button>
         </div>
-        <div>
-          <button type="roll" class="use_dark_side" value="!eed characterID(@{character_id}) destiny useDark" data-i18n="use_dark_side">Use Dark Side</button>
-          <button type="roll" class="use_light_side" name="Use-Darkside-Point" value="!eed characterID(@{character_id}) destiny useLight" data-i18n="use_light_side">Use Light Side</button>
-        </div>
-        <div>
-          <input class="destiny_dark" name="attr_darkSidePoints" type="number" min="0" value="0" />
-          <label class="destiny_dark_label" name="attr_dark" value="@{destiny_dark}" data-i18n="dark">Dark</label>
+        <div class="destiny_inputs">
+          <div>
+            <input class="destiny_light" name="attr_lightSidePoints" type="number" min="0" value="0" />
+            <label class="destiny_light_label" name="attr_light" value="@{destiny_light}" data-i18n="light">Light</label>
+          </div>
+          <div>
+            <button type="roll" class="use_dark_side" value="!eed characterID(@{character_id}) destiny useDark" data-i18n="use_dark_side">Use Dark Side</button>
+            <button type="roll" class="use_light_side" name="Use-Darkside-Point" value="!eed characterID(@{character_id}) destiny useLight" data-i18n="use_light_side">Use Light Side</button>
+          </div>
+          <div>
+            <input class="destiny_dark" name="attr_darkSidePoints" type="number" min="0" value="0" />
+            <label class="destiny_dark_label" name="attr_dark" value="@{destiny_dark}" data-i18n="dark">Dark</label>
+          </div>
         </div>
       </div>
     </div>
@@ -911,982 +915,1000 @@
           <button class="roll_button" type="roll" name="roll_vigilance" value="!eed characterID(@{character_id}) label(skill:Vigilance) @{vigilance_modifiers} skill(@{vigilance_rank}|@{willpower}|Vigilance) @{dicePool}"></button>
         </div>        
       </div>
-      <div class="skills_combat">
-        <h3>Combat Skills</h3>
-        <div class="skill skill_heading">          
-          <div data-i18n="skill">Skill</div>
-          <div data-i18n="characteristic">Characteristic</div>
-          <div data-i18n="career">Career</div>
-          <div data-i18n="ranks">Ranks</div>
-          <div data-i18n="dice">Dice</div>
-          <div data-i18n="modifiers">Modifiers</div>
-          <div data-i18n="roll">Roll</div>
-        </div>
-        <div class="skill">          
-          <label data-i18n="brawl">Brawl</label>
-          <div>(<span data-i18n="brawn_abbr">Bra</span>)</div>
-          <input type="checkbox" name="attr_brawl_career" value="true" />
-          <input type="number"  name="attr_brawl_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_brawl_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_brawl_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+      <div>
+        <div class="skills_combat">
+          <h3>Combat Skills</h3>
+          <div class="skill skill_heading">          
+            <div data-i18n="skill">Skill</div>
+            <div data-i18n="characteristic">Characteristic</div>
+            <div data-i18n="career">Career</div>
+            <div data-i18n="ranks">Ranks</div>
+            <div data-i18n="dice">Dice</div>
+            <div data-i18n="modifiers">Modifiers</div>
+            <div data-i18n="roll">Roll</div>
           </div>
-          <input type="text" name="attr_brawl_modifiers" />
-          <button class="roll_button" type="roll" name="roll_brawl" value="!eed characterID(@{character_id}) label(skill:Brawl) @{brawl_modifiers} skill(@{brawl_rank}|@{brawn}|Brawl) @{dicePool}"></button>
-        </div>
-        <div class="skill">          
-          <label data-i18n="melee">Melee</label>
-          <div>(<span data-i18n="brawn_abbr">Bra</span>)</div>
-          <input type="checkbox" name="attr_melee_career" value="true" />
-          <input type="number"  name="attr_melee_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_melee_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_melee_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+          <div class="skill">          
+            <label data-i18n="brawl">Brawl</label>
+            <div>(<span data-i18n="brawn_abbr">Bra</span>)</div>
+            <input type="checkbox" name="attr_brawl_career" value="true" />
+            <input type="number"  name="attr_brawl_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_brawl_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_brawl_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_brawl_modifiers" />
+            <button class="roll_button" type="roll" name="roll_brawl" value="!eed characterID(@{character_id}) label(skill:Brawl) @{brawl_modifiers} skill(@{brawl_rank}|@{brawn}|Brawl) @{dicePool}"></button>
           </div>
-          <input type="text" name="attr_melee_modifiers" />
-          <button class="roll_button" type="roll" name="roll_melee" value="!eed characterID(@{character_id}) label(skill:Melee) @{melee_modifiers} skill(@{melee_rank}|@{brawn}|Melee) @{dicePool}"></button>
-        </div>
-        <div class="skill">          
-          <label data-i18n="gunnery">Gunnery</label>
-          <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
-          <input type="checkbox" name="attr_gunnery_career" value="true" />
-          <input type="number"  name="attr_gunnery_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_gunnery_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_gunnery_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+          <div class="skill">          
+            <label data-i18n="melee">Melee</label>
+            <div>(<span data-i18n="brawn_abbr">Bra</span>)</div>
+            <input type="checkbox" name="attr_melee_career" value="true" />
+            <input type="number"  name="attr_melee_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_melee_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_melee_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_melee_modifiers" />
+            <button class="roll_button" type="roll" name="roll_melee" value="!eed characterID(@{character_id}) label(skill:Melee) @{melee_modifiers} skill(@{melee_rank}|@{brawn}|Melee) @{dicePool}"></button>
           </div>
-          <input type="text" name="attr_gunnery_modifiers" />
-          <button class="roll_button" type="roll" name="roll_gunnery" value="!eed characterID(@{character_id}) label(skill:Gunnery) @{gunnery_modifiers} skill(@{gunnery_rank}|@{agility}|Gunnery) @{dicePool}"></button>
-        </div>
-        <div class="skill">          
-          <label data-i18n="lightsaber">Lightsaber</label>
-          <div class="select_wrapper">
-            <select name="attr_lightsaber_characteristic">
-              <option data-i18n="brawn" value="brawn" selected="selected">Brawn</option>
-              <option data-i18n="agility" value="agility">Agility</option>
-              <option data-i18n="intellect" value="intellect">Intellect</option>
-              <option data-i18n="cunning" value="cunning">Cunning</option>
-              <option data-i18n="willpower" value="willpower">Willpower</option>
-              <option data-i18n="presence" value="presence">Presence</option>
-            </select>
+          <div class="skill">          
+            <label data-i18n="gunnery">Gunnery</label>
+            <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
+            <input type="checkbox" name="attr_gunnery_career" value="true" />
+            <input type="number"  name="attr_gunnery_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_gunnery_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_gunnery_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_gunnery_modifiers" />
+            <button class="roll_button" type="roll" name="roll_gunnery" value="!eed characterID(@{character_id}) label(skill:Gunnery) @{gunnery_modifiers} skill(@{gunnery_rank}|@{agility}|Gunnery) @{dicePool}"></button>
           </div>
-          <input type="hidden" name="attr_lightsaber_characteristic_value" value="" />
-          <input type="checkbox" name="attr_lightsaber_career" value="true" />
-          <input type="number"  name="attr_lightsaber_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_lightsaber_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_lightsaber_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+          <div class="skill">          
+            <label data-i18n="lightsaber">Lightsaber</label>
+            <div class="select_wrapper">
+              <select name="attr_lightsaber_characteristic">
+                <option data-i18n="brawn" value="brawn" selected="selected">Brawn</option>
+                <option data-i18n="agility" value="agility">Agility</option>
+                <option data-i18n="intellect" value="intellect">Intellect</option>
+                <option data-i18n="cunning" value="cunning">Cunning</option>
+                <option data-i18n="willpower" value="willpower">Willpower</option>
+                <option data-i18n="presence" value="presence">Presence</option>
+              </select>
+            </div>
+            <input type="hidden" name="attr_lightsaber_characteristic_value" value="" />
+            <input type="checkbox" name="attr_lightsaber_career" value="true" />
+            <input type="number"  name="attr_lightsaber_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_lightsaber_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_lightsaber_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_lightsaber_modifiers" />
+            <button class="roll_button" type="roll" name="roll_lightsaber" value="!eed characterID(@{character_id}) label(skill:Lightsaber) @{lightsaber_modifiers} skill(@{lightsaber_rank}|@{lightsaber_characteristic_value}|Lightsaber) @{dicePool}"></button>
           </div>
-          <input type="text" name="attr_lightsaber_modifiers" />
-          <button class="roll_button" type="roll" name="roll_lightsaber" value="!eed characterID(@{character_id}) label(skill:Lightsaber) @{lightsaber_modifiers} skill(@{lightsaber_rank}|@{lightsaber_characteristic_value}|Lightsaber) @{dicePool}"></button>
-        </div>
-        <div class="skill">          
-          <label data-i18n="ranged-light">Ranged - Light</label>
-          <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
-          <input type="checkbox" name="attr_ranged-light_career" value="true" />
-          <input type="number"  name="attr_ranged-light_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_ranged-light_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_ranged-light_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+          <div class="skill">          
+            <label data-i18n="ranged-light">Ranged - Light</label>
+            <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
+            <input type="checkbox" name="attr_ranged-light_career" value="true" />
+            <input type="number"  name="attr_ranged-light_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_ranged-light_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_ranged-light_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_ranged-light_modifiers" />
+            <button class="roll_button" type="roll" name="roll_ranged-light" value="!eed characterID(@{character_id}) label(skill:Ranged - Light) @{ranged-light_modifiers} skill(@{ranged-light_rank}|@{agility}|Ranged - Light) @{dicePool}"></button>
           </div>
-          <input type="text" name="attr_ranged-light_modifiers" />
-          <button class="roll_button" type="roll" name="roll_ranged-light" value="!eed characterID(@{character_id}) label(skill:Ranged - Light) @{ranged-light_modifiers} skill(@{ranged-light_rank}|@{agility}|Ranged - Light) @{dicePool}"></button>
-        </div>
-        <div class="skill">          
-          <label data-i18n="ranged-heavy">Ranged - Heavy</label>
-          <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
-          <input type="checkbox" name="attr_ranged-heavy_career" value="true" />
-          <input type="number"  name="attr_ranged-heavy_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_ranged-heavy_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_ranged-heavy_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+          <div class="skill">          
+            <label data-i18n="ranged-heavy">Ranged - Heavy</label>
+            <div>(<span data-i18n="agility_abbr">Ag</span>)</div>
+            <input type="checkbox" name="attr_ranged-heavy_career" value="true" />
+            <input type="number"  name="attr_ranged-heavy_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_ranged-heavy_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_ranged-heavy_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_ranged-heavy_modifiers" />
+            <button class="roll_button" type="roll" name="roll_ranged-heavy" value="!eed characterID(@{character_id}) label(skill:Ranged - Heavy) @{ranged-heavy_modifiers} skill(@{ranged-heavy_rank}|@{agility}|Ranged - Heavy) @{dicePool}"></button>
           </div>
-          <input type="text" name="attr_ranged-heavy_modifiers" />
-          <button class="roll_button" type="roll" name="roll_ranged-heavy" value="!eed characterID(@{character_id}) label(skill:Ranged - Heavy) @{ranged-heavy_modifiers} skill(@{ranged-heavy_rank}|@{agility}|Ranged - Heavy) @{dicePool}"></button>
         </div>
-      </div>
-      <div class="skills_knowledge">
-        <h3>Knowledge Skills</h3>
-        <div class="skill skill_heading">          
-          <div data-i18n="skill">Skill</div>
-          <div data-i18n="characteristic">Characteristic</div>
-          <div data-i18n="career">Career</div>
-          <div data-i18n="ranks">Ranks</div>
-          <div data-i18n="dice">Dice</div>
-          <div data-i18n="modifiers">Modifiers</div>
-          <div data-i18n="roll">Roll</div>
-        </div>
-        <div class="skill">          
-          <label data-i18n="core-worlds">Core Worlds</label>
-          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
-          <input type="checkbox" name="attr_core-worlds_career" value="true" />
-          <input type="number"  name="attr_core-worlds_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_core-worlds_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_core-worlds_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+        <div class="skills_knowledge">
+          <h3>Knowledge Skills</h3>
+          <div class="skill skill_heading">          
+            <div data-i18n="skill">Skill</div>
+            <div data-i18n="characteristic">Characteristic</div>
+            <div data-i18n="career">Career</div>
+            <div data-i18n="ranks">Ranks</div>
+            <div data-i18n="dice">Dice</div>
+            <div data-i18n="modifiers">Modifiers</div>
+            <div data-i18n="roll">Roll</div>
           </div>
-          <input type="text" name="attr_core-worlds_modifiers" />
-          <button class="roll_button" type="roll" name="roll_core-worlds" value="!eed characterID(@{character_id}) label(skill:Core Worlds) @{core-worlds_modifiers} skill(@{core-worlds_rank}|@{intellect}|Core Worlds) @{dicePool}"></button>
-        </div>
-        <div class="skill">          
-          <label data-i18n="education">Education</label>
-          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
-          <input type="checkbox" name="attr_education_career" value="true" />
-          <input type="number"  name="attr_education_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_education_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_education_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+          <div class="skill">          
+            <label data-i18n="core-worlds">Core Worlds</label>
+            <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+            <input type="checkbox" name="attr_core-worlds_career" value="true" />
+            <input type="number"  name="attr_core-worlds_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_core-worlds_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_core-worlds_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_core-worlds_modifiers" />
+            <button class="roll_button" type="roll" name="roll_core-worlds" value="!eed characterID(@{character_id}) label(skill:Core Worlds) @{core-worlds_modifiers} skill(@{core-worlds_rank}|@{intellect}|Core Worlds) @{dicePool}"></button>
           </div>
-          <input type="text" name="attr_education_modifiers" />
-          <button class="roll_button" type="roll" name="roll_education" value="!eed characterID(@{character_id}) label(skill:Education) @{education_modifiers} skill(@{education_rank}|@{intellect}|Education) @{dicePool}"></button>
-        </div>
-        <div class="skill">          
-          <label data-i18n="lore">Lore</label>
-          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
-          <input type="checkbox" name="attr_lore_career" value="true" />
-          <input type="number"  name="attr_lore_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_lore_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_lore_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+          <div class="skill">          
+            <label data-i18n="education">Education</label>
+            <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+            <input type="checkbox" name="attr_education_career" value="true" />
+            <input type="number"  name="attr_education_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_education_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_education_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_education_modifiers" />
+            <button class="roll_button" type="roll" name="roll_education" value="!eed characterID(@{character_id}) label(skill:Education) @{education_modifiers} skill(@{education_rank}|@{intellect}|Education) @{dicePool}"></button>
           </div>
-          <input type="text" name="attr_lore_modifiers" />
-          <button class="roll_button" type="roll" name="roll_lore" value="!eed characterID(@{character_id}) label(skill:Lore) @{lore_modifiers} skill(@{lore_rank}|@{intellect}|Lore) @{dicePool}"></button>
-        </div>
-        <div class="skill">          
-          <label data-i18n="outer-rim">Outer Rim</label>
-          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
-          <input type="checkbox" name="attr_outer-rim_career" value="true" />
-          <input type="number"  name="attr_outer-rim_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_outer-rim_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_outer-rim_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+          <div class="skill">          
+            <label data-i18n="lore">Lore</label>
+            <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+            <input type="checkbox" name="attr_lore_career" value="true" />
+            <input type="number"  name="attr_lore_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_lore_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_lore_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_lore_modifiers" />
+            <button class="roll_button" type="roll" name="roll_lore" value="!eed characterID(@{character_id}) label(skill:Lore) @{lore_modifiers} skill(@{lore_rank}|@{intellect}|Lore) @{dicePool}"></button>
           </div>
-          <input type="text" name="attr_outer-rim_modifiers" />
-          <button class="roll_button" type="roll" name="roll_outer-rim" value="!eed characterID(@{character_id}) label(skill:Outer Rim) @{outer-rim_modifiers} skill(@{outer-rim_rank}|@{intellect}|Outer Rim) @{dicePool}"></button>
-        </div>
-        <div class="skill">          
-          <label data-i18n="underworld">Underworld</label>
-          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
-          <input type="checkbox" name="attr_underworld_career" value="true" />
-          <input type="number"  name="attr_underworld_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_underworld_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_underworld_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+          <div class="skill">          
+            <label data-i18n="outer-rim">Outer Rim</label>
+            <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+            <input type="checkbox" name="attr_outer-rim_career" value="true" />
+            <input type="number"  name="attr_outer-rim_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_outer-rim_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_outer-rim_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_outer-rim_modifiers" />
+            <button class="roll_button" type="roll" name="roll_outer-rim" value="!eed characterID(@{character_id}) label(skill:Outer Rim) @{outer-rim_modifiers} skill(@{outer-rim_rank}|@{intellect}|Outer Rim) @{dicePool}"></button>
           </div>
-          <input type="text" name="attr_underworld_modifiers" />
-          <button class="roll_button" type="roll" name="roll_underworld" value="!eed characterID(@{character_id}) label(skill:Underworld) @{underworld_modifiers} skill(@{underworld_rank}|@{intellect}|Underworld) @{dicePool}"></button>
-        </div>
-        <div class="skill">          
-          <label data-i18n="warfare">Warfare</label>
-          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
-          <input type="checkbox" name="attr_warfare_career" value="true" />
-          <input type="number"  name="attr_warfare_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_warfare_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_warfare_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+          <div class="skill">          
+            <label data-i18n="underworld">Underworld</label>
+            <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+            <input type="checkbox" name="attr_underworld_career" value="true" />
+            <input type="number"  name="attr_underworld_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_underworld_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_underworld_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_underworld_modifiers" />
+            <button class="roll_button" type="roll" name="roll_underworld" value="!eed characterID(@{character_id}) label(skill:Underworld) @{underworld_modifiers} skill(@{underworld_rank}|@{intellect}|Underworld) @{dicePool}"></button>
           </div>
-          <input type="text" name="attr_warfare_modifiers" />
-          <button class="roll_button" type="roll" name="roll_warfare" value="!eed characterID(@{character_id}) label(skill:Warfare) @{warfare_modifiers} skill(@{warfare_rank}|@{intellect}|Warfare) @{dicePool}"></button>
-        </div>
-        <div class="skill">          
-          <label data-i18n="xenology">Xenology</label>
-          <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
-          <input type="checkbox" name="attr_xenology_career" value="true" />
-          <input type="number"  name="attr_xenology_rank" min="0" max="6" maxlength="1" value="0" />
-          <div class="skill_rank_boxes">
-            <input class="yd" type="hidden" name="attr_xenology_yd" value="" />
-            <span class="icon-proficiency-dice"></span>
-            <input class="gd" type="hidden" name="attr_xenology_gd" value="" />
-            <span class="icon-ability-dice"></span>            
+          <div class="skill">          
+            <label data-i18n="warfare">Warfare</label>
+            <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+            <input type="checkbox" name="attr_warfare_career" value="true" />
+            <input type="number"  name="attr_warfare_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_warfare_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_warfare_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_warfare_modifiers" />
+            <button class="roll_button" type="roll" name="roll_warfare" value="!eed characterID(@{character_id}) label(skill:Warfare) @{warfare_modifiers} skill(@{warfare_rank}|@{intellect}|Warfare) @{dicePool}"></button>
           </div>
-          <input type="text" name="attr_xenology_modifiers" />
-          <button class="roll_button" type="roll" name="roll_xenology" value="!eed characterID(@{character_id}) label(skill:Xenology) @{xenology_modifiers} skill(@{xenology_rank}|@{intellect}|Xenology) @{dicePool}"></button>
-        </div> 
+          <div class="skill">          
+            <label data-i18n="xenology">Xenology</label>
+            <div>(<span data-i18n="intellect_abbr">Int</span>)</div>
+            <input type="checkbox" name="attr_xenology_career" value="true" />
+            <input type="number"  name="attr_xenology_rank" min="0" max="6" maxlength="1" value="0" />
+            <div class="skill_rank_boxes">
+              <input class="yd" type="hidden" name="attr_xenology_yd" value="" />
+              <span class="icon-proficiency-dice"></span>
+              <input class="gd" type="hidden" name="attr_xenology_gd" value="" />
+              <span class="icon-ability-dice"></span>            
+            </div>
+            <input type="text" name="attr_xenology_modifiers" />
+            <button class="roll_button" type="roll" name="roll_xenology" value="!eed characterID(@{character_id}) label(skill:Xenology) @{xenology_modifiers} skill(@{xenology_rank}|@{intellect}|Xenology) @{dicePool}"></button>
+          </div> 
+        </div>
       </div>
     </div>
     <input type="hidden" name="attr_skillStatStore" value="%7B%22astrogation%22%3A%22intellect%22%2C%22athletics%22%3A%22brawn%22%2C%22charm%22%3A%22presence%22%2C%22coercion%22%3A%22willpower%22%2C%22computers%22%3A%22intellect%22%2C%22cool%22%3A%22presence%22%2C%22coordination%22%3A%22agility%22%2C%22deception%22%3A%22cunning%22%2C%22discipline%22%3A%22willpower%22%2C%22leadership%22%3A%22presence%22%2C%22mechanics%22%3A%22intellect%22%2C%22medicine%22%3A%22intellect%22%2C%22negotiation%22%3A%22presence%22%2C%22perception%22%3A%22cunning%22%2C%22piloting-planetary%22%3A%22agility%22%2C%22piloting-space%22%3A%22agility%22%2C%22resilience%22%3A%22brawn%22%2C%22skullduggery%22%3A%22cunning%22%2C%22stealth%22%3A%22agility%22%2C%22streetwise%22%3A%22cunning%22%2C%22survival%22%3A%22cunning%22%2C%22vigilance%22%3A%22willpower%22%2C%22brawl%22%3A%22brawn%22%2C%22melee%22%3A%22brawn%22%2C%22gunnery%22%3A%22agility%22%2C%22lightsaber%22%3A%22brawn%22%2C%22ranged-light%22%3A%22agility%22%2C%22ranged-heavy%22%3A%22agility%22%2C%22core-worlds%22%3A%22intellect%22%2C%22education%22%3A%22intellect%22%2C%22lore%22%3A%22intellect%22%2C%22outer-rim%22%3A%22intellect%22%2C%22underworld%22%3A%22intellect%22%2C%22warfare%22%3A%22intellect%22%2C%22xenology%22%3A%22intellect%22%7D" />
   </div>
   <div class="combat">
-    <h2><span data-i18n="initiative">Initiative</span><button type="action" name="act_show_initiative"><span name="attr_show_initiative_label"></span></button></h2>    
-    <input type="hidden" name="attr_show_initiative_label" value="hide" />
-    <input class="show_section" type="hidden" name="attr_show_initiative" value="true" />
-    <div class="initiative section">
-      <div class="skill skill_cool">          
-        <label class="cell_width_3" data-i18n="cool_if_prepared">Cool (if prepared)</label>
-        <div>(<span data-i18n="presence_abbr">Pr</span>)</div>
-        <div class="skill_rank_boxes">
-          <input class="yd" type="hidden" name="attr_init_cool_yd" value="(((@{presence} + @{cool_rank}) - abs(@{presence} - @{cool_rank})) / 2)" disabled />
-          <span class="icon-proficiency-dice"></span>
-          <input class="gd" type="hidden" name="attr_init_cool_gd" value="((((@{presence} + @{cool_rank}) + abs(@{presence} - @{cool_rank})) / 2) - @{cool_yd})" disabled />
-          <span class="icon-ability-dice"></span>            
+    <div>
+      <h2><span data-i18n="initiative">Initiative</span><button type="action" name="act_show_initiative"><span name="attr_show_initiative_label"></span></button></h2>    
+      <input type="hidden" name="attr_show_initiative_label" value="hide" />
+      <input class="show_section" type="hidden" name="attr_show_initiative" value="true" />
+      <div class="initiative section">
+        <div class="skill skill_cool">          
+          <label class="cell_width_3" data-i18n="cool_if_prepared">Cool (if prepared)</label>
+          <div>(<span data-i18n="presence_abbr">Pr</span>)</div>
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_init_cool_yd" value="(((@{presence} + @{cool_rank}) - abs(@{presence} - @{cool_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_init_cool_gd" value="((((@{presence} + @{cool_rank}) + abs(@{presence} - @{cool_rank})) / 2) - @{cool_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_init_cool_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_init_cool" value="!eed characterID(@{character_id}) label(skill:Initiative Cool) @{cool_modifiers} @{init_cool_modifiers} skill(@{cool_rank}|@{presence}|Cool) @{dicePool}"></button>
         </div>
-        <input type="text" name="attr_init_cool_modifiers" />
-        <button class="roll_button" type="roll" name="attr_roll_init_cool" value="!eed characterID(@{character_id}) label(skill:Initiative Cool) @{cool_modifiers} @{init_cool_modifiers} skill(@{cool_rank}|@{presence}|Cool) @{dicePool}"></button>
-      </div>
-      <div class="skill skill_vigilance">          
-        <label class="cell_width_3" data-i18n="vigilance_if_unexpected">Vigilance (if unexpected)</label>
-        <div>(<span data-i18n="willpower_abbr">Wil</span>)</div>
-        <div class="skill_rank_boxes">
-          <input class="yd" type="hidden" name="attr_init_vigilance_yd" value="(((@{willpower} + @{vigilance_rank}) - abs(@{willpower} - @{vigilance_rank})) / 2)" disabled />
-          <span class="icon-proficiency-dice"></span>
-          <input class="gd" type="hidden" name="attr_init_vigilance_gd" value="((((@{willpower} + @{vigilance_rank}) + abs(@{willpower} - @{vigilance_rank})) / 2) - @{vigilance_yd})" disabled />
-          <span class="icon-ability-dice"></span>            
+        <div class="skill skill_vigilance">          
+          <label class="cell_width_3" data-i18n="vigilance_if_unexpected">Vigilance (if unexpected)</label>
+          <div>(<span data-i18n="willpower_abbr">Wil</span>)</div>
+          <div class="skill_rank_boxes">
+            <input class="yd" type="hidden" name="attr_init_vigilance_yd" value="(((@{willpower} + @{vigilance_rank}) - abs(@{willpower} - @{vigilance_rank})) / 2)" disabled />
+            <span class="icon-proficiency-dice"></span>
+            <input class="gd" type="hidden" name="attr_init_vigilance_gd" value="((((@{willpower} + @{vigilance_rank}) + abs(@{willpower} - @{vigilance_rank})) / 2) - @{vigilance_yd})" disabled />
+            <span class="icon-ability-dice"></span>            
+          </div>
+          <input type="text" name="attr_init_vigilance_modifiers" />
+          <button class="roll_button" type="roll" name="attr_roll_init_vigilance" value="!eed characterID(@{character_id}) label(skill:Initiative Vigilance) @{vigilance_modifiers} @{init_vigilance_modifiers} skill(@{vigilance_rank}|@{willpower}|Vigilance) @{dicePool}"></button>
         </div>
-        <input type="text" name="attr_init_vigilance_modifiers" />
-        <button class="roll_button" type="roll" name="attr_roll_init_vigilance" value="!eed characterID(@{character_id}) label(skill:Initiative Vigilance) @{vigilance_modifiers} @{init_vigilance_modifiers} skill(@{vigilance_rank}|@{willpower}|Vigilance) @{dicePool}"></button>
       </div>
     </div>
-    <h2><span data-i18n="criticals">Criticals</span><button type="action" name="act_show_criticals"><span name="attr_show_criticals_label"></span></button></h2>    
-    <input type="hidden" name="attr_show_criticals_label" value="hide" />
-    <input class="show_section" type="hidden" name="attr_show_criticals" value="true" />
-    <div class="criticals section">
-      <h3 data-i18n="roll_a_critical">Roll a Critical (for any target)</h3>
-      <div class="rolla_critical">
-        <label data-i18n="critical_bonus">Critical Bonus</label>
-        <input name="attr_critical-bonus-standalone" type="number" step="10" value="0" min="0" max="120" />
-        <input name="attr_target-type" type="hidden" value="NPC" />
-        <button type="roll" class="roll_crit_button" value="!eed characterID(@{character_id}) rollRandomCritical" data-i18n="roll_critical">Roll Critical</button>
-      </div>
-      <h3 data-i18n="your_current_critical_injuries">Your Current Critical Injuries</h3>
-      <fieldset class="repeating_current-crits">
-        <input class="current_crit_severity_input" type="hidden" name="attr_current_crit_severity" value="" />
-        <div class="current_crit">
-          <div class="current_crit_container">
-            <div><span name="attr_current_crit_severity"></span></div>
-            <div><span name="attr_current_crit_type" class="current_crit_type"></span></div>
-            <div class="select_wrapper">
-              <select name="attr_current_crit_number">
-                <option class="disabled_option" value="0">Crit Roll</option>            
-                <optgroup label="Easy (1 ♦)">
-                  <option value="5">1 - 5</option>
-                  <option value="10">6 - 10</option>
-                  <option value="15">11 - 15</option>
-                  <option value="20">16 - 20</option>
-                  <option value="25">21 - 25</option>
-                  <option value="30">26 - 30</option>
-                  <option value="35">31 - 35</option>
-                  <option value="40">36 - 40</option>
-                </optgroup>
-                <optgroup label="Average (2 ♦♦)">
-                  <option value="45">41 - 45</option>
-                  <option value="50">46 - 50</option>
-                  <option value="55">51 - 55</option>
-                  <option value="60">56 - 60</option>
-                  <option value="65">61 - 65</option>
-                  <option value="70">66 - 70</option>
-                  <option value="75">71 - 75</option>
-                  <option value="80">76 - 80</option>
-                  <option value="85">81 - 85</option>
-                  <option value="90">86 - 90</option>
-                </optgroup>
-                <optgroup label="Hard (3 ♦♦♦)">
-                  <option value="95">91 - 95</option>
-                  <option value="100">96 - 100</option>
-                  <option value="105">101 - 105</option>
-                  <option value="110">106 - 110</option>
-                  <option value="115">111 - 115</option>
-                  <option value="120">116 - 120</option>
-                  <option value="125">121 - 125</option>
-                </optgroup>
-                <optgroup label="Daunting (4 ♦♦♦♦)">
-                  <option value="130">126 - 130</option>
-                  <option value="140">131 - 140</option>
-                  <option value="150">141 - 150</option>
-                </optgroup>
-                <optgroup label="Dead">
-                  <option value="151">151+</option>
-                </optgroup>
-              </select>
-            </div>
-            <div class="current_crit_description"><span name="attr_current_crit_description"></span></div>
-          </div>          
-          <button type="action" name="act_healcrit" data-i18n="heal_this_wound">Heal this wound</button>
+    <div>
+      <h2><span data-i18n="criticals">Criticals</span><button type="action" name="act_show_criticals"><span name="attr_show_criticals_label"></span></button></h2>    
+      <input type="hidden" name="attr_show_criticals_label" value="hide" />
+      <input class="show_section" type="hidden" name="attr_show_criticals" value="true" />
+      <div class="criticals section">
+        <h3 data-i18n="roll_a_critical">Roll a Critical (for any target)</h3>
+        <div class="rolla_critical">
+          <label data-i18n="critical_bonus">Critical Bonus</label>
+          <input name="attr_critical-bonus-standalone" type="number" step="10" value="0" min="0" max="120" />
+          <input name="attr_target-type" type="hidden" value="NPC" />
+          <button type="roll" class="roll_crit_button" value="!eed characterID(@{character_id}) rollRandomCritical" data-i18n="roll_critical">Roll Critical</button>
         </div>
-      </fieldset>      
+        <h3 data-i18n="your_current_critical_injuries">Your Current Critical Injuries</h3>
+        <fieldset class="repeating_current-crits">
+          <input class="current_crit_severity_input" type="hidden" name="attr_current_crit_severity" value="" />
+          <div class="current_crit">
+            <div class="current_crit_container">
+              <div><span name="attr_current_crit_severity"></span></div>
+              <div><span name="attr_current_crit_type" class="current_crit_type"></span></div>
+              <div class="select_wrapper">
+                <select name="attr_current_crit_number">
+                  <option class="disabled_option" value="0">Crit Roll</option>            
+                  <optgroup label="Easy (1 ♦)">
+                    <option value="5">1 - 5</option>
+                    <option value="10">6 - 10</option>
+                    <option value="15">11 - 15</option>
+                    <option value="20">16 - 20</option>
+                    <option value="25">21 - 25</option>
+                    <option value="30">26 - 30</option>
+                    <option value="35">31 - 35</option>
+                    <option value="40">36 - 40</option>
+                  </optgroup>
+                  <optgroup label="Average (2 ♦♦)">
+                    <option value="45">41 - 45</option>
+                    <option value="50">46 - 50</option>
+                    <option value="55">51 - 55</option>
+                    <option value="60">56 - 60</option>
+                    <option value="65">61 - 65</option>
+                    <option value="70">66 - 70</option>
+                    <option value="75">71 - 75</option>
+                    <option value="80">76 - 80</option>
+                    <option value="85">81 - 85</option>
+                    <option value="90">86 - 90</option>
+                  </optgroup>
+                  <optgroup label="Hard (3 ♦♦♦)">
+                    <option value="95">91 - 95</option>
+                    <option value="100">96 - 100</option>
+                    <option value="105">101 - 105</option>
+                    <option value="110">106 - 110</option>
+                    <option value="115">111 - 115</option>
+                    <option value="120">116 - 120</option>
+                    <option value="125">121 - 125</option>
+                  </optgroup>
+                  <optgroup label="Daunting (4 ♦♦♦♦)">
+                    <option value="130">126 - 130</option>
+                    <option value="140">131 - 140</option>
+                    <option value="150">141 - 150</option>
+                  </optgroup>
+                  <optgroup label="Dead">
+                    <option value="151">151+</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="current_crit_description"><span name="attr_current_crit_description"></span></div>
+            </div>          
+            <button type="action" name="act_healcrit" data-i18n="heal_this_wound">Heal this wound</button>
+          </div>
+        </fieldset>      
+      </div>
     </div>
-    <h2><span data-i18n="weapons">Weapons</span><button type="action" name="act_show_weapons"><span name="attr_show_weapons_label"></span></button></h2>    
-    <input type="hidden" name="attr_show_weapons_label" value="hide" />
-    <input class="show_section" type="hidden" name="attr_show_weapons" value="true" />
-    <div class="weapons section">
-      <fieldset class="repeating_weapons">
-        <div class="weapon">
-          <h3 class="weapon_name"><span name="attr_make_model">Make/Model</span></h3>
-          <div class="weapon_stats">
-            <div>
-              <label data-i18n="damage">Damage</label>
-              <input type="number" name="attr_weapon_damage" max="20" min="0" value="0" />
-            </div>
-            <div>
-              <label data-i18n="critical">Critical</label>
-              <input type="number" name="attr_weapon_critical" max="9" min="0" value="0" />
-            </div>
-            <button name="roll_weapon" type="roll" value="!eed characterID(@{character_id}) label(Weapon:@{make_model}|Type:@{weapon_skill}|Damage:@{weapon_damage}|Critical:@{weapon_critical}|Range:@{weapon_range}|Qualities:@{weapon_qualities_list}) @{weapon_skill_value} @{weapon_condition} @{weapon_qualities_pool} @{dicePool} calculateDamage(@{weapon_damage}|@{weapon_critical}|@{weapon_damage_bonus_total}|@{weapon_critical_bonus_total})"></button>
-            <div>
-              <label data-i18n="encumbrance_abbr">Encum</label>
-              <input type="number" name="attr_weapon_encumbrance" max="9" min="0" value="0" />
-            </div>
-            <div>
-              <label data-i18n="hard_points">Hard Points</label>
-              <input type="number" name="attr_weapon_hard_points" max="9" min="0" value="0" />
-            </div>
-          </div>
-          <div class="weapon_info">
-            <label data-i18n="make_model">Make-Model</label>
-            <input type="text" name="attr_make_model" />
-            <label data-i18n="carried_">Carried?</label>
-            <div class="weapon_carried_grid">
-              <input type="checkbox" name="attr_weapon_carried" value="true" />
-              <span class="icon_help">
-                <div class="help_info_left">
-                  <p>Check this box if the character is currently carrying this weapon.  Carried weapons count toward total encumbrance.</p>
-                </div>
-              </span>
-            </div>            
-            <label data-i18n="skill">Skill</label>
-            <div class="select_wrapper">
-              <select name="attr_weapon_skill">
-                <optgroup label="Combat Skills" data-i18n-label="combat_skills">
-                  <option value="Brawl" data-i18n="brawl">Brawl</option>
-                  <option value="Melee" data-i18n="melee">Melee</option>
-                  <option value="Gunnery" data-i18n="gunnery">Gunnery</option>
-                  <option value="Ranged - Light" data-i18n="ranged-light">Ranged - Light</option>
-                  <option value="Ranged - Heavy" data-i18n="ranged-heavy">Ranged - Heavy</option>
-                  <option value="Lightsaber" data-i18n="lightsaber">Lightsaber</option>
-                </optgroup>
-                <optgroup label="General Skills" data-i18n-label="general_skills">
-                  <option value="Mechanics" data-i18n="mechanics">Mechanics</option>
-                  <option value="Medicine" data-i18n="medecine">Medicine</option>
-                  <option value="Resilience" data-i18n="resilience">Resilience</option>
-                </optgroup>
-              </select>
-            </div>
-            <label><span name="attr_weapon_skill"></span></label>
-            <div class="skill_rank_boxes">
-              <input class="yd" type="hidden" name="attr_weapon_skill_yd" value="" />
-              <span class="icon-proficiency-dice"></span>
-              <input class="gd" type="hidden" name="attr_weapon_skill_gd" value="" />
-              <span class="icon-ability-dice"></span>            
-            </div>
-            <input type="hidden" name="attr_weapon_skill_value" value="" />
-            <label data-i18n="range">Range</label>
-            <div class="select_wrapper">
-              <select name="attr_weapon_range">
-                <option value="Engaged" data-i18n="engaged">Engaged</option>
-                <option value="Short" data-i18n="short">Short</option>
-                <option value="Medium" data-i18n="medium">Medium</option>
-                <option value="Long" data-i18n="long">Long</option>
-                <option value="Extreme" data-i18n="extreme">Extreme</option>
-              </select>
-            </div>
-            <label data-i18n="condition">Condition</label>
-            <div class="select_wrapper">
-              <select name="attr_weapon_condition">
-                <option value="" data-i18n="undamaged">Undamaged</option>
-                <option value="1blk" data-i18n="minor">Minor</option>
-                <option value="1p" data-i18n="moderate">Moderate</option>
-                <option value="unusableWeapon" data-i18n="major">Major</option>
-                <option value="unusableWeapon" data-i18n="destroyed">Destroyed</option>
-              </select>
-            </div>
-            <label class="critical_damage_cell" data-i18n="critical_bonus">Critical Bonus</label>
-            <div class="critical_damage_cell">              
-              <div class="weapon_critical_bonus">
-                <input name="attr_weapon_critical_bonus" type="number" step="10" value="0" min="0" max="200" />
-                <div>
-                  <span data-i18n="from_other">from Other</span>
-                  <span class="icon_help">
-                    <div class="help_info">
-                      <p>Include a critical bonus for this weapon from a source other than Vicious, such as a weapon attachment/mod or a talent. It is added to a roll when activating a critical injury with this weapon.</p>
-                    </div>
-                  </span>
-                </div>
+    <div>
+      <h2><span data-i18n="weapons">Weapons</span><button type="action" name="act_show_weapons"><span name="attr_show_weapons_label"></span></button></h2>    
+      <input type="hidden" name="attr_show_weapons_label" value="hide" />
+      <input class="show_section" type="hidden" name="attr_show_weapons" value="true" />
+      <div class="weapons section">
+        <fieldset class="repeating_weapons">
+          <div class="weapon">
+            <h3 class="weapon_name"><span name="attr_make_model">Make/Model</span></h3>
+            <div class="weapon_stats">
+              <div>
+                <label data-i18n="damage">Damage</label>
+                <input type="number" name="attr_weapon_damage" max="20" min="0" value="0" />
               </div>
-              <input type="hidden" class="weapon_critical_bonus_vicious" name="attr_weapon_quality_vicious_crit_bonus" value="0" />
-              <div class="weapon_critical_bonus weapon_critical_bonus_vicious">
-                <div class="weapon_bonus_text">+<span name="attr_weapon_quality_vicious_crit_bonus"></span></div>
-                <div>
-                  <span data-i18n="from_vicious">from Vicious</span>
-                  <span class="icon_help">
-                    <div class="help_info">
-                      <p>This shows the critical bonus added to the weapon due to a Vicious quality.  It is automatically added to a roll when activating a critical injury with this weapon.</p>
-                    </div>
-                  </span>
-                </div>
+              <div>
+                <label data-i18n="critical">Critical</label>
+                <input type="number" name="attr_weapon_critical" max="9" min="0" value="0" />
               </div>
-              <div class="weapon_critical_bonus weapon_critical_bonus_total">
-                <input name="attr_weapon_critical_bonus_total" type="hidden" value="0" />
-                <div class="weapon_bonus_text"><span name="attr_weapon_critical_bonus_total"></span></div>
-                <div><span data-i18n="total_bonus">Total Bonus</span></div>
+              <button name="roll_weapon" type="roll" value="!eed characterID(@{character_id}) label(Weapon:@{make_model}|Type:@{weapon_skill}|Damage:@{weapon_damage}|Critical:@{weapon_critical}|Range:@{weapon_range}|Qualities:@{weapon_qualities_list}) @{weapon_skill_value} @{weapon_condition} @{weapon_qualities_pool} @{dicePool} calculateDamage(@{weapon_damage}|@{weapon_critical}|@{weapon_damage_bonus_total}|@{weapon_critical_bonus_total})"></button>
+              <div>
+                <label data-i18n="encumbrance_abbr">Encum</label>
+                <input type="number" name="attr_weapon_encumbrance" max="9" min="0" value="0" />
               </div>
-            </div>           
-            <label class="critical_damage_cell" data-i18n="damage_bonus:">Damage Bonus</label>
-            <div class="critical_damage_cell">        
-              <div class="weapon_damage_bonus">
-                <input name="attr_weapon_damage_bonus" type="number" value="0" min="-10" max="10" />
-                <div>
-                  <span data-i18n="from_other">from Other</span>
-                  <span class="icon_help">
-                    <div class="help_info">
-                      <p>Include a damage bonus for this weapon from a source other than Superior or Inferior, such as a weapon attachment/mod or a talent. It is added to a roll when calculating damage with this weapon.</p>
-                    </div>
-                  </span>
-                </div>
-              </div>
-              <input type="hidden" class="weapon_quality_superior_bonus_damage" name="attr_weapon_quality_superior_bonus_damage" value="0" />
-              <div class="weapon_damage_bonus weapon_damage_bonus_superior">
-                <div class="weapon_bonus_text">+<span name="attr_weapon_quality_superior_bonus_damage"></span></div>
-                <div>
-                  <span data-i18n="from_superior">from Superior</span>
-                  <span class="icon_help">
-                    <div class="help_info">
-                      <p>This shows the damage bonus added to the weapon due to a Superior quality. It is automatically added to a roll when calculating damage with this weapon.</p>
-                    </div>
-                  </span>
-                </div>
-              </div>              
-              <input type="hidden" class="weapon_quality_inferior_penalty_damage" name="attr_weapon_quality_inferior_penalty_damage" value="0" />
-              <div class="weapon_damage_bonus weapon_damage_bonus_inferior">
-                <div class="weapon_bonus_text">-<span name="attr_weapon_quality_inferior_penalty_damage"></span></div>
-                <div>
-                  <span data-i18n="from_inferior">from Inferior</span>
-                  <span class="icon_help">
-                    <div class="help_info">
-                      <p>This shows the damage subtracted from the weapon due to an Inferior quality. It is automatically subtracted from a roll when calculating damage with this weapon.</p>
-                    </div>
-                  </span>
-                </div>
-              </div>
-              <div class="weapon_damage_bonus weapon_damage_bonus_total">                
-                <input name="attr_weapon_damage_bonus_total" type="hidden" value="0" />
-                <div class="weapon_bonus_text"><span name="attr_weapon_damage_bonus_total"></span></div>
-                <div><span data-i18n="total_bonus">Total Bonus</span></div>
+              <div>
+                <label data-i18n="hard_points">Hard Points</label>
+                <input type="number" name="attr_weapon_hard_points" max="9" min="0" value="0" />
               </div>
             </div>
-            <label data-i18n="weapon_qualities">Weapon Qualities</label>
-            <div class="weapon_qualities_cell"><span name="attr_weapon_qualities_list"></span></div>            
-          </div>
-          <h3>
-            <div class="weapon_qualities_header">
-              <span data-i18n="weapon_qualities">Weapon Qualities</span>
-              <span class="weapon_qualities_activation_icon"></span>
-              <span class="weapon_qualities_activation" data-i18n="two_advantage_to_activate">Two Advantage to activate unless otherwise noted</span>
-            </div>            
-            <button type="action" name="act_show-weapon-qualities"><span name="attr_show-weapon-qualities_label"></span></button>    
-          </h3>          
-          <input type="hidden" name="attr_weapon_qualities_pool" value="@{weapon_quality_accurate_value}b @{weapon_quality_inaccurate_value}blk @{weapon_quality_cumbersome_penalty}p @{weapon_quality_inferior_penalty} @{weapon_quality_superior_bonus}" />
-          <input type="hidden" name="attr_weapon_qualities_list" value="None" />
-          <input type="hidden" name="attr_show-weapon-qualities_label" value="hide" />
-          <input class="show_section" type="hidden" name="attr_show-weapon-qualities" value="true" />
-          <div class="weapon_qualities section">            
-            <label><span data-i18n="accurate">Accurate</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Accurate weapons are easier to aim or wield, whether through design or technology. For each level of this trait, the attacker adds 1 blue to his attack dice pools while using this weapon.</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_accurate_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="auto_fire">Auto-Fire</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>A weapon with Auto-fire can be set to shoot in rapid succession and potentially spray an area with bolts, flechettes, slugs, or other types of projectiles. The advantage in using Auto-fire is that it has the chance to hit multiple targets or hit a single target multiple times.</p>
-                  <p>Attacking with a weapon on Auto-fire is generally less accurate, and the attacker must increase the difficulty of the attack check by 1 purple die. The user may choose to not use the Auto-fire quality on a weapon; in this case, he cannot trigger the quality but also does not suffer the aforementioned penalty.</p>
-                  <p>If the attack hits, the attacker can trigger Auto-fire by spending 2 Advantages Auto-fire can be triggered multiple times. Each time the attacker triggers Autofire, it deals an additional hit to the target. Each of these counts as an additional hit from that weapon, and each hit deals base damage plus the number of uncanceled success on the check.</p>
-                  <p>These additional hits can be allocated to the target, or to other targets within range of the weapon. If the attacker wishes to hit multiple targets, he must deci to do so before making the check. Furthermore, if h wishes to hit multiple targets, his initial target must always be the target with the highest difficulty and highest defense (if this is two separate targets, the GM chooses which target is the initial target). The initial hit must always be against the initial target. Subsequent hits generated can be allocated to any of the other designated targets.</p>
-                  <p>Auto-fire weapons can also activate one Critical Injury for each hit generated on the attack per the normal cost; the Critical must target the target of the specific hit.</p>
-                </div>
-              </span>
-            </label>
-            <div class="select_wrapper">
-              <select name="attr_weapon_quality_auto_fire_value">
-                <option data-i18n="no">No</option>
-                <option data-i18n="yes">Yes</option>
-              </select>
-            </div>
-            <label><span data-i18n="blast">Blast</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>The weapon has a large spread, an explosive blast, or similar area of effect, like the detonation of a grenade or a warhead fired from a missile launcher. If the attack is successful and Blast activates, each character (friend or foe) engaged with the original target suffers damage equal to the weapon's Blast rating (plus an additional wound per success as usual).</p>
-                  <p>In a relatively small and enclosed area, the Game Master might decide that everyone in the room suffers damage.</p>
-                  <p>If the Blast quality doesn't activate, the ordnance still detonates, but bad luck or poor aim on the part of the firer (or quick reactions on the part of the victims) means the explosion may not catch anyone else in its radius. However, the user may also trigger Blast if the attack misses by spending 3 advantages. In this case, the original target and every target engaged with the original target suffers damage equal to the Blast rating of the weapon.</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_blast_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="breach">Breach</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Weapons with Breach burn through the toughest armor, and are often heavy weapons or starship weapons.</p>
-                  <p>Breach weapons ignore one point of armor for every rating of Breach (meaning they also ignore 10 points of soak for every rating of Breach).</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_breach_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="burn">Burn</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Weapons with Burn inflict damage over time. If the attack is successful, the target continues to suffer the weapon's base damage each round for a number of rounds equal to the weapon's Burn rating. Damage is applied at the start of each of the target's turns.</p>
-                  <p>A victim might be able to stop the damage by rolling around on the ground and making an Agility check as an action. This is an Average (2 purple dice) Coordination check on hard surfaces such as the hall of a spaceship, or an Easy (1 purple die) Coordination check on grass or soft ground. Jumping into a body of water stops the damage immediately. Both situations assume the flame is from actual combustion rather than a chemical reaction. With the latter, there is usually little the victim can do.</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_burn_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="concussive">Concussive</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>The weapon's attack can leave the target shell-shocked from mighty blows or punishing Shockwaves, unable to perform any but the most basic actions. The target is staggered for a number of rounds equal to the weapon's Concussive rating. A staggered target cannot perform actions.</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_concussive_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="cortosis">Cortosis</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Cortosis is an ore principally found in the Outer Rim. It is extremely rare and valuable, and was used primarily during the Clone Wars against the Jedi Knights. There are two varieties of Cortosis ore. The rarest versions can actually short out a lightsaber's blade, causing it to fail temporarily. The far more common Cortosis ore is still a miraculous substance, because when molded into armor, it forms an interlocking molecular bond that is extremely resistant to energy weapons.</p>
-                  <p>Weapons with the Cortosis quality are immune to the Sunder quality. Armor with the Cortosis quality makes the wearer's soak immune to the Pierce and Breach qualities.</p>
-                </div>
-              </span>
-            </label>
-            <div class="select_wrapper">
-              <select name="attr_weapon_quality_cortosis_value">
-                <option data-i18n="no">No</option>
-                <option data-i18n="yes">Yes</option>
-              </select>
-            </div>
-            <label><span data-i18n="cumbersome">Cumbersome</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>A Cumbersome weapon is large, unwieldy, awkward, or heavy. To wield a Cumbersome weapon properly, the character needs a Brawn characteristic equal to or greater than the weapon's Cumbersome rating. For each point of Brawn by which the character is deficient, he must increase the difficulty of all checks made while using the weapon by one.</p>
-                </div>
-              </span>
-            </label>            
-            <input type="hidden" name="attr_weapon_quality_cumbersome_penalty" value="" />
-            <input name="attr_weapon_quality_cumbersome_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="defensive">Defensive</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Defensive weapons are particularly good at fending off incoming melee attacks. A character wielding a weapon with the Defensive quality increases his melee defense by the weapon's Defensive rating.</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_defensive_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="deflection">Deflection</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>An item with the Deflection quality increases the wearer's ranged defense equal to its Deflection rating.</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_deflection_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="disorient">Disorient</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>A weapon with Disorient can daze an opponent. When Disorient is triggered, the target is disoriented for a number of rounds equal to the weapon's Disorient rating. (A disoriented target adds 1 black die to all skill checks he performs.)</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_disorient_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="ensnare">Ensnare</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>A weapon with Ensnare binds a foe and restricts his movements. When Ensnare is triggered, the target is immobilized for a number of rounds equal to the weapon's Ensnare rating. An Ensnared target may attempt a Hard (3 purple dice) Athletics check as his action on his turn to break free from the effect. (An immobilized target cannot perform maneuvers.)</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_ensnare_value" type="number" value="0" min="0" max="9" />  
-            <label><span data-i18n="guided">Guided</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Certain types of projectiles, such as guided missiles, may benefit from course alterations after being fired. If a character misses while firing a Guided weapon and if Guided is activated, he may make an attack check at the end of the round. The difficulty of the check is calculated by comparing the weapon's silhouette of 0 to the silhouette of the target, and the check's green die equal the weapon's Guided rating. If the test is successful, the weapon strikes the target, and damage is dealt normally.</p>
-                  <p>Guided requires 3 advantages to activate, unless otherwise specified in the weapon's description. Remember, the Guided effect can activate on its subsequent attacks, representing the projectile continuing to track the target.</p>
-                  <p>"Spoofing" is a countermeasure designed to work against a particular type of projectile, such as flares designed to draw off infrared missiles. Spoofing directly increases the defense of the target against attacks with the Guided quality.</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_guided_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="knockdown">Knockdown</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>When knockdown triggers, the target is knocked prone. Unless specified otherwise, Knockdown requires 2 advantages to trigger, plus one additional advantage per silhouette of the target beyond one. </p>
-                </div>
-              </span>
-            </label>
-            <div class="select_wrapper">
-              <select name="attr_weapon_quality_knockdown_value">
-                <option data-i18n="no">No</option>
-                <option data-i18n="yes">Yes</option>
-              </select>
-            </div>
-            <label><span data-i18n="inaccurate">Inaccurate</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Inaccurate weapons are weapons of a shoddy or inferior construction, which means they are less likely to be accurate or precise. Alternatively, the weapon's nature may inhibit accuracy. Inaccurate weapons add 1 black die to the attacker's dice pool equal to their Inaccurate rating. </p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_inaccurate_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="inferior">Inferior</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>An Inferior item is a lackluster example of its kind, representing shoddy and poor craftsmanship. An Inferior weapon generates automatic 1 threat on all checks related to its use, and has its base damage decreased by one. Inferior armor has its encumbrance increased by one and its defense decreased by one. If it does not have defense, decrease its soak value by one, to a minimum of zero.</p>
-                </div>
-              </span>
-            </label>
-            <input type="hidden" name="attr_weapon_quality_inferior_penalty" value="" />
-            <div class="select_wrapper">
-              <select name="attr_weapon_quality_inferior_value">
-                <option data-i18n="no">No</option>
-                <option data-i18n="yes">Yes</option>
-              </select>
-            </div>
-            <label><span data-i18n="ion">Ion</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Ion weapons are designed to affect electrical systems instead of dealing raw damage. They are fitted to ships to knock out opponents' shields, sensors, and engines. They are shorter range than laser weapons and deal larger amounts of damage, but their damage is dealt to the target (usually a vehicle) as system strain. The damage is still reduced by armor and soak. Droids are affected by ion weapons, taking damage to their strain threshold.</p>
-                </div>
-              </span>
-            </label>
-            <div class="select_wrapper">
-              <select name="attr_weapon_quality_ion_value">
-                <option data-i18n="no">No</option>
-                <option data-i18n="yes">Yes</option>
-              </select>
-            </div>
-            <label><span data-i18n="limited_ammo">Limited Ammo</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Some weapons fire particularly large or complex projectiles that cost significant numbers of credits or are themselves a complete weapon that, once launched, is expended. A weapon with the Limited Ammo quality may be used to make a number of attacks equal to its Limited Ammo rating before it must be reloaded with a maneuver. In addition, each shot expends one of a limited number of rounds of ammo, which, once used, must be purchased or otherwise obtained before firing the weapon again. This also applies to grenades and other "one use" weapons that have the Limited Ammo 1 quality (here, the user is not "reloading" the grenade, but drawing another to use—but mechanically they are equivalent).</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_limited_ammo_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="linked">Linked</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Some weapons, like the laser cannons fitted to the X-wing, are designed to fire together at the same target. This increases the possibility of a hit as well as the damage dealt. When firing a linked weapon, on a successful attack, the weapon deals one hit. The wielder may spend 2 advantages to gain an additional hit, and may do so a number of times equal to the weapon's Linked rating. Additional hits from the Linked weapon being used may only be applied against the original target. Each hit deals the weapon's base damage plus the total uncanceled successes scored on the check. </p>
-                </div>
-              </span>
-            </label>
-            <div class="select_wrapper">
-              <select name="attr_weapon_quality_linked_value">
-                <option data-i18n="no">No</option>
-                <option data-i18n="yes">Yes</option>
-              </select>
-            </div>
-            <label><span data-i18n="pierce">Pierce</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>An attack made with this weapon ignores one point of soak for each rank of Pierce. If the weapon has more ranks of Pierce than the target's total soak, it completely ignores the target's soak. For example. Pierce 3 against a soak of 2 ignores 2 points of soak, but the extra "point" of Pierce has no further effect. </p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_pierce_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="prepare">Prepare</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Weapons with this quality require time to set up before being used. The user must perform a number of preparation maneuvers equal to the weapon's Prepare rating before making attacks with that weapon.</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_prepare_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="slow_firing">Slow-Firing</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Slow-Firing weapons tend to be large, heavy, emplacement-mounted weapons like the turbolasers found on capital ships or planetary defense ion cannons. While they deal incredible damage, they need time to recharge or cool down between shots. A weapon's Slow-Firing rating dictates how quickly the weapon can be fired after an attack. For example, a heavy turbolaser with Slow-Firing 2 must wait two rounds after being fired before it can be fired again.</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_slow_firing_value" type="number" value="0" min="0" max="9" />
-            <label><span data-i18n="stun">Stun</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>Some weapons deal Stun damage instead of regular damage. In this case, the weapon deals damage as strain instead of wounds. This damage is still reduced by a target's soak.</p>
-                  <p>A variant of this is a Stun setting. As an incidental, the wielder can choose to switch the setting of his weapon to "Stun." In this case, it does Stun damage as described above. When weapons with a Stun setting are used to deal Stun damage, their range changes to short and cannot be increased.</p>
-                </div>
-              </span>
-            </label>
-            <div class="select_wrapper">
-              <select name="attr_weapon_quality_stun_damage_value">
-                <option data-i18n="no">No</option>
-                <option data-i18n="yes">Yes</option>
-              </select>
-            </div>
-            <label><span data-i18n="sunder">Sunder</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>When activated, the attacker chooses one item openly wielded by the target (such as a weapon, shield, or item on a belt). That item is damaged one step: to minor if undamaged, from minor to moderate, or from moderate to major. If a weapon already suffering major damage is the target of a successful Sunder, it is destroyed.</p>
-                  <p>Sunder requires 1 advantage to activate. If activated multiple times in the same attack, each activation can be applied against the same weapon, potentially taking a weapon from undamaged to destroyed in a single attack.</p>
-                </div>
-              </span>
-            </label>
-            <div class="select_wrapper">
-              <select name="attr_weapon_quality_sunder_value">
-                <option data-i18n="no">No</option>
-                <option data-i18n="yes">Yes</option>
-              </select>
-            </div>
-            <label><span data-i18n="superior">Superior</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>A Superior item is a sterling example of its kind, representing masterful craftsmanship. A Superior weapon generates automatic 1 advantage on all checks related to its use, and has its base damage increased by one. Superior armor has its encumbrance reduced by one and its soak value increased by one. </p>
-                </div>
-              </span>
-            </label>            
-            <input type="hidden" name="attr_weapon_quality_superior_bonus" value="" />
-            <div class="select_wrapper">
-              <select name="attr_weapon_quality_superior_value">
-                <option data-i18n="no">No</option>
-                <option data-i18n="yes">Yes</option>
-              </select>
-            </div>
-            <label><span data-i18n="vicious">Vicious</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-              <span class="icon_help">
-                <div class="help_info">
-                  <p>When this weapon scores a Critical Injury or Hit, the character adds ten times the Vicious rating to the Critical roll. With Vicious 3, for example, the victim adds + 30 to his Critical Hit result.</p>
-                </div>
-              </span>
-            </label>
-            <input name="attr_weapon_quality_vicious_value" type="number" value="0" min="0" max="9" />
-          </div>
-          <h3>
-            <span data-i18n="attachments_mods">Attachments / Mods</span>
-            <button type="action" name="act_show-weapon-attachments"><span name="attr_show-weapon-attachments_label"></span></button>
-          </h3>
-          <input class="weapon_mods_negative" type="hidden" name="attr_weapon_mods_negative" value="false" />
-          <div class="weapon_mods_negative_message">The total hard points for attachments has exceeded the weapon's available hard points.</div>
-          <input type="hidden" name="attr_show-weapon-attachments_label" value="hide" />
-          <input class="show_section" type="hidden" name="attr_show-weapon-attachments" value="true" />
-          <div class="attachments_mods_container section">
-            <div class="weapon_mods_table_header">
-              <div data-i18n="name">Name</div>
-              <div><span data-i18n="hp">HP</span>
+            <div class="weapon_info">
+              <label data-i18n="make_model">Make-Model</label>
+              <input type="text" name="attr_make_model" />
+              <label data-i18n="carried_">Carried?</label>
+              <div class="weapon_carried_grid">
+                <input type="checkbox" name="attr_weapon_carried" value="true" />
                 <span class="icon_help">
-                  <div class="help_info">
-                    <p>The number of hard points is subtracted from the available weapon hard points above.  Make sure the weapon hard points are set before adding attachments.</p>
+                  <div class="help_info_left">
+                    <p>Check this box if the character is currently carrying this weapon.  Carried weapons count toward total encumbrance.</p>
                   </div>
                 </span>
-              </div>  
-              <div data-i18n="benefit">Benefit</div>
+              </div>            
+              <label data-i18n="skill">Skill</label>
+              <div class="select_wrapper">
+                <select name="attr_weapon_skill">
+                  <optgroup label="Combat Skills" data-i18n-label="combat_skills">
+                    <option value="Brawl" data-i18n="brawl">Brawl</option>
+                    <option value="Melee" data-i18n="melee">Melee</option>
+                    <option value="Gunnery" data-i18n="gunnery">Gunnery</option>
+                    <option value="Ranged - Light" data-i18n="ranged-light">Ranged - Light</option>
+                    <option value="Ranged - Heavy" data-i18n="ranged-heavy">Ranged - Heavy</option>
+                    <option value="Lightsaber" data-i18n="lightsaber">Lightsaber</option>
+                  </optgroup>
+                  <optgroup label="General Skills" data-i18n-label="general_skills">
+                    <option value="Mechanics" data-i18n="mechanics">Mechanics</option>
+                    <option value="Medicine" data-i18n="medecine">Medicine</option>
+                    <option value="Resilience" data-i18n="resilience">Resilience</option>
+                  </optgroup>
+                </select>
+              </div>
+              <label><span name="attr_weapon_skill"></span></label>
+              <div class="skill_rank_boxes">
+                <input class="yd" type="hidden" name="attr_weapon_skill_yd" value="" />
+                <span class="icon-proficiency-dice"></span>
+                <input class="gd" type="hidden" name="attr_weapon_skill_gd" value="" />
+                <span class="icon-ability-dice"></span>            
+              </div>
+              <input type="hidden" name="attr_weapon_skill_value" value="" />
+              <label data-i18n="range">Range</label>
+              <div class="select_wrapper">
+                <select name="attr_weapon_range">
+                  <option value="Engaged" data-i18n="engaged">Engaged</option>
+                  <option value="Short" data-i18n="short">Short</option>
+                  <option value="Medium" data-i18n="medium">Medium</option>
+                  <option value="Long" data-i18n="long">Long</option>
+                  <option value="Extreme" data-i18n="extreme">Extreme</option>
+                </select>
+              </div>
+              <label data-i18n="condition">Condition</label>
+              <div class="select_wrapper">
+                <select name="attr_weapon_condition">
+                  <option value="" data-i18n="undamaged">Undamaged</option>
+                  <option value="1blk" data-i18n="minor">Minor</option>
+                  <option value="1p" data-i18n="moderate">Moderate</option>
+                  <option value="unusableWeapon" data-i18n="major">Major</option>
+                  <option value="unusableWeapon" data-i18n="destroyed">Destroyed</option>
+                </select>
+              </div>
+              <label class="critical_damage_cell" data-i18n="critical_bonus">Critical Bonus</label>
+              <div class="critical_damage_cell">              
+                <div class="weapon_critical_bonus">
+                  <input name="attr_weapon_critical_bonus" type="number" step="10" value="0" min="0" max="200" />
+                  <div>
+                    <span data-i18n="from_other">from Other</span>
+                    <span class="icon_help">
+                      <div class="help_info">
+                        <p>Include a critical bonus for this weapon from a source other than Vicious, such as a weapon attachment/mod or a talent. It is added to a roll when activating a critical injury with this weapon.</p>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+                <input type="hidden" class="weapon_critical_bonus_vicious" name="attr_weapon_quality_vicious_crit_bonus" value="0" />
+                <div class="weapon_critical_bonus weapon_critical_bonus_vicious">
+                  <div class="weapon_bonus_text">+<span name="attr_weapon_quality_vicious_crit_bonus"></span></div>
+                  <div>
+                    <span data-i18n="from_vicious">from Vicious</span>
+                    <span class="icon_help">
+                      <div class="help_info">
+                        <p>This shows the critical bonus added to the weapon due to a Vicious quality.  It is automatically added to a roll when activating a critical injury with this weapon.</p>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+                <div class="weapon_critical_bonus weapon_critical_bonus_total">
+                  <input name="attr_weapon_critical_bonus_total" type="hidden" value="0" />
+                  <div class="weapon_bonus_text"><span name="attr_weapon_critical_bonus_total"></span></div>
+                  <div><span data-i18n="total_bonus">Total Bonus</span></div>
+                </div>
+              </div>           
+              <label class="critical_damage_cell" data-i18n="damage_bonus:">Damage Bonus</label>
+              <div class="critical_damage_cell">        
+                <div class="weapon_damage_bonus">
+                  <input name="attr_weapon_damage_bonus" type="number" value="0" min="-10" max="10" />
+                  <div>
+                    <span data-i18n="from_other">from Other</span>
+                    <span class="icon_help">
+                      <div class="help_info">
+                        <p>Include a damage bonus for this weapon from a source other than Superior or Inferior, such as a weapon attachment/mod or a talent. It is added to a roll when calculating damage with this weapon.</p>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+                <input type="hidden" class="weapon_quality_superior_bonus_damage" name="attr_weapon_quality_superior_bonus_damage" value="0" />
+                <div class="weapon_damage_bonus weapon_damage_bonus_superior">
+                  <div class="weapon_bonus_text">+<span name="attr_weapon_quality_superior_bonus_damage"></span></div>
+                  <div>
+                    <span data-i18n="from_superior">from Superior</span>
+                    <span class="icon_help">
+                      <div class="help_info">
+                        <p>This shows the damage bonus added to the weapon due to a Superior quality. It is automatically added to a roll when calculating damage with this weapon.</p>
+                      </div>
+                    </span>
+                  </div>
+                </div>              
+                <input type="hidden" class="weapon_quality_inferior_penalty_damage" name="attr_weapon_quality_inferior_penalty_damage" value="0" />
+                <div class="weapon_damage_bonus weapon_damage_bonus_inferior">
+                  <div class="weapon_bonus_text">-<span name="attr_weapon_quality_inferior_penalty_damage"></span></div>
+                  <div>
+                    <span data-i18n="from_inferior">from Inferior</span>
+                    <span class="icon_help">
+                      <div class="help_info">
+                        <p>This shows the damage subtracted from the weapon due to an Inferior quality. It is automatically subtracted from a roll when calculating damage with this weapon.</p>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+                <div class="weapon_damage_bonus weapon_damage_bonus_total">                
+                  <input name="attr_weapon_damage_bonus_total" type="hidden" value="0" />
+                  <div class="weapon_bonus_text"><span name="attr_weapon_damage_bonus_total"></span></div>
+                  <div><span data-i18n="total_bonus">Total Bonus</span></div>
+                </div>
+              </div>
+              <label data-i18n="weapon_qualities">Weapon Qualities</label>
+              <div class="weapon_qualities_cell"><span name="attr_weapon_qualities_list"></span></div>            
             </div>
-            <div class="weapon_mod">
-              <input type="text" name="attr_mod1_name" value="" />
-              <input type="number" name="attr_mod1_hp" min="0" max="5" value="0" />
-              <textarea name="attr_mod1_description"></textarea>
+            <h3>
+              <div class="weapon_qualities_header">
+                <span data-i18n="weapon_qualities">Weapon Qualities</span>
+                <span class="weapon_qualities_activation_icon"></span>
+                <span class="weapon_qualities_activation" data-i18n="two_advantage_to_activate">Two Advantage to activate unless otherwise noted</span>
+              </div>            
+              <button type="action" name="act_show-weapon-qualities"><span name="attr_show-weapon-qualities_label"></span></button>    
+            </h3>          
+            <input type="hidden" name="attr_weapon_qualities_pool" value="@{weapon_quality_accurate_value}b @{weapon_quality_inaccurate_value}blk @{weapon_quality_cumbersome_penalty}p @{weapon_quality_inferior_penalty} @{weapon_quality_superior_bonus}" />
+            <input type="hidden" name="attr_weapon_qualities_list" value="None" />
+            <input type="hidden" name="attr_show-weapon-qualities_label" value="hide" />
+            <input class="show_section" type="hidden" name="attr_show-weapon-qualities" value="true" />
+            <div class="weapon_qualities section">            
+              <label><span data-i18n="accurate">Accurate</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Accurate weapons are easier to aim or wield, whether through design or technology. For each level of this trait, the attacker adds 1 blue to his attack dice pools while using this weapon.</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_accurate_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="auto_fire">Auto-Fire</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>A weapon with Auto-fire can be set to shoot in rapid succession and potentially spray an area with bolts, flechettes, slugs, or other types of projectiles. The advantage in using Auto-fire is that it has the chance to hit multiple targets or hit a single target multiple times.</p>
+                    <p>Attacking with a weapon on Auto-fire is generally less accurate, and the attacker must increase the difficulty of the attack check by 1 purple die. The user may choose to not use the Auto-fire quality on a weapon; in this case, he cannot trigger the quality but also does not suffer the aforementioned penalty.</p>
+                    <p>If the attack hits, the attacker can trigger Auto-fire by spending 2 Advantages Auto-fire can be triggered multiple times. Each time the attacker triggers Autofire, it deals an additional hit to the target. Each of these counts as an additional hit from that weapon, and each hit deals base damage plus the number of uncanceled success on the check.</p>
+                    <p>These additional hits can be allocated to the target, or to other targets within range of the weapon. If the attacker wishes to hit multiple targets, he must deci to do so before making the check. Furthermore, if h wishes to hit multiple targets, his initial target must always be the target with the highest difficulty and highest defense (if this is two separate targets, the GM chooses which target is the initial target). The initial hit must always be against the initial target. Subsequent hits generated can be allocated to any of the other designated targets.</p>
+                    <p>Auto-fire weapons can also activate one Critical Injury for each hit generated on the attack per the normal cost; the Critical must target the target of the specific hit.</p>
+                  </div>
+                </span>
+              </label>
+              <div class="select_wrapper">
+                <select name="attr_weapon_quality_auto_fire_value">
+                  <option data-i18n="no">No</option>
+                  <option data-i18n="yes">Yes</option>
+                </select>
+              </div>
+              <label><span data-i18n="blast">Blast</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>The weapon has a large spread, an explosive blast, or similar area of effect, like the detonation of a grenade or a warhead fired from a missile launcher. If the attack is successful and Blast activates, each character (friend or foe) engaged with the original target suffers damage equal to the weapon's Blast rating (plus an additional wound per success as usual).</p>
+                    <p>In a relatively small and enclosed area, the Game Master might decide that everyone in the room suffers damage.</p>
+                    <p>If the Blast quality doesn't activate, the ordnance still detonates, but bad luck or poor aim on the part of the firer (or quick reactions on the part of the victims) means the explosion may not catch anyone else in its radius. However, the user may also trigger Blast if the attack misses by spending 3 advantages. In this case, the original target and every target engaged with the original target suffers damage equal to the Blast rating of the weapon.</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_blast_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="breach">Breach</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Weapons with Breach burn through the toughest armor, and are often heavy weapons or starship weapons.</p>
+                    <p>Breach weapons ignore one point of armor for every rating of Breach (meaning they also ignore 10 points of soak for every rating of Breach).</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_breach_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="burn">Burn</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Weapons with Burn inflict damage over time. If the attack is successful, the target continues to suffer the weapon's base damage each round for a number of rounds equal to the weapon's Burn rating. Damage is applied at the start of each of the target's turns.</p>
+                    <p>A victim might be able to stop the damage by rolling around on the ground and making an Agility check as an action. This is an Average (2 purple dice) Coordination check on hard surfaces such as the hall of a spaceship, or an Easy (1 purple die) Coordination check on grass or soft ground. Jumping into a body of water stops the damage immediately. Both situations assume the flame is from actual combustion rather than a chemical reaction. With the latter, there is usually little the victim can do.</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_burn_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="concussive">Concussive</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>The weapon's attack can leave the target shell-shocked from mighty blows or punishing Shockwaves, unable to perform any but the most basic actions. The target is staggered for a number of rounds equal to the weapon's Concussive rating. A staggered target cannot perform actions.</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_concussive_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="cortosis">Cortosis</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Cortosis is an ore principally found in the Outer Rim. It is extremely rare and valuable, and was used primarily during the Clone Wars against the Jedi Knights. There are two varieties of Cortosis ore. The rarest versions can actually short out a lightsaber's blade, causing it to fail temporarily. The far more common Cortosis ore is still a miraculous substance, because when molded into armor, it forms an interlocking molecular bond that is extremely resistant to energy weapons.</p>
+                    <p>Weapons with the Cortosis quality are immune to the Sunder quality. Armor with the Cortosis quality makes the wearer's soak immune to the Pierce and Breach qualities.</p>
+                  </div>
+                </span>
+              </label>
+              <div class="select_wrapper">
+                <select name="attr_weapon_quality_cortosis_value">
+                  <option data-i18n="no">No</option>
+                  <option data-i18n="yes">Yes</option>
+                </select>
+              </div>
+              <label><span data-i18n="cumbersome">Cumbersome</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>A Cumbersome weapon is large, unwieldy, awkward, or heavy. To wield a Cumbersome weapon properly, the character needs a Brawn characteristic equal to or greater than the weapon's Cumbersome rating. For each point of Brawn by which the character is deficient, he must increase the difficulty of all checks made while using the weapon by one.</p>
+                  </div>
+                </span>
+              </label>            
+              <input type="hidden" name="attr_weapon_quality_cumbersome_penalty" value="" />
+              <input name="attr_weapon_quality_cumbersome_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="defensive">Defensive</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Defensive weapons are particularly good at fending off incoming melee attacks. A character wielding a weapon with the Defensive quality increases his melee defense by the weapon's Defensive rating.</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_defensive_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="deflection">Deflection</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>An item with the Deflection quality increases the wearer's ranged defense equal to its Deflection rating.</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_deflection_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="disorient">Disorient</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>A weapon with Disorient can daze an opponent. When Disorient is triggered, the target is disoriented for a number of rounds equal to the weapon's Disorient rating. (A disoriented target adds 1 black die to all skill checks he performs.)</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_disorient_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="ensnare">Ensnare</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>A weapon with Ensnare binds a foe and restricts his movements. When Ensnare is triggered, the target is immobilized for a number of rounds equal to the weapon's Ensnare rating. An Ensnared target may attempt a Hard (3 purple dice) Athletics check as his action on his turn to break free from the effect. (An immobilized target cannot perform maneuvers.)</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_ensnare_value" type="number" value="0" min="0" max="9" />  
+              <label><span data-i18n="guided">Guided</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Certain types of projectiles, such as guided missiles, may benefit from course alterations after being fired. If a character misses while firing a Guided weapon and if Guided is activated, he may make an attack check at the end of the round. The difficulty of the check is calculated by comparing the weapon's silhouette of 0 to the silhouette of the target, and the check's green die equal the weapon's Guided rating. If the test is successful, the weapon strikes the target, and damage is dealt normally.</p>
+                    <p>Guided requires 3 advantages to activate, unless otherwise specified in the weapon's description. Remember, the Guided effect can activate on its subsequent attacks, representing the projectile continuing to track the target.</p>
+                    <p>"Spoofing" is a countermeasure designed to work against a particular type of projectile, such as flares designed to draw off infrared missiles. Spoofing directly increases the defense of the target against attacks with the Guided quality.</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_guided_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="knockdown">Knockdown</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>When knockdown triggers, the target is knocked prone. Unless specified otherwise, Knockdown requires 2 advantages to trigger, plus one additional advantage per silhouette of the target beyond one. </p>
+                  </div>
+                </span>
+              </label>
+              <div class="select_wrapper">
+                <select name="attr_weapon_quality_knockdown_value">
+                  <option data-i18n="no">No</option>
+                  <option data-i18n="yes">Yes</option>
+                </select>
+              </div>
+              <label><span data-i18n="inaccurate">Inaccurate</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Inaccurate weapons are weapons of a shoddy or inferior construction, which means they are less likely to be accurate or precise. Alternatively, the weapon's nature may inhibit accuracy. Inaccurate weapons add 1 black die to the attacker's dice pool equal to their Inaccurate rating. </p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_inaccurate_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="inferior">Inferior</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>An Inferior item is a lackluster example of its kind, representing shoddy and poor craftsmanship. An Inferior weapon generates automatic 1 threat on all checks related to its use, and has its base damage decreased by one. Inferior armor has its encumbrance increased by one and its defense decreased by one. If it does not have defense, decrease its soak value by one, to a minimum of zero.</p>
+                  </div>
+                </span>
+              </label>
+              <input type="hidden" name="attr_weapon_quality_inferior_penalty" value="" />
+              <div class="select_wrapper">
+                <select name="attr_weapon_quality_inferior_value">
+                  <option data-i18n="no">No</option>
+                  <option data-i18n="yes">Yes</option>
+                </select>
+              </div>
+              <label><span data-i18n="ion">Ion</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Ion weapons are designed to affect electrical systems instead of dealing raw damage. They are fitted to ships to knock out opponents' shields, sensors, and engines. They are shorter range than laser weapons and deal larger amounts of damage, but their damage is dealt to the target (usually a vehicle) as system strain. The damage is still reduced by armor and soak. Droids are affected by ion weapons, taking damage to their strain threshold.</p>
+                  </div>
+                </span>
+              </label>
+              <div class="select_wrapper">
+                <select name="attr_weapon_quality_ion_value">
+                  <option data-i18n="no">No</option>
+                  <option data-i18n="yes">Yes</option>
+                </select>
+              </div>
+              <label><span data-i18n="limited_ammo">Limited Ammo</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Some weapons fire particularly large or complex projectiles that cost significant numbers of credits or are themselves a complete weapon that, once launched, is expended. A weapon with the Limited Ammo quality may be used to make a number of attacks equal to its Limited Ammo rating before it must be reloaded with a maneuver. In addition, each shot expends one of a limited number of rounds of ammo, which, once used, must be purchased or otherwise obtained before firing the weapon again. This also applies to grenades and other "one use" weapons that have the Limited Ammo 1 quality (here, the user is not "reloading" the grenade, but drawing another to use—but mechanically they are equivalent).</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_limited_ammo_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="linked">Linked</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Some weapons, like the laser cannons fitted to the X-wing, are designed to fire together at the same target. This increases the possibility of a hit as well as the damage dealt. When firing a linked weapon, on a successful attack, the weapon deals one hit. The wielder may spend 2 advantages to gain an additional hit, and may do so a number of times equal to the weapon's Linked rating. Additional hits from the Linked weapon being used may only be applied against the original target. Each hit deals the weapon's base damage plus the total uncanceled successes scored on the check. </p>
+                  </div>
+                </span>
+              </label>
+              <div class="select_wrapper">
+                <select name="attr_weapon_quality_linked_value">
+                  <option data-i18n="no">No</option>
+                  <option data-i18n="yes">Yes</option>
+                </select>
+              </div>
+              <label><span data-i18n="pierce">Pierce</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>An attack made with this weapon ignores one point of soak for each rank of Pierce. If the weapon has more ranks of Pierce than the target's total soak, it completely ignores the target's soak. For example. Pierce 3 against a soak of 2 ignores 2 points of soak, but the extra "point" of Pierce has no further effect. </p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_pierce_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="prepare">Prepare</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Weapons with this quality require time to set up before being used. The user must perform a number of preparation maneuvers equal to the weapon's Prepare rating before making attacks with that weapon.</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_prepare_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="slow_firing">Slow-Firing</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Slow-Firing weapons tend to be large, heavy, emplacement-mounted weapons like the turbolasers found on capital ships or planetary defense ion cannons. While they deal incredible damage, they need time to recharge or cool down between shots. A weapon's Slow-Firing rating dictates how quickly the weapon can be fired after an attack. For example, a heavy turbolaser with Slow-Firing 2 must wait two rounds after being fired before it can be fired again.</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_slow_firing_value" type="number" value="0" min="0" max="9" />
+              <label><span data-i18n="stun">Stun</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>Some weapons deal Stun damage instead of regular damage. In this case, the weapon deals damage as strain instead of wounds. This damage is still reduced by a target's soak.</p>
+                    <p>A variant of this is a Stun setting. As an incidental, the wielder can choose to switch the setting of his weapon to "Stun." In this case, it does Stun damage as described above. When weapons with a Stun setting are used to deal Stun damage, their range changes to short and cannot be increased.</p>
+                  </div>
+                </span>
+              </label>
+              <div class="select_wrapper">
+                <select name="attr_weapon_quality_stun_damage_value">
+                  <option data-i18n="no">No</option>
+                  <option data-i18n="yes">Yes</option>
+                </select>
+              </div>
+              <label><span data-i18n="sunder">Sunder</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>When activated, the attacker chooses one item openly wielded by the target (such as a weapon, shield, or item on a belt). That item is damaged one step: to minor if undamaged, from minor to moderate, or from moderate to major. If a weapon already suffering major damage is the target of a successful Sunder, it is destroyed.</p>
+                    <p>Sunder requires 1 advantage to activate. If activated multiple times in the same attack, each activation can be applied against the same weapon, potentially taking a weapon from undamaged to destroyed in a single attack.</p>
+                  </div>
+                </span>
+              </label>
+              <div class="select_wrapper">
+                <select name="attr_weapon_quality_sunder_value">
+                  <option data-i18n="no">No</option>
+                  <option data-i18n="yes">Yes</option>
+                </select>
+              </div>
+              <label><span data-i18n="superior">Superior</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>A Superior item is a sterling example of its kind, representing masterful craftsmanship. A Superior weapon generates automatic 1 advantage on all checks related to its use, and has its base damage increased by one. Superior armor has its encumbrance reduced by one and its soak value increased by one. </p>
+                  </div>
+                </span>
+              </label>            
+              <input type="hidden" name="attr_weapon_quality_superior_bonus" value="" />
+              <div class="select_wrapper">
+                <select name="attr_weapon_quality_superior_value">
+                  <option data-i18n="no">No</option>
+                  <option data-i18n="yes">Yes</option>
+                </select>
+              </div>
+              <label><span data-i18n="vicious">Vicious</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>When this weapon scores a Critical Injury or Hit, the character adds ten times the Vicious rating to the Critical roll. With Vicious 3, for example, the victim adds + 30 to his Critical Hit result.</p>
+                  </div>
+                </span>
+              </label>
+              <input name="attr_weapon_quality_vicious_value" type="number" value="0" min="0" max="9" />
             </div>
-            <div class="weapon_mod">
-              <input type="text" name="attr_mod2_name" value="" />
-              <input type="number" name="attr_mod2_hp" min="0" max="5" value="0" />
-              <textarea name="attr_mod2_description"></textarea>
+            <h3>
+              <span data-i18n="attachments_mods">Attachments / Mods</span>
+              <button type="action" name="act_show-weapon-attachments"><span name="attr_show-weapon-attachments_label"></span></button>
+            </h3>
+            <input class="weapon_mods_negative" type="hidden" name="attr_weapon_mods_negative" value="false" />
+            <div class="weapon_mods_negative_message">The total hard points for attachments has exceeded the weapon's available hard points.</div>
+            <input type="hidden" name="attr_show-weapon-attachments_label" value="hide" />
+            <input class="show_section" type="hidden" name="attr_show-weapon-attachments" value="true" />
+            <div class="attachments_mods_container section">
+              <div class="weapon_mods_table_header">
+                <div data-i18n="name">Name</div>
+                <div><span data-i18n="hp">HP</span>
+                  <span class="icon_help">
+                    <div class="help_info">
+                      <p>The number of hard points is subtracted from the available weapon hard points above.  Make sure the weapon hard points are set before adding attachments.</p>
+                    </div>
+                  </span>
+                </div>  
+                <div data-i18n="benefit">Benefit</div>
+              </div>
+              <div class="weapon_mod">
+                <input type="text" name="attr_mod1_name" value="" />
+                <input type="number" name="attr_mod1_hp" min="0" max="5" value="0" />
+                <textarea name="attr_mod1_description"></textarea>
+              </div>
+              <div class="weapon_mod">
+                <input type="text" name="attr_mod2_name" value="" />
+                <input type="number" name="attr_mod2_hp" min="0" max="5" value="0" />
+                <textarea name="attr_mod2_description"></textarea>
+              </div>
+              <div class="weapon_mod">
+                <input type="text" name="attr_mod3_name" value="" />
+                <input type="number" name="attr_mod3_hp" min="0" max="5" value="0" />
+                <textarea name="attr_mod3_description"></textarea>
+              </div>
+              <div class="weapon_mod">
+                <input type="text" name="attr_mod4_name" value="" />
+                <input type="number" name="attr_mod4_hp" min="0" max="5" value="0" />
+                <textarea name="attr_mod4_description"></textarea>
+              </div>
+              <div class="weapon_mod">
+                <input type="text" name="attr_mod5_name" value="" />
+                <input type="number" name="attr_mod5_hp" min="0" max="5" value="0" />
+                <textarea name="attr_mod5_description"></textarea>
+              </div>           
             </div>
-            <div class="weapon_mod">
-              <input type="text" name="attr_mod3_name" value="" />
-              <input type="number" name="attr_mod3_hp" min="0" max="5" value="0" />
-              <textarea name="attr_mod3_description"></textarea>
-            </div>
-            <div class="weapon_mod">
-              <input type="text" name="attr_mod4_name" value="" />
-              <input type="number" name="attr_mod4_hp" min="0" max="5" value="0" />
-              <textarea name="attr_mod4_description"></textarea>
-            </div>
-            <div class="weapon_mod">
-              <input type="text" name="attr_mod5_name" value="" />
-              <input type="number" name="attr_mod5_hp" min="0" max="5" value="0" />
-              <textarea name="attr_mod5_description"></textarea>
-            </div>           
+            <h3>
+              <span data-i18n="notes">Notes</span>
+              <button type="action" name="act_show-weapon-notes"><span name="attr_show-weapon-notes_label"></span></button>
+            </h3>
+            <input type="hidden" name="attr_show-weapon-notes_label" value="hide" />
+            <input class="show_section" type="hidden" name="attr_show-weapon-notes" value="true" />
+            <div class="section">
+              <textarea class="weapon_notes" name="attr_weapon_notes"></textarea>
+            </div>          
           </div>
-          <h3>
-            <span data-i18n="notes">Notes</span>
-            <button type="action" name="act_show-weapon-notes"><span name="attr_show-weapon-notes_label"></span></button>
-          </h3>
-          <input type="hidden" name="attr_show-weapon-notes_label" value="hide" />
-          <input class="show_section" type="hidden" name="attr_show-weapon-notes" value="true" />
-          <div class="section">
-            <textarea class="weapon_notes" name="attr_weapon_notes"></textarea>
-          </div>          
-        </div>
-      </fieldset>          
+        </fieldset>          
+      </div>
     </div>
-    <h2><span data-i18n="combat_talents">Combat Talents</span><button type="action" name="act_show_combat_talents"><span name="attr_show_combat_talents_label"></span></button></h2>    
-    <input type="hidden" name="attr_show_combat_talents_label" value="hide" />
-    <input class="show_section" type="hidden" name="attr_show_combat_talents" value="true" />
-    <div class="combat_talents section">
-      <div class="combat_talent combat_talents_heading">
-        <div data-i18n="name">Name</div>
-        <div data-i18n="ranks">Ranks</div>
-        <div data-i18n="active_">Active?</div>
-        <div data-i18n="description">Description</div>
-      </div>
-      <fieldset class="repeating_combat-talents">
-        <div class="combat_talent">
-          <input type="text" name="attr_combat_talent_name" />
-          <input type="number" name="attr_combat_talent_ranks" min="0" max="5" value="0" />
-          <div class="combat_talent_checkbox_container">
-            <input class="combat_talent_active_checkbox" type="checkbox" name="attr_combat_talent_active" />
-            <span class="icon_active" title="Active" data-i18n-title="active"></span>
-            <span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
-          </div>          
-          <textarea name="attr_combat_talent_description"></textarea>
+    <div>
+      <h2><span data-i18n="combat_talents">Combat Talents</span><button type="action" name="act_show_combat_talents"><span name="attr_show_combat_talents_label"></span></button></h2>    
+      <input type="hidden" name="attr_show_combat_talents_label" value="hide" />
+      <input class="show_section" type="hidden" name="attr_show_combat_talents" value="true" />
+      <div class="combat_talents section">
+        <div class="combat_talent combat_talents_heading">
+          <div data-i18n="name">Name</div>
+          <div data-i18n="ranks">Ranks</div>
+          <div data-i18n="active_">Active?</div>
+          <div data-i18n="description">Description</div>
         </div>
-      </fieldset>
+        <fieldset class="repeating_combat-talents">
+          <div class="combat_talent">
+            <input type="text" name="attr_combat_talent_name" />
+            <input type="number" name="attr_combat_talent_ranks" min="0" max="5" value="0" />
+            <div class="combat_talent_checkbox_container">
+              <input class="combat_talent_active_checkbox" type="checkbox" name="attr_combat_talent_active" />
+              <span class="icon_active" title="Active" data-i18n-title="active"></span>
+              <span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+            </div>          
+            <textarea name="attr_combat_talent_description"></textarea>
+          </div>
+        </fieldset>
+      </div>
     </div>
-    <h2><span data-i18n="armor">Armor</span><button type="action" name="act_show_armor"><span name="attr_show_armor_label"></span></button></h2>    
-    <input type="hidden" name="attr_show_armor_label" value="hide" />
-    <input class="show_section" type="hidden" name="attr_show_armor" value="true" />
-    <div class="armor section">
-      <div class="armor_item armor_heading">
-        <div data-i18n="name">Name</div>
-        <div><span data-i18n="ranged">Ranged</span>
-          <span class="icon_help">
-            <div class="help_info">
-              <p>This bonus is automatically added to the character's total Defense - Ranged value.</p>
-            </div>
-          </span>
+    <div>
+      <h2><span data-i18n="armor">Armor</span><button type="action" name="act_show_armor"><span name="attr_show_armor_label"></span></button></h2>    
+      <input type="hidden" name="attr_show_armor_label" value="hide" />
+      <input class="show_section" type="hidden" name="attr_show_armor" value="true" />
+      <div class="armor section">
+        <div class="armor_item armor_heading">
+          <div data-i18n="name">Name</div>
+          <div><span data-i18n="ranged">Ranged</span>
+            <span class="icon_help">
+              <div class="help_info">
+                <p>This bonus is automatically added to the character's total Defense - Ranged value.</p>
+              </div>
+            </span>
+          </div>
+          <div><span data-i18n="melee">Melee</span>
+            <span class="icon_help">
+              <div class="help_info">
+                <p>This bonus is automatically added to the character's total Defense - Melee value.</p>
+              </div>
+            </span>
+          </div>        
+          <div><span data-i18n="soak">Soak</span>
+            <span class="icon_help">
+              <div class="help_info">
+                <p>This bonus is automatically added to the character's total Soak value.</p>
+              </div>
+            </span>
+          </div>
+          <div><span data-i18n="encum">Encum</span>
+            <span class="icon_help">
+              <div class="help_info">
+                <p>This bonus is automatically added to the character's current Encumbrance value.</p>
+              </div>
+            </span>
+          </div>
+          <div><span data-i18n="hp">HP</span>
+            <span class="icon_help">
+              <div class="help_info">
+                <p>The current amount of hard points available for this armor.  Automatically lowered for each attachment.</p>
+              </div>
+            </span>
+          </div>
+          <div><span data-i18n="quality">Quality</span>
+            <span class="icon_help">
+              <div class="help_info">
+                <p>Quality of the armor affects the Defense, Encumbrance, and possibly Soak values.</p>
+                <p><strong>Make sure the Defense, Encumbrance, and Soak values are set on Normal quality before selecting Superior or Inferior.</strong></p>
+                <p>Superior armor has its encumbrance reduced by one and its soak value increased by one.</p>
+                <p>Inferior armor has its encumbrance increased by one and its defense decreased by one. If it does not have defense, decrease its soak value by one, to a minimum of zero.</p>
+              </div>
+            </span>
+          </div>
         </div>
-        <div><span data-i18n="melee">Melee</span>
-          <span class="icon_help">
-            <div class="help_info">
-              <p>This bonus is automatically added to the character's total Defense - Melee value.</p>
-            </div>
-          </span>
-        </div>        
-        <div><span data-i18n="soak">Soak</span>
-          <span class="icon_help">
-            <div class="help_info">
-              <p>This bonus is automatically added to the character's total Soak value.</p>
-            </div>
-          </span>
-        </div>
-        <div><span data-i18n="encum">Encum</span>
-          <span class="icon_help">
-            <div class="help_info">
-              <p>This bonus is automatically added to the character's current Encumbrance value.</p>
-            </div>
-          </span>
-        </div>
-        <div><span data-i18n="hp">HP</span>
-          <span class="icon_help">
-            <div class="help_info">
-              <p>The current amount of hard points available for this armor.  Automatically lowered for each attachment.</p>
-            </div>
-          </span>
-        </div>
-        <div><span data-i18n="quality">Quality</span>
-          <span class="icon_help">
-            <div class="help_info">
-              <p>Quality of the armor affects the Defense, Encumbrance, and possibly Soak values.</p>
-              <p><strong>Make sure the Defense, Encumbrance, and Soak values are set on Normal quality before selecting Superior or Inferior.</strong></p>
-              <p>Superior armor has its encumbrance reduced by one and its soak value increased by one.</p>
-              <p>Inferior armor has its encumbrance increased by one and its defense decreased by one. If it does not have defense, decrease its soak value by one, to a minimum of zero.</p>
-            </div>
-          </span>
+        <div class="armor_item">
+          <input type="text" name="attr_armor_name" />
+          <input type="number" name="attr_armor_bonus_defense_ranged" min="0" max="5" value="0" />
+          <input type="number" name="attr_armor_bonus_defense_melee" min="0" max="5" value="0" />
+          <input type="number" name="attr_armor_bonus_soak" min="0" max="5" value="0" />
+          <input type="number" name="attr_armor_encumbrance" min="0" max="9" value="0" />
+          <input type="number" name="attr_armor_hard_points" min="0" max="9" value="0" />
+          <div class="select_wrapper">
+            <select name="attr_armor_quality">
+              <option value="normal" data-i18n="normal">Normal</option>
+              <option value="superior" data-i18n="superior">Superior</option>
+              <option value="inferior" data-i18n="inferior">Inferior</option>
+            </select>
+          </div>
+          <div></div>
+          <label>Special</label>
+          <textarea name="attr_armor_special" class="cell_width_5"></textarea>
         </div>
       </div>
-      <div class="armor_item">
-        <input type="text" name="attr_armor_name" />
-        <input type="number" name="attr_armor_bonus_defense_ranged" min="0" max="5" value="0" />
-        <input type="number" name="attr_armor_bonus_defense_melee" min="0" max="5" value="0" />
-        <input type="number" name="attr_armor_bonus_soak" min="0" max="5" value="0" />
-        <input type="number" name="attr_armor_encumbrance" min="0" max="9" value="0" />
-        <input type="number" name="attr_armor_hard_points" min="0" max="9" value="0" />
-        <div class="select_wrapper">
-          <select name="attr_armor_quality">
-            <option value="normal" data-i18n="normal">Normal</option>
-            <option value="superior" data-i18n="superior">Superior</option>
-            <option value="inferior" data-i18n="inferior">Inferior</option>
-          </select>
-        </div>
-        <div></div>
-        <label>Special</label>
-        <textarea name="attr_armor_special" class="cell_width_5"></textarea>
-      </div>
-    </div>   
+    </div>  
   </div>
   <div class="equipment">
-    <h2><span data-i18n="gear">Gear</span><button type="action" name="act_show_gear"><span name="attr_show_gear_label"></span></button></h2>    
-    <input type="hidden" name="attr_show_gear_label" value="hide" />
-    <input class="show_section" type="hidden" name="attr_show_gear" />
-    <div class="gear section">
-      <div class="gear_item gear_heading">
-        <div data-i18n="name">Name</div>
-        <div data-i18n="encum">Encum</div>
-        <div class="centered_heading">
-          <span data-i18n="carried_">Carried?</span>
-          <span class="icon_help">
-            <div class="help_info_left">
-              <p>Check this box if the character is currently carrying this item.  Carried items count toward total encumbrance.</p>
-            </div>
-          </span>
-        </div>
-        <div data-i18n="description">Description</div>
-      </div>
-      <fieldset class="repeating_gear">
-        <div class="gear_item">
-          <input type="text" name="attr_gear_item_name" />
-          <input type="number" name="attr_gear_item_encumbrance" min="0" max="5" value="0" />
-          <input type="checkbox" name="attr_gear_item_carried" value="true" />
-          <textarea name="attr_gear_item_description"></textarea>
-        </div>
-      </fieldset>      
-    </div>
-    <h2>
+    <div class="gear_containers_grid">
       <div>
-        <span data-i18n="containers">Containers</span>
-        <span class="icon_help">
-          <div class="help_info">
-            <p>Gear that adds Encumbrance threshold - backpacks, utility belts, etc.</p>
+        <h2><span data-i18n="gear">Gear</span><button type="action" name="act_show_gear"><span name="attr_show_gear_label"></span></button></h2>    
+        <input type="hidden" name="attr_show_gear_label" value="hide" />
+        <input class="show_section" type="hidden" name="attr_show_gear" />
+        <div class="gear section">
+          <div class="gear_item gear_heading">
+            <div data-i18n="name">Name</div>
+            <div data-i18n="encum">Encum</div>
+            <div class="centered_heading">
+              <span data-i18n="carried_">Carried?</span>
+              <span class="icon_help">
+                <div class="help_info_left">
+                  <p>Check this box if the character is currently carrying this item.  Carried items count toward total encumbrance.</p>
+                </div>
+              </span>
+            </div>
+            <div data-i18n="description">Description</div>
           </div>
-        </span>
-      </div>      
-      <button type="action" name="act_show_containers"><span name="attr_show_containers_label"></span></button>
-    </h2>    
-    <input type="hidden" name="attr_show_containers_label" value="hide" />
-    <input class="show_section" type="hidden" name="attr_show_containers" value="true" />
-    <div class="containers section">
-      <div class="container container_heading">
-        <div data-i18n="name">Name</div>
-        <div data-i18n="add_encum_threshold">+ Encum Threshold</div>
-        <div data-i18n="description">Description</div>
+          <fieldset class="repeating_gear">
+            <div class="gear_item">
+              <input type="text" name="attr_gear_item_name" />
+              <input type="number" name="attr_gear_item_encumbrance" min="0" max="5" value="0" />
+              <input type="checkbox" name="attr_gear_item_carried" value="true" />
+              <textarea name="attr_gear_item_description"></textarea>
+            </div>
+          </fieldset>      
+        </div>
       </div>
-      <div class="container">
-        <input type="text" name="attr_container1_name" />
-        <input type="number" name="attr_container1_encumbrance" min="0" max="5" value="0" />
-        <textarea name="attr_container1_description"></textarea>
-        <input type="text" name="attr_container2_name" />
-        <input type="number" name="attr_container2_encumbrance" min="0" max="5" value="0" />
-        <textarea name="attr_container2_description"></textarea>
-        <input type="text" name="attr_container3_name" />
-        <input type="number" name="attr_container3_encumbrance" min="0" max="5" value="0" />
-        <textarea name="attr_container3_description"></textarea>
-        <input type="text" name="attr_container4_name" />
-        <input type="number" name="attr_container4_encumbrance" min="0" max="5" value="0" />
-        <textarea name="attr_container4_description"></textarea>
-        <input type="text" name="attr_container5_name" />
-        <input type="number" name="attr_container5_encumbrance" min="0" max="5" value="0" />
-        <textarea name="attr_container5_description"></textarea>
+      <div>
+        <h2>
+          <div>
+            <span data-i18n="containers">Containers</span>
+            <span class="icon_help">
+              <div class="help_info">
+                <p>Gear that adds Encumbrance threshold - backpacks, utility belts, etc.</p>
+              </div>
+            </span>
+          </div>      
+          <button type="action" name="act_show_containers"><span name="attr_show_containers_label"></span></button>
+        </h2>    
+        <input type="hidden" name="attr_show_containers_label" value="hide" />
+        <input class="show_section" type="hidden" name="attr_show_containers" value="true" />
+        <div class="containers section">
+          <div class="container container_heading">
+            <div data-i18n="name">Name</div>
+            <div data-i18n="add_encum_threshold">+ Encum Threshold</div>
+            <div data-i18n="description">Description</div>
+          </div>
+          <div class="container">
+            <input type="text" name="attr_container1_name" />
+            <input type="number" name="attr_container1_encumbrance" min="0" max="5" value="0" />
+            <textarea name="attr_container1_description"></textarea>
+            <input type="text" name="attr_container2_name" />
+            <input type="number" name="attr_container2_encumbrance" min="0" max="5" value="0" />
+            <textarea name="attr_container2_description"></textarea>
+            <input type="text" name="attr_container3_name" />
+            <input type="number" name="attr_container3_encumbrance" min="0" max="5" value="0" />
+            <textarea name="attr_container3_description"></textarea>
+            <input type="text" name="attr_container4_name" />
+            <input type="number" name="attr_container4_encumbrance" min="0" max="5" value="0" />
+            <textarea name="attr_container4_description"></textarea>
+            <input type="text" name="attr_container5_name" />
+            <input type="number" name="attr_container5_encumbrance" min="0" max="5" value="0" />
+            <textarea name="attr_container5_description"></textarea>
+          </div>
+        </div>
       </div>
     </div>
     <h2>
@@ -2030,7 +2052,7 @@
     <h2 data-i18n="general_settings">General Settings</h2>
     <div class="settings_grid section">
       <label data-i18n="change_font_size_zoom">Change font size / zoom</label>
-      <input type="number" name="attr_settings_font_size_selector" min="8" max="24" step="2" value="16" />
+      <input type="number" name="attr_settings_font_size_selector" min="8" max="24" step="2" value="14" />
     </div>    
   </div>
   <!-- End General Settings -->
