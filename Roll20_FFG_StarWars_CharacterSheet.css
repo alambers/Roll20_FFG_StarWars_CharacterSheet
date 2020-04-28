@@ -558,6 +558,12 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   align-items: center;
 }
 
+.sheet-motivations_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  column-gap: 5em;
+}
+
 .sheet-obligation_total_grid,
 .sheet-duty_total_grid,
 .sheet-morality_total_grid {

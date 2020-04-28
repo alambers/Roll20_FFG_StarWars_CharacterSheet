@@ -561,67 +561,75 @@
       <label data-i18n="credits">Credits</label>
       <input type="number" name="credits" min="0" max="999999999999999" value="0" />
     </div>
-    <h2><span data-i18n="obligation">Obligation</span><button type="action" name="act_show_obligation"><span name="attr_show_obligation_label"></span></button></h2>    
-    <input type="hidden" name="attr_show_obligation_label" value="hide" />
-    <input class="show_section" type="hidden" name="attr_show_obligation" value="true" />
-    <div class="obligation section">
-      <div class="obligation_total_grid">
-        <label data-i18n="total_obligation">Total Obligation</label>
-        <span name="attr_obligation_total"></span>
-        <input type="hidden" name="attr_obligation_total" value="0" />
-      </div>
-      <div class="obligation_item list_heading">
-        <div>Type</div>
-        <div>Amount</div>
-        <div>Source</div>
-        <div>Notes</div>
-      </div>
-      <fieldset class="repeating_obligations">
-        <div class="obligation_item">
-          <input type="text" name="attr_obligation_type" />
-          <input type="number" name="attr_obligation_amount" maxlength="3" min="0" max="999" value="0" />
-          <input type="text" name="attr_obligation_source" />
-          <textarea name="attr_obligation_notes"></textarea>
+    <div class="motivations_grid">
+      <div>
+        <h2><span data-i18n="obligation">Obligation</span><button type="action" name="act_show_obligation"><span name="attr_show_obligation_label"></span></button></h2>    
+        <input type="hidden" name="attr_show_obligation_label" value="hide" />
+        <input class="show_section" type="hidden" name="attr_show_obligation" value="true" />
+        <div class="obligation section">
+          <div class="obligation_total_grid">
+            <label data-i18n="total_obligation">Total Obligation</label>
+            <span name="attr_obligation_total"></span>
+            <input type="hidden" name="attr_obligation_total" value="0" />
+          </div>
+          <div class="obligation_item list_heading">
+            <div>Type</div>
+            <div>Amount</div>
+            <div>Source</div>
+            <div>Notes</div>
+          </div>
+          <fieldset class="repeating_obligations">
+            <div class="obligation_item">
+              <input type="text" name="attr_obligation_type" />
+              <input type="number" name="attr_obligation_amount" maxlength="3" min="0" max="999" value="0" />
+              <input type="text" name="attr_obligation_source" />
+              <textarea name="attr_obligation_notes"></textarea>
+            </div>
+          </fieldset>
         </div>
-      </fieldset>
-    </div>
-    <h2><span data-i18n="duty">Duty</span><button type="action" name="act_show_duty"><span name="attr_show_duty_label"></span></button></h2>    
-    <input type="hidden" name="attr_show_duty_label" value="hide" />
-    <input class="show_section" type="hidden" name="attr_show_duty" value="true" />
-    <div class="duty section">
-      <div class="duty_total_grid">
-        <label data-i18n="contribution_rank">Contribution Rank</label>
-        <input type="number" name="attr_contribution_rank" min="0" max="9" value="0" />
       </div>
-      <div class="duty_item list_heading">
-        <div>Type</div>
-        <div>Amount</div>
-        <div>Notes</div>
-      </div>
-      <fieldset class="repeating_duties">
-        <div class="duty_item">
-          <input type="text" name="attr_duty_type" />
-          <input type="number" name="attr_duty_amount" maxlength="3" min="0" max="999" value="0" />
-          <textarea name="attr_duty_notes"></textarea>
+      <div>
+        <h2><span data-i18n="duty">Duty</span><button type="action" name="act_show_duty"><span name="attr_show_duty_label"></span></button></h2>    
+        <input type="hidden" name="attr_show_duty_label" value="hide" />
+        <input class="show_section" type="hidden" name="attr_show_duty" value="true" />
+        <div class="duty section">
+          <div class="duty_total_grid">
+            <label data-i18n="contribution_rank">Contribution Rank</label>
+            <input type="number" name="attr_contribution_rank" min="0" max="9" value="0" />
+          </div>
+          <div class="duty_item list_heading">
+            <div>Type</div>
+            <div>Amount</div>
+            <div>Notes</div>
+          </div>
+          <fieldset class="repeating_duties">
+            <div class="duty_item">
+              <input type="text" name="attr_duty_type" />
+              <input type="number" name="attr_duty_amount" maxlength="3" min="0" max="999" value="0" />
+              <textarea name="attr_duty_notes"></textarea>
+            </div>
+          </fieldset>
         </div>
-      </fieldset>
-    </div>
-    <h2><span data-i18n="morality">Morality</span><button type="action" name="act_show_morality"><span name="attr_show_morality_label"></span></button></h2>    
-    <input type="hidden" name="attr_show_morality_label" value="hide" />
-    <input class="show_section" type="hidden" name="attr_show_morality" value="true" />
-    <div class="morality section">
-      <label data-i18n="morality">Morality</label>
-      <input type="number" name="attr_morality" min="0" max="100" value="50" />
-      <label data-i18n="conflict">Conflict</label>
-      <input type="number" name="attr_conflict" min="0" max="100" value="0" />
-      <label data-i18n="emotional_strength">Emotional Strength</label>
-      <input type="text" name="attr_emotional_strength" />
-      <label data-i18n="emotional_weakness">Emotional Weakness</label>
-      <input type="text" name="attr_emotional_weakness" />
-      <label data-i18n="ambition">Ambition</label>
-      <input type="text" name="attr_ambition" />
-      <label data-i18n="cause">Cause</label>
-      <input type="text" name="attr_cause" />
+      </div>
+      <div>
+        <h2><span data-i18n="morality">Morality</span><button type="action" name="act_show_morality"><span name="attr_show_morality_label"></span></button></h2>    
+        <input type="hidden" name="attr_show_morality_label" value="hide" />
+        <input class="show_section" type="hidden" name="attr_show_morality" value="true" />
+        <div class="morality section">
+          <label data-i18n="morality">Morality</label>
+          <input type="number" name="attr_morality" min="0" max="100" value="50" />
+          <label data-i18n="conflict">Conflict</label>
+          <input type="number" name="attr_conflict" min="0" max="100" value="0" />
+          <label data-i18n="emotional_strength">Emotional Strength</label>
+          <input type="text" name="attr_emotional_strength" />
+          <label data-i18n="emotional_weakness">Emotional Weakness</label>
+          <input type="text" name="attr_emotional_weakness" />
+          <label data-i18n="ambition">Ambition</label>
+          <input type="text" name="attr_ambition" />
+          <label data-i18n="cause">Cause</label>
+          <input type="text" name="attr_cause" />
+        </div>
+      </div>
     </div>
     <h2><span data-i18n="notes">Notes</span><button type="action" name="act_show_bio_notes"><span name="attr_show_bio_notes_label"></span></button></h2>    
     <input type="hidden" name="attr_show_bio_notes_label" value="hide" />
