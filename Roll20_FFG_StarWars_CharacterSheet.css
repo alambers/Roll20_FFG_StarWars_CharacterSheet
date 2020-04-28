@@ -171,6 +171,7 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   padding: 0.5em;
   font-size: 1em;
   margin: 0;
+  height: max-content;
 }
 
 .sheet-character_sheet input[type="number"] {
@@ -178,6 +179,7 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   width: 100%;
   padding: 0.5em;
   margin: 0;
+  height: max-content;
 }
 
 .sheet-character_sheet input[type="checkbox"]:checked {
@@ -228,6 +230,17 @@ input.sheet-show_section[value="false"] + .sheet-section {
 
 .sheet-cell_width_6 {
   grid-column: span 6;
+}
+
+/* List headings for repeating sections */
+.sheet-list_heading {
+  padding-bottom: 0.5em;
+  border-bottom: 1px dotted #aaaaaa;
+  margin-bottom: 1em; 
+}
+
+.sheet-list_heading div {
+  font-size: 0.85em;
 }
 
 
@@ -515,12 +528,12 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   row-gap: 1em;
 }
 
-.sheet-name label {
+.sheet-bio label {
   padding: 0.5em 0;
   text-align: right;
 }
 
-.sheet-name label::after {
+.sheet-bio label::after {
   content: ":";
   text-align: right;
 }
@@ -536,6 +549,49 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
   align-items: center;
   text-align: center;
   height: max-content;
+}
+
+.sheet-xp_credits {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr 3fr;
+  column-gap: 3em;
+  align-items: center;
+}
+
+.sheet-obligation_total_grid,
+.sheet-duty_total_grid,
+.sheet-morality_total_grid {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  column-gap: 1em;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.sheet-morality {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr 3fr;
+  column-gap: 3em;
+  row-gap: 1em;
+  align-items: center;
+}
+
+.sheet-obligation_item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 4fr;
+  column-gap: 1em;
+}
+
+.sheet-duty_item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 6fr;
+  column-gap: 1em;
+}
+
+.sheet-obligation_item textarea,
+.sheet-duty_item textarea {
+  padding: 1em;
+  height: 5em;
 }
 
 /* Body Stats - Wounds, Strain, Soak, Defense */

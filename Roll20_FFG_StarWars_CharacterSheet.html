@@ -547,12 +547,81 @@
           </div>
         </fieldset>
       </div>
+    </div>
+    <h2><span data-i18n="xp_credits">XP and Credits</span><button type="action" name="act_show_xp_credits"><span name="attr_show_xp_credits_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_xp_credits_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_xp_credits" value="true" />
+    <div class="xp_credits section">
       <label data-i18n="xp_total_current">XP Total / Current</label>
       <div class="xp_grid">
         <input type="number" name="xp_total" min="0" value="0" />
         <div>/</div>
         <input type="number" name="xp_current" min="0" value="0" />
-      </div>     
+      </div>
+      <label data-i18n="credits">Credits</label>
+      <input type="number" name="credits" min="0" max="999999999999999" value="0" />
+    </div>
+    <h2><span data-i18n="obligation">Obligation</span><button type="action" name="act_show_obligation"><span name="attr_show_obligation_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_obligation_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_obligation" value="true" />
+    <div class="obligation section">
+      <div class="obligation_total_grid">
+        <label data-i18n="total_obligation">Total Obligation</label>
+        <span name="attr_obligation_total"></span>
+        <input type="hidden" name="attr_obligation_total" value="0" />
+      </div>
+      <div class="obligation_item list_heading">
+        <div>Type</div>
+        <div>Amount</div>
+        <div>Source</div>
+        <div>Notes</div>
+      </div>
+      <fieldset class="repeating_obligations">
+        <div class="obligation_item">
+          <input type="text" name="attr_obligation_type" />
+          <input type="number" name="attr_obligation_amount" maxlength="3" min="0" max="999" value="0" />
+          <input type="text" name="attr_obligation_source" />
+          <textarea name="attr_obligation_notes"></textarea>
+        </div>
+      </fieldset>
+    </div>
+    <h2><span data-i18n="duty">Duty</span><button type="action" name="act_show_duty"><span name="attr_show_duty_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_duty_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_duty" value="true" />
+    <div class="duty section">
+      <div class="duty_total_grid">
+        <label data-i18n="contribution_rank">Contribution Rank</label>
+        <input type="number" name="attr_contribution_rank" min="0" max="9" value="0" />
+      </div>
+      <div class="duty_item list_heading">
+        <div>Type</div>
+        <div>Amount</div>
+        <div>Notes</div>
+      </div>
+      <fieldset class="repeating_duties">
+        <div class="duty_item">
+          <input type="text" name="attr_duty_type" />
+          <input type="number" name="attr_duty_amount" maxlength="3" min="0" max="999" value="0" />
+          <textarea name="attr_duty_notes"></textarea>
+        </div>
+      </fieldset>
+    </div>
+    <h2><span data-i18n="morality">Morality</span><button type="action" name="act_show_morality"><span name="attr_show_morality_label"></span></button></h2>    
+    <input type="hidden" name="attr_show_morality_label" value="hide" />
+    <input class="show_section" type="hidden" name="attr_show_morality" value="true" />
+    <div class="morality section">
+      <label data-i18n="morality">Morality</label>
+      <input type="number" name="attr_morality" min="0" max="100" value="50" />
+      <label data-i18n="conflict">Conflict</label>
+      <input type="number" name="attr_conflict" min="0" max="100" value="0" />
+      <label data-i18n="emotional_strength">Emotional Strength</label>
+      <input type="text" name="attr_emotional_strength" />
+      <label data-i18n="emotional_weakness">Emotional Weakness</label>
+      <input type="text" name="attr_emotional_weakness" />
+      <label data-i18n="ambition">Ambition</label>
+      <input type="text" name="attr_ambition" />
+      <label data-i18n="cause">Cause</label>
+      <input type="text" name="attr_cause" />
     </div>
     <h2><span data-i18n="notes">Notes</span><button type="action" name="act_show_bio_notes"><span name="attr_show_bio_notes_label"></span></button></h2>    
     <input type="hidden" name="attr_show_bio_notes_label" value="hide" />
@@ -3312,7 +3381,11 @@
     'show_destiny_pool',
     'show_vital_stats',
     'show_name',
+    'show_xp_credits',
     'show_bio_notes',
+    'show_obligation',
+    'show_duty',
+    'show_morality',
     'show_characteristics',
     'show_skills',
     'show_initiative',
@@ -3372,6 +3445,44 @@
         [section]: newValue, [section + '_label']: newLabel });
     });
   });
+
+  /* Calculate Total Obligation */
+  on('change:repeating_obligations:obligation_amount', (eventInfo) => {
+    getAttrs(['obligation_total'], (values) => {
+      const previousObligation = parseInt(eventInfo.previousValue);
+      const newObligation = parseInt(eventInfo.newValue);
+      const currentObligation = parseInt(values.obligation_total);
+      let obligationDifference = Math.abs(previousObligation - newObligation);
+      obligationDifference = (previousObligation > newObligation) ? -(obligationDifference) : obligationDifference;
+      // Workaround for newly added items in repeating sections; number fields have no value until initialized with a change
+      // This will break if the user happens to manually change a number to the same number
+      if (previousObligation === newObligation) {
+        obligationDifference = newObligation;
+      }
+      let setObligation = currentObligation + obligationDifference;
+      // Don't let Obligation go negative
+      setObligation = (setObligation > 0) ? setObligation : 0;
+      setAttrs({ 'obligation_total': setObligation });
+    });
+  });
+
+    // When removing an Obligation, remove from the Total Obligation
+    on('remove:repeating_obligations', (eventInfo) => {
+    const itemId = (eventInfo.sourceAttribute).slice(22);
+    const removedItems = eventInfo.removedInfo;
+    const removedObligationKey = 'repeating_obligations_' + itemId + '_obligation_amount';
+    // If the repeating item values were never initialized by a user changing a value, the removedInfo will be empty.
+    // The item's encumbrance, then does not exist (rather than being zero) and would throw an error.
+    if (Object.keys(removedItems).length > 0 && removedItems.constructor === Object) {
+      getAttrs(['obligation_total'], (values) => { 
+        const removedObligation = parseInt(removedItems[removedObligationKey]);
+        const currentObligation = parseInt(values.obligation_total);
+        setObligation = currentObligation - removedObligation;
+        setAttrs({ 'obligation_total': setObligation });
+      });
+    }
+  });
 </script>
+
 <!-- End Sheet Workers -->
 
