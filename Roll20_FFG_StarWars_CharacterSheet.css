@@ -29,6 +29,7 @@ Grey Green    - #97ABA9
   font-size: 14px;
   font-family: 'Nunito', sans-serif;
   margin-bottom: 2em;
+  min-width: 900px;
 }
 
 /* Font size selector */
@@ -171,7 +172,7 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   padding: 0.5em;
   font-size: 1em;
   margin: 0;
-  height: max-content;
+  line-height: 1.15;
 }
 
 .sheet-character_sheet input[type="number"] {
@@ -179,6 +180,10 @@ input[name="attr_settings_font_size"][value="24"] + .sheet-character_sheet {
   width: 100%;
   padding: 0.5em;
   margin: 0;
+}
+
+.sheet-character_sheet input[type="checkbox"]
+{
   height: max-content;
 }
 
@@ -625,7 +630,7 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 
 .sheet-vital_stats span {
   text-align: center;
-  padding: 0.42em;
+  padding: 0.5em;
   background-color: #ffffff;
   display: block;
 }
@@ -1711,13 +1716,6 @@ input[name="attr_gmdicepool"][value="2"]:checked ~ .sheet-character_sheet .sheet
 
 .sheet-settings_grid label::after {
   content: ':';
-}
-
-/* ==================== MEDIA QUERIES ==================== */
-
-/* Large screens - over 1300px */
-@media only screen and (min-width : 1300px) {
-
 }
 
 /* Roll Template Formatting - Critical */
