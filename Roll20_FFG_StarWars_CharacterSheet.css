@@ -29,7 +29,7 @@ Grey Green    - #97ABA9
   font-size: 14px;
   font-family: 'Nunito', sans-serif;
   margin-bottom: 2em;
-  min-width: 900px;
+  min-width: 800px;
 }
 
 /* Font size selector */
@@ -1565,8 +1565,16 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   text-align: center;
 }
 
-.sheet-force-power-mastery {
+.sheet-force-power-basic,
+.sheet-force-power-mastery{
   padding: 1em 0;
+}
+
+.sheet-force-power-basic label::before {
+  content: '❖';
+  font-size: 1.25em;
+  padding-right: 0.25em;
+  color: #e2a160;
 }
 
 .sheet-force-power-mastery label::before {
@@ -1576,13 +1584,16 @@ background: radial-gradient(circle, rgba(82,100,76,1) 38%, rgba(54,64,51,1) 100%
   color: #e2a160;
 }
 
+.sheet-force-power-basic label,
 .sheet-force-power-mastery label {
   margin-bottom: 0.5em;
   font-weight: bold;
 }
 
+.sheet-force-power-basic label + textarea,
 .sheet-force-power-mastery label + textarea {
-  height: 4em;
+  min-height: 4em;
+  max-height: 7em;
 }
 
 /* Tooltips */
