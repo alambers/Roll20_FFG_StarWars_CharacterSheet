@@ -1485,7 +1485,7 @@
               </div>            
               <button type="action" name="act_show-weapon-qualities"><span name="attr_show-weapon-qualities_label"></span></button>    
             </h3>          
-            <input type="hidden" name="attr_weapon_qualities_pool" value="@{weapon_quality_accurate_value}b @{weapon_quality_inaccurate_value}blk @{weapon_quality_cumbersome_penalty}p @{weapon_quality_inferior_penalty} @{weapon_quality_superior_bonus}" />
+            <input type="hidden" name="attr_weapon_qualities_pool" value="@{weapon_quality_accurate_value}b @{weapon_quality_inaccurate_value}blk @{weapon_quality_cumbersome_penalty}p @{weapon_quality_unwieldy_penalty}p @{weapon_quality_inferior_penalty} @{weapon_quality_superior_bonus}" />
             <input type="hidden" name="attr_weapon_qualities_list" value="None" />
             <input type="hidden" name="attr_show-weapon-qualities_label" value="hide" />
             <input class="show_section" type="hidden" name="attr_show-weapon-qualities" value="true" />
@@ -1493,7 +1493,7 @@
               <label><span data-i18n="accurate">Accurate</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
                 <span class="icon_help">
                   <div class="help_info">
-                    <p>Accurate weapons are easier to aim or wield, whether through design or technology. For each level of this trait, the attacker adds 1 blue to his attack dice pools while using this weapon.</p>
+                    <p>Accurate weapons are easier to aim or wield, whether through design or technology. For each level of this trait, the attacker adds 1 blue to their attack dice pools while using this weapon.</p>
                   </div>
                 </span>
               </label>
@@ -1502,9 +1502,9 @@
                 <span class="icon_help">
                   <div class="help_info">
                     <p>A weapon with Auto-fire can be set to shoot in rapid succession and potentially spray an area with bolts, flechettes, slugs, or other types of projectiles. The advantage in using Auto-fire is that it has the chance to hit multiple targets or hit a single target multiple times.</p>
-                    <p>Attacking with a weapon on Auto-fire is generally less accurate, and the attacker must increase the difficulty of the attack check by 1 purple die. The user may choose to not use the Auto-fire quality on a weapon; in this case, he cannot trigger the quality but also does not suffer the aforementioned penalty.</p>
+                    <p>Attacking with a weapon on Auto-fire is generally less accurate, and the attacker must increase the difficulty of the attack check by 1 purple die. The user may choose to not use the Auto-fire quality on a weapon; in this case, they cannot trigger the quality but also does not suffer the aforementioned penalty.</p>
                     <p>If the attack hits, the attacker can trigger Auto-fire by spending 2 Advantages Auto-fire can be triggered multiple times. Each time the attacker triggers Autofire, it deals an additional hit to the target. Each of these counts as an additional hit from that weapon, and each hit deals base damage plus the number of uncanceled success on the check.</p>
-                    <p>These additional hits can be allocated to the target, or to other targets within range of the weapon. If the attacker wishes to hit multiple targets, he must deci to do so before making the check. Furthermore, if h wishes to hit multiple targets, his initial target must always be the target with the highest difficulty and highest defense (if this is two separate targets, the GM chooses which target is the initial target). The initial hit must always be against the initial target. Subsequent hits generated can be allocated to any of the other designated targets.</p>
+                    <p>These additional hits can be allocated to the target, or to other targets within range of the weapon. If the attacker wishes to hit multiple targets, they must decide to do so before making the check. Furthermore, if they wish to hit multiple targets, their initial target must always be the target with the highest difficulty and highest defense (if this is two separate targets, the GM chooses which target is the initial target). The initial hit must always be against the initial target. Subsequent hits generated can be allocated to any of the other designated targets.</p>
                     <p>Auto-fire weapons can also activate one Critical Injury for each hit generated on the attack per the normal cost; the Critical must target the target of the specific hit.</p>
                   </div>
                 </span>
@@ -1568,7 +1568,7 @@
               <label><span data-i18n="cumbersome">Cumbersome</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
                 <span class="icon_help">
                   <div class="help_info">
-                    <p>A Cumbersome weapon is large, unwieldy, awkward, or heavy. To wield a Cumbersome weapon properly, the character needs a Brawn characteristic equal to or greater than the weapon's Cumbersome rating. For each point of Brawn by which the character is deficient, he must increase the difficulty of all checks made while using the weapon by one.</p>
+                    <p>A Cumbersome weapon is large, unwieldy, awkward, or heavy. To wield a Cumbersome weapon properly, the character needs a Brawn characteristic equal to or greater than the weapon's Cumbersome rating. For each point of Brawn by which the character is deficient, they must increase the difficulty of all checks made while using the weapon by one.</p>
                   </div>
                 </span>
               </label>            
@@ -1577,7 +1577,7 @@
               <label><span data-i18n="defensive">Defensive</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
                 <span class="icon_help">
                   <div class="help_info">
-                    <p>Defensive weapons are particularly good at fending off incoming melee attacks. A character wielding a weapon with the Defensive quality increases his melee defense by the weapon's Defensive rating.</p>
+                    <p>Defensive weapons are particularly good at fending off incoming melee attacks. A character wielding a weapon with the Defensive quality increases their melee defense by the weapon's Defensive rating.</p>
                   </div>
                 </span>
               </label>
@@ -1593,7 +1593,7 @@
               <label><span data-i18n="disorient">Disorient</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
                 <span class="icon_help">
                   <div class="help_info">
-                    <p>A weapon with Disorient can daze an opponent. When Disorient is triggered, the target is disoriented for a number of rounds equal to the weapon's Disorient rating. (A disoriented target adds 1 black die to all skill checks he performs.)</p>
+                    <p>A weapon with Disorient can daze an opponent. When Disorient is triggered, the target is disoriented for a number of rounds equal to the weapon's Disorient rating. (A disoriented target adds 1 black die to all skill checks they perform.)</p>
                   </div>
                 </span>
               </label>
@@ -1601,7 +1601,7 @@
               <label><span data-i18n="ensnare">Ensnare</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
                 <span class="icon_help">
                   <div class="help_info">
-                    <p>A weapon with Ensnare binds a foe and restricts his movements. When Ensnare is triggered, the target is immobilized for a number of rounds equal to the weapon's Ensnare rating. An Ensnared target may attempt a Hard (3 purple dice) Athletics check as his action on his turn to break free from the effect. (An immobilized target cannot perform maneuvers.)</p>
+                    <p>A weapon with Ensnare binds a foe and restricts their movements. When Ensnare is triggered, the target is immobilized for a number of rounds equal to the weapon's Ensnare rating. An Ensnared target may attempt a Hard (3 purple dice) Athletics check as their action on their turn to break free from the effect. (An immobilized target cannot perform maneuvers.)</p>
                   </div>
                 </span>
               </label>
@@ -1609,7 +1609,7 @@
               <label><span data-i18n="guided">Guided</span><span class="icon_active" title="Active" data-i18n-title="active"></span>
                 <span class="icon_help">
                   <div class="help_info">
-                    <p>Certain types of projectiles, such as guided missiles, may benefit from course alterations after being fired. If a character misses while firing a Guided weapon and if Guided is activated, he may make an attack check at the end of the round. The difficulty of the check is calculated by comparing the weapon's silhouette of 0 to the silhouette of the target, and the check's green die equal the weapon's Guided rating. If the test is successful, the weapon strikes the target, and damage is dealt normally.</p>
+                    <p>Certain types of projectiles, such as guided missiles, may benefit from course alterations after being fired. If a character misses while firing a Guided weapon and if Guided is activated, they may make an attack check at the end of the round. The difficulty of the check is calculated by comparing the weapon's silhouette of 0 to the silhouette of the target, and the check's green die equal the weapon's Guided rating. If the test is successful, the weapon strikes the target, and damage is dealt normally.</p>
                     <p>Guided requires 3 advantages to activate, unless otherwise specified in the weapon's description. Remember, the Guided effect can activate on its subsequent attacks, representing the projectile continuing to track the target.</p>
                     <p>"Spoofing" is a countermeasure designed to work against a particular type of projectile, such as flares designed to draw off infrared missiles. Spoofing directly increases the defense of the target against attacks with the Guided quality.</p>
                   </div>
@@ -1713,7 +1713,7 @@
                 <span class="icon_help">
                   <div class="help_info">
                     <p>Some weapons deal Stun damage instead of regular damage. In this case, the weapon deals damage as strain instead of wounds. This damage is still reduced by a target's soak.</p>
-                    <p>A variant of this is a Stun setting. As an incidental, the wielder can choose to switch the setting of his weapon to "Stun." In this case, it does Stun damage as described above. When weapons with a Stun setting are used to deal Stun damage, their range changes to short and cannot be increased.</p>
+                    <p>A variant of this is a Stun setting. As an incidental, the wielder can choose to switch the setting of their weapon to "Stun." In this case, it does Stun damage as described above. When weapons with a Stun setting are used to deal Stun damage, their range changes to short and cannot be increased.</p>
                   </div>
                 </span>
               </label>
@@ -1751,10 +1751,19 @@
                   <option data-i18n="yes">Yes</option>
                 </select>
               </div>
+              <label><span data-i18n="unwieldy">Unwieldy</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
+                <span class="icon_help">
+                  <div class="help_info">
+                    <p>An Unwieldy weapon is large, awkward, or heavy. To wield an Unwieldy weapon properly, the character needs an Agility characteristic equal to or greater than the weapon's Unwieldy rating. For each point of Agility by which the character is deficient, they must increase the difficulty of all checks made while using the weapon by one.</p>
+                  </div>
+                </span>
+              </label>            
+              <input type="hidden" name="attr_weapon_quality_unwieldy_penalty" value="" />
+              <input name="attr_weapon_quality_unwieldy_value" type="number" value="0" min="0" max="9" />
               <label><span data-i18n="vicious">Vicious</span><span class="icon_passive" title="Passive" data-i18n-title="passive"></span>
                 <span class="icon_help">
                   <div class="help_info">
-                    <p>When this weapon scores a Critical Injury or Hit, the character adds ten times the Vicious rating to the Critical roll. With Vicious 3, for example, the victim adds + 30 to his Critical Hit result.</p>
+                    <p>When this weapon scores a Critical Injury or Hit, the character adds ten times the Vicious rating to the Critical roll. With Vicious 3, for example, the victim adds + 30 to their Critical Hit result.</p>
                   </div>
                 </span>
               </label>
@@ -2666,6 +2675,21 @@
     }
   });
 
+  // Unwieldy
+  on('change:repeating_weapons:weapon_quality_unwieldy_value', (eventInfo) => {
+    const unwieldy = parseInt(eventInfo.newValue);
+    getAttrs(['agility'], (values) => {
+      const agility = parseInt(values.agility);
+      const penalty = unwieldy - agility;
+      if (penalty > 0) {
+        setAttrs({ 'repeating_weapons_weapon_quality_unwieldy_penalty': penalty });
+      }
+      else {
+        setAttrs({ 'repeating_weapons_weapon_quality_unwieldy_penalty': 0 });
+      }
+    });
+  });
+
   // Vicious
   on('change:repeating_weapons:weapon_quality_vicious_value', (eventInfo) => {
     const viciousPrevious = parseInt(eventInfo.previousValue);
@@ -2752,6 +2776,7 @@
     'weapon_quality_stun_damage_value': 'Stun Damage',
     'weapon_quality_sunder_value': 'Sunder',
     'weapon_quality_superior_value': 'Superior',
+    'weapon_quality_unwieldy_value': 'Unwieldy',
     'weapon_quality_vicious_value': 'Vicious'
   };
 
