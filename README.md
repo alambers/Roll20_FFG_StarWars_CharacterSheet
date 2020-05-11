@@ -1,10 +1,13 @@
 # Roll20_FFG_StarWars_CharacterSheet
-Creating a new Roll20 character sheet for FFG Star Wars; compatible with FFG-SWRPG-Dice-Roller
+Roll20 character sheet for FFG Star Wars; compatible with FFG-SWRPG-Dice-Roller
 
-#Version 1.0
+**Developers**:  Timothy Yuen, Aaron Lambers, Gene Eilebrecht
+**Playtesters**:  Gene Eilebrecht, Ben Hamill, Aaron Lambers, Zack Morris, Brett Wilson, Timothy Yuen
 
-This sheet is inspired by and an alternative to the Star Wars FFG API-Compatible sheet.  When our small tabletop FFG Star Wars gaming group went online during the COVID-19 situation, we began using that sheet.  As the GM, I saw an opportunity to taylor the sheet to my group's needs.  As a web app designer by trade, I found it to be a compelling project during my downtime at home.  Rather than branching that project, I started fresh and utilized the latest (as of May 2020) CSS Grid techniques for the interface and Roll20 Sheet Workers to power most of the calcs.
+## Version 1.0
 
-There are many things that other sheet does which I have not recreated, most notably GM info, Vehicles, and Companions.  This sheet is focused entirely on a single PC.  That said, I think I've added a few new features I did not see in the other sheet.  Our group has only playtested this a handful of times so far, but it seems relatively stable.  There are bugs, I'm sure.
+This sheet is inspired by and an alternative to the [Star Wars FFG API-Compatible sheet](https://github.com/Roll20/roll20-character-sheets/tree/master/Star%20Wars%20FFG%20API-Compatible).  When our small local tabletop FFG Star Wars gaming group moved online to Roll20 during the COVID-19 situation, we started with that sheet.  As a GM, I saw an opportunity to taylor the sheet to my group's needs.  As a web app interface designer by trade, I found it to be a compelling project during my downtime at home.  Rather than branching the original project, I started fresh so I could really learn how the Roll20 sheets work from the ground up.  I also saw the chance to utilize some CSS Grid techniques for layout (rather than tables) and take advantage of Roll20 Sheet Workers to power most of the calcs.  Plus, there were many things we didn't really need in the short-term -- GM info, Vehicles, Companions, etc.  This sheet is focused entirely on a single PC.
 
-Along with the new sheet, some in the group also worked a custom branch of the FFG-SWRPG-Dice-Roller to integrate with the new sheet.  Since it has references to this sheet in particular, we haven't tried a PR to the main branch of the dice roller, but have kept our own version.  Perhaps we will roll that up, too, someday.
+Our group has only playtested this a handful of times so far and there are bugs, I'm sure.  But it seems to have it's legs underneath it after a couple hundred hours of development and is learning to walk.
+
+We also worked a custom branch of the [FFG-SWRPG-Dice-Roller](https://github.com/Roll20/roll20-api-scripts/tree/master/FFG-SWRPG-Dice-Roller) to integrate with the new sheet.  Since it has references objects in this sheet in particular and may not be compatible with other sheets, we have kept our own version for now and haven't tried a PR to the main branch of the dice roller.
