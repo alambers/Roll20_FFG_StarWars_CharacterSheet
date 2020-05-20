@@ -5,7 +5,7 @@ Roll20 character sheet for FFG Star Wars; compatible with FFG-SWRPG-Dice-Roller
 
 **Playtesters**:  Gene Eilebrecht, Ben Hamill, Aaron Lambers, Zack Morris, Brett Wilson, Timothy Yuen
 
-## Version 1.0
+## Version 1.0.0
 
 * Requires manual initialization of fields. Make sure to set all number fields you want to use to a value with a manual keyboard input the first time you use that field. Not doing so may cause some odd behavior with calculations dependent on those fields receiving an "undefined" value. This includes all Characteristics, Vital Stats, Weapon and Armor stats, and Item encumbrance. In the next major version we plan to auto-init all fields.
 
