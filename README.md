@@ -6,6 +6,8 @@ Roll20 character sheet for FFG Star Wars; compatible with FFG-SWRPG-Dice-Roller
 
 ## Version 1.0
 
+* Requires manual initialization of fields. Make sure to set all number fields you want to use to a value with a manual keyboard input the first time you use that field. Not doing so may cause some odd behavior with calculations dependent on those fields receiving an "undefined" value. This includes all Characteristics, Vital Stats, Weapon and Armor stats, and Item encumbrance. In the next major version we plan to auto-init all fields.
+
 This sheet is inspired by and an alternative to the [Star Wars FFG API-Compatible sheet](https://github.com/Roll20/roll20-character-sheets/tree/master/Star%20Wars%20FFG%20API-Compatible).  When our small local tabletop FFG Star Wars gaming group moved online to Roll20 during the COVID-19 situation, we started with that sheet.  As a GM, I saw an opportunity to taylor the sheet to my group's needs.  As a web app interface designer by trade, I found it to be a compelling project during my downtime at home.  Rather than branching the original project, I started fresh so I could really learn how the Roll20 sheets work from the ground up.  I also saw the chance to utilize some CSS Grid techniques for layout (rather than tables) and take advantage of Roll20 Sheet Workers to power most of the calcs.  Plus, there were many things we didn't really need in the short-term -- GM info, Vehicles, Companions, etc.  This sheet is focused entirely on a single PC.
 
 Our group has only playtested this a handful of times so far and there are bugs, I'm sure.  But it seems to have it's legs underneath it after a couple hundred hours of development and is learning to walk.
