@@ -2,6 +2,7 @@
 Roll20 character sheet for FFG Star Wars; compatible with FFG-SWRPG-Dice-Roller
 
 **Developers**:  Timothy Yuen, Aaron Lambers, Gene Eilebrecht
+
 **Playtesters**:  Gene Eilebrecht, Ben Hamill, Aaron Lambers, Zack Morris, Brett Wilson, Timothy Yuen
 
 ## Version 1.0
